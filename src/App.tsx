@@ -54,7 +54,7 @@ function App() {
 
   return (
     <>
-      <h1>Dscribe</h1>
+      <h1 className=' text-5xl'>Dscribe</h1>
       {!signedIn ?
       <>
       <h2>email</h2>
