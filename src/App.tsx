@@ -13,14 +13,14 @@ const supabaseKey: string = import.meta.env.VITE_SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey);
 console.log(supabase);
 
-const signUp = async () => {
-  const { data, error } = await supabase.auth.signUp({
-    email: 'bengt@bengt',
-    password: 'bengtbengt123',
-  });
-  console.log(data);
-  console.log(error);
-};
+// const signUp = async () => {
+//   const { data, error } = await supabase.auth.signUp({
+//     email: 'bengt@bengt',
+//     password: 'bengtbengt123',
+//   });
+//   console.log(data);
+//   console.log(error);
+// };
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
