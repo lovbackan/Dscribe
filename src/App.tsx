@@ -19,6 +19,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState('');
+  const [error, setError] = useState('');
 
   const signInWithEmail = async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -29,6 +30,7 @@ function App() {
     else console.log(error);
     console.log(data);
     console.log(error);
+    if (error) setError(error.message);
   };
   const signUp = async () => {
     const { data, error } = await supabase.auth.signUp({
@@ -42,6 +44,7 @@ function App() {
     });
     console.log(data);
     console.log(error);
+    if (error) setError(error.message);
   };
 
   useEffect(() => {
@@ -75,12 +78,13 @@ function App() {
           <h2>Username</h2>
           <textarea
             onChange={e => {
-              setPassword(e.target.value);
+              setUser(e.target.value);
             }}
           ></textarea>
           <div>
             <button onClick={() => signUp()}>Sign up!</button>
           </div>
+          {error ? <p className="text-red-500">{error}</p> : <></>}
         </>
       ) : (
         <div className="min-h-full">
