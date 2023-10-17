@@ -191,29 +191,29 @@ function BlockFormatDropDown({
     }
   };
 
-  const formatCode = () => {
-    if (blockType !== 'code') {
-      editor.update(() => {
-        let selection = $getSelection();
+  // const formatCode = () => {
+  //   if (blockType !== 'code') {
+  //     editor.update(() => {
+  //       let selection = $getSelection();
 
-        if (
-          $isRangeSelection(selection) ||
-          DEPRECATED_$isGridSelection(selection)
-        ) {
-          if (selection.isCollapsed()) {
-            $setBlocksType(selection, () => $createCodeNode());
-          } else {
-            const textContent = selection.getTextContent();
-            const codeNode = $createCodeNode();
-            selection.insertNodes([codeNode]);
-            selection = $getSelection();
-            if ($isRangeSelection(selection))
-              selection.insertRawText(textContent);
-          }
-        }
-      });
-    }
-  };
+  //       if (
+  //         $isRangeSelection(selection) ||
+  //         DEPRECATED_$isGridSelection(selection)
+  //       ) {
+  //         if (selection.isCollapsed()) {
+  //           $setBlocksType(selection, () => $createCodeNode());
+  //         } else {
+  //           const textContent = selection.getTextContent();
+  //           const codeNode = $createCodeNode();
+  //           selection.insertNodes([codeNode]);
+  //           selection = $getSelection();
+  //           if ($isRangeSelection(selection))
+  //             selection.insertRawText(textContent);
+  //         }
+  //       }
+  //     });
+  //   }
+  // };
 
   return (
     <DropDown
@@ -279,13 +279,13 @@ function BlockFormatDropDown({
         <i className="icon quote" />
         <span className="text">Quote</span>
       </DropDownItem>
-      <DropDownItem
+      {/* <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'code')}
         onClick={formatCode}
       >
         <i className="icon code" />
         <span className="text">Code Block</span>
-      </DropDownItem>
+      </DropDownItem> */}
     </DropDown>
   );
 }
@@ -644,7 +644,7 @@ export default function ToolbarPlugin(): JSX.Element {
           >
             <i className="format underline" />
           </button>
-          <button
+          {/* <button
             disabled={!isEditable}
             onClick={() => {
               activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
@@ -655,7 +655,7 @@ export default function ToolbarPlugin(): JSX.Element {
             aria-label="Insert code block"
           >
             <i className="format code" />
-          </button>
+          </button> */}
           <button
             disabled={!isEditable}
             onClick={insertLink}

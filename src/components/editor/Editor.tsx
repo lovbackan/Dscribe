@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import exampleTheme from '../../themes/ExampleTheme';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -9,7 +9,6 @@ import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
-import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
@@ -17,7 +16,6 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
-import { TRANSFORMERS } from '@lexical/markdown';
 import ToolbarPlugin from '../../plugins/ToolbarPlugin';
 import { EditorState } from 'lexical';
 
@@ -27,6 +25,7 @@ import { EditorState } from 'lexical';
 // import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
 // import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
+//Gör en riktig state och spara texten i.
 function MyOnChangeFunction(props: {
   onChange: (editorState: EditorState) => void;
 }): null {
@@ -69,6 +68,12 @@ const editorConfig = {
 };
 
 const Editor = () => {
+  const [editorState, setEditorState] = React.useState<EditorState | null>();
+
+  useEffect(() => {
+    console.log(editorState);
+  }, [editorState]);
+
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
@@ -81,7 +86,7 @@ const Editor = () => {
           />
           <MyOnChangeFunction
             onChange={editorState => {
-              console.log(editorState);
+              setEditorState(editorState);
             }}
           />
           <HistoryPlugin />
