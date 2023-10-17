@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
+import Editor from './components/editor/Editor';
 
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
@@ -82,7 +83,9 @@ function App() {
           </div>
         </>
       ) : (
-        <></>
+        <div className="min-h-full">
+          <Editor />
+        </div>
       )}
     </>
   );
