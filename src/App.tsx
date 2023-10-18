@@ -4,6 +4,7 @@ import './App.css';
 import Editor from './components/editor/Editor';
 import Card from './components/Card/Card';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
+import Navbar from './components/Navbar/Navbar';
 
 interface Story {
   id: number;
@@ -28,6 +29,9 @@ function App() {
   const [deck, setDeck] = useState<Array<any>>([]);
   const [stories, setStories] = useState<Array<any>>([]);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+  const [view, setView] = useState<
+    'home' | 'community' | 'shop' | 'settings' | 'signOut'
+  >('home');
 
   useEffect(() => {
     fetchDeck();
@@ -150,43 +154,50 @@ function App() {
           {error ? <p className="text-red-500">{error}</p> : <></>}
         </>
       ) : (
-        <div className="min-h-full">
-          <h1>
-            Selected Story:
-            {selectedStory ? selectedStory.id : 'None'}
-          </h1>
-          <StoriesContainer
-            stories={stories}
-            supabase={supabase}
-            setStories={setStories}
-            setSelectedStory={setSelectedStory}
-          ></StoriesContainer>
-          <Editor />
-          {selectedStory ? (
-            deck.map(card => {
-              return (
-                <Card
-                  card={card}
-                  key={card.id}
-                  supabase={supabase}
-                  deck={deck}
-                  setDeck={setDeck}
-                ></Card>
-              );
-            })
+        <>
+          <Navbar setView={setView} view={view} />
+          {view === 'home' ? (
+            <div className="min-h-full">
+              <h1>
+                Selected Story:
+                {selectedStory ? selectedStory.id : 'None'}
+              </h1>
+              <StoriesContainer
+                stories={stories}
+                supabase={supabase}
+                setStories={setStories}
+                setSelectedStory={setSelectedStory}
+              ></StoriesContainer>
+              <Editor />
+              <button className=" bg-red-600" onClick={addCard}>
+                Add Card
+              </button>
+              <button className=" bg-red-600" onClick={fetchDeck}>
+                Get Cards
+              </button>
+              <button className=" bg-red-600" onClick={addStory}>
+                Add Story
+              </button>
+              {selectedStory ? (
+                deck.map(card => {
+                  return (
+                    <Card
+                      card={card}
+                      key={card.id}
+                      supabase={supabase}
+                      deck={deck}
+                      setDeck={setDeck}
+                    ></Card>
+                  );
+                })
+              ) : (
+                <></>
+              )}
+            </div>
           ) : (
             <></>
           )}
-          <button className=" bg-red-600" onClick={addCard}>
-            Add Card
-          </button>
-          <button className=" bg-red-600" onClick={fetchDeck}>
-            Get Cards
-          </button>
-          <button className=" bg-red-600" onClick={addStory}>
-            Add Story
-          </button>
-        </div>
+        </>
       )}
     </>
   );
