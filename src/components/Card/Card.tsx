@@ -16,14 +16,16 @@ const Card = (props: CardProps) => {
       .from('cards')
       .delete()
       .match({ id: props.card.id });
-    console.log(result);
-    const updatedDeck = props.deck;
-    const idToRemove = updatedDeck.findIndex(card => {
-      if (card.id === props.card.id) return true;
-      return false;
-    });
-    updatedDeck.splice(idToRemove, 1);
-    props.setDeck([...updatedDeck]);
+    if (result.error) console.log(result.error);
+    else {
+      const updatedDeck = props.deck;
+      const idToRemove = updatedDeck.findIndex(card => {
+        if (card.id === props.card.id) return true;
+        return false;
+      });
+      updatedDeck.splice(idToRemove, 1);
+      props.setDeck([...updatedDeck]);
+    }
   };
 
   return (

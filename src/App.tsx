@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
 import Editor from './components/editor/Editor';
-import Card from './components/editor/Card/Card';
+import Card from './components/Card/Card';
 
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
@@ -21,6 +21,7 @@ function App() {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
   const [deck, setDeck] = useState<Array<any>>([]);
+  const [stories, setStories] = useState<Array<any>>([]);
 
   const fetchDeck = async () => {
     const { data, error } = await supabase.from('cards').select('*');
@@ -29,6 +30,12 @@ function App() {
     else setDeck(data);
   };
 
+  const fetchStories = async () => {
+    const { data, error } = await supabase.from('stories').select('*');
+    console.log(data);
+    if (error) console.log(error);
+    else setStories(data);
+  };
   //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
   const addCard = async () => {
     const insertData = {
@@ -56,7 +63,7 @@ function App() {
       console.log(error);
     } else {
       console.log(data);
-      fetchDeck();
+      fetchStories();
     }
   };
 
@@ -72,6 +79,7 @@ function App() {
     if (error) setError(error.message);
     if (!error) {
       fetchDeck();
+      fetchStories();
     }
   };
   const signUp = async () => {
