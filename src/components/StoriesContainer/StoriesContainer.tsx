@@ -4,6 +4,7 @@ interface StoriesContainerProps {
   stories: Array<any>;
   supabase: SupabaseClient;
   setStories: Function;
+  setSelectedStory: Function;
 }
 
 const StoriesContainer = (props: StoriesContainerProps) => {
@@ -21,6 +22,7 @@ const StoriesContainer = (props: StoriesContainerProps) => {
       });
       updatedStories.splice(idToRemove, 1);
       props.setStories([...updatedStories]);
+      props.setSelectedStory(null);
     }
   };
 
@@ -32,6 +34,12 @@ const StoriesContainer = (props: StoriesContainerProps) => {
             A story! ID: {story.id}
             <button className="bg-black" onClick={() => removeStory(story.id)}>
               Remove!
+            </button>
+            <button
+              className="bg-black"
+              onClick={() => props.setSelectedStory(story)}
+            >
+              Select!
             </button>
           </div>
         );

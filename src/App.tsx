@@ -5,6 +5,10 @@ import Editor from './components/editor/Editor';
 import Card from './components/Card/Card';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 
+interface Story {
+  id: number;
+}
+
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
   ? import.meta.env.VITE_SUPABASE_URL
@@ -23,9 +27,17 @@ function App() {
   const [error, setError] = useState('');
   const [deck, setDeck] = useState<Array<any>>([]);
   const [stories, setStories] = useState<Array<any>>([]);
+  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+
+  useEffect(() => {
+    fetchDeck();
+  }, [selectedStory]);
 
   const fetchDeck = async () => {
-    const { data, error } = await supabase.from('cards').select('*');
+    const { data, error } = await supabase
+      .from('cards')
+      .select('*')
+      .match({ story_id: selectedStory ? selectedStory.id : 0 });
     console.log(data);
     if (error) console.log(error);
     else setDeck(data);
@@ -42,7 +54,7 @@ function App() {
     const insertData = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
       name: 'Gundi',
-      story_id: 1,
+      story_id: selectedStory ? selectedStory.id : 0,
     };
     const { data, error } = await supabase.from('cards').insert(insertData);
     if (error) {
@@ -139,23 +151,32 @@ function App() {
         </>
       ) : (
         <div className="min-h-full">
+          <h1>
+            Selected Story:
+            {selectedStory ? selectedStory.id : 'None'}
+          </h1>
           <StoriesContainer
             stories={stories}
             supabase={supabase}
             setStories={setStories}
+            setSelectedStory={setSelectedStory}
           ></StoriesContainer>
           <Editor />
-          {deck.map(card => {
-            return (
-              <Card
-                card={card}
-                key={card.id}
-                supabase={supabase}
-                deck={deck}
-                setDeck={setDeck}
-              ></Card>
-            );
-          })}
+          {selectedStory ? (
+            deck.map(card => {
+              return (
+                <Card
+                  card={card}
+                  key={card.id}
+                  supabase={supabase}
+                  deck={deck}
+                  setDeck={setDeck}
+                ></Card>
+              );
+            })
+          ) : (
+            <></>
+          )}
           <button className=" bg-red-600" onClick={addCard}>
             Add Card
           </button>
