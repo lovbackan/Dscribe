@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import './App.css';
 import Editor from './components/editor/Editor';
 import Card from './components/Card/Card';
+import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
@@ -138,6 +139,11 @@ function App() {
         </>
       ) : (
         <div className="min-h-full">
+          <StoriesContainer
+            stories={stories}
+            supabase={supabase}
+            setStories={setStories}
+          ></StoriesContainer>
           <Editor />
           {deck.map(card => {
             return (
