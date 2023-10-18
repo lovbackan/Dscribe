@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
-import Editor from './components/EditorTemporarilyRenamed/Editor';
+import Editor from './components/Editor/Editor';
 import Card from './components/Card/Card';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
