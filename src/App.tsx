@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
 import Editor from './components/editor/Editor';
+import Card from './components/editor/Card/Card';
 
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
@@ -12,7 +13,6 @@ const supabaseKey: string = import.meta.env.VITE_SUPABASE_KEY
   : ' ';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-console.log(supabase);
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
@@ -20,8 +20,47 @@ function App() {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
+  const [deck, setDeck] = useState<Array<any>>([]);
 
-  const signInWithEmail = async () => {
+  const fetchDeck = async () => {
+    const { data, error } = await supabase.from('cards').select('*');
+    console.log(data);
+    if (error) console.log(error);
+    else setDeck(data);
+  };
+
+  //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
+  const addCard = async () => {
+    const insertData = {
+      user_id: (await supabase.auth.getUser()).data.user?.id,
+      name: 'Gundi',
+      story_id: 1,
+    };
+    const { data, error } = await supabase.from('cards').insert(insertData);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+      fetchDeck();
+    }
+  };
+
+  //Mostly testing database interactions. Works fine but values are hardcoded.
+  const addStory = async () => {
+    const insertData = {
+      user_id: (await supabase.auth.getUser()).data.user?.id,
+      name: 'Gundi',
+    };
+    const { data, error } = await supabase.from('stories').insert(insertData);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+      fetchDeck();
+    }
+  };
+
+  const signIn = async () => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -31,6 +70,9 @@ function App() {
     console.log(data);
     console.log(error);
     if (error) setError(error.message);
+    if (!error) {
+      fetchDeck();
+    }
   };
   const signUp = async () => {
     const { data, error } = await supabase.auth.signUp({
@@ -73,7 +115,7 @@ function App() {
             }}
           ></textarea>
           <div>
-            <button onClick={() => signInWithEmail()}>Sign in!</button>
+            <button onClick={() => signIn()}>Sign in!</button>
           </div>
           <h2>Username</h2>
           <textarea
@@ -89,6 +131,26 @@ function App() {
       ) : (
         <div className="min-h-full">
           <Editor />
+          {deck.map(card => {
+            return (
+              <Card
+                card={card}
+                key={card.id}
+                supabase={supabase}
+                deck={deck}
+                setDeck={setDeck}
+              ></Card>
+            );
+          })}
+          <button className=" bg-red-600" onClick={addCard}>
+            Add Card
+          </button>
+          <button className=" bg-red-600" onClick={fetchDeck}>
+            Get Cards
+          </button>
+          <button className=" bg-red-600" onClick={addStory}>
+            Add Story
+          </button>
         </div>
       )}
     </>
