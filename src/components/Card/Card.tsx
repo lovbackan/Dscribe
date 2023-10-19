@@ -4,6 +4,7 @@ interface CardProps {
   card: {
     name: string;
     id: number;
+    category_id: number;
   };
   supabase: SupabaseClient;
   deck: Array<any>;
@@ -35,6 +36,7 @@ const Card = (props: CardProps) => {
         <button className=" bg-red-500 w-20 h-20" onClick={() => removeSelf()}>
           remove
         </button>
+        <h2>Category Id:{props.card.category_id}</h2>
       </div>
     </>
   );

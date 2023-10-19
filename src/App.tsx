@@ -33,9 +33,12 @@ function App() {
   const [view, setView] = useState<
     'home' | 'community' | 'shop' | 'settings' | 'signOut'
   >('home');
+  const [categories, setCategories] = useState<Array<any>>([]);
+  const [categoryId, setCategory] = useState<number>(0);
 
   useEffect(() => {
     fetchDeck();
+    fetchCategories();
   }, [selectedStory]);
 
   const fetchDeck = async () => {
@@ -54,12 +57,25 @@ function App() {
     if (error) console.log(error);
     else setStories(data);
   };
+
+  const fetchCategories = async () => {
+    if (selectedStory) {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .match({ story_id: selectedStory.id });
+      console.log(data);
+      if (error) console.log(error);
+      else setCategories(data);
+    }
+  };
   //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
   const addCard = async () => {
     const insertData = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
       name: 'Gundi',
       story_id: selectedStory ? selectedStory.id : 0,
+      category_id: categories[categoryId].id,
     };
     const { data, error } = await supabase.from('cards').insert(insertData);
     if (error) {
@@ -68,6 +84,23 @@ function App() {
       console.log(data);
       fetchDeck();
     }
+  };
+
+  const addCategory = async () => {
+    const insertData = {
+      name: 'Bundi',
+      story_id: selectedStory ? selectedStory.id : 0,
+      user_id: (await supabase.auth.getUser()).data.user?.id,
+    };
+    const { data, error } = await supabase
+      .from('categories')
+      .insert(insertData);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+    }
+    fetchCategories();
   };
 
   //Mostly testing database interactions. Works fine but values are hardcoded.
@@ -178,6 +211,9 @@ function App() {
               </button>
               <button className=" bg-red-600" onClick={addStory}>
                 Add Story
+              </button>
+              <button className=" bg-red-600" onClick={addCategory}>
+                Add Category
               </button>
               {selectedStory ? (
                 <Hand deck={deck} setDeck={setDeck} supabase={supabase} />
