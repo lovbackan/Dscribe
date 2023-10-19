@@ -21,6 +21,7 @@
 }
 
 body {
+  overflow: hidden;
   margin: 0;
   background: #eee;
   font-family:

@@ -30,7 +30,7 @@ const Card = (props: CardProps) => {
 
   return (
     <>
-      <div className=" bg-green-500 h-60">
+      <div className=" bg-green-500 h-60 w-[200px] rounded-xl mr-[-20px] hover:z-10 border-4 border-black row-[1]">
         {props.card.name}
         <button className=" bg-red-500 w-20 h-20" onClick={() => removeSelf()}>
           remove

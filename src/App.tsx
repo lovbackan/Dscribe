@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import './App.css';
 import Editor from './components/Editor/Editor';
 import Card from './components/Card/Card';
+import Hand from './components/Hand/Hand';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
 
@@ -179,17 +180,7 @@ function App() {
                 Add Story
               </button>
               {selectedStory ? (
-                deck.map(card => {
-                  return (
-                    <Card
-                      card={card}
-                      key={card.id}
-                      supabase={supabase}
-                      deck={deck}
-                      setDeck={setDeck}
-                    ></Card>
-                  );
-                })
+                <Hand deck={deck} setDeck={setDeck} supabase={supabase} />
               ) : (
                 <></>
               )}
