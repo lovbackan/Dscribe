@@ -1,4 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
+import RichTextViewer from '../RichTextViewer/RichTextViewer';
+import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
 interface CardProps {
   card: {
@@ -37,8 +39,10 @@ const Card = (props: CardProps) => {
         <button className=" bg-red-500 w-20 h-20" onClick={() => removeSelf()}>
           remove
         </button>
-        <h2>Category Id:{props.card.category_id}</h2>
-        <h2>{props.card.text}</h2>
+        <h2 onClick={() => console.log(props.card.text)}>
+          Category Id:{props.card.category_id}
+        </h2>
+        <RichTextViewer editorState={props.card.text} />
       </div>
     </>
   );

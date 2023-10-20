@@ -19,7 +19,7 @@ import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { EditorState } from 'lexical';
 
 interface EditorProps {
-  editorState: EditorState | undefined;
+  editorState: string;
 }
 
 function Placeholder() {
@@ -55,7 +55,10 @@ const RichTextViewer = (props: EditorProps) => {
   function UpdateState(): null {
     const [editor] = useLexicalComposerContext();
     React.useEffect(() => {
-      if (props.editorState) editor.setEditorState(props.editorState);
+      // console.log(props.editorState);
+      // if (props.editorState) console.log(editor.parseEditorState(props.editorState));
+      if (props.editorState)
+        editor.setEditorState(editor.parseEditorState(props.editorState));
     }, [props.editorState]);
     return null;
   }

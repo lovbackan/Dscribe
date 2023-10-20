@@ -79,14 +79,16 @@ function App() {
   };
   //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
   const addCard = async () => {
+    const editorStateJSON = JSON.stringify(editorState);
     const insertData = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
       name: 'Gundi',
       story_id: selectedStory ? selectedStory.id : 0,
       category_id: categories[categoryId].id,
-      text: editorState,
+      text: editorStateJSON,
     };
 
+    console.log(editorState);
     const { data, error } = await supabase.from('cards').insert(insertData);
     if (error) {
       console.log(error);
@@ -228,9 +230,7 @@ function App() {
               {selectedStory ? (
                 <Hand deck={deck} setDeck={setDeck} supabase={supabase} />
               ) : (
-                <>
-                  <RichTextViewer editorState={editorState} />
-                </>
+                <></>
               )}
             </div>
           ) : (
