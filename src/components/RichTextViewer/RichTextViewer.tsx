@@ -16,41 +16,21 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
-import ToolbarPlugin from '../../plugins/ToolbarPlugin';
 import { EditorState } from 'lexical';
 
-// import TreeViewPlugin from "./plugins/TreeViewPlugin";
-// import ToolbarPlugin from "./plugins/ToolbarPlugin";
-// import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
-// import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
-// import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
-
 interface EditorProps {
-  setEditorState: Function;
-}
-
-//Gör en riktig state och spara texten i.
-function MyOnChangeFunction(props: {
-  onChange: (editorState: EditorState) => void;
-}): null {
-  const [editor] = useLexicalComposerContext(); //essential part of every lexical plugin
-  const { onChange } = props;
-  React.useEffect(() => {
-    editor.registerUpdateListener(({ editorState }) => {
-      onChange(editorState); //we can work with this to save the editor state to local storage
-    });
-  }, [onChange]);
-  return null;
+  editorState: EditorState | undefined;
 }
 
 function Placeholder() {
-  return <div className="editor-placeholder">Enter some rich text...</div>;
+  return <div className="editor-placeholder"></div>;
 }
 
 const editorConfig = {
   namespace: 'MyEditor',
   // The editor theme
   theme: exampleTheme,
+  editable: false,
   // Handling of errors during update
   onError(error: any) {
     throw error;
@@ -71,31 +51,26 @@ const editorConfig = {
   ],
 };
 
-const Editor = (props: EditorProps) => {
-  /* Using prop instead
-  const [editorState, setEditorState] = React.useState<EditorState | null>();
-
-  useEffect(() => {
-    console.log(editorState);
-  }, [editorState]);
-  */
+const RichTextViewer = (props: EditorProps) => {
+  function UpdateState(): null {
+    const [editor] = useLexicalComposerContext();
+    React.useEffect(() => {
+      if (props.editorState) editor.setEditorState(props.editorState);
+    }, [props.editorState]);
+    return null;
+  }
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
-        <ToolbarPlugin />
         <div className="editor-inner">
           <RichTextPlugin
             contentEditable={<ContentEditable className="editor-input" />}
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />
-          <MyOnChangeFunction
-            onChange={editorState => {
-              props.setEditorState(editorState);
-            }}
-          />
           <HistoryPlugin />
+          <UpdateState />
           <AutoFocusPlugin />
           <ListPlugin />
           <LinkPlugin />
@@ -105,4 +80,4 @@ const Editor = (props: EditorProps) => {
   );
 };
 
-export default Editor;
+export default RichTextViewer;

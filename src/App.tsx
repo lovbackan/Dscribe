@@ -6,6 +6,9 @@ import Card from './components/Card/Card';
 import Hand from './components/Hand/Hand';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
+import { EditorState } from 'lexical';
+import RichTextViewer from './components/RichTextViewer/RichTextViewer';
+import { createEmptyEditorState } from 'lexical/LexicalEditorState';
 
 interface Story {
   id: number;
@@ -35,6 +38,11 @@ function App() {
   >('home');
   const [categories, setCategories] = useState<Array<any>>([]);
   const [categoryId, setCategory] = useState<number>(0);
+  const [editorState, setEditorState] = useState<EditorState>();
+
+  useEffect(() => {
+    console.log(editorState);
+  }, [editorState]);
 
   useEffect(() => {
     fetchDeck();
@@ -76,7 +84,9 @@ function App() {
       name: 'Gundi',
       story_id: selectedStory ? selectedStory.id : 0,
       category_id: categories[categoryId].id,
+      text: editorState,
     };
+
     const { data, error } = await supabase.from('cards').insert(insertData);
     if (error) {
       console.log(error);
@@ -202,7 +212,7 @@ function App() {
                 setStories={setStories}
                 setSelectedStory={setSelectedStory}
               ></StoriesContainer>
-              <Editor />
+              <Editor setEditorState={setEditorState} />
               <button className=" bg-red-600" onClick={addCard}>
                 Add Card
               </button>
@@ -218,7 +228,9 @@ function App() {
               {selectedStory ? (
                 <Hand deck={deck} setDeck={setDeck} supabase={supabase} />
               ) : (
-                <></>
+                <>
+                  <RichTextViewer editorState={editorState} />
+                </>
               )}
             </div>
           ) : (

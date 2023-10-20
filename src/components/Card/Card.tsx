@@ -5,6 +5,7 @@ interface CardProps {
     name: string;
     id: number;
     category_id: number;
+    text: string;
   };
   supabase: SupabaseClient;
   deck: Array<any>;
@@ -37,6 +38,7 @@ const Card = (props: CardProps) => {
           remove
         </button>
         <h2>Category Id:{props.card.category_id}</h2>
+        <h2>{props.card.text}</h2>
       </div>
     </>
   );
