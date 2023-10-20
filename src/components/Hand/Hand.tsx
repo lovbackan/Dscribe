@@ -5,6 +5,7 @@ interface HandProps {
   deck: Array<any>;
   supabase: SupabaseClient;
   setDeck: Function;
+  setSelectedCard: Function;
 }
 
 const Hand = (props: HandProps) => {
@@ -18,6 +19,7 @@ const Hand = (props: HandProps) => {
             supabase={props.supabase}
             deck={props.deck}
             setDeck={props.setDeck}
+            setSelectedCard={props.setSelectedCard}
           ></Card>
         );
       })}

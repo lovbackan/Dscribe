@@ -8,7 +8,6 @@ import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
 import { EditorState } from 'lexical';
 import RichTextViewer from './components/RichTextViewer/RichTextViewer';
-import { createEmptyEditorState } from 'lexical/LexicalEditorState';
 
 interface Story {
   id: number;
@@ -40,9 +39,8 @@ function App() {
   const [categoryId, setCategory] = useState<number>(0);
   const [editorState, setEditorState] = useState<EditorState>();
 
-  useEffect(() => {
-    console.log(editorState);
-  }, [editorState]);
+  //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
+  const [selectedCard, setSelectedCard] = useState<Object>();
 
   useEffect(() => {
     fetchDeck();
@@ -214,7 +212,10 @@ function App() {
                 setStories={setStories}
                 setSelectedStory={setSelectedStory}
               ></StoriesContainer>
-              <Editor setEditorState={setEditorState} />
+              <Editor
+                setEditorState={setEditorState}
+                selectedCard={selectedCard}
+              />
               <button className=" bg-red-600" onClick={addCard}>
                 Add Card
               </button>
@@ -228,7 +229,12 @@ function App() {
                 Add Category
               </button>
               {selectedStory ? (
-                <Hand deck={deck} setDeck={setDeck} supabase={supabase} />
+                <Hand
+                  deck={deck}
+                  setDeck={setDeck}
+                  supabase={supabase}
+                  setSelectedCard={setSelectedCard}
+                />
               ) : (
                 <></>
               )}

@@ -25,8 +25,16 @@ import { EditorState } from 'lexical';
 // import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
 // import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
+//Fix this any when Card is done enough to be properly typed
 interface EditorProps {
   setEditorState: Function;
+  selectedCard?:
+    | any
+    | {
+        id: number;
+        name: string;
+        text: string;
+      };
 }
 
 //Gör en riktig state och spara texten i.
@@ -35,11 +43,23 @@ function MyOnChangeFunction(props: {
 }): null {
   const [editor] = useLexicalComposerContext(); //essential part of every lexical plugin
   const { onChange } = props;
+  editor.registerUpdateListener(({ editorState }) => {
+    onChange(editorState);
+  });
+
+  return null;
+}
+
+//Fix this any. Make selectedCard interface or something
+function UpdateState(props: any): null {
+  const [editor] = useLexicalComposerContext();
+
   React.useEffect(() => {
-    editor.registerUpdateListener(({ editorState }) => {
-      onChange(editorState); //we can work with this to save the editor state to local storage
-    });
-  }, [onChange]);
+    if (props.selectedCard) {
+      console.log(props.selectedCard);
+      editor.setEditorState(editor.parseEditorState(props.selectedCard.text));
+    }
+  }, [props.selectedCard]);
   return null;
 }
 
@@ -72,14 +92,7 @@ const editorConfig = {
 };
 
 const Editor = (props: EditorProps) => {
-  /* Using prop instead
-  const [editorState, setEditorState] = React.useState<EditorState | null>();
-
-  useEffect(() => {
-    console.log(editorState);
-  }, [editorState]);
-  */
-
+  const { selectedCard } = props;
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
@@ -95,6 +108,7 @@ const Editor = (props: EditorProps) => {
               props.setEditorState(editorState);
             }}
           />
+          <UpdateState selectedCard={selectedCard} />
           <HistoryPlugin />
           <AutoFocusPlugin />
           <ListPlugin />
