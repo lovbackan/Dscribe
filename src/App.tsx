@@ -36,7 +36,7 @@ function App() {
     'home' | 'community' | 'shop' | 'settings' | 'signOut'
   >('home');
   const [categories, setCategories] = useState<Array<any>>([]);
-  //Incoporate setCategory to remove problem in terminal and vercel
+  //Incoporate setCategory to remove problem in terminal and vercel but i have changed vercel settings so it should build even if there are errors (for now).
   const [categoryId, setCategory] = useState<number>(0);
   const [editorState, setEditorState] = useState<EditorState>();
 
