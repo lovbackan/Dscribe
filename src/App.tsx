@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CTAButton } from './components/CTAButton/CTAButton';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
 import Editor from './components/Editor/Editor';
@@ -174,29 +175,40 @@ function App() {
       {!signedIn ? (
         <>
           <h1 className="text-5xl">Sign in</h1>
-          <h2>Email</h2>
+          <h2 className="text-black">Email</h2>
           <textarea
+            className="bg-gray-200 text-black"
             onChange={e => {
               setEmail(e.target.value);
             }}
           ></textarea>
-          <h2>Password</h2>
+          <h2 className="text-black">Password</h2>
           <textarea
             onChange={e => {
               setPassword(e.target.value);
             }}
+            className="bg-gray-200 text-black"
           ></textarea>
           <div>
-            <button onClick={() => signIn()}>Sign in!</button>
+            <CTAButton
+              title="Sign in!"
+              variant="primary"
+              onClick={() => signIn()}
+            />
           </div>
-          <h2>Username</h2>
+
+          {/* <div>
+            <button onClick={() => signIn()}>Sign in!</button>
+          </div> */}
+          <h2 className="text-black">Username</h2>
           <textarea
+            className="bg-gray-200 text-black"
             onChange={e => {
               setUser(e.target.value);
             }}
           ></textarea>
           <div>
-            <button onClick={() => signUp()}>Sign up!</button>
+            <CTAButton title="Sign up!" variant="secondary" onClick={signUp} />
           </div>
           {error ? <p className="text-red-500">{error}</p> : <></>}
         </>
