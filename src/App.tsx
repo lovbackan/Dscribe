@@ -38,7 +38,7 @@ function App() {
   const [categories, setCategories] = useState<Array<any>>([]);
   //Incoporate setCategory to remove problem in terminal and vercel but i have changed vercel settings so it should build even if there are errors (for now).
   const [categoryId, setCategory] = useState<number>(0);
-  setCategory(8);
+
   const [editorState, setEditorState] = useState<EditorState>();
 
   //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
