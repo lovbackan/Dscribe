@@ -36,6 +36,7 @@ function App() {
     'home' | 'community' | 'shop' | 'settings' | 'signOut'
   >('home');
   const [categories, setCategories] = useState<Array<any>>([]);
+  //Incoporate setCategory to remove problem in terminal
   const [categoryId, setCategory] = useState<number>(0);
   const [editorState, setEditorState] = useState<EditorState>();
 
