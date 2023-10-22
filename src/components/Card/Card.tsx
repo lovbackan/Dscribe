@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import RichTextViewer from '../RichTextViewer/RichTextViewer';
-import { EditorState } from 'lexical';
+// import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
 interface CardProps {
   card: {

@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
 import Editor from './components/Editor/Editor';
-import Card from './components/Card/Card';
+// import Card from './components/Card/Card';
 import Hand from './components/Hand/Hand';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
 import { EditorState } from 'lexical';
-import RichTextViewer from './components/RichTextViewer/RichTextViewer';
+// import RichTextViewer from './components/RichTextViewer/RichTextViewer';
 
 interface Story {
   id: number;
