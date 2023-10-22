@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
+  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -165,7 +165,7 @@ h1 {
   line-height: 14px;
 }
 
-.editor-code {
+/* .editor-code {
   background-color: rgb(240, 242, 245);
   font-family: Menlo, Consolas, Monaco, monospace;
   display: block;
@@ -176,12 +176,12 @@ h1 {
   margin-top: 8px;
   margin-bottom: 8px;
   tab-size: 2;
-  /* white-space: pre; */
+ 
   overflow-x: auto;
   position: relative;
-}
+} */
 
-.editor-code:before {
+/* .editor-code:before {
   content: attr(data-gutter);
   position: absolute;
   background-color: #eee;
@@ -203,7 +203,7 @@ h1 {
   text-transform: uppercase;
   position: absolute;
   color: rgba(0, 0, 0, 0.5);
-}
+} */
 
 .editor-tokenComment {
   color: slategray;
@@ -265,6 +265,8 @@ h1 {
   padding: 0;
   text-transform: uppercase;
 }
+
+/* Add styling for the other headings here */
 
 .editor-quote {
   margin: 0;
@@ -378,7 +380,7 @@ pre::-webkit-scrollbar-thumb {
   margin-bottom: 1px;
   background: hsl(0, 0%, 100%);
   padding: 4px;
-  width: 780px;
+  width: 788px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   vertical-align: middle;
