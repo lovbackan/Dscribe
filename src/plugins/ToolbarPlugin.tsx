@@ -3,25 +3,26 @@ import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext
 import {
   $createParagraphNode,
   $getNodeByKey,
-  $getRoot,
+  // $getRoot,
   $getSelection,
   $isRangeSelection,
   $isRootOrShadowRoot,
-  $isTextNode,
+  // $isTextNode,
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
   DEPRECATED_$isGridSelection,
   FORMAT_ELEMENT_COMMAND,
   FORMAT_TEXT_COMMAND,
-  INDENT_CONTENT_COMMAND,
+  // INDENT_CONTENT_COMMAND,
   LexicalEditor,
   NodeKey,
-  OUTDENT_CONTENT_COMMAND,
+  // OUTDENT_CONTENT_COMMAND,
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
 } from 'lexical';
+
 import {
   $createHeadingNode,
   $createQuoteNode,
@@ -30,9 +31,9 @@ import {
 } from '@lexical/rich-text';
 import {
   $getSelectionStyleValueForProperty,
-  $isParentElementRTL,
+  // $isParentElementRTL,
   $patchStyleText,
-  $selectAll,
+  // $selectAll,
   $setBlocksType,
 } from '@lexical/selection';
 import {
@@ -44,7 +45,7 @@ import {
   REMOVE_LIST_COMMAND,
 } from '@lexical/list';
 import {
-  $createCodeNode,
+  // $createCodeNode,
   $isCodeNode,
   CODE_LANGUAGE_FRIENDLY_NAME_MAP,
   CODE_LANGUAGE_MAP,
@@ -53,7 +54,7 @@ import {
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
   $findMatchingParent,
-  $getNearestBlockElementAncestorOrThrow,
+  // $getNearestBlockElementAncestorOrThrow,
   $getNearestNodeOfType,
   mergeRegister,
 } from '@lexical/utils';
@@ -360,21 +361,21 @@ export default function ToolbarPlugin(): JSX.Element {
     null,
   );
   const [fontSize, setFontSize] = useState<string>('15px');
-  const [fontColor, setFontColor] = useState<string>('#000');
-  const [bgColor, setBgColor] = useState<string>('#fff');
+  // const [fontColor, setFontColor] = useState<string>('#000');
+  // const [bgColor, setBgColor] = useState<string>('#fff');
   const [fontFamily, setFontFamily] = useState<string>('Arial');
   const [isLink, setIsLink] = useState(false);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
-  const [isStrikethrough, setIsStrikethrough] = useState(false);
-  const [isSubscript, setIsSubscript] = useState(false);
-  const [isSuperscript, setIsSuperscript] = useState(false);
-  const [isCode, setIsCode] = useState(false);
+  // const [isStrikethrough, setIsStrikethrough] = useState(false);
+  // const [isSubscript, setIsSubscript] = useState(false);
+  // const [isSuperscript, setIsSuperscript] = useState(false);
+  // const [isCode, setIsCode] = useState(false);
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
   //   const [modal, showModal] = useModal();
-  const [isRTL, setIsRTL] = useState(false);
+  // const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
   const IS_APPLE = false;
@@ -402,11 +403,11 @@ export default function ToolbarPlugin(): JSX.Element {
       setIsBold(selection.hasFormat('bold'));
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
-      setIsStrikethrough(selection.hasFormat('strikethrough'));
-      setIsSubscript(selection.hasFormat('subscript'));
-      setIsSuperscript(selection.hasFormat('superscript'));
-      setIsCode(selection.hasFormat('code'));
-      setIsRTL($isParentElementRTL(selection));
+      // setIsStrikethrough(selection.hasFormat('strikethrough'));
+      // setIsSubscript(selection.hasFormat('subscript'));
+      // setIsSuperscript(selection.hasFormat('superscript'));
+      // setIsCode(selection.hasFormat('code'));
+      // setIsRTL($isParentElementRTL(selection));
 
       // Update links
       const node = getSelectedNode(selection);
@@ -449,16 +450,16 @@ export default function ToolbarPlugin(): JSX.Element {
       setFontSize(
         $getSelectionStyleValueForProperty(selection, 'font-size', '15px'),
       );
-      setFontColor(
-        $getSelectionStyleValueForProperty(selection, 'color', '#000'),
-      );
-      setBgColor(
-        $getSelectionStyleValueForProperty(
-          selection,
-          'background-color',
-          '#fff',
-        ),
-      );
+      // setFontColor(
+      //   $getSelectionStyleValueForProperty(selection, 'color', '#000'),
+      // );
+      // setBgColor(
+      //   $getSelectionStyleValueForProperty(
+      //     selection,
+      //     'background-color',
+      //     '#fff',
+      //   ),
+      // );
       setFontFamily(
         $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
       );
