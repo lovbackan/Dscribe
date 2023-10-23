@@ -13,6 +13,8 @@ interface CardProps {
   deck: Array<any>;
   setDeck: Function;
   setSelectedCard: Function;
+  hand: Array<any>;
+  setHand: Function;
 }
 
 const Card = (props: CardProps) => {
@@ -31,6 +33,21 @@ const Card = (props: CardProps) => {
       updatedDeck.splice(idToRemove, 1);
       props.setDeck([...updatedDeck]);
     }
+    toggleInHand();
+  };
+
+  const toggleInHand = () => {
+    const newHand = props.hand;
+
+    const cardInHandId = newHand.findIndex(cardInHand => {
+      if (props.card.id === cardInHand.id) return true;
+      else return false;
+    });
+    console.log(cardInHandId);
+    if (cardInHandId != -1) props.hand.splice(cardInHandId, 1);
+    //Remove card from hand if already there.
+    else props.hand.push(props.card); //Else add it.
+    props.setHand([...newHand]);
   };
 
   return (
@@ -50,6 +67,14 @@ const Card = (props: CardProps) => {
         >
           Select me!
         </button>
+        <button
+          onClick={() => {
+            toggleInHand();
+          }}
+        >
+          Toggle in hand!
+        </button>
+
         <RichTextViewer editorState={props.card.text} />
       </div>
     </>
