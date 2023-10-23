@@ -94,12 +94,17 @@ function App() {
     };
 
     console.log(editorState);
-    const { data, error } = await supabase.from('cards').insert(insertData);
+    const { data, error } = await supabase
+      .from('cards')
+      .insert(insertData)
+      .select()
+      .single();
     if (error) {
       console.log(error);
     } else {
-      console.log(data);
-      fetchDeck();
+      const newDeck = deck;
+      const newCard = data;
+      setDeck([...newDeck, newCard]);
     }
   };
 

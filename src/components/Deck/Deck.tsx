@@ -13,6 +13,7 @@ interface DeckProps {
 
 const Deck = (props: DeckProps) => {
   const [filteredCards, setFilteredCards] = useState<Array<any>>([]);
+
   useEffect(() => {
     setFilteredCards(props.deck);
   }, []);

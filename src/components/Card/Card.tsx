@@ -1,5 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import RichTextViewer from '../RichTextViewer/RichTextViewer';
+import { useState } from 'react';
 // import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
 interface CardProps {
@@ -8,6 +9,7 @@ interface CardProps {
     id: number;
     category_id: number;
     text: string;
+    inHand?: boolean;
   };
   supabase: SupabaseClient;
   deck: Array<any>;
@@ -18,6 +20,8 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
+  const [inHand, setInHand] = useState(true);
+
   const removeSelf = async () => {
     const result = await props.supabase
       .from('cards')
@@ -33,21 +37,18 @@ const Card = (props: CardProps) => {
       updatedDeck.splice(idToRemove, 1);
       props.setDeck([...updatedDeck]);
     }
-    toggleInHand();
   };
 
   const toggleInHand = () => {
-    const newHand = props.hand;
-
-    const cardInHandId = newHand.findIndex(cardInHand => {
-      if (props.card.id === cardInHand.id) return true;
+    const cardIndex = props.deck.findIndex(card => {
+      if (props.card.id === card.id) return true;
       else return false;
     });
-    console.log(cardInHandId);
-    if (cardInHandId != -1) props.hand.splice(cardInHandId, 1);
-    //Remove card from hand if already there.
-    else props.hand.push(props.card); //Else add it.
-    props.setHand([...newHand]);
+
+    if (props.card.inHand) props.deck[cardIndex].inHand = false;
+    else props.deck[cardIndex].inHand = true;
+
+    props.setDeck([...props.deck]);
   };
 
   return (
@@ -72,7 +73,7 @@ const Card = (props: CardProps) => {
             toggleInHand();
           }}
         >
-          Toggle in hand!
+          {props.card.inHand ? 'Remove from hand!' : 'Add to hand!'}
         </button>
 
         <RichTextViewer editorState={props.card.text} />
