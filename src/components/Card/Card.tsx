@@ -61,13 +61,17 @@ const Card = (props: CardProps) => {
         <h2 onClick={() => console.log(props.card.text)}>
           Category Id:{props.card.category_id}
         </h2>
-        <button
-          onClick={() => {
-            props.setSelectedCard(props.card);
-          }}
-        >
-          Select me!
-        </button>
+        {props.card.inHand ? (
+          <button
+            onClick={() => {
+              props.setSelectedCard(props.card);
+            }}
+          >
+            Select me!
+          </button>
+        ) : (
+          <></>
+        )}
         <button
           onClick={() => {
             toggleInHand();
