@@ -8,7 +8,7 @@ import Hand from './components/Hand/Hand';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
 import { EditorState } from 'lexical';
-import Deck from './components/Deck/deck';
+import Deck from './components/Deck/Deck';
 // import RichTextViewer from './components/RichTextViewer/RichTextViewer';
 
 interface Story {
