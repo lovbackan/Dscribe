@@ -31,6 +31,8 @@ const exampleTheme = {
     underlineStrikethrough: 'editor-text-underlineStrikethrough',
     code: 'editor-text-code',
   },
+  cardlink: 'editor-cardlink',
+
   code: 'editor-code',
   codeHighlight: {
     atrule: 'editor-tokenAttr',

@@ -61,6 +61,7 @@ import {
 import DropDown, { DropDownItem } from '../ui/DropDown';
 import { getSelectedNode } from '../utils/getSelectedNode';
 import { sanitizeUrl } from '../utils/url';
+import { INSERT_CARD_LINK_COMMAND } from './CardLinkPlugin';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -118,10 +119,6 @@ function dropDownActiveClass(active: boolean) {
   if (active) return 'active dropdown-item-active';
   else return '';
 }
-
-// function CardLinkPlugin():null {
-
-// }
 
 function BlockFormatDropDown({
   editor,
@@ -533,6 +530,20 @@ export default function ToolbarPlugin(): JSX.Element {
     }
   }, [editor, isLink]);
 
+  // const insertCardLink = useCallback(() => {
+  //   editor.dispatchCommand(INSERT_CARD_LINK_COMMAND, undefined);
+  //   console.log('clickat på knapp');
+  // }, [editor]);
+
+  function CardLinkPlugin(): JSX.Element {
+    const [editor] = useLexicalComposerContext();
+    const onClick = (): void => {
+      editor.dispatchCommand(INSERT_CARD_LINK_COMMAND, undefined);
+      console.log('Helloo click me');
+    };
+    return <button onClick={onClick}>Insert Card</button>;
+  }
+
   return (
     <div className="toolbar">
       <button
@@ -649,6 +660,7 @@ export default function ToolbarPlugin(): JSX.Element {
           >
             <i className="format underline" />
           </button>
+
           {/* <button
             disabled={!isEditable}
             onClick={() => {
@@ -719,6 +731,8 @@ export default function ToolbarPlugin(): JSX.Element {
           </DropDown>
         </>
       )}
+      {/* <button onClick={insertCardLink}> cardlink</button> */}
+      <CardLinkPlugin />
     </div>
   );
 }

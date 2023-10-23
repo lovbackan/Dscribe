@@ -121,6 +121,10 @@ h1 {
   font-weight: bold;
 }
 
+.editor-cardlink {
+  background-color: #905;
+}
+
 .editor-text-italic {
   font-style: italic;
 }
