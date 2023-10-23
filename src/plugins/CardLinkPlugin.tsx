@@ -13,6 +13,10 @@ import {
 import { $setBlocksType } from '@lexical/selection';
 
 export class CardLinkNode extends ElementNode {
+  static getType(): string {
+    return 'cardlink';
+  }
+
   constructor(key?: NodeKey) {
     super(key);
   }
@@ -23,9 +27,9 @@ export class CardLinkNode extends ElementNode {
 
   createDOM(config: EditorConfig): HTMLElement {
     //render element
-    const element = document.createElement('div');
+    const element = document.createElement('span');
     //give element classname
-    element.className = config.theme.cardLink;
+    element.className = config.theme.cardlink;
 
     return element;
   }
