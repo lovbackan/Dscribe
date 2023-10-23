@@ -8,6 +8,7 @@ import Hand from './components/Hand/Hand';
 import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
 import { EditorState } from 'lexical';
+import Deck from './components/Deck/deck';
 // import RichTextViewer from './components/RichTextViewer/RichTextViewer';
 
 interface Story {
@@ -31,6 +32,7 @@ function App() {
   const [user, setUser] = useState('');
   const [error, setError] = useState('');
   const [deck, setDeck] = useState<Array<any>>([]);
+  const [hand, setHand] = useState<Array<any>>([]);
   const [stories, setStories] = useState<Array<any>>([]);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [view, setView] = useState<
@@ -42,14 +44,14 @@ function App() {
 
   const [editorState, setEditorState] = useState<EditorState>();
 
-  console.log(setCategory);
-
   //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
   const [selectedCard, setSelectedCard] = useState<Object>();
 
   useEffect(() => {
     fetchDeck();
     fetchCategories();
+    setCategory(0);
+    setHand([]);
   }, [selectedStory]);
 
   const fetchDeck = async () => {
@@ -198,10 +200,6 @@ function App() {
               onClick={() => signIn()}
             />
           </div>
-
-          {/* <div>
-            <button onClick={() => signIn()}>Sign in!</button>
-          </div> */}
           <h2 className="text-black">Username</h2>
           <textarea
             className="bg-gray-200 text-black"
@@ -247,17 +245,26 @@ function App() {
               </button>
               {selectedStory ? (
                 <Hand
-                  deck={deck}
-                  setDeck={setDeck}
-                  supabase={supabase}
-                  setSelectedCard={setSelectedCard}
+                  {...{
+                    supabase,
+                    setSelectedCard,
+                    setDeck,
+                    deck,
+                    hand,
+                    setHand,
+                  }}
                 />
               ) : (
                 <></>
               )}
             </div>
           ) : (
-            <></>
+            <>
+              <h1>Say hello to my little deck.</h1>
+              <Deck
+                {...{ supabase, setSelectedCard, setDeck, deck, hand, setHand }}
+              ></Deck>
+            </>
           )}
         </>
       )}
