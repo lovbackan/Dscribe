@@ -42,6 +42,8 @@ function App() {
 
   const [editorState, setEditorState] = useState<EditorState>();
 
+  console.log(setCategory);
+
   //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
   const [selectedCard, setSelectedCard] = useState<Object>();
 
