@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+//import { useEffect, useState } from 'react';
 import Card from '../Card/Card';
 import { SupabaseClient } from '@supabase/supabase-js';
 
@@ -12,23 +12,17 @@ interface DeckProps {
 }
 
 const Deck = (props: DeckProps) => {
-  const [filteredCards, setFilteredCards] = useState<Array<any>>([]);
-
-  useEffect(() => {
-    setFilteredCards(props.deck);
-  }, []);
-
   return (
     <>
       <div className="flex flex-wrap gap-10 m-[10%] ">
-        {filteredCards.map(card => {
+        {props.deck.map(card => {
           return (
             <Card
               key={card.id}
               supabase={props.supabase}
               card={card}
               setSelectedCard={props.setSelectedCard}
-              deck={filteredCards}
+              deck={props.deck}
               setDeck={props.setDeck}
               hand={props.hand}
               setHand={props.setHand}
