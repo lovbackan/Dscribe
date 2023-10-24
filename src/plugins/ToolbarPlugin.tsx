@@ -20,7 +20,7 @@ import {
   // OUTDENT_CONTENT_COMMAND,
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
-  TextNode,
+  // TextNode,
   UNDO_COMMAND,
 } from 'lexical';
 
@@ -381,7 +381,7 @@ export default function ToolbarPlugin(): JSX.Element {
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
 
-  const [isBanner, setIsBanner] = useState(false);
+  // const [isBanner, setIsBanner] = useState(false);
   const IS_APPLE = false;
 
   const updateToolbar = useCallback(() => {
