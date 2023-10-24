@@ -20,6 +20,7 @@ import {
   // OUTDENT_CONTENT_COMMAND,
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
+  TextNode,
   UNDO_COMMAND,
 } from 'lexical';
 
@@ -379,6 +380,8 @@ export default function ToolbarPlugin(): JSX.Element {
   // const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
+
+  const [isBanner, setIsBanner] = useState(false);
   const IS_APPLE = false;
 
   const updateToolbar = useCallback(() => {
@@ -404,6 +407,7 @@ export default function ToolbarPlugin(): JSX.Element {
       setIsBold(selection.hasFormat('bold'));
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
+      // setIsBanner(selection.hasFormat('banner'));
       // setIsStrikethrough(selection.hasFormat('strikethrough'));
       // setIsSubscript(selection.hasFormat('subscript'));
       // setIsSuperscript(selection.hasFormat('superscript'));
@@ -536,13 +540,36 @@ export default function ToolbarPlugin(): JSX.Element {
   // }, [editor]);
 
   function BannerToolbarPlugin(): JSX.Element {
-    const [editor] = useLexicalComposerContext();
-    const onClick = (e: React.MouseEvent): void => {
-      editor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
-      console.log('Helloo click me');
-    };
-    return <button onClick={onClick}>Banner</button>;
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if ((event.metaKey || event.ctrlKey) && event.key === 'h') {
+          event.preventDefault(); // Prevent the default behavior of the browser
+          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, []);
+    return (
+      <button
+        title={IS_APPLE ? 'Banner (⌘H)' : 'Banner (Ctrl+H)'}
+        aria-label={`Format text as banner. Shortcut: ${
+          IS_APPLE ? '⌘H' : 'Ctrl+H'
+        }`}
+        onClick={() => {
+          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
+        }}
+        type="button"
+      >
+        Banner
+      </button>
+    );
   }
+  // activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
 
   return (
     <div className="toolbar">

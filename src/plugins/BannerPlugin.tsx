@@ -46,7 +46,6 @@ export class BannerNode extends ElementNode {
     return false;
   }
   //when u press enter u get a new paragraph node, moving out from the banner node
-
   insertNewAfter(
     selection: RangeSelection,
     restoreSelection: boolean,
@@ -58,6 +57,7 @@ export class BannerNode extends ElementNode {
     return newBlock;
   }
 
+  //remove banner node if u delete the first character in the banner node
   collapseAtStart(): boolean {
     const paragraph = $createParagraphNode();
     const children = this.getChildren();
