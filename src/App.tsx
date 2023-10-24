@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import './App.css';
-// import Card from './components/Card/Card';
-import Navbar from './components/Navbar/Navbar';
 import LoginPage from './components/LoginPage/LoginPage';
 import EditorPage from './components/EditorPage/EditorPage';
-// import RichTextViewer from './components/RichTextViewer/RichTextViewer';
-
+import MenuPage from './components/MenuPage/MenuPage';
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
   ? import.meta.env.VITE_SUPABASE_URL
@@ -22,9 +19,6 @@ function App() {
   const [stories, setStories] = useState<Array<any>>([]);
 
   const [view, setView] = useState<'menu' | 'editor'>('editor');
-  const [menuView, setMenuView] = useState<
-    'home' | 'community' | 'shop' | 'settings' | 'signOut'
-  >('home');
   useEffect(() => {
     if (signedIn === true) {
       fetchStories();
@@ -38,7 +32,7 @@ function App() {
     else setStories(data);
   };
 
-  //Login Page
+  //Login page.
   if (!signedIn) {
     return (
       <>
@@ -47,7 +41,7 @@ function App() {
     );
   }
 
-  //Editor page
+  //Editor page.
   if (view === 'editor')
     return (
       <EditorPage
@@ -58,12 +52,8 @@ function App() {
       />
     );
 
-  return (
-    <>
-      <Navbar setView={setMenuView} view={menuView} />
-      {menuView === 'home' ? <h1>Home </h1> : <h2>Inte home</h2>}
-    </>
-  );
+  //Menu page.
+  if (view === 'menu') return <MenuPage></MenuPage>;
 }
 
 export default App;
