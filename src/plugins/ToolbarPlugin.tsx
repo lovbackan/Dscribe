@@ -61,7 +61,7 @@ import {
 import DropDown, { DropDownItem } from '../ui/DropDown';
 import { getSelectedNode } from '../utils/getSelectedNode';
 import { sanitizeUrl } from '../utils/url';
-import { INSERT_CARD_LINK_COMMAND } from './CardLinkPlugin';
+import { INSERT_BANNER_COMMAND } from './BannerPlugin';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -535,13 +535,13 @@ export default function ToolbarPlugin(): JSX.Element {
   //   console.log('clickat på knapp');
   // }, [editor]);
 
-  function CardLinkPlugin(): JSX.Element {
+  function BannerToolbarPlugin(): JSX.Element {
     const [editor] = useLexicalComposerContext();
-    const onClick = (): void => {
-      editor.dispatchCommand(INSERT_CARD_LINK_COMMAND, undefined);
+    const onClick = (e: React.MouseEvent): void => {
+      editor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
       console.log('Helloo click me');
     };
-    return <button onClick={onClick}>Insert Card</button>;
+    return <button onClick={onClick}>Banner</button>;
   }
 
   return (
@@ -732,7 +732,7 @@ export default function ToolbarPlugin(): JSX.Element {
         </>
       )}
       {/* <button onClick={insertCardLink}> cardlink</button> */}
-      <CardLinkPlugin />
+      <BannerToolbarPlugin />
     </div>
   );
 }

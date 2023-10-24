@@ -18,7 +18,7 @@ import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import ToolbarPlugin from '../../plugins/ToolbarPlugin';
 import { EditorState } from 'lexical';
-// import { CardLinkNode, CardLinkPlugin } from '../../plugins/CardLinkPlugin';
+import { BannerNode, BannerPlugin } from '../../plugins/BannerPlugin';
 
 // import TreeViewPlugin from "./plugins/TreeViewPlugin";
 // import ToolbarPlugin from "./plugins/ToolbarPlugin";
@@ -89,7 +89,7 @@ const editorConfig = {
     TableRowNode,
     AutoLinkNode,
     LinkNode,
-    // CardLinkNode,
+    BannerNode,
   ],
 };
 
@@ -111,7 +111,7 @@ const Editor = (props: EditorProps) => {
             }}
           />
           <UpdateState selectedCard={selectedCard} />
-          {/* <CardLinkPlugin /> */}
+          <BannerPlugin />
           <HistoryPlugin />
           <AutoFocusPlugin />
           <ListPlugin />
