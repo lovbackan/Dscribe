@@ -14,11 +14,21 @@ const supabaseKey: string = import.meta.env.VITE_SUPABASE_KEY
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+interface Story {
+  id: number;
+}
+
 function App() {
   const [signedIn, setSignedIn] = useState(false);
   const [stories, setStories] = useState<Array<any>>([]);
+  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
 
-  const [view, setView] = useState<'menu' | 'editor'>('editor');
+  useEffect(() => {
+    if (selectedStory) setView('editor');
+    else setView('menu');
+  }, [selectedStory]);
+
+  const [view, setView] = useState<'menu' | 'editor'>('menu');
   useEffect(() => {
     if (signedIn === true) {
       fetchStories();
@@ -49,11 +59,21 @@ function App() {
         stories={stories}
         setStories={setStories}
         fetchStories={fetchStories}
+        selectedStory={selectedStory}
+        setSelectedStory={setSelectedStory}
       />
     );
 
   //Menu page.
-  if (view === 'menu') return <MenuPage></MenuPage>;
+  if (view === 'menu')
+    return (
+      <MenuPage
+        supabase={supabase}
+        stories={stories}
+        setStories={setStories}
+        setSelectedStory={setSelectedStory}
+      ></MenuPage>
+    );
 }
 
 export default App;

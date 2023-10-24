@@ -5,6 +5,7 @@ interface StoriesContainerProps {
   supabase: SupabaseClient;
   setStories: Function;
   setSelectedStory: Function;
+  selectedStory: { id: number } | null;
 }
 
 const StoriesContainer = (props: StoriesContainerProps) => {
@@ -20,9 +21,10 @@ const StoriesContainer = (props: StoriesContainerProps) => {
         if (story.id === id) return true;
         return false;
       });
+      if (props.selectedStory && id === props.selectedStory.id)
+        props.setSelectedStory(null);
       updatedStories.splice(idToRemove, 1);
       props.setStories([...updatedStories]);
-      props.setSelectedStory(null);
     }
   };
 
