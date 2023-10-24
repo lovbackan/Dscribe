@@ -9,6 +9,7 @@ import StoriesContainer from './components/StoriesContainer/StoriesContainer';
 import Navbar from './components/Navbar/Navbar';
 import { EditorState } from 'lexical';
 import Deck from './components/Deck/Deck';
+import LoginPage from './components/LoginPage/LoginPage';
 // import RichTextViewer from './components/RichTextViewer/RichTextViewer';
 
 interface Story {
@@ -27,9 +28,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 function App() {
   const [signedIn, setSignedIn] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [user, setUser] = useState('');
   const [error, setError] = useState('');
   const [deck, setDeck] = useState<Array<any>>([]);
   const [hand, setHand] = useState<Array<any>>([]);
@@ -47,6 +45,12 @@ function App() {
 
   //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
   const [selectedCard, setSelectedCard] = useState<Object>();
+
+  useEffect(() => {
+    if (signedIn === true) {
+      fetchStories();
+    }
+  }, [signedIn]);
 
   useEffect(() => {
     fetchDeck();
@@ -83,6 +87,7 @@ function App() {
       else setCategories(data);
     }
   };
+
   //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
   const addCard = async () => {
     const editorStateJSON = JSON.stringify(editorState);
@@ -142,83 +147,11 @@ function App() {
     }
   };
 
-  const signIn = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    if (!error) setSignedIn(true);
-    else console.log(error);
-    console.log(data);
-    console.log(error);
-    if (error) setError(error.message);
-    if (!error) {
-      fetchDeck();
-      fetchStories();
-    }
-  };
-  const signUp = async () => {
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          username: user,
-        },
-      },
-    });
-    console.log(data);
-    console.log(error);
-    if (error) setError(error.message);
-  };
-
-  useEffect(() => {
-    console.log(email);
-  }, [email]);
-  useEffect(() => {
-    console.log(password);
-  }, [password]);
-
   //Login Page
   if (!signedIn) {
     return (
       <>
-        <h1 className=" text-8xl">Dscribe</h1>
-        <>
-          <h1 className="text-5xl">Sign in</h1>
-          <h2 className="text-black">Email</h2>
-          <textarea
-            className="bg-gray-200 text-black"
-            onChange={e => {
-              setEmail(e.target.value);
-            }}
-          ></textarea>
-          <h2 className="text-black">Password</h2>
-          <textarea
-            onChange={e => {
-              setPassword(e.target.value);
-            }}
-            className="bg-gray-200 text-black"
-          ></textarea>
-          <div>
-            <CTAButton
-              title="Sign in!"
-              variant="primary"
-              onClick={() => signIn()}
-            />
-          </div>
-          <h2 className="text-black">Username</h2>
-          <textarea
-            className="bg-gray-200 text-black"
-            onChange={e => {
-              setUser(e.target.value);
-            }}
-          ></textarea>
-          <div>
-            <CTAButton title="Sign up!" variant="secondary" onClick={signUp} />
-          </div>
-          {error ? <p className="text-red-500">{error}</p> : <></>}
-        </>
+        <LoginPage supabase={supabase} setSignedIn={setSignedIn} />
       </>
     );
   }
