@@ -1,7 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { CTAButton } from '../CTAButton/CTAButton';
-import { useEffect } from 'react';
 
 interface LoginPageProps {
   supabase: SupabaseClient;
