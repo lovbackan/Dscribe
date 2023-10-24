@@ -46,6 +46,7 @@ export class BannerNode extends ElementNode {
     return false;
   }
   //when u press enter u get a new paragraph node, moving out from the banner node
+  //I also want to change so that when u press space u get a new text node
   insertNewAfter(
     selection: RangeSelection,
     restoreSelection: boolean,
@@ -65,15 +66,6 @@ export class BannerNode extends ElementNode {
     this.replace(paragraph);
     return true;
   }
-
-  // updateDOM(
-  //   _prevNode: unknown,
-  //   _dom: HTMLElement,
-  //   _config: EditorConfig,
-  // ): boolean {
-  //   //you will need to change this if you want lexical to update the dom for you, when things change (may be useful)
-  //   return false;
-  // }
 }
 
 export function $createBannerNode(): BannerNode {
