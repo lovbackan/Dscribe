@@ -84,16 +84,21 @@ h1 {
   text-align: left;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  /* height: 400px; */
 }
 
 .editor-inner {
   width: 788px;
+  overflow: scroll;
   background: #fff;
   position: relative;
+  height: 300px;
 }
 
 .editor-input {
   min-height: 150px;
+  overflow: scroll;
+  height: 300px;
   resize: none;
   font-size: 15px;
   caret-color: rgb(5, 5, 5);
