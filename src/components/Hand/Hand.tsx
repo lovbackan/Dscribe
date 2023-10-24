@@ -25,9 +25,7 @@ const Hand = (props: HandProps) => {
             hand={props.hand}
             setHand={props.setHand}
           ></Card>
-        ) : (
-          <></>
-        );
+        ) : null;
       })}
     </div>
   );

@@ -35,7 +35,8 @@ function App() {
   const [hand, setHand] = useState<Array<any>>([]);
   const [stories, setStories] = useState<Array<any>>([]);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
-  const [view, setView] = useState<
+  const [view, setView] = useState<'menu' | 'editor'>('editor');
+  const [menuView, setMenuView] = useState<
     'home' | 'community' | 'shop' | 'settings' | 'signOut'
   >('home');
   const [categories, setCategories] = useState<Array<any>>([]);
@@ -61,7 +62,7 @@ function App() {
       .match({ story_id: selectedStory ? selectedStory.id : 0 });
     console.log(data);
     if (error) console.log(error);
-    else setDeck(data);
+    else setDeck(...[data]);
   };
 
   const fetchStories = async () => {
@@ -178,10 +179,11 @@ function App() {
     console.log(password);
   }, [password]);
 
-  return (
-    <>
-      <h1 className=" text-8xl">Dscribe</h1>
-      {!signedIn ? (
+  //Login Page
+  if (!signedIn) {
+    return (
+      <>
+        <h1 className=" text-8xl">Dscribe</h1>
         <>
           <h1 className="text-5xl">Sign in</h1>
           <h2 className="text-black">Email</h2>
@@ -217,62 +219,65 @@ function App() {
           </div>
           {error ? <p className="text-red-500">{error}</p> : <></>}
         </>
-      ) : (
+      </>
+    );
+  }
+
+  //Editor page
+  if (view === 'editor')
+    return (
+      <>
+        <div className="min-h-full">
+          <h1>
+            Selected Story:
+            {selectedStory ? selectedStory.id : 'None'}
+          </h1>
+          <StoriesContainer
+            stories={stories}
+            supabase={supabase}
+            setStories={setStories}
+            setSelectedStory={setSelectedStory}
+          ></StoriesContainer>
+          <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
+          <button className=" bg-red-600" onClick={addCard}>
+            Add Card
+          </button>
+          <button className=" bg-red-600" onClick={fetchDeck}>
+            Get Cards
+          </button>
+          <button className=" bg-red-600" onClick={addStory}>
+            Add Story
+          </button>
+          <button className=" bg-red-600" onClick={addCategory}>
+            Add Category
+          </button>
+          {selectedStory ? (
+            <Hand
+              {...{
+                supabase,
+                setSelectedCard,
+                setDeck,
+                deck,
+                hand,
+                setHand,
+              }}
+            />
+          ) : null}
+        </div>
         <>
-          <Navbar setView={setView} view={view} />
-          {view === 'home' ? (
-            <div className="min-h-full">
-              <h1>
-                Selected Story:
-                {selectedStory ? selectedStory.id : 'None'}
-              </h1>
-              <StoriesContainer
-                stories={stories}
-                supabase={supabase}
-                setStories={setStories}
-                setSelectedStory={setSelectedStory}
-              ></StoriesContainer>
-              <Editor
-                setEditorState={setEditorState}
-                selectedCard={selectedCard}
-              />
-              <button className=" bg-red-600" onClick={addCard}>
-                Add Card
-              </button>
-              <button className=" bg-red-600" onClick={fetchDeck}>
-                Get Cards
-              </button>
-              <button className=" bg-red-600" onClick={addStory}>
-                Add Story
-              </button>
-              <button className=" bg-red-600" onClick={addCategory}>
-                Add Category
-              </button>
-              {selectedStory ? (
-                <Hand
-                  {...{
-                    supabase,
-                    setSelectedCard,
-                    setDeck,
-                    deck,
-                    hand,
-                    setHand,
-                  }}
-                />
-              ) : (
-                <></>
-              )}
-            </div>
-          ) : (
-            <>
-              <h1>Say hello to my little deck.</h1>
-              <Deck
-                {...{ supabase, setSelectedCard, setDeck, deck, hand, setHand }}
-              ></Deck>
-            </>
-          )}
+          <h1>Say hello to my little deck.</h1>
+          <h2>hej</h2>
+          <Deck
+            {...{ supabase, setSelectedCard, setDeck, deck, hand, setHand }}
+          />
         </>
-      )}
+      </>
+    );
+
+  return (
+    <>
+      <Navbar setView={setMenuView} view={menuView} />
+      {menuView === 'home' ? <h1>Home </h1> : <h2>Inte home</h2>}
     </>
   );
 }
