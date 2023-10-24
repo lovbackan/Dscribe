@@ -18,13 +18,17 @@ const MenuPage = (props: MenuPageProps) => {
   return (
     <>
       <Navbar setView={setMenuView} view={menuView} />
-      <StoryList
-        supabase={props.supabase}
-        stories={props.stories}
-        setSelectedStory={props.setSelectedStory}
-        setStories={props.setStories}
-      />
-      {menuView === 'home' ? <h1>Home </h1> : <h2>Inte home</h2>}
+
+      {menuView === 'home' ? (
+        <StoryList
+          supabase={props.supabase}
+          stories={props.stories}
+          setSelectedStory={props.setSelectedStory}
+          setStories={props.setStories}
+        />
+      ) : (
+        <h2>Inte home</h2>
+      )}
     </>
   );
 };
