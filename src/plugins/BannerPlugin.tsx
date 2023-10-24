@@ -4,10 +4,11 @@ import {
   createCommand,
   type LexicalNode,
   type EditorConfig,
-  type NodeKey,
   $getSelection,
   $isRangeSelection,
   ElementNode,
+  $createParagraphNode,
+  RangeSelection,
 } from 'lexical';
 
 import { $setBlocksType } from '@lexical/selection';
@@ -25,6 +26,7 @@ export class BannerNode extends ElementNode {
     return new BannerNode(node.__key);
   }
 
+  //This is where you create the DOM element for the node, here we should
   createDOM(config: EditorConfig): HTMLElement {
     //render element
     const element = document.createElement('span');
@@ -42,6 +44,26 @@ export class BannerNode extends ElementNode {
 
   updateDOM(): false {
     return false;
+  }
+  //when u press enter u get a new paragraph node, moving out from the banner node
+
+  insertNewAfter(
+    selection: RangeSelection,
+    restoreSelection: boolean,
+  ): LexicalNode {
+    const newBlock = $createParagraphNode();
+    const direction = this.getDirection();
+    newBlock.setDirection(direction);
+    this.insertAfter(newBlock, restoreSelection);
+    return newBlock;
+  }
+
+  collapseAtStart(): boolean {
+    const paragraph = $createParagraphNode();
+    const children = this.getChildren();
+    children.forEach(child => paragraph.append(child));
+    this.replace(paragraph);
+    return true;
   }
 
   // updateDOM(

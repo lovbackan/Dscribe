@@ -123,6 +123,8 @@ h1 {
 
 .editor-banner {
   background-color: #905;
+  border-radius: 2px;
+  padding: 5px 5px 5px 5px;
 }
 
 .editor-text-italic {
