@@ -5,6 +5,7 @@ import { CTAButton } from '../CTAButton/CTAButton';
 interface LoginPageProps {
   supabase: SupabaseClient;
   setSignedIn: Function;
+  setView: Function;
 }
 
 const LoginPage = (props: LoginPageProps) => {
@@ -18,7 +19,7 @@ const LoginPage = (props: LoginPageProps) => {
       email: email,
       password: password,
     });
-    if (!error) props.setSignedIn(true);
+    if (!error) props.setSignedIn(true), props.setView('menu');
     else console.log(error);
     console.log(data);
     console.log(error);
