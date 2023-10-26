@@ -3,9 +3,8 @@ import Hand from '../Hand/Hand';
 import StoriesContainer from '../StoriesContainer/StoriesContainer';
 import Deck from '../Deck/Deck';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { useState } from 'react';
+import { useState, useEffect, useContext, createContext } from 'react';
 import { EditorState } from 'lexical';
-import { useEffect } from 'react';
 
 interface EditorPageProps {
   supabase: SupabaseClient;
@@ -18,6 +17,9 @@ interface EditorPageProps {
 interface Story {
   id: number;
 }
+
+//Using context so deck can be accessed by Lexical Editor nodes. Sending props to Editor works less than ideal.
+export const deckContext = createContext<any[]>([]);
 
 const EditorPage = (props: EditorPageProps) => {
   const [deck, setDeck] = useState<Array<any>>([]);
@@ -102,7 +104,7 @@ const EditorPage = (props: EditorPageProps) => {
   };
 
   return (
-    <>
+    <deckContext.Provider value={deck}>
       <div className="min-h-full">
         <h1>
           Selected Story:
@@ -146,7 +148,7 @@ const EditorPage = (props: EditorPageProps) => {
           {...{ setSelectedCard, setDeck, deck, hand, setHand }}
         />
       </>
-    </>
+    </deckContext.Provider>
   );
 };
 
