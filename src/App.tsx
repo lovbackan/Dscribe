@@ -4,6 +4,7 @@ import './App.css';
 import LoginPage from './components/LoginPage/LoginPage';
 import EditorPage from './components/EditorPage/EditorPage';
 import MenuPage from './components/MenuPage/MenuPage';
+import LandingPage from './components/LandingPage/LandingPage';
 //Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
   ? import.meta.env.VITE_SUPABASE_URL
@@ -25,15 +26,21 @@ function App() {
 
   useEffect(() => {
     if (selectedStory) setView('editor');
-    else setView('menu');
+    // else setView('menu');
   }, [selectedStory]);
 
-  const [view, setView] = useState<'menu' | 'editor'>('menu');
+  const [view, setView] = useState<'landing' | 'login' | 'menu' | 'editor'>(
+    'menu',
+  );
   useEffect(() => {
     if (signedIn === true) {
       fetchStories();
     }
   }, [signedIn]);
+
+  useEffect(() => {
+    console.log(view);
+  }, [view]);
 
   const fetchStories = async () => {
     const { data, error } = await supabase.from('stories').select('*');
@@ -42,11 +49,23 @@ function App() {
     else setStories(data);
   };
 
-  //Login page.
-  if (!signedIn) {
+  if (!signedIn && view !== 'login') {
     return (
       <>
-        <LoginPage supabase={supabase} setSignedIn={setSignedIn} />
+        <LandingPage setView={setView} />
+      </>
+    );
+  }
+
+  //Login page.
+  if (view === 'login') {
+    return (
+      <>
+        <LoginPage
+          supabase={supabase}
+          setSignedIn={setSignedIn}
+          setView={setView}
+        />
       </>
     );
   }
