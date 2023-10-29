@@ -77,7 +77,10 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           />
         </div>
 
-        <div id="textAreaWrappper" className={`${containerClasses}`}>
+        <div
+          id="textAreaWrappper"
+          className={`${containerClasses} mt-[110px] gap-[20px]`}
+        >
           <TextArea
             placeholder={placeholder1}
             onChange={onChange1}
@@ -107,10 +110,10 @@ export const LoginCard: React.FC<LoginCardProps> = ({
           <CTAButton title={buttonTitle} variant="primary" onClick={onClick} />
         </div>
         <div id="optionsContainer" className="flex flex-col">
-          <a href="#" onClick={option1OnClick}>
+          <a className="text-xs" href="#" onClick={option1OnClick}>
             {optionTitle1}
           </a>
-          <a href="#" onClick={option2OnClick}>
+          <a className="text-xs" href="#" onClick={option2OnClick}>
             {optionTitle2}
           </a>
         </div>

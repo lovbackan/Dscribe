@@ -18,7 +18,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
     variant === 'primary'
       ? 'w-[120px] h-[30px] resize-none'
       : variant === 'secondary'
-      ? 'w-[120px] h-[30px] resize-none'
+      ? 'w-[200px] h-[30px] resize-none'
       : 'w-[120px] h-[30px] resize-none';
 
   // const textClasses =
