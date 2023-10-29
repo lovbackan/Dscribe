@@ -1,6 +1,6 @@
 import React from 'react';
 import { CTAButton } from '../CTAButton/CTAButton';
-
+import { TextArea } from '../TextArea/TextArea';
 type LoginCardType = 'login' | 'signup' | 'forgotPassword';
 
 interface LoginCardProps {
@@ -65,32 +65,42 @@ export const LoginCard: React.FC<LoginCardProps> = ({
         <div id="forgotPassswordView" className={`${forgotPassword}`}>
           <p>Forgot your password?</p>
           <p>Don't you worry, fill in your email to reset your password</p>
-          <textarea
+          {/* <textarea
             placeholder="Email..."
             className="w-[120px] h-[30px] resize-none"
             onChange={onChange1}
-          ></textarea>
+          ></textarea> */}
+          <TextArea
+            placeholder={placeholder1}
+            onChange={onChange1}
+            variant="primary"
+          />
         </div>
 
         <div id="textAreaWrappper" className={`${containerClasses}`}>
-          <textarea
-            className="w-[120px] h-[30px] resize-none"
+          <TextArea
             placeholder={placeholder1}
             onChange={onChange1}
-          ></textarea>
-          <textarea
+            variant="primary"
+          />
+          <TextArea
             placeholder={placeholder2}
             onChange={onChange2}
-            className="w-[120px] h-[30px] resize-none"
-          ></textarea>
+            variant="primary"
+          />
         </div>
 
         <div id="textAreaWrappperSetUser" className={` ${userName}`}>
-          <textarea
+          {/* <textarea
             placeholder={placeholderUsername}
             onChange={onChange3}
             className="w-[120px] h-[30px] resize-none"
-          ></textarea>
+          ></textarea> */}
+          <TextArea
+            placeholder={placeholderUsername}
+            onChange={onChange3}
+            variant="primary"
+          />
         </div>
 
         <div id="buttonWrapper">

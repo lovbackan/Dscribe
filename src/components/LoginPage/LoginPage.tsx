@@ -14,6 +14,7 @@ const LoginPage = (props: LoginPageProps) => {
   const [error, setError] = useState('');
   const [user, setUser] = useState('');
   const [loginPageView, setLoginPageView] = useState('login');
+  let content;
 
   const signIn = async () => {
     const { data, error } = await props.supabase.auth.signInWithPassword({
@@ -46,105 +47,105 @@ const LoginPage = (props: LoginPageProps) => {
   if (error) {
     alert(error);
   }
-
+  // change the content of the login page based on the loginPageView state
   if (loginPageView === 'login') {
-    return (
-      <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
-        <LoginCard
-          placeholder1="Email..."
-          placeholder2="Password..."
-          placeholderUsername="Username..."
-          buttonTitle="Login"
-          variant="login"
-          optionTitle1="Sign up"
-          onChange1={e => {
-            setEmail(e.target.value);
-          }}
-          onChange2={e => {
-            setPassword(e.target.value);
-          }}
-          onChange3={e => {
-            setUser(e.target.value);
-          }}
-          optionTitle2="Forgot password?"
-          option1OnClick={() => {
-            setLoginPageView('signup');
-          }}
-          option2OnClick={() => {
-            setLoginPageView('forgotPassword');
-          }}
-          onClick={() => {
-            signIn();
-          }}
-        />
-      </div>
+    content = (
+      <LoginCard
+        placeholder1="Email..."
+        placeholder2="Password..."
+        placeholderUsername="Username..."
+        buttonTitle="Login"
+        variant="login"
+        optionTitle1="Sign up"
+        onChange1={e => {
+          setEmail(e.target.value);
+        }}
+        onChange2={e => {
+          setPassword(e.target.value);
+        }}
+        onChange3={e => {
+          setUser(e.target.value);
+        }}
+        optionTitle2="Forgot password?"
+        option1OnClick={() => {
+          setLoginPageView('signup');
+        }}
+        option2OnClick={() => {
+          setLoginPageView('forgotPassword');
+        }}
+        onClick={() => {
+          signIn();
+        }}
+      />
     );
   } else if (loginPageView === 'signup') {
-    return (
-      <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
-        <LoginCard
-          placeholder1="Email..."
-          placeholder2="Password..."
-          placeholderUsername="Username..."
-          buttonTitle="Sign up"
-          variant="signup"
-          optionTitle1="Login"
-          optionTitle2="Forgot password?"
-          onChange1={e => {
-            setEmail(e.target.value);
-          }}
-          onChange2={e => {
-            setPassword(e.target.value);
-          }}
-          onChange3={e => {
-            setUser(e.target.value);
-          }}
-          option1OnClick={() => {
-            setLoginPageView('login');
-          }}
-          option2OnClick={() => {
-            setLoginPageView('forgotPassword');
-          }}
-          onClick={() => {
-            signUp();
-          }}
-        />
-      </div>
+    content = (
+      <LoginCard
+        placeholder1="Email..."
+        placeholder2="Password..."
+        placeholderUsername="Username..."
+        buttonTitle="Sign up"
+        variant="signup"
+        optionTitle1="Login"
+        optionTitle2="Forgot password?"
+        onChange1={e => {
+          setEmail(e.target.value);
+        }}
+        onChange2={e => {
+          setPassword(e.target.value);
+        }}
+        onChange3={e => {
+          setUser(e.target.value);
+        }}
+        option1OnClick={() => {
+          setLoginPageView('login');
+        }}
+        option2OnClick={() => {
+          setLoginPageView('forgotPassword');
+        }}
+        onClick={() => {
+          signUp();
+        }}
+      />
     );
   } else if (loginPageView === 'forgotPassword') {
-    return (
-      <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
-        <LoginCard
-          placeholder1="Email..."
-          placeholder2="Password..."
-          placeholderUsername="Username..."
-          buttonTitle="Sign up"
-          variant="forgotPassword"
-          optionTitle1="Login"
-          optionTitle2="Sign up"
-          onChange1={e => {
-            setEmail(e.target.value);
-          }}
-          onChange2={e => {
-            setPassword(e.target.value);
-          }}
-          onChange3={e => {
-            setUser(e.target.value);
-          }}
-          option1OnClick={() => {
-            setLoginPageView('login');
-          }}
-          option2OnClick={() => {
-            setLoginPageView('signup');
-          }}
-          onClick={() => {
-            //write email reset password function here
-            console.log('hello');
-          }}
-        />
-      </div>
+    content = (
+      <LoginCard
+        placeholder1="Email..."
+        placeholder2="Password..."
+        placeholderUsername="Username..."
+        buttonTitle="Sign up"
+        variant="forgotPassword"
+        optionTitle1="Login"
+        optionTitle2="Sign up"
+        onChange1={e => {
+          setEmail(e.target.value);
+        }}
+        onChange2={e => {
+          setPassword(e.target.value);
+        }}
+        onChange3={e => {
+          setUser(e.target.value);
+        }}
+        option1OnClick={() => {
+          setLoginPageView('login');
+        }}
+        option2OnClick={() => {
+          setLoginPageView('signup');
+        }}
+        onClick={() => {
+          //write email reset password function here
+          console.log('hello');
+        }}
+      />
     );
   }
+
+  return (
+    <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
+      {content}
+    </div>
+  );
 };
 
 export default LoginPage;
