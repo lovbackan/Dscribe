@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { useState } from 'react';
-import { CTAButton } from '../CTAButton/CTAButton';
+import { LoginCard } from './LoginCard';
 
 interface LoginPageProps {
   supabase: SupabaseClient;
@@ -13,6 +13,7 @@ const LoginPage = (props: LoginPageProps) => {
   const [password, setPassword] = useState('asdasd123'); ///////
   const [error, setError] = useState('');
   const [user, setUser] = useState('');
+  const [loginPageView, setLoginPageView] = useState('login');
 
   const signIn = async () => {
     const { data, error } = await props.supabase.auth.signInWithPassword({
@@ -41,47 +42,153 @@ const LoginPage = (props: LoginPageProps) => {
     if (error) setError(error.message);
   };
 
-  return (
-    <>
-      <h1 className=" text-8xl">Dscribe</h1>
-      <h1 className="text-5xl">Sign in</h1>
-      <h2 className="text-black">Email</h2>
+  //Make error message appear on screen.
+  if (error) {
+    alert(error);
+  }
 
-      <>
-        <textarea
-          className="bg-gray-200 text-black"
-          onChange={e => {
+  if (loginPageView === 'login') {
+    return (
+      <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
+        <LoginCard
+          placeholder1="Email..."
+          placeholder2="Password..."
+          placeholderUsername="Username..."
+          buttonTitle="Login"
+          variant="login"
+          optionTitle1="Sign up"
+          onChange1={e => {
             setEmail(e.target.value);
           }}
-        />
-        <h2 className="text-black">Password</h2>
-        <textarea
-          onChange={e => {
+          onChange2={e => {
             setPassword(e.target.value);
           }}
-          className="bg-gray-200 text-black"
-        />
-        <div>
-          <CTAButton
-            title="Sign in!"
-            variant="primary"
-            onClick={() => signIn()}
-          />
-        </div>
-        <h2 className="text-black">Username</h2>
-        <textarea
-          className="bg-gray-200 text-black"
-          onChange={e => {
+          onChange3={e => {
             setUser(e.target.value);
           }}
-        ></textarea>
-        <div>
-          <CTAButton title="Sign up!" variant="secondary" onClick={signUp} />
-        </div>
-        {error ? <p className="text-red-500">{error}</p> : <></>}
-      </>
-    </>
-  );
+          optionTitle2="Forgot password?"
+          option1OnClick={() => {
+            setLoginPageView('signup');
+          }}
+          option2OnClick={() => {
+            setLoginPageView('forgotPassword');
+          }}
+          onClick={() => {
+            signIn();
+          }}
+        />
+      </div>
+    );
+  } else if (loginPageView === 'signup') {
+    return (
+      <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
+        <LoginCard
+          placeholder1="Email..."
+          placeholder2="Password..."
+          placeholderUsername="Username..."
+          buttonTitle="Sign up"
+          variant="signup"
+          optionTitle1="Login"
+          optionTitle2="Forgot password?"
+          onChange1={e => {
+            setEmail(e.target.value);
+          }}
+          onChange2={e => {
+            setPassword(e.target.value);
+          }}
+          onChange3={e => {
+            setUser(e.target.value);
+          }}
+          option1OnClick={() => {
+            setLoginPageView('login');
+          }}
+          option2OnClick={() => {
+            setLoginPageView('forgotPassword');
+          }}
+          onClick={() => {
+            signUp();
+          }}
+        />
+      </div>
+    );
+  } else if (loginPageView === 'forgotPassword') {
+    return (
+      <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
+        <LoginCard
+          placeholder1="Email..."
+          placeholder2="Password..."
+          placeholderUsername="Username..."
+          buttonTitle="Sign up"
+          variant="forgotPassword"
+          optionTitle1="Login"
+          optionTitle2="Sign up"
+          onChange1={e => {
+            setEmail(e.target.value);
+          }}
+          onChange2={e => {
+            setPassword(e.target.value);
+          }}
+          onChange3={e => {
+            setUser(e.target.value);
+          }}
+          option1OnClick={() => {
+            setLoginPageView('login');
+          }}
+          option2OnClick={() => {
+            setLoginPageView('signup');
+          }}
+          onClick={() => {
+            //write email reset password function here
+            console.log('hello');
+          }}
+        />
+      </div>
+    );
+  }
 };
 
 export default LoginPage;
+
+//   return (
+//     <>
+//       <h1 className=" text-8xl">Dscribe</h1>
+//       <h1 className="text-5xl">Sign in</h1>
+//       <h2 className="text-black">Email</h2>
+//       <>
+//         <textarea
+//           className="bg-gray-200 text-black"
+//           onChange={e => {
+//             setEmail(e.target.value);
+//           }}
+//         />
+//         <h2 className="text-black">Password</h2>
+//         <textarea
+//           onChange={e => {
+//             setPassword(e.target.value);
+//           }}
+//           className="bg-gray-200 text-black"
+//         />
+//         <div>
+//           <CTAButton
+//             title="Sign in!"
+//             variant="primary"
+//             onClick={() => signIn()}
+//           />
+//         </div>
+//         <h2 className="text-black">Username</h2>
+//         <textarea
+//           className="bg-gray-200 text-black"
+//           onChange={e => {
+//             setUser(e.target.value);
+//           }}
+//         ></textarea>
+//         <div>
+//           <CTAButton title="Sign up!" variant="secondary" onClick={signUp} />
+//         </div>
+//         {error ? <p className="text-red-500">{error}</p> : <></>}
+//       </>
+//     </>
+//   );
+// };
+
+// export default LoginPage;
