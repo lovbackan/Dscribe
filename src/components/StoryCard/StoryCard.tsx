@@ -6,10 +6,10 @@ interface StoryCardProps {
 const StoryCard = (props: StoryCardProps) => {
   return (
     <div
-      className=" bg-black w-24 h-48"
+      className="  w-[200px] h-[300px] rounded-[20px] bg-slate-300"
       onClick={() => props.setSelectedStory(props.story)}
     >
-      <h2>Story: {props.story.id}</h2>
+      <h2 className="text-black">Story: {props.story.id}</h2>
     </div>
   );
 };
