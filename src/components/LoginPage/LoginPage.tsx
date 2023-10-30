@@ -44,9 +44,11 @@ const LoginPage = (props: LoginPageProps) => {
   };
 
   //Make error message appear on screen.
-  if (error) {
-    alert(error);
-  }
+  const errorHandler = () => {
+    if (error) {
+      alert(error);
+    }
+  };
   // change the content of the login page based on the loginPageView state
   if (loginPageView === 'login') {
     content = (
@@ -74,6 +76,7 @@ const LoginPage = (props: LoginPageProps) => {
           setLoginPageView('forgotPassword');
         }}
         onClick={() => {
+          errorHandler();
           signIn();
         }}
       />
@@ -104,6 +107,7 @@ const LoginPage = (props: LoginPageProps) => {
           setLoginPageView('forgotPassword');
         }}
         onClick={() => {
+          errorHandler();
           signUp();
         }}
       />
@@ -134,6 +138,7 @@ const LoginPage = (props: LoginPageProps) => {
           setLoginPageView('signup');
         }}
         onClick={() => {
+          errorHandler();
           //write email reset password function here
           console.log('hello');
         }}
