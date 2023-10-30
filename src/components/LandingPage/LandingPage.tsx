@@ -1,5 +1,6 @@
 import { CTAButton } from '../CTAButton/CTAButton';
 import { CardDesign } from '../Card/CardDesign';
+import { Input } from '../Input/Input.tsx';
 
 interface LandingPageProps {
   setView: Function;
@@ -29,9 +30,13 @@ const LandingPage = (props: LandingPageProps) => {
         <h4 className="text-3xl text-black">
           Your card-based authoring platform
         </h4>
-        <textarea
-          className="h-14 w-[80%] text-white text-3xl mt-10"
+        {/* Set search function here */}
+        <Input
           placeholder="Search for stories"
+          variant="landing"
+          onChange={e => {
+            console.log(e.target.value);
+          }}
         />
       </section>
 

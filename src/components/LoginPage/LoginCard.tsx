@@ -1,15 +1,15 @@
 import React from 'react';
 import { CTAButton } from '../CTAButton/CTAButton';
-import { TextArea } from '../TextArea/TextArea';
+import { Input } from '../Input/Input';
 type LoginCardType = 'login' | 'signup' | 'forgotPassword';
 
 interface LoginCardProps {
   placeholder1: string;
-  onChange1: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange1: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder2: string;
-  onChange2: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange2: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholderUsername: string;
-  onChange3: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange3: (e: React.ChangeEvent<HTMLInputElement>) => void;
   variant: LoginCardType;
   buttonTitle: string;
   optionTitle1: string;
@@ -60,53 +60,55 @@ export const LoginCard: React.FC<LoginCardProps> = ({
       </div>
       <div
         id="infoContainer"
-        className="w-[200px] h-[300px] rounded-r-[20px] bg-slate-400"
+        className="w-[200px] h-[300px] rounded-r-[20px] bg-slate-400 flex justify-center items-center flex-col"
       >
-        <div id="forgotPassswordView" className={`${forgotPassword}`}>
-          <p>Forgot your password?</p>
-          <p>Don't you worry, fill in your email to reset your password</p>
+        <div
+          id="forgotPassswordView"
+          className={`${forgotPassword} flex justify-center items-center`}
+        >
+          <p className="text-[12px]">Forgot your password?</p>
+          <p className="text-[12px] mb-[36px]">
+            Don't you worry, fill in your email to reset your password
+          </p>
           {/* <textarea
             placeholder="Email..."
             className="w-[120px] h-[30px] resize-none"
             onChange={onChange1}
           ></textarea> */}
-          <TextArea
+          <Input
             placeholder={placeholder1}
             onChange={onChange1}
             variant="primary"
           />
         </div>
 
-        <div
-          id="textAreaWrappper"
-          className={`${containerClasses} mt-[110px] gap-[20px]`}
-        >
-          <TextArea
+        <div id="inputWrappper" className={`${containerClasses} gap-[20px] `}>
+          <Input
             placeholder={placeholder1}
             onChange={onChange1}
             variant="primary"
           />
-          <TextArea
+          <Input
             placeholder={placeholder2}
             onChange={onChange2}
             variant="primary"
           />
         </div>
 
-        <div id="textAreaWrappperSetUser" className={` ${userName}`}>
+        <div id="inputWrappperSetUser" className={` ${userName} pt-[20px]`}>
           {/* <textarea
             placeholder={placeholderUsername}
             onChange={onChange3}
             className="w-[120px] h-[30px] resize-none"
           ></textarea> */}
-          <TextArea
+          <Input
             placeholder={placeholderUsername}
             onChange={onChange3}
             variant="primary"
           />
         </div>
 
-        <div id="buttonWrapper">
+        <div id="buttonWrapper" className="my-[20px]">
           <CTAButton title={buttonTitle} variant="primary" onClick={onClick} />
         </div>
         <div id="optionsContainer" className="flex flex-col">

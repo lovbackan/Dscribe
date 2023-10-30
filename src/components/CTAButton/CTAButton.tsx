@@ -1,6 +1,11 @@
 import React from 'react';
 
-type ButtonType = 'primary' | 'secondary' | 'landing' | 'disabled';
+type ButtonType =
+  | 'primary'
+  | 'secondary'
+  | 'landing'
+  | 'minimize/close'
+  | 'disabled';
 
 interface CTAButtonProps {
   title: string;
@@ -16,21 +21,25 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
 }) => {
   const containerClasses =
     variant === 'primary'
-      ? 'bg-black border-black h-12 w-20 rounded-lg border-2 justify-center items-center'
+      ? 'bg-white  h-[27px] w-[80px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
       : variant === 'secondary'
-      ? 'bg-white h-12 w-20 rounded-lg border-2 justify-center items-center'
+      ? 'bg-white border-black h-[27px] w-[139px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
       : variant === 'landing'
       ? ''
-      : 'bg-white border-gray-400';
+      : variant === 'minimize/close'
+      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
+      : 'bg-purple-400';
 
   const textClasses =
     variant === 'primary'
-      ? 'text-white text-xl font-semibold'
+      ? 'text-black text-[12px]'
       : variant === 'secondary'
-      ? 'text-black text-xl font-semibold'
+      ? 'text-black text-[12px]'
       : variant === 'landing'
       ? 'text-black text-3xl font-semibold'
-      : 'text-gray-400';
+      : variant === 'minimize/close'
+      ? 'text-black text-[12px]'
+      : 'text-purple-400';
 
   return (
     <button onClick={onClick} className={` ${containerClasses}`}>

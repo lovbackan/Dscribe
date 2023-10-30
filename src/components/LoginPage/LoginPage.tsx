@@ -114,7 +114,7 @@ const LoginPage = (props: LoginPageProps) => {
         placeholder1="Email..."
         placeholder2="Password..."
         placeholderUsername="Username..."
-        buttonTitle="Sign up"
+        buttonTitle="Reset"
         variant="forgotPassword"
         optionTitle1="Login"
         optionTitle2="Sign up"

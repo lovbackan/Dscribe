@@ -1,15 +1,15 @@
 import React from 'react';
 
-type TextAreaType = 'primary' | 'secondary' | 'other';
+type InputType = 'primary' | 'secondary' | 'landing';
 
-interface TextAreaProps {
+interface InputProps {
   placeholder: string;
-  variant: TextAreaType;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  variant: InputType;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 //FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
-export const TextArea: React.FC<TextAreaProps> = ({
+export const Input: React.FC<InputProps> = ({
   placeholder,
   onChange,
   variant,
@@ -19,7 +19,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
       ? 'w-[120px] h-[30px] resize-none'
       : variant === 'secondary'
       ? 'w-[200px] h-[30px] resize-none'
-      : 'w-[120px] h-[30px] resize-none';
+      : 'w-[540px] h-[30px] resize-none';
 
   // const textClasses =
   //   variant === 'primary'
@@ -36,10 +36,10 @@ export const TextArea: React.FC<TextAreaProps> = ({
     //         className="w-[120px] h-[30px] resize-none"
     //         onChange={onChange1}
     //       ></textarea>
-    <textarea
+    <input
       placeholder={placeholder}
       onChange={onChange}
       className={` ${containerClasses}`}
-    ></textarea>
+    ></input>
   );
 };
