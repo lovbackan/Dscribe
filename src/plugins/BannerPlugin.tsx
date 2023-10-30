@@ -1,6 +1,5 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
-  SerializedLexicalNode,
   LexicalEditor,
   NodeKey,
   COMMAND_PRIORITY_LOW,
@@ -26,7 +25,7 @@ let deck: undefined | any[];
 let editor: LexicalEditor;
 
 export class BannerNode extends ElementNode {
-  __cardId: number;
+  private __cardId: number;
   static getType(): string {
     return 'banner';
   }
@@ -38,13 +37,12 @@ export class BannerNode extends ElementNode {
 
   //Lots of testing functionality for now. Should just set __cardId //Dan 30-10-2023
   setCardId(cardId: number | false) {
-    // editor.registerMutationListener(BannerNode, () => {});
     const self = this.getWritable();
-    self.__cardId = this.__cardId + 1;
+    self.__cardId = this.getCardId() + 1;
     console.log(deck);
     if (deck) {
       const index = deck.findIndex((card: any) => {
-        if (card.id === this.__cardId) {
+        if (card.id === this.getCardId) {
           return true;
         }
         return false;
@@ -54,23 +52,23 @@ export class BannerNode extends ElementNode {
   }
 
   getCardId(): number {
-    return this.__cardId;
+    const self = this.getLatest();
+    return self.__cardId;
   }
 
   static clone(node: BannerNode): BannerNode {
-    return new BannerNode(undefined, node.__key);
+    return new BannerNode(node.getCardId(), node.__key);
   }
 
   //Working on this now //Dan 30-10-2023
   exportJSON(): SerializedBannerNode {
     console.log(self);
-    console.log(this); //For some reason the __cardId field has its value from the constructor inside of this function but not in the onClick... I think I may be updating it incorrectly.
+    console.log(this);
     console.log(this.getCardId());
-    // console.log('BannerNode exported. cardId = ' + this.getCardId());
     return {
       ...super.exportJSON(),
       type: 'banner',
-      cardId: this.__cardId,
+      cardId: this.getCardId(),
     };
   }
   static importJSON(serializedNode: SerializedBannerNode): LexicalNode {
@@ -95,9 +93,6 @@ export class BannerNode extends ElementNode {
       // Handle click event here
       //This is very WIP and testing functionality atm. Will be looked over and fixed. //Dan 30-10-2023
       editor.update(() => this.setCardId(0));
-      console.log(this.__cardId);
-      console.log(this);
-
       // This would be how we could make things happen depending on written text etc. Potenially relevant. //Dan 30-10-2023
       // editorTest[0].registerNodeTransform(BannerNode, bannerNode =>
       //   if(something) do something with bannerNode.setCardId(55)
@@ -116,6 +111,8 @@ export class BannerNode extends ElementNode {
     selection: RangeSelection,
     restoreSelection: boolean,
   ): LexicalNode {
+    console.log('insertNewAfter');
+
     const newBlock = $createParagraphNode();
     const direction = this.getDirection();
     newBlock.setDirection(direction);
