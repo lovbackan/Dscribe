@@ -1,6 +1,5 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
-  SerializedLexicalNode,
   LexicalEditor,
   NodeKey,
   COMMAND_PRIORITY_LOW,
@@ -38,7 +37,6 @@ export class BannerNode extends ElementNode {
 
   //Lots of testing functionality for now. Should just set __cardId //Dan 30-10-2023
   setCardId(cardId: number | false) {
-    // editor.registerMutationListener(BannerNode, () => {});
     const self = this.getWritable();
     self.__cardId = this.__cardId + 1;
     console.log(deck);
@@ -53,20 +51,15 @@ export class BannerNode extends ElementNode {
     }
   }
 
-  getCardId(): number {
-    return this.__cardId;
-  }
-
   static clone(node: BannerNode): BannerNode {
-    return new BannerNode(undefined, node.__key);
+    return new BannerNode(node.__cardId, node.__key);
   }
 
   //Working on this now //Dan 30-10-2023
   exportJSON(): SerializedBannerNode {
     console.log(self);
-    console.log(this); //For some reason the __cardId field has its value from the constructor inside of this function but not in the onClick... I think I may be updating it incorrectly.
-    console.log(this.getCardId());
-    // console.log('BannerNode exported. cardId = ' + this.getCardId());
+    console.log(this);
+    console.log(this.__cardId);
     return {
       ...super.exportJSON(),
       type: 'banner',
