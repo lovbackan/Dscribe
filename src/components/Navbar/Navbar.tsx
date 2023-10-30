@@ -5,7 +5,7 @@ interface NavbarProps {
 
 const Navbar = (props: NavbarProps) => {
   return (
-    <div className="absolute left-0 top-0 w-32 h-full bg-slate-600 flex flex-col justify-between">
+    <div className=" fixed left-0 top-0 w-32 h-full bg-slate-600 flex flex-col justify-between">
       <div className="flex flex-col">
         <button
           className={`h-20 ${props.view === 'home' ? 'bg-slate-400' : ''}`}

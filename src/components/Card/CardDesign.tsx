@@ -22,7 +22,7 @@ export const CardDesign: React.FC<CardDesignProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`h-72  w-52 rounded-lg border-2 justify-center items-center  ${containerClasses}`}
+      className={`h-72  w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border ${containerClasses}`}
     >
       <span className={`text-base font-semibold break-words ${textClasses}`}>
         {title}

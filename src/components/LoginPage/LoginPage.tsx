@@ -147,7 +147,7 @@ const LoginPage = (props: LoginPageProps) => {
   }
 
   return (
-    <div className="w-screen h-screen  flex justify-center items-center bg-red-600">
+    <div className="w-screen h-screen flex justify-center items-center bg-red-600">
       {content}
     </div>
   );

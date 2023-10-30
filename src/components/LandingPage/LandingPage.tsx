@@ -8,7 +8,7 @@ interface LandingPageProps {
 
 const LandingPage = (props: LandingPageProps) => {
   return (
-    <>
+    <div className="h-screen">
       <section
         id="LandingPageNavbar"
         className=" flex justify-between h-14 w-full bg-slate-400 items-center"
@@ -77,7 +77,7 @@ const LandingPage = (props: LandingPageProps) => {
           />
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
