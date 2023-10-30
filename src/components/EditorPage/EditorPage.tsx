@@ -3,7 +3,7 @@ import Hand from '../Hand/Hand';
 import StoriesContainer from '../StoriesContainer/StoriesContainer';
 import Deck from '../Deck/Deck';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { EditorState } from 'lexical';
 
 interface EditorPageProps {
