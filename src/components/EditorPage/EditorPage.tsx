@@ -105,7 +105,7 @@ const EditorPage = (props: EditorPageProps) => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="min-h-full">
+      <div className="h-screen w-full">
         <h1>
           Selected Story:
           {props.selectedStory ? props.selectedStory.id : 'None'}
@@ -139,15 +139,15 @@ const EditorPage = (props: EditorPageProps) => {
             }}
           />
         ) : null}
+        <>
+          <h1>Say hello to my little deck.</h1>
+          <h2>hej</h2>
+          <Deck
+            supabase={props.supabase}
+            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+          />
+        </>
       </div>
-      <>
-        <h1>Say hello to my little deck.</h1>
-        <h2>hej</h2>
-        <Deck
-          supabase={props.supabase}
-          {...{ setSelectedCard, setDeck, deck, hand, setHand }}
-        />
-      </>
     </deckContext.Provider>
   );
 };
