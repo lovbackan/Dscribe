@@ -110,13 +110,13 @@ const EditorPage = (props: EditorPageProps) => {
           Selected Story:
           {props.selectedStory ? props.selectedStory.id : 'None'}
         </h1>
-        <StoriesContainer
+        {/* <StoriesContainer
           stories={props.stories}
           supabase={props.supabase}
           setStories={props.setStories}
           selectedStory={props.selectedStory}
           setSelectedStory={props.setSelectedStory}
-        ></StoriesContainer>
+        ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
         <button className=" bg-red-600" onClick={addCard}>
           Add Card

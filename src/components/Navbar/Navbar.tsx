@@ -1,6 +1,8 @@
 interface NavbarProps {
   setView: Function;
-  view: 'home' | 'community' | 'shop' | 'settings' | 'signOut';
+  view: 'home' | 'community' | 'shop' | 'settings';
+  setSignOut: Function;
+  signOut: boolean;
 }
 
 const Navbar = (props: NavbarProps) => {
@@ -9,7 +11,10 @@ const Navbar = (props: NavbarProps) => {
       <div className="flex flex-col">
         <button
           className={`h-20 ${props.view === 'home' ? 'bg-slate-400' : ''}`}
-          onClick={() => props.setView('home')}
+          onClick={() => {
+            props.setView('home');
+            props.setSignOut(false);
+          }}
         >
           Home
         </button>
@@ -17,13 +22,19 @@ const Navbar = (props: NavbarProps) => {
           className={` h-20 ${
             props.view === 'community' ? 'bg-slate-400' : ''
           }`}
-          onClick={() => props.setView('community')}
+          onClick={() => {
+            props.setView('community');
+            props.setSignOut(false);
+          }}
         >
           Community
         </button>
         <button
           className={` h-20 ${props.view === 'shop' ? 'bg-slate-400' : ''}`}
-          onClick={() => props.setView('shop')}
+          onClick={() => {
+            props.setView('shop');
+            props.setSignOut(false);
+          }}
         >
           Shop
         </button>
@@ -31,13 +42,22 @@ const Navbar = (props: NavbarProps) => {
       <div className="flex flex-col">
         <button
           className={` h-20 ${props.view === 'settings' ? 'bg-slate-400' : ''}`}
-          onClick={() => props.setView('settings')}
+          onClick={() => {
+            props.setView('settings');
+            props.setSignOut(false);
+          }}
         >
           Settings
         </button>
         <button
-          className={` h-20 ${props.view === 'signOut' ? 'bg-slate-400' : ''}`}
-          onClick={() => props.setView('signOut')}
+          className={` h-20`}
+          onClick={() => {
+            props.setSignOut(true);
+            console.log(props.signOut);
+            if (props.signOut) {
+              props.setSignOut(false);
+            }
+          }}
         >
           Log Out
         </button>
