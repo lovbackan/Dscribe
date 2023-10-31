@@ -29,9 +29,12 @@ function App() {
     // else setView('menu');
   }, [selectedStory]);
 
-  const [view, setView] = useState<'landing' | 'login' | 'menu' | 'editor'>(
-    'menu',
-  );
+  // const [view, setView] = useState<'landing' | 'login' | 'menu' | 'editor'>(
+  //   'menu',
+  // );
+
+  const [view, setView] = useState('landing');
+
   useEffect(() => {
     if (signedIn === true) {
       fetchStories();
@@ -40,6 +43,7 @@ function App() {
 
   useEffect(() => {
     console.log(view);
+    console.log(`USER IS SIGNED IN ${signedIn}`);
   }, [view]);
 
   const fetchStories = async () => {
@@ -49,7 +53,7 @@ function App() {
     else setStories(data);
   };
 
-  if (!signedIn && view !== 'login') {
+  if (!signedIn && view === 'landing') {
     return (
       <>
         <LandingPage setView={setView} />
@@ -91,6 +95,8 @@ function App() {
         stories={stories}
         setStories={setStories}
         setSelectedStory={setSelectedStory}
+        setView={setView}
+        setSignedIn={setSignedIn}
       ></MenuPage>
     );
 }

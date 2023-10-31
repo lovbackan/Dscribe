@@ -11,14 +11,30 @@ interface MenuPageProps {
   stories: Array<any>;
   setStories: Function;
   setSelectedStory: Function;
+  setView: Function;
+  setSignedIn: Function;
 }
 
 const MenuPage = (props: MenuPageProps) => {
   const [menuView, setMenuView] = useState<
     'home' | 'community' | 'shop' | 'settings'
   >('home');
+
   const [signOut, setSignOut] = useState<boolean>(false);
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
+
+  const handleSignOut = async () => {
+    try {
+      await props.supabase.auth.signOut(); // Await the signOut function
+      setSignOut(false); // Close the popup after sign out
+      props.setSignedIn(false); // Set the signedIn state to false
+      props.setView('landing'); // Set the view to 'landing'
+      console.log('signed out');
+    } catch (error) {
+      console.error(error);
+      // Handle any potential errors during sign out
+    }
+  };
 
   useEffect(() => {
     setIsScrollDisabled(signOut);
@@ -77,22 +93,24 @@ const MenuPage = (props: MenuPageProps) => {
     //for some reason this works but not when i try to give the div overflowhidden
     document.body.style.overflow = 'hidden';
     signOutPopUp = (
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
         <h2>Are you sure</h2>
-        <CTAButton
-          title="Sign out"
-          variant="primary"
-          onClick={() => {
-            console.log('clicked');
-          }}
-        />
-        <CTAButton
-          title="Cancel"
-          variant="secondary"
-          onClick={() => {
-            setSignOut(false);
-          }}
-        />
+        <div className="flex flex-row justify-between">
+          <CTAButton
+            title="Sign out"
+            variant="primary"
+            onClick={() => {
+              handleSignOut();
+            }}
+          />
+          <CTAButton
+            title="Cancel"
+            variant="secondary"
+            onClick={() => {
+              setSignOut(false);
+            }}
+          />
+        </div>
       </div>
     );
   } else {
