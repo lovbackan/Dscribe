@@ -87,7 +87,18 @@ export class BannerNode extends ElementNode {
     element.style.cursor = 'pointer';
     element.onclick = () => {
       //Should display linked card in popup //Dan 31/10/2023
-      console.log(this.__cardId);
+      const cardId = this.__cardId;
+      const index = deck?.findIndex(card => {
+        console.log(cardId);
+        console.log(card.id);
+        if (cardId === card.id) return true;
+        else return false;
+      });
+      if (deck && index != undefined && index >= 0) console.log(deck[index]);
+
+      this.__cardId;
+      console.log('index: ' + index);
+      console.log(deck);
     };
 
     return element;

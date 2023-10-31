@@ -63,6 +63,7 @@ import DropDown, { DropDownItem } from '../ui/DropDown';
 import { getSelectedNode } from '../utils/getSelectedNode';
 import { sanitizeUrl } from '../utils/url';
 import { INSERT_BANNER_COMMAND } from './BannerPlugin';
+import Deck from '../components/Deck/Deck';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -561,8 +562,9 @@ export default function ToolbarPlugin(): JSX.Element {
           IS_APPLE ? '⌘H' : 'Ctrl+H'
         }`}
         onClick={() => {
+          //Placeholder hardcoded values. Should implement some sort of card selector.
           console.log('Heeej :^D');
-          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, 5);
+          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, 1053);
         }}
         type="button"
       >
