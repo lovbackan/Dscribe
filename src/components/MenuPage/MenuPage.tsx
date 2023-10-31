@@ -24,15 +24,14 @@ const MenuPage = (props: MenuPageProps) => {
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
 
   const handleSignOut = async () => {
-    try {
-      await props.supabase.auth.signOut(); // Await the signOut function
+    const result = await props.supabase.auth.signOut();
+    if (result.error) {
+      console.log(result.error);
+    } else {
       setSignOut(false); // Close the popup after sign out
       props.setSignedIn(false); // Set the signedIn state to false
       props.setView('landing'); // Set the view to 'landing'
       console.log('signed out');
-    } catch (error) {
-      console.error(error);
-      // Handle any potential errors during sign out
     }
   };
 
