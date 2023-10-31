@@ -561,7 +561,8 @@ export default function ToolbarPlugin(): JSX.Element {
           IS_APPLE ? '⌘H' : 'Ctrl+H'
         }`}
         onClick={() => {
-          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
+          console.log('Heeej :^D');
+          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, 5);
         }}
         type="button"
       >

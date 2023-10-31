@@ -62,9 +62,6 @@ export class BannerNode extends ElementNode {
 
   //Working on this now //Dan 30-10-2023
   exportJSON(): SerializedBannerNode {
-    console.log(self);
-    console.log(this);
-    console.log(this.getCardId());
     return {
       ...super.exportJSON(),
       type: 'banner',
@@ -74,7 +71,6 @@ export class BannerNode extends ElementNode {
   static importJSON(serializedNode: SerializedBannerNode): LexicalNode {
     console.log('Bannernode imported');
     const node = $createBannerNode(serializedNode.cardId);
-
     node.setFormat(serializedNode.format);
     node.setIndent(serializedNode.indent);
     node.setDirection(serializedNode.direction);
@@ -90,13 +86,8 @@ export class BannerNode extends ElementNode {
 
     element.style.cursor = 'pointer';
     element.onclick = () => {
-      // Handle click event here
-      //This is very WIP and testing functionality atm. Will be looked over and fixed. //Dan 30-10-2023
-      editor.update(() => this.setCardId(0));
-      // This would be how we could make things happen depending on written text etc. Potenially relevant. //Dan 30-10-2023
-      // editorTest[0].registerNodeTransform(BannerNode, bannerNode =>
-      //   if(something) do something with bannerNode.setCardId(55)
-      // );
+      //Should display linked card in popup //Dan 31/10/2023
+      console.log(this.__cardId);
     };
 
     return element;
@@ -155,10 +146,11 @@ export function BannerPlugin(): null {
 
   editor.registerCommand(
     INSERT_BANNER_COMMAND,
-    () => {
+    (cardId: number) => {
+      console.log(cardId);
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
-        $setBlocksType(selection, () => $createBannerNode(undefined));
+        $setBlocksType(selection, () => $createBannerNode(cardId));
       }
       return true;
     },
