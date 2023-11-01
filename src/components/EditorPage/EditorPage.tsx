@@ -1,10 +1,12 @@
 import Editor from '../Editor/Editor';
 import Hand from '../Hand/Hand';
-import StoriesContainer from '../StoriesContainer/StoriesContainer';
-import Deck from '../Deck/Deck';
+// import StoriesContainer from '../StoriesContainer/StoriesContainer';
+// import Deck from '../Deck/Deck';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { useState, useEffect, createContext } from 'react';
 import { EditorState } from 'lexical';
+import { CTAButton } from '../CTAButton/CTAButton';
+import { DeckView } from '../DeckView/DeckView';
 
 interface EditorPageProps {
   supabase: SupabaseClient;
@@ -30,6 +32,7 @@ const EditorPage = (props: EditorPageProps) => {
 
   //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
   const [selectedCard, setSelectedCard] = useState<Object>();
+  const [showDeck, setShowDeck] = useState<boolean>(false);
 
   useEffect(() => {
     fetchDeck();
@@ -140,12 +143,24 @@ const EditorPage = (props: EditorPageProps) => {
           />
         ) : null}
         <>
-          <h1>Say hello to my little deck.</h1>
-          <h2>hej</h2>
-          <Deck
+          <CTAButton
+            title="Deck"
+            variant="primary"
+            onClick={() => {
+              setShowDeck(!showDeck);
+            }}
+          />
+          <DeckView
+            showDeckView={showDeck}
             supabase={props.supabase}
             {...{ setSelectedCard, setDeck, deck, hand, setHand }}
           />
+          <h1>Say hello to my little deck.</h1>
+          <h2>hej</h2>
+          {/* <Deck
+            supabase={props.supabase}
+            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+          /> */}
         </>
       </div>
     </deckContext.Provider>
