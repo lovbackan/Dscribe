@@ -777,13 +777,14 @@ export default function ToolbarPlugin(): JSX.Element {
         {deck.map(card => {
           return (
             <DropDownItem
+              key={card.id}
               onClick={() => {
-                activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
+                activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, card.id);
               }}
               className="item"
             >
               <i className="icon justify-align" />
-              <span className="text">Justify Align</span>
+              <span className="text">{card.id}</span>
             </DropDownItem>
           );
         })}
