@@ -9,7 +9,7 @@ interface LandingPageProps {
 
 const LandingPage = (props: LandingPageProps) => {
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-black">
       <section
         id="LandingPageNavbar"
         className="h-14 w-full bg-slate-400 flex flex-row"
@@ -30,6 +30,7 @@ const LandingPage = (props: LandingPageProps) => {
 
         <Text
           variant="heading1"
+          textColor="green"
           content=" Unfold creativity and structure with
           card-based literacy!"
         />
@@ -57,9 +58,9 @@ const LandingPage = (props: LandingPageProps) => {
 
       <section id="StoryList" className="w-full h-[30%] px-5 ">
         <div className="flex flex-row pb-10">
-          <Text variant="heading2" content="Trending" />
+          <Text textColor="green" variant="heading2" content="Trending" />
 
-          <div className="w-full h-1 bg-black self-end"></div>
+          <div className="w-full h-0.5 bg-green-700 self-end"></div>
         </div>
 
         {/* Add published works here 
