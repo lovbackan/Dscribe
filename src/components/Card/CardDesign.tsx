@@ -1,6 +1,6 @@
 import React from 'react';
 
-type CardType = 'bigCard' | 'smallCard';
+type CardType = 'bigCard' | 'smallCard' | 'wikiCard';
 
 interface CardDesignProps {
   title: string;

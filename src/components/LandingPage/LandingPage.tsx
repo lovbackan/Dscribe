@@ -1,6 +1,7 @@
 import { CTAButton } from '../CTAButton/CTAButton';
 import { CardDesign } from '../Card/CardDesign';
 import { Input } from '../Input/Input.tsx';
+import { Text } from '../Text/Text.tsx';
 
 interface LandingPageProps {
   setView: Function;
@@ -11,11 +12,11 @@ const LandingPage = (props: LandingPageProps) => {
     <div className="h-screen">
       <section
         id="LandingPageNavbar"
-        className=" flex justify-between h-14 w-full bg-slate-400 items-center"
+        className="h-14 w-full bg-slate-400 flex flex-row"
       >
-        <h3 className="text-3xl text-white">Codeck</h3>
+        <div className="flex-grow"></div>
         <CTAButton
-          title="Sign in"
+          title="Log in"
           variant="landing"
           onClick={() => {
             console.log('Sign in button clicked');
@@ -23,14 +24,28 @@ const LandingPage = (props: LandingPageProps) => {
           }}
         />
       </section>
-      <section
+
+      <section id="hero" className="flex flex-row justify-center items-center">
+        {/* put logo here */}
+
+        <Text
+          variant="heading1"
+          content=" Unfold creativity and structure with
+          card-based literacy!"
+        />
+      </section>
+
+      {/* <section
         id="searchBar"
         className="flex flex-col justify-center items-center mt-28"
       >
-        <h4 className="text-3xl text-black">
-          Your card-based authoring platform
-        </h4>
-        {/* Set search function here */}
+        <Text
+          variant="heading1"
+          content=" Unfold creativity and structure with
+          card-based literacy!"
+        />
+
+        
         <Input
           placeholder="Search for stories"
           variant="landing"
@@ -38,11 +53,13 @@ const LandingPage = (props: LandingPageProps) => {
             console.log(e.target.value);
           }}
         />
-      </section>
+      </section> */}
 
-      <section id="StoryList" className="w-full h-[30%] px-5">
-        <div className="">
-          <h4 className="text-3xl text-black text-left ">Trending</h4>
+      <section id="StoryList" className="w-full h-[30%] px-5 ">
+        <div className="flex flex-row pb-10">
+          <Text variant="heading2" content="Trending" />
+
+          <div className="w-full h-1 bg-black self-end"></div>
         </div>
 
         {/* Add published works here 
