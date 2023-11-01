@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { deckContext } from '../components/EditorPage/EditorPage';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
   $createParagraphNode,
@@ -63,7 +64,6 @@ import DropDown, { DropDownItem } from '../ui/DropDown';
 import { getSelectedNode } from '../utils/getSelectedNode';
 import { sanitizeUrl } from '../utils/url';
 import { INSERT_CARDLINK_COMMAND } from './CardLinkPlugin';
-import Deck from '../components/Deck/Deck';
 
 const blockTypeToBlockName = {
   bullet: 'Bulleted List',
@@ -381,6 +381,7 @@ export default function ToolbarPlugin(): JSX.Element {
   // const [isRTL, setIsRTL] = useState(false);
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
+  const deck = useContext(deckContext);
 
   // const [isCardLink, setIsCardLink] = useState(false);
   const IS_APPLE = false;
@@ -562,6 +563,8 @@ export default function ToolbarPlugin(): JSX.Element {
           IS_APPLE ? '⌘H' : 'Ctrl+H'
         }`}
         onClick={() => {
+          ///DROPDOWN!
+
           //Placeholder hardcoded values. Should implement some sort of card selector.
           console.log('Heeej :^D');
           activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
@@ -763,6 +766,28 @@ export default function ToolbarPlugin(): JSX.Element {
       )}
       {/* <button onClick={insertCardLink}> cardlink</button> */}
       <CardLinkToolbarPlugin />
+      <Divider />
+      <DropDown
+        disabled={!isEditable}
+        buttonLabel="Link Card"
+        buttonIconClassName="icon left-align"
+        buttonClassName="toolbar-item spaced alignment"
+        buttonAriaLabel="Link card to text."
+      >
+        {deck.map(card => {
+          return (
+            <DropDownItem
+              onClick={() => {
+                activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
+              }}
+              className="item"
+            >
+              <i className="icon justify-align" />
+              <span className="text">Justify Align</span>
+            </DropDownItem>
+          );
+        })}
+      </DropDown>
     </div>
   );
 }
