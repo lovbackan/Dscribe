@@ -115,7 +115,7 @@ const MenuPage = (props: MenuPageProps) => {
 
   return (
     <div
-      className={`w-full h-full pb-32 px-32 ${
+      className={`w-full min-h-screen h-full pb-32 px-32 ${
         isScrollDisabled ? 'overflow-hidden ' : 'overflow-auto'
       }`}
     >

@@ -23,8 +23,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     black: 'text-black',
     white: 'text-white',
     green: 'text-green-700',
-    pink: 'text-pink',
-    default: 'text-pink',
+    default: 'text-pink-700',
   };
 
   const tailwindColorClass =

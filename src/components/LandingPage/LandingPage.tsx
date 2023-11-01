@@ -1,6 +1,6 @@
 import { CTAButton } from '../CTAButton/CTAButton';
 import { CardDesign } from '../Card/CardDesign';
-import { Input } from '../Input/Input.tsx';
+// import { Input } from '../Input/Input.tsx';
 import { Text } from '../Text/Text.tsx';
 
 interface LandingPageProps {
@@ -9,7 +9,7 @@ interface LandingPageProps {
 
 const LandingPage = (props: LandingPageProps) => {
   return (
-    <div className="h-screen bg-black">
+    <div className="h-screen bg-amber-50">
       <section
         id="LandingPageNavbar"
         className="h-14 w-full bg-slate-400 flex flex-row"
