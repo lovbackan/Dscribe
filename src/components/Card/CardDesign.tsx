@@ -1,6 +1,7 @@
 import React from 'react';
+import { Text } from '../Text/Text';
 
-type CardType = 'bigCard' | 'smallCard';
+type CardType = 'bigCard' | 'smallCard' | 'wikiCard';
 
 interface CardDesignProps {
   title: string;
@@ -15,18 +16,16 @@ export const CardDesign: React.FC<CardDesignProps> = ({
   variant,
 }) => {
   const containerClasses =
-    variant === 'bigCard' ? 'bg-black border-black' : 'bg-white';
+    variant === 'bigCard' ? 'bg-white border-black' : 'bg-white';
 
-  const textClasses = variant === 'bigCard' ? 'text-white' : 'text-black';
+  // const textClasses = variant === 'bigCard' ? 'text-white' : 'text-black';
 
   return (
     <div
       onClick={onClick}
       className={`h-72  w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border ${containerClasses}`}
     >
-      <span className={`text-base font-semibold break-words ${textClasses}`}>
-        {title}
-      </span>
+      <Text content={title} textColor="black" variant="cardTitle" />
     </div>
   );
 };

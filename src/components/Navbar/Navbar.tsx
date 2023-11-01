@@ -1,6 +1,6 @@
 interface NavbarProps {
   setView: Function;
-  view: 'home' | 'community' | 'shop' | 'settings';
+  view: 'home' | 'community' | 'settings';
   setSignOut: Function;
   signOut: boolean;
 }
@@ -28,15 +28,6 @@ const Navbar = (props: NavbarProps) => {
           }}
         >
           Community
-        </button>
-        <button
-          className={` h-20 ${props.view === 'shop' ? 'bg-slate-400' : ''}`}
-          onClick={() => {
-            props.setView('shop');
-            props.setSignOut(false);
-          }}
-        >
-          Shop
         </button>
       </div>
       <div className="flex flex-col">

@@ -16,9 +16,9 @@ interface MenuPageProps {
 }
 
 const MenuPage = (props: MenuPageProps) => {
-  const [menuView, setMenuView] = useState<
-    'home' | 'community' | 'shop' | 'settings'
-  >('home');
+  const [menuView, setMenuView] = useState<'home' | 'community' | 'settings'>(
+    'home',
+  );
 
   const [signOut, setSignOut] = useState<boolean>(false);
   const [isScrollDisabled, setIsScrollDisabled] = useState(false);
@@ -75,11 +75,7 @@ const MenuPage = (props: MenuPageProps) => {
         <h1>COMMUNITY</h1>
       </>
     ),
-    shop: (
-      <>
-        <h1>SHOP</h1>
-      </>
-    ),
+
     settings: (
       <>
         <h1>SETTINGS</h1>
