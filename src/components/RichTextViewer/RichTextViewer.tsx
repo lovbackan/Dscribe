@@ -16,8 +16,8 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
-import { BannerPlugin } from '../../plugins/BannerPlugin';
-import { BannerNode } from '../../plugins/BannerPlugin';
+import { CardLinkPlugin } from '../../plugins/CardLinkPlugin';
+import { CardLinkNode } from '../../plugins/CardLinkPlugin';
 // import { EditorState } from 'lexical';
 
 interface EditorProps {
@@ -50,7 +50,7 @@ const editorConfig = {
     TableRowNode,
     AutoLinkNode,
     LinkNode,
-    BannerNode,
+    CardLinkNode,
   ],
 };
 
@@ -75,7 +75,7 @@ const RichTextViewer = (props: EditorProps) => {
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />
-          <BannerPlugin />
+          <CardLinkPlugin />
           <HistoryPlugin />
           <UpdateState />
           <AutoFocusPlugin />

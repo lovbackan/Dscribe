@@ -18,16 +18,16 @@ import { $setBlocksType } from '@lexical/selection';
 import { deckContext } from '../components/EditorPage/EditorPage';
 import { useContext } from 'react';
 
-type SerializedBannerNode = { cardId: number } & SerializedElementNode;
+type SerializedCardLinkNode = { cardId: number } & SerializedElementNode;
 
 //I suspect this is pretty bad practice but it works for now. I should circle back to this when I understand Lexical better. //Dan 30-10-2023
 let deck: undefined | any[];
 let editor: LexicalEditor;
 
-export class BannerNode extends ElementNode {
+export class CardLinkNode extends ElementNode {
   private __cardId: number;
   static getType(): string {
-    return 'banner';
+    return 'cardlink';
   }
 
   constructor(cardId = -1, key?: NodeKey) {
@@ -56,21 +56,21 @@ export class BannerNode extends ElementNode {
     return self.__cardId;
   }
 
-  static clone(node: BannerNode): BannerNode {
-    return new BannerNode(node.getCardId(), node.__key);
+  static clone(node: CardLinkNode): CardLinkNode {
+    return new CardLinkNode(node.getCardId(), node.__key);
   }
 
   //Working on this now //Dan 30-10-2023
-  exportJSON(): SerializedBannerNode {
+  exportJSON(): SerializedCardLinkNode {
     return {
       ...super.exportJSON(),
-      type: 'banner',
+      type: 'cardlink',
       cardId: this.getCardId(),
     };
   }
-  static importJSON(serializedNode: SerializedBannerNode): LexicalNode {
-    console.log('Bannernode imported');
-    const node = $createBannerNode(serializedNode.cardId);
+  static importJSON(serializedNode: SerializedCardLinkNode): LexicalNode {
+    console.log('CardLinkNode imported');
+    const node = $createCardLinkNode(serializedNode.cardId);
     node.setFormat(serializedNode.format);
     node.setIndent(serializedNode.indent);
     node.setDirection(serializedNode.direction);
@@ -82,7 +82,7 @@ export class BannerNode extends ElementNode {
     //render element
     const element = document.createElement('span');
     //give element classname
-    element.className = config.theme.banner;
+    element.className = config.theme.cardLink;
 
     element.style.cursor = 'pointer';
     element.onclick = () => {
@@ -107,7 +107,7 @@ export class BannerNode extends ElementNode {
   updateDOM(): boolean {
     return true;
   }
-  //when u press enter u get a new paragraph node, moving out from the banner node
+  //when u press enter u get a new paragraph node, moving out from the cardlink node
   //I also want to change so that when u press space u get a new text node
   insertNewAfter(
     selection: RangeSelection,
@@ -122,7 +122,7 @@ export class BannerNode extends ElementNode {
     return newBlock;
   }
 
-  //remove banner node if u delete the first character in the banner node
+  //remove cardlink node if u delete the first character in the cardlink node
   collapseAtStart(): boolean {
     const paragraph = $createParagraphNode();
     const children = this.getChildren();
@@ -132,36 +132,36 @@ export class BannerNode extends ElementNode {
   }
 }
 
-export function $createBannerNode(
+export function $createCardLinkNode(
   cardId: number | undefined,
   key?: string,
-): BannerNode {
-  return new BannerNode(cardId, key);
+): CardLinkNode {
+  return new CardLinkNode(cardId, key);
 }
 
 // If you need this functionality you can uncomment it
-export function $isBannerNode(node: LexicalNode): node is BannerNode {
-  return node instanceof BannerNode;
+export function $isCardLinkNode(node: LexicalNode): node is CardLinkNode {
+  return node instanceof CardLinkNode;
 }
 
-export const INSERT_BANNER_COMMAND = createCommand('insertBanner');
+export const INSERT_CARDLINK_COMMAND = createCommand('insertCardLink');
 
-export function BannerPlugin(): null {
+export function CardLinkPlugin(): null {
   deck = useContext(deckContext);
   [editor] = useLexicalComposerContext();
 
-  //the tutorial has written ([BannerNode])
-  if (!editor.hasNode(BannerNode)) {
-    throw new Error('BannerPlugin: CardLink not registered on editor');
+  //the tutorial has written ([CardLinkNode])
+  if (!editor.hasNode(CardLinkNode)) {
+    throw new Error('CardLinkPlugin: CardLink not registered on editor');
   }
 
   editor.registerCommand(
-    INSERT_BANNER_COMMAND,
+    INSERT_CARDLINK_COMMAND,
     (cardId: number) => {
       console.log(cardId);
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
-        $setBlocksType(selection, () => $createBannerNode(cardId));
+        $setBlocksType(selection, () => $createCardLinkNode(cardId));
       }
       return true;
     },
