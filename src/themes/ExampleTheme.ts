@@ -31,7 +31,7 @@ const exampleTheme = {
     underlineStrikethrough: 'editor-text-underlineStrikethrough',
     code: 'editor-text-code',
   },
-  banner: 'editor-banner',
+  cardLink: 'editor-card-link',
 
   code: 'editor-code',
   codeHighlight: {

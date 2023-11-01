@@ -62,7 +62,7 @@ import {
 import DropDown, { DropDownItem } from '../ui/DropDown';
 import { getSelectedNode } from '../utils/getSelectedNode';
 import { sanitizeUrl } from '../utils/url';
-import { INSERT_BANNER_COMMAND } from './BannerPlugin';
+import { INSERT_CARDLINK_COMMAND } from './CardLinkPlugin';
 import Deck from '../components/Deck/Deck';
 
 const blockTypeToBlockName = {
@@ -382,7 +382,7 @@ export default function ToolbarPlugin(): JSX.Element {
   const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
 
-  // const [isBanner, setIsBanner] = useState(false);
+  // const [isCardLink, setIsCardLink] = useState(false);
   const IS_APPLE = false;
 
   const updateToolbar = useCallback(() => {
@@ -408,7 +408,7 @@ export default function ToolbarPlugin(): JSX.Element {
       setIsBold(selection.hasFormat('bold'));
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
-      // setIsBanner(selection.hasFormat('banner'));
+      // setIsCardLink(selection.hasFormat('cardLink'));
       // setIsStrikethrough(selection.hasFormat('strikethrough'));
       // setIsSubscript(selection.hasFormat('subscript'));
       // setIsSuperscript(selection.hasFormat('superscript'));
@@ -540,12 +540,12 @@ export default function ToolbarPlugin(): JSX.Element {
   //   console.log('clickat på knapp');
   // }, [editor]);
 
-  function BannerToolbarPlugin(): JSX.Element {
+  function CardLinkToolbarPlugin(): JSX.Element {
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if ((event.metaKey || event.ctrlKey) && event.key === 'h') {
           event.preventDefault(); // Prevent the default behavior of the browser
-          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
+          activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, undefined);
         }
       };
 
@@ -557,18 +557,18 @@ export default function ToolbarPlugin(): JSX.Element {
     }, []);
     return (
       <button
-        title={IS_APPLE ? 'Banner (⌘H)' : 'Banner (Ctrl+H)'}
-        aria-label={`Format text as banner. Shortcut: ${
+        title={IS_APPLE ? 'CardLink (⌘H)' : 'CardLink (Ctrl+H)'}
+        aria-label={`Format text as cardLink. Shortcut: ${
           IS_APPLE ? '⌘H' : 'Ctrl+H'
         }`}
         onClick={() => {
           //Placeholder hardcoded values. Should implement some sort of card selector.
           console.log('Heeej :^D');
-          activeEditor.dispatchCommand(INSERT_BANNER_COMMAND, 1053);
+          activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
         }}
         type="button"
       >
-        Banner
+        CardLink
       </button>
     );
   }
@@ -762,7 +762,7 @@ export default function ToolbarPlugin(): JSX.Element {
         </>
       )}
       {/* <button onClick={insertCardLink}> cardlink</button> */}
-      <BannerToolbarPlugin />
+      <CardLinkToolbarPlugin />
     </div>
   );
 }

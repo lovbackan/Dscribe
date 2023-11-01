@@ -18,7 +18,7 @@ import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import ToolbarPlugin from '../../plugins/ToolbarPlugin';
 import { EditorState } from 'lexical';
-import { BannerNode, BannerPlugin } from '../../plugins/BannerPlugin';
+import { CardLinkNode, CardLinkPlugin } from '../../plugins/CardLinkPlugin';
 
 // import TreeViewPlugin from "./plugins/TreeViewPlugin";
 // import ToolbarPlugin from "./plugins/ToolbarPlugin";
@@ -89,12 +89,13 @@ const editorConfig = {
     TableRowNode,
     AutoLinkNode,
     LinkNode,
-    BannerNode,
+    CardLinkNode,
   ],
 };
 
 const Editor = (props: EditorProps) => {
   const { selectedCard } = props;
+
   return (
     <LexicalComposer initialConfig={editorConfig}>
       <div className="editor-container">
@@ -111,7 +112,7 @@ const Editor = (props: EditorProps) => {
             }}
           />
           <UpdateState selectedCard={selectedCard} />
-          <BannerPlugin />
+          <CardLinkPlugin />
           <HistoryPlugin />
           <AutoFocusPlugin />
           <ListPlugin />
