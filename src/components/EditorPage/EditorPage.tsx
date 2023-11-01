@@ -155,8 +155,6 @@ const EditorPage = (props: EditorPageProps) => {
             supabase={props.supabase}
             {...{ setSelectedCard, setDeck, deck, hand, setHand }}
           />
-          <h1>Say hello to my little deck.</h1>
-          <h2>hej</h2>
           {/* <Deck
             supabase={props.supabase}
             {...{ setSelectedCard, setDeck, deck, hand, setHand }}

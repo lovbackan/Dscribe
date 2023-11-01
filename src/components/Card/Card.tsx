@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import RichTextViewer from '../RichTextViewer/RichTextViewer';
-import { useState } from 'react';
+// import { useState } from 'react';
 // import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
 interface CardProps {
@@ -20,7 +20,7 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-  const [inHand, setInHand] = useState(true);
+  // const [inHand, setInHand] = useState(true);
 
   const removeSelf = async () => {
     const result = await props.supabase
