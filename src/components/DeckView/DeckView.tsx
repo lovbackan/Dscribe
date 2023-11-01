@@ -4,6 +4,7 @@ import React from 'react';
 import Card from '../Card/Card';
 
 import { SupabaseClient } from '@supabase/supabase-js';
+import { CTAButton } from '../CTAButton/CTAButton';
 
 interface DeckViewProps {
   showDeckView: boolean;
@@ -13,6 +14,7 @@ interface DeckViewProps {
   deck: Array<any>;
   hand: Array<any>;
   setHand: Function;
+  toggleDeckView: Function;
 }
 
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
@@ -22,6 +24,14 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       id="deckView"
       className="w-[80%] h-[50%] absolute z-10 bg-slate-500 top-0"
     >
+      <CTAButton
+        title="X"
+        variant="primary"
+        onClick={() => {
+          console.log('close deck view');
+          props.toggleDeckView();
+        }}
+      />
       <h1>DeckView</h1>
       {/* map over deck and display cards */}
 

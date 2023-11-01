@@ -34,6 +34,10 @@ const EditorPage = (props: EditorPageProps) => {
   const [selectedCard, setSelectedCard] = useState<Object>();
   const [showDeck, setShowDeck] = useState<boolean>(false);
 
+  const toggleDeckView = () => {
+    setShowDeck(!showDeck);
+  };
+
   useEffect(() => {
     fetchDeck();
     fetchCategories();
@@ -121,15 +125,40 @@ const EditorPage = (props: EditorPageProps) => {
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
-        <button className=" bg-red-600" onClick={addCard}>
-          Add Card
-        </button>
-        <button className=" bg-red-600" onClick={fetchDeck}>
-          Get Cards
-        </button>
-        <button className=" bg-red-600" onClick={addCategory}>
-          Add Category
-        </button>
+        <div className="flex flex-row bottom-0 absolute w-full justify-evenly">
+          <CTAButton
+            variant="secondary"
+            onClick={() => {
+              addCard();
+            }}
+            title="Add card"
+          />
+
+          <CTAButton
+            variant="secondary"
+            onClick={() => {
+              fetchDeck();
+            }}
+            title="Get Cards"
+          />
+
+          <CTAButton
+            variant="secondary"
+            onClick={() => {
+              addCategory();
+            }}
+            title="Add category"
+          />
+
+          <CTAButton
+            title="Deck"
+            variant="secondary"
+            onClick={() => {
+              toggleDeckView();
+            }}
+          />
+        </div>
+
         {props.selectedStory ? (
           <Hand
             supabase={props.supabase}
@@ -142,24 +171,13 @@ const EditorPage = (props: EditorPageProps) => {
             }}
           />
         ) : null}
-        <>
-          <CTAButton
-            title="Deck"
-            variant="primary"
-            onClick={() => {
-              setShowDeck(!showDeck);
-            }}
-          />
-          <DeckView
-            showDeckView={showDeck}
-            supabase={props.supabase}
-            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
-          />
-          {/* <Deck
-            supabase={props.supabase}
-            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
-          /> */}
-        </>
+
+        <DeckView
+          showDeckView={showDeck}
+          toggleDeckView={toggleDeckView}
+          supabase={props.supabase}
+          {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+        />
       </div>
     </deckContext.Provider>
   );
