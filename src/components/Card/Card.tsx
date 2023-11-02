@@ -1,5 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
-import RichTextViewer from '../RichTextViewer/RichTextViewer';
+// import RichTextViewer from '../RichTextViewer/RichTextViewer';
+// import { Text } from '../Text/Text';
 // import { useState } from 'react';
 // import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
@@ -80,7 +81,7 @@ const Card = (props: CardProps) => {
           {props.card.inHand ? 'Remove from hand!' : 'Add to hand!'}
         </button>
 
-        <RichTextViewer editorState={props.card.text} />
+        {/* <RichTextViewer editorState={props.card.text} /> */}
       </div>
     </>
   );
