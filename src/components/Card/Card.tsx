@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
+import { CTAButton } from '../CTAButton/CTAButton';
 // import RichTextViewer from '../RichTextViewer/RichTextViewer';
-// import { Text } from '../Text/Text';
+import { Text } from '../Text/Text';
 // import { useState } from 'react';
 // import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
@@ -54,15 +55,39 @@ const Card = (props: CardProps) => {
 
   return (
     <>
-      <div className=" bg-green-500 h-60 w-[200px] rounded-xl mr-[-20px] hover:z-10 border-4 border-black row-[1]">
-        {props.card.name}
-        <button className=" bg-red-500 w-20 h-20" onClick={() => removeSelf()}>
-          remove
-        </button>
-        <h2 onClick={() => console.log(props.card.text)}>
-          Category Id:{props.card.category_id}
-        </h2>
-        {props.card.inHand ? (
+      <div
+        className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+        onClick={() => {
+          if (props.card.inHand) {
+            props.setSelectedCard(props.card);
+          } else {
+            toggleInHand();
+            console.log('You pressed the card');
+          }
+        }}
+      >
+        <div className="flex flex-row justify-between">
+          <CTAButton
+            variant="cardCategory"
+            title={props.card.category_id}
+            onClick={() => {
+              console.log(props.card.text);
+              console.log(props.card.category_id);
+            }}
+          />
+
+          <CTAButton
+            variant="minimize/close"
+            title="X"
+            onClick={event => {
+              event.stopPropagation(); // Stop the event from propagating to the parent div
+              if (props.card.inHand) toggleInHand();
+            }}
+          />
+        </div>
+        <Text content={props.card.name} textColor="white" variant="cardTitle" />
+
+        {/* {props.card.inHand ? (
           <button
             onClick={() => {
               props.setSelectedCard(props.card);
@@ -72,14 +97,14 @@ const Card = (props: CardProps) => {
           </button>
         ) : (
           <></>
-        )}
-        <button
+        )} */}
+        {/* <button
           onClick={() => {
             toggleInHand();
           }}
         >
           {props.card.inHand ? 'Remove from hand!' : 'Add to hand!'}
-        </button>
+        </button> */}
 
         {/* <RichTextViewer editorState={props.card.text} /> */}
       </div>
