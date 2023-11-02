@@ -15,6 +15,7 @@ import {
   $applyNodeReplacement,
   INSERT_LINE_BREAK_COMMAND,
   $isParagraphNode,
+  $getNodeByKey,
 } from 'lexical';
 
 import { $setBlocksType } from '@lexical/selection';
@@ -134,21 +135,16 @@ export class CardLinkNode extends ElementNode {
     return newBlock;
   }
 
+  canBeEmpty() {
+    return false;
+  }
+
   canInsertTextBefore() {
     return false;
   }
 
   canInsertTextAfter() {
     return false;
-  }
-
-  //remove cardlink node if u delete the first character in the cardlink node
-  collapseAtStart(): boolean {
-    const paragraph = $createParagraphNode();
-    const children = this.getChildren();
-    children.forEach(child => paragraph.append(child));
-    this.replace(paragraph);
-    return true;
   }
 }
 
@@ -287,6 +283,35 @@ export function CardLinkPlugin(): null {
 
           if (cardLinkNode !== null) {
             cardLinkNode.append(node);
+          }
+        });
+        const newNodes = selection.getNodes();
+        console.log('Old nodes:', nodes);
+        console.log('New nodes:', newNodes);
+        cardLinkNode = null;
+        newNodes.forEach(node => {
+          // if (
+          //   $isCardLinkNode(node) &&
+          //   cardLinkNode != null &&
+          //   $getNodeByKey(node.__prev) === cardLinkNode
+          // ) {
+          //   cardLinkNode = null;
+          //   return;
+          // }
+
+          if ($isCardLinkNode(node)) {
+            if (cardLinkNode === null) {
+              cardLinkNode = node;
+              return;
+            }
+
+            if (node.__prev && $getNodeByKey(node.__prev) === cardLinkNode) {
+              const children = node.getChildren();
+              children.forEach(child => {
+                if (cardLinkNode != null) cardLinkNode.append(child);
+              });
+              node.remove();
+            }
           }
         });
       }
