@@ -22,7 +22,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   return (
     <div
       id="deckView"
-      className="w-[80%] h-[80%] absolute z-10 bg-slate-500 top-0"
+      className="w-[80%] h-[80%] absolute z-10 bg-slate-500 top-0 overflow-y-auto"
     >
       <CTAButton
         title="X"

@@ -112,7 +112,7 @@ const EditorPage = (props: EditorPageProps) => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="h-screen w-full flex flex-col">
+      <div className="h-screen w-screen">
         <h1>
           Selected Story:
           {props.selectedStory ? props.selectedStory.id : 'None'}
@@ -126,14 +126,6 @@ const EditorPage = (props: EditorPageProps) => {
         ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
         <div className="flex flex-col right-0 absolute w-full justify-evenly">
-          <CTAButton
-            variant="secondary"
-            onClick={() => {
-              addCard();
-            }}
-            title="Add card"
-          />
-
           <CTAButton
             variant="secondary"
             onClick={() => {
@@ -151,7 +143,14 @@ const EditorPage = (props: EditorPageProps) => {
           />
         </div>
 
-        <div className="absolute bottom-0 z-10 flex flex-row justify-between">
+        <div className="absolute bottom-0 z-10 flex flex-col justify-between gap-5 mb-6 ml-6">
+          <CTAButton
+            variant="deck"
+            onClick={() => {
+              addCard();
+            }}
+            title="+"
+          />
           <CTAButton
             title="D"
             variant="deck"
