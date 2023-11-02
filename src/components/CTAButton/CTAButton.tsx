@@ -6,7 +6,8 @@ type ButtonType =
   | 'landing'
   | 'minimize/close'
   | 'cardCategory'
-  | 'disabled';
+  | 'disabled'
+  | 'deck';
 
 interface CTAButtonProps {
   title: string | number;
@@ -29,6 +30,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? ''
       : variant === 'cardCategory'
       ? 'bg-black h-4 min-w-[40px] w-auto rounded-tl-[5px] rounded-br-[5px] flex justify-center items-center hover:border-white hover:border'
+      : variant === 'deck'
+      ? 'w-12 h-20 rounded-xl bg-white border-2 border-black flex justify-center items-center hover:border-green-700 hover:border-4'
       : variant === 'minimize/close'
       ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
       : 'bg-purple-400';
@@ -42,6 +45,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'text-black text-3xl font-semibold'
       : variant === 'cardCategory'
       ? 'text-white text-xs'
+      : variant === 'deck'
+      ? 'text-black text-[32px]'
       : variant === 'minimize/close'
       ? 'text-black text-[12px]'
       : 'text-purple-400';

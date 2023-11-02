@@ -112,7 +112,7 @@ const EditorPage = (props: EditorPageProps) => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="h-screen w-full">
+      <div className="h-screen w-full flex flex-col">
         <h1>
           Selected Story:
           {props.selectedStory ? props.selectedStory.id : 'None'}
@@ -125,7 +125,7 @@ const EditorPage = (props: EditorPageProps) => {
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
-        <div className="flex flex-row bottom-0 absolute w-full justify-evenly">
+        <div className="flex flex-col right-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
             onClick={() => {
@@ -149,16 +149,17 @@ const EditorPage = (props: EditorPageProps) => {
             }}
             title="Add category"
           />
+        </div>
 
+        <div className="absolute bottom-0 z-10 flex flex-row justify-between">
           <CTAButton
-            title="Deck"
-            variant="secondary"
+            title="D"
+            variant="deck"
             onClick={() => {
               toggleDeckView();
             }}
           />
         </div>
-
         {props.selectedStory ? (
           <Hand
             supabase={props.supabase}
