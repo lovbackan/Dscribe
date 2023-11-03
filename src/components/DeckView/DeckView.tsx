@@ -24,9 +24,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   return (
     <div
       id="deckView"
-      className="w-[80%] h-[80%] absolute z-10 bg-slate-500 top-0 overflow-y-auto rounded-3xl"
+      className="w-[80%] h-[80%] absolute z-10 bg-slate-500 top-0 overflow-y-auto rounded-3xl px-20"
     >
-      <div className="absolute right-0">
+      <div className="fixed">
         <CTAButton
           title="X"
           variant="primary"
@@ -49,19 +49,32 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           }}
         />
       </div>
-      <div>
+
+      <div className="flex flex-row w-[100%]">
         {props.deck.map(card => {
           return (
             <CTAButton
               title={card.category_id}
               variant="deckViewCategory"
-              onClick={() => {}}
+              onClick={() => {
+                console.log(card.category_id);
+              }}
             />
           );
         })}
       </div>
 
-      <div className="flex flex-wrap gap-10 m-[10%] ">
+      <div className="flex flex-row pb-10">
+        <Text textColor="black" variant="heading2" content="Chapters" />
+
+        <div className="w-full h-0.5 bg-black self-end"></div>
+      </div>
+      <div className="flex flex-row pb-10">
+        <Text textColor="black" variant="heading2" content="Cards" />
+
+        <div className="w-full h-0.5 bg-black self-end"></div>
+      </div>
+      <div className="flex flex-wrap gap-10 my-2 justify-center items-center">
         {props.deck.map(card => {
           return (
             <Card
@@ -73,7 +86,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
               setDeck={props.setDeck}
               hand={props.hand}
               setHand={props.setHand}
-              variant="smallCard"
+              variant="deckCard"
             />
           );
         })}

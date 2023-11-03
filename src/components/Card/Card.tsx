@@ -6,7 +6,7 @@ import { Text } from '../Text/Text';
 // import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
 
-type CardType = 'bigCard' | 'smallCard';
+type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
 interface CardProps {
   card: {
@@ -65,7 +65,7 @@ const Card = (props: CardProps) => {
           onClick={() => {
             if (props.card.inHand) {
               props.setSelectedCard(props.card);
-              //här ska vi lägga till funktionalitet som skapar ett big card och visar det
+              //här ska vi lägga till funktionalitet som skapar ett open card och visar det
             } else {
               toggleInHand();
               console.log('You pressed the card');
@@ -96,37 +96,71 @@ const Card = (props: CardProps) => {
             textColor="white"
             variant="cardTitle"
           />
-
-          {/* {props.card.inHand ? (
-          <button
-            onClick={() => {
-              props.setSelectedCard(props.card);
-            }}
-          >
-            Select me!
-          </button>
-        ) : (
-          <></>
-        )} */}
-          {/* <button
-          onClick={() => {
-            toggleInHand();
-          }}
-        >
-          {props.card.inHand ? 'Remove from hand!' : 'Add to hand!'}
-        </button> */}
+        </div>
+      </>
+    );
+  }
+  if (props.variant === 'openCard') {
+    return (
+      <>
+        <div className="bg-white h-[30%] w-[40%] rounded-xl">
+          <Text
+            content={props.card.name}
+            textColor="black"
+            variant="cardTitle"
+          />
 
           {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>
       </>
     );
   }
-  if (props.variant === 'bigCard') {
-    <>
-      <div className="bg-white h-[30%] w-[40%] rounded-xl">
-        <Text content={props.card.name} textColor="black" variant="cardTitle" />
-      </div>
-    </>;
+
+  if (props.variant === 'deckCard') {
+    return (
+      <>
+        <>
+          <div
+            className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+            onClick={() => {
+              if (props.card.inHand) {
+                props.setSelectedCard(props.card);
+                //här ska vi lägga till funktionalitet som skapar ett big card och visar det
+              } else {
+                toggleInHand();
+                console.log('You pressed the card');
+              }
+            }}
+          >
+            <div className="flex flex-row justify-between">
+              <CTAButton
+                variant="cardCategory"
+                title={props.card.category_id}
+                onClick={() => {
+                  console.log(props.card.text);
+                  console.log(props.card.category_id);
+                }}
+              />
+              {/* <div className="p-2">
+                <CTAButton
+                  variant="edit"
+                  title=""
+                  onClick={event => {
+                    event.stopPropagation(); // Stop the event from propagating to the parent div
+                    console.log('edit');
+                  }}
+                />
+              </div> */}
+            </div>
+            <Text
+              content={props.card.name}
+              textColor="white"
+              variant="cardTitle"
+            />
+          </div>
+        </>
+      </>
+    );
   }
 };
 

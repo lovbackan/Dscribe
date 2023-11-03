@@ -159,25 +159,30 @@ const EditorPage = (props: EditorPageProps) => {
             }}
           />
         </div>
-        {/* if u press card in hand, it should popup the cardView, now it crashes */}
+
         {props.selectedStory ? (
-          <Hand
-            supabase={props.supabase}
-            {...{
-              setSelectedCard,
-              setDeck,
-              deck,
-              hand,
-              setHand,
-            }}
-          />
+          <div className="flex justify-center">
+            <Hand
+              supabase={props.supabase}
+              {...{
+                setSelectedCard,
+                setDeck,
+                deck,
+                hand,
+                setHand,
+              }}
+            />
+          </div>
         ) : null}
-        <DeckView
-          showDeckView={showDeck}
-          toggleDeckView={toggleDeckView}
-          supabase={props.supabase}
-          {...{ setSelectedCard, setDeck, deck, hand, setHand }}
-        />
+
+        <div className="flex justify-center">
+          <DeckView
+            showDeckView={showDeck}
+            toggleDeckView={toggleDeckView}
+            supabase={props.supabase}
+            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+          />
+        </div>
       </div>
     </deckContext.Provider>
   );
