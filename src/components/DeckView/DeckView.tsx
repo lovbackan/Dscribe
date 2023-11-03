@@ -26,7 +26,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       id="deckView"
       className="  bg-slate-500 overflow-y-auto rounded-3xl px-20 w-[70%] h-[85vh]"
     >
-      <div className="">
+      <div className=" flex flex-row justify-end ">
         <CTAButton
           title="X"
           variant="primary"
@@ -36,7 +36,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           }}
         />
       </div>
-      <h1>DeckView</h1>
+      <div id="title" className="mt-10 ">
+        <h1>DeckView</h1>
+      </div>
       {/* map over deck and display cards */}
 
       <div className="flex flex-row">
