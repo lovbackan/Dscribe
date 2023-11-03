@@ -24,9 +24,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   return (
     <div
       id="deckView"
-      className="w-[80%] h-[80%] absolute z-10 bg-slate-500 top-0 overflow-y-auto rounded-3xl px-20"
+      className="  bg-slate-500 overflow-y-auto rounded-3xl px-20 w-[70%] h-[85vh]"
     >
-      <div className="fixed">
+      <div className="">
         <CTAButton
           title="X"
           variant="primary"

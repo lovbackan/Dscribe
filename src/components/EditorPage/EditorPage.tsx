@@ -112,7 +112,7 @@ const EditorPage = (props: EditorPageProps) => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="h-screen w-screen overflow-hidden relative">
+      <div className="h-screen w-screen relative overflow-hidden">
         <h1>
           Selected Story:
           {props.selectedStory ? props.selectedStory.id : 'None'}
@@ -175,7 +175,11 @@ const EditorPage = (props: EditorPageProps) => {
           </div>
         ) : null}
 
-        <div className="flex justify-center">
+        <div
+          className={`justify-center items-center absolute top-[5%] z-10 ${
+            showDeck ? 'flex' : 'hidden'
+          }`}
+        >
           <DeckView
             showDeckView={showDeck}
             toggleDeckView={toggleDeckView}

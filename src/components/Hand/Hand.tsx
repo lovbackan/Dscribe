@@ -12,10 +12,11 @@ interface HandProps {
 
 const Hand = (props: HandProps) => {
   return (
-    <div className="px-24 absolute z-10 grid w-[90%] justify-center grid-cols-[repeat(auto-fit,_minmax(0,_max-content))]  max-w-[80%]  h-fill">
+    <div className="px-24 z-10 absolute grid w-[90%] justify-center grid-cols-[repeat(auto-fit,_minmax(0,_max-content))]  max-w-[80%]  h-fill">
       {props.deck.map(card => {
         return card.inHand ? (
-          <div className="mt-[-30%] hover:mt-[-40%]">
+          <div className="bottom-[-230px] hover:bottom-[-220px]">
+            {/* <div className=" absolute bottom-[-230px] hover:bottom-[-220px]"> */}
             <Card
               card={card}
               key={card.id}
