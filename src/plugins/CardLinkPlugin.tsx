@@ -289,16 +289,9 @@ export function CardLinkPlugin(): null {
         console.log('Old nodes:', nodes);
         console.log('New nodes:', newNodes);
         cardLinkNode = null;
-        newNodes.forEach(node => {
-          // if (
-          //   $isCardLinkNode(node) &&
-          //   cardLinkNode != null &&
-          //   $getNodeByKey(node.__prev) === cardLinkNode
-          // ) {
-          //   cardLinkNode = null;
-          //   return;
-          // }
 
+        //Merge adjacent nodes
+        newNodes.forEach(node => {
           if ($isCardLinkNode(node)) {
             if (cardLinkNode === null) {
               cardLinkNode = node;
@@ -312,6 +305,11 @@ export function CardLinkPlugin(): null {
               });
               node.remove();
             }
+          }
+
+          if ($isCardLinkNode(node)) {
+            cardLinkNode = node;
+            return;
           }
         });
       }
