@@ -5,6 +5,9 @@ import { Text } from '../Text/Text';
 // import { useState } from 'react';
 // import { EditorState } from 'lexical';
 // 18-10-2023 Mostly just functionality for testing database.
+
+type CardType = 'bigCard' | 'smallCard';
+
 interface CardProps {
   card: {
     name: string;
@@ -13,6 +16,7 @@ interface CardProps {
     text: string;
     inHand?: boolean;
   };
+  variant: CardType;
   supabase: SupabaseClient;
   deck: Array<any>;
   setDeck: Function;
@@ -53,41 +57,47 @@ const Card = (props: CardProps) => {
     props.setDeck([...props.deck]);
   };
 
-  return (
-    <>
-      <div
-        className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
-        onClick={() => {
-          if (props.card.inHand) {
-            props.setSelectedCard(props.card);
-          } else {
-            toggleInHand();
-            console.log('You pressed the card');
-          }
-        }}
-      >
-        <div className="flex flex-row justify-between">
-          <CTAButton
-            variant="cardCategory"
-            title={props.card.category_id}
-            onClick={() => {
-              console.log(props.card.text);
-              console.log(props.card.category_id);
-            }}
+  if (props.variant === 'smallCard') {
+    return (
+      <>
+        <div
+          className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          onClick={() => {
+            if (props.card.inHand) {
+              props.setSelectedCard(props.card);
+              //här ska vi lägga till funktionalitet som skapar ett big card och visar det
+            } else {
+              toggleInHand();
+              console.log('You pressed the card');
+            }
+          }}
+        >
+          <div className="flex flex-row justify-between">
+            <CTAButton
+              variant="cardCategory"
+              title={props.card.category_id}
+              onClick={() => {
+                console.log(props.card.text);
+                console.log(props.card.category_id);
+              }}
+            />
+
+            <CTAButton
+              variant="minimize/close"
+              title="X"
+              onClick={event => {
+                event.stopPropagation(); // Stop the event from propagating to the parent div
+                if (props.card.inHand) toggleInHand();
+              }}
+            />
+          </div>
+          <Text
+            content={props.card.name}
+            textColor="white"
+            variant="cardTitle"
           />
 
-          <CTAButton
-            variant="minimize/close"
-            title="X"
-            onClick={event => {
-              event.stopPropagation(); // Stop the event from propagating to the parent div
-              if (props.card.inHand) toggleInHand();
-            }}
-          />
-        </div>
-        <Text content={props.card.name} textColor="white" variant="cardTitle" />
-
-        {/* {props.card.inHand ? (
+          {/* {props.card.inHand ? (
           <button
             onClick={() => {
               props.setSelectedCard(props.card);
@@ -98,7 +108,7 @@ const Card = (props: CardProps) => {
         ) : (
           <></>
         )} */}
-        {/* <button
+          {/* <button
           onClick={() => {
             toggleInHand();
           }}
@@ -106,10 +116,18 @@ const Card = (props: CardProps) => {
           {props.card.inHand ? 'Remove from hand!' : 'Add to hand!'}
         </button> */}
 
-        {/* <RichTextViewer editorState={props.card.text} /> */}
+          {/* <RichTextViewer editorState={props.card.text} /> */}
+        </div>
+      </>
+    );
+  }
+  if (props.variant === 'bigCard') {
+    <>
+      <div className="bg-white h-[30%] w-[40%] rounded-xl">
+        <Text content={props.card.name} textColor="black" variant="cardTitle" />
       </div>
-    </>
-  );
+    </>;
+  }
 };
 
 export default Card;
