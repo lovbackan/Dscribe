@@ -112,7 +112,7 @@ const EditorPage = (props: EditorPageProps) => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="h-screen w-screen">
+      <div className="h-screen w-screen overflow-hidden relative">
         <h1>
           Selected Story:
           {props.selectedStory ? props.selectedStory.id : 'None'}
@@ -125,7 +125,7 @@ const EditorPage = (props: EditorPageProps) => {
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
-        <div className="flex flex-col right-0 absolute w-full justify-evenly">
+        <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
             onClick={() => {
@@ -143,7 +143,7 @@ const EditorPage = (props: EditorPageProps) => {
           />
         </div>
 
-        <div className="absolute bottom-0 z-10 flex flex-col justify-between gap-5 mb-6 ml-6">
+        <div className="absolute bottom-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
           <CTAButton
             variant="deck"
             onClick={() => {
@@ -159,25 +159,30 @@ const EditorPage = (props: EditorPageProps) => {
             }}
           />
         </div>
+
         {props.selectedStory ? (
-          <Hand
-            supabase={props.supabase}
-            {...{
-              setSelectedCard,
-              setDeck,
-              deck,
-              hand,
-              setHand,
-            }}
-          />
+          <div className="flex justify-center">
+            <Hand
+              supabase={props.supabase}
+              {...{
+                setSelectedCard,
+                setDeck,
+                deck,
+                hand,
+                setHand,
+              }}
+            />
+          </div>
         ) : null}
 
-        <DeckView
-          showDeckView={showDeck}
-          toggleDeckView={toggleDeckView}
-          supabase={props.supabase}
-          {...{ setSelectedCard, setDeck, deck, hand, setHand }}
-        />
+        <div className="flex justify-center">
+          <DeckView
+            showDeckView={showDeck}
+            toggleDeckView={toggleDeckView}
+            supabase={props.supabase}
+            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+          />
+        </div>
       </div>
     </deckContext.Provider>
   );
