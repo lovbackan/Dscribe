@@ -1,35 +1,30 @@
-import { Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ErrorPage from '../components/pages/ErrorPage';
 
-import RequireAuth from '../components/Auth/RequireAuth.tsx';
 // import Page404 from '@/lib/pages/404';
 
-import { routes, privateRoutes } from './routes';
-
-const Routings = () => {
+import { routes, privateRoutes, ACCEPTED_ROUTES } from './routes';
+interface Props {
+  isAuthenticated: boolean;
+}
+const Routings: React.FC<Props> = ({ isAuthenticated }) => {
   return (
-    <Suspense>
-      <Routes>
-        {routes.map(routeProps => (
-          <Route {...routeProps} key={routeProps.path as string} />
-        ))}
-        {privateRoutes.map(({ element, ...privateRouteProps }) => (
-          <Route
-            element={
-              <RequireAuth
-                redirectTo={`/login?redirectTo=${privateRouteProps.path}`}
-              >
-                {element}
-              </RequireAuth>
-            }
-            {...privateRouteProps}
-            key={`privateRoute-${privateRouteProps.path}`}
-          />
-        ))}
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </Suspense>
+    <Routes>
+      {routes.map(routeProps => (
+        <Route {...routeProps} key={routeProps.path as string} />
+      ))}
+      {privateRoutes.map(({ element, ...privateRouteProps }) => (
+        <Route
+          element={
+            isAuthenticated ? element : <Navigate to={ACCEPTED_ROUTES.LOGIN} />
+          }
+          {...privateRouteProps}
+          key={`privateRoute-${privateRouteProps.path}`}
+        />
+      ))}
+      {/* erropage verkar inte funka just nu */}
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   );
 };
 

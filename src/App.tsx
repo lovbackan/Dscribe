@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { Session, createClient } from '@supabase/supabase-js';
 import './App.css';
 import LoginPage from './components/LoginPage/LoginPage';
 import EditorPage from './components/EditorPage/EditorPage';
@@ -110,11 +110,41 @@ export default App;
 // import { BrowserRouter as Router } from 'react-router-dom';
 
 // import Routings from './routes/routings.tsx';
+// import { supabase } from './supabase/index.ts';
 
-// const App = () => (
-//   <Router>
-//     <Routings />
-//   </Router>
-// );
+// const App = () => {
+//   const [session, setSession] = useState<Session | null>(null);
+//   const [appLoading, setAppLoading] = useState(true);
+
+//   useEffect(() => {
+//     // This code runs only once when the app loads
+//     // and is nessesary to check if the user is logged in
+//     supabase.auth.getSession().then(({ data: { session } }) => {
+//       setSession(session);
+//       /* setTimeout(() => {
+//         setAppLoading(false);
+//       }, 1500); */
+//       setAppLoading(false);
+//     });
+//   }, []);
+
+//   useEffect(() => {
+//     const {
+//       data: { subscription },
+//     } = supabase.auth.onAuthStateChange((_event, session) => {
+//       setSession(session);
+//     });
+
+//     return () => subscription.unsubscribe();
+//   }, []);
+
+//   if (appLoading) return <div>Loading...</div>;
+
+//   return (
+//     <Router>
+//       <Routings isAuthenticated={Boolean(session)} />
+//     </Router>
+//   );
+// };
 
 // export default App;

@@ -8,6 +8,9 @@ import { Text } from '../Text/Text';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
+// Come up with a batter name for this component and CardDesign, this card is the one that is used in the deck view and contains its data.
+//But the CardDesign is the one that is used to create newCards and show the stories (but they should propably also be card.tsx because
+//they will contain pictures/title/headCategory.
 interface CardProps {
   card: {
     name: string;
