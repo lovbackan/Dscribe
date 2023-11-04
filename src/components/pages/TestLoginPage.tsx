@@ -1,9 +1,9 @@
-import { SupabaseClient } from '@supabase/supabase-js';
 import { useState } from 'react';
-import { LoginCard } from '../LoginCard/LoginCard';
+
 import { supabase } from '../../supabase';
-import { Link } from 'react-router-dom';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
+
+import FormCard from '../Forms/FormCard';
+import Form from '../Forms/Form';
 
 const TestLoginPage = () => {
   const [email, setEmail] = useState('asd@asd'); //Values for testing account.
@@ -19,21 +19,24 @@ const TestLoginPage = () => {
     if (error) setError(error);
   };
 
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) setError(error);
-  };
+  // const signOut = async () => {
+  //   const { error } = await supabase.auth.signOut();
+  //   if (error) setError(error);
+  // };
 
   return (
-    <div>
-      <input placeholder="email" onChange={e => setEmail(e.target.value)} />
-      <input
-        placeholder="password"
-        onChange={e => setPassword(e.target.value)}
+    <div className="w-screen h-screen flex justify-center items-center">
+      <FormCard
+        formComponent={
+          <Form
+            variant="login"
+            onChange1={e => setEmail(e.target.value)}
+            onChange2={e => setPassword(e.target.value)}
+            onClick={signIn}
+          />
+        }
       />
-      <button onClick={signIn}>Sign in</button>
-      <button onClick={signOut}>Sign out</button>
-      <Link to={ACCEPTED_ROUTES.READINGPAGE}>READING PAGE</Link>
+
       {error && <p>{error.message}</p>}
     </div>
   );
