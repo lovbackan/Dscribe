@@ -53,6 +53,8 @@ function App() {
     else setStories(data);
   };
 
+  //Codereview Adam: När du refreshar en sida kommer du alltid komma tillbaka till startsidan med denna lösningen vilket inte är bra. En annan routing lösning hade varit bättre.  T.ex. React routing, kanske får skicka med vissa props till de olika vyerna - eller i detta fall kanske mest från home till editorviewen. Om du vill länka din story till någon annan så kommer det funka utan routing. Blir också relevant för back funktionen i browsern. Finns protected routes att kolla upp gällande routing säkerhet, t.ex. om du inte är inloggad så kan du inte kommma åt vissa sidor. https://reactrouter.com/en/main/start/tutorial
+
   if (!signedIn && view === 'landing') {
     return (
       <>

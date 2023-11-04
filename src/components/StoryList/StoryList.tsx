@@ -30,6 +30,7 @@ const StoryList = (props: StoryListProps) => {
   return (
     <div className="flex flex-wrap w-full justify-center gap-5 pl-[200px] max-w-[90%]">
       {props.stories.map(story => {
+        console.log(story);
         return (
           <StoryCard
             key={story.id}
