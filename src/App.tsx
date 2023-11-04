@@ -104,3 +104,17 @@ function App() {
 }
 
 export default App;
+
+// DETTA ÄR ROUTINGLÖSNINGS IMPLEMENTATIONEN
+
+// import { BrowserRouter as Router } from 'react-router-dom';
+
+// import Routings from './routes/routings.tsx';
+
+// const App = () => (
+//   <Router>
+//     <Routings />
+//   </Router>
+// );
+
+// export default App;

@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { useState } from 'react';
-import { LoginCard } from './LoginCard';
+import { LoginCard } from '../LoginCard/LoginCard';
 
 interface LoginPageProps {
   supabase: SupabaseClient;
