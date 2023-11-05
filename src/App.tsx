@@ -5,7 +5,7 @@ import LoginPage from './components/LoginPage/LoginPage';
 import EditorPage from './components/EditorPage/EditorPage';
 import MenuPage from './components/MenuPage/MenuPage';
 import LandingPage from './components/LandingPage/LandingPage';
-//Supabase setup
+// Supabase setup
 const supabaseUrl: string = import.meta.env.VITE_SUPABASE_URL
   ? import.meta.env.VITE_SUPABASE_URL
   : ' ';
@@ -119,14 +119,17 @@ export default App;
 //   useEffect(() => {
 //     // This code runs only once when the app loads
 //     // and is nessesary to check if the user is logged in
+//     //change timers speed if you want to load a cool animation
 //     supabase.auth.getSession().then(({ data: { session } }) => {
 //       setSession(session);
-//       /* setTimeout(() => {
+//       setTimeout(() => {
 //         setAppLoading(false);
-//       }, 1500); */
-//       setAppLoading(false);
+//       }, 100);
+//       setAppLoading(true);
 //     });
 //   }, []);
+
+//   // om session finns redirecta till readingpage(ska inte vara readingpage utan homepage men för testning)
 
 //   useEffect(() => {
 //     const {

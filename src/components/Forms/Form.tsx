@@ -33,9 +33,8 @@ const Form: React.FC<FormProps> = ({
             onChange={onChange2}
           />
         )}
-        <Link to={ACCEPTED_ROUTES.READINGPAGE}>
-          <CTAButton title="Login" variant="primary" onClick={onClick} />
-        </Link>
+
+        <CTAButton title="Login" variant="primary" onClick={onClick} />
 
         <div id="optionsContainer" className="flex flex-col">
           <Link to={ACCEPTED_ROUTES.REGISTER}>
@@ -66,7 +65,7 @@ const Form: React.FC<FormProps> = ({
             onChange={onChange3}
           />
         )}
-        <Link to={ACCEPTED_ROUTES.READINGPAGE}>
+        <Link to={ACCEPTED_ROUTES.HOME}>
           <CTAButton title="Register" variant="primary" onClick={onClick} />
         </Link>
       </>
@@ -76,7 +75,7 @@ const Form: React.FC<FormProps> = ({
       <>
         <Text variant="heading3" content="Reset password" textColor="black" />
         <Input variant="primary" placeholder="Email" onChange={onChange1} />
-        <Link to={ACCEPTED_ROUTES.READINGPAGE}>
+        <Link to={ACCEPTED_ROUTES.HOME}>
           <CTAButton title="Login" variant="primary" onClick={onClick} />
         </Link>
       </>

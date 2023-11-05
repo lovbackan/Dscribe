@@ -38,7 +38,7 @@ const RegisterPage = () => {
       setError(error);
     } else {
       await signIn(); // Wait for signIn to complete before navigating
-      navigate(ACCEPTED_ROUTES.READINGPAGE); //  avigate to the readingPage
+      navigate(ACCEPTED_ROUTES.HOME); //  avigate to the readingPage
     }
   };
 
