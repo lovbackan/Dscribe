@@ -1,10 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { CTAButton } from '../CTAButton/CTAButton';
-// import RichTextViewer from '../RichTextViewer/RichTextViewer';
 import { Text } from '../Text/Text';
-// import { useState } from 'react';
-// import { EditorState } from 'lexical';
-// 18-10-2023 Mostly just functionality for testing database.
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -17,20 +13,17 @@ interface CardProps {
     id: number;
     category_id: number;
     text: string;
-    inHand?: boolean;
+    inHand?: Boolean;
+    openCard?: Boolean;
   };
   variant: CardType;
   supabase: SupabaseClient;
   deck: Array<any>;
   setDeck: Function;
   setSelectedCard: Function;
-  hand: Array<any>;
-  setHand: Function;
 }
 
 const Card = (props: CardProps) => {
-  // const [inHand, setInHand] = useState(true);
-
   const removeSelf = async () => {
     const result = await props.supabase
       .from('cards')
@@ -60,19 +53,26 @@ const Card = (props: CardProps) => {
     props.setDeck([...props.deck]);
   };
 
+  const toggleOpenCard = () => {
+    const cardIndex = props.deck.findIndex(card => {
+      if (props.card.id === card.id) return true;
+      else return false;
+    });
+
+    if (props.card.openCard) props.deck[cardIndex].openCard = false;
+    else props.deck[cardIndex].openCard = true;
+
+    props.setDeck([...props.deck]);
+    console.log(props.deck[cardIndex]);
+  };
+
   if (props.variant === 'smallCard') {
     return (
       <>
         <div
           className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
-            if (props.card.inHand) {
-              props.setSelectedCard(props.card);
-              //här ska vi lägga till funktionalitet som skapar ett open card och visar det
-            } else {
-              toggleInHand();
-              console.log('You pressed the card');
-            }
+            toggleOpenCard();
           }}
         >
           <div className="flex flex-row justify-between">

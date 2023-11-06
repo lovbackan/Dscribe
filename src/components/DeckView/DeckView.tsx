@@ -14,8 +14,6 @@ interface DeckViewProps {
   setSelectedCard: Function;
   setDeck: Function;
   deck: Array<any>;
-  hand: Array<any>;
-  setHand: Function;
   toggleDeckView: Function;
 }
 
@@ -89,8 +87,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 setSelectedCard={props.setSelectedCard}
                 deck={props.deck}
                 setDeck={props.setDeck}
-                hand={props.hand}
-                setHand={props.setHand}
                 variant="deckCard"
               />
             );

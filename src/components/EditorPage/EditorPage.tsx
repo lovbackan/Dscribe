@@ -7,6 +7,8 @@ import { useState, useEffect, createContext } from 'react';
 import { EditorState } from 'lexical';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { DeckView } from '../DeckView/DeckView';
+import Card from '../Card/Card';
+import { supabase } from '../../supabase';
 
 interface EditorPageProps {
   supabase: SupabaseClient;
@@ -25,7 +27,6 @@ export const deckContext = createContext<any[]>([]);
 
 const EditorPage = (props: EditorPageProps) => {
   const [deck, setDeck] = useState<Array<any>>([]);
-  const [hand, setHand] = useState<Array<any>>([]);
   const [editorState, setEditorState] = useState<EditorState>();
   const [categories, setCategories] = useState<Array<any>>([]);
   const [categoryId, setCategory] = useState<number>(0);
@@ -42,7 +43,6 @@ const EditorPage = (props: EditorPageProps) => {
     fetchDeck();
     fetchCategories();
     setCategory(0);
-    setHand([]);
   }, [props.selectedStory]);
 
   const fetchDeck = async () => {
@@ -125,6 +125,20 @@ const EditorPage = (props: EditorPageProps) => {
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
+        {deck.map(card => {
+          if (card.openCard)
+            return (
+              <Card
+                card={card}
+                variant="openCard"
+                supabase={supabase}
+                deck={deck}
+                setDeck={setDeck}
+                setSelectedCard={setSelectedCard}
+              />
+            );
+        })}
+
         <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
@@ -168,8 +182,6 @@ const EditorPage = (props: EditorPageProps) => {
                 setSelectedCard,
                 setDeck,
                 deck,
-                hand,
-                setHand,
               }}
             />
           </div>
@@ -184,7 +196,7 @@ const EditorPage = (props: EditorPageProps) => {
             showDeckView={showDeck}
             toggleDeckView={toggleDeckView}
             supabase={props.supabase}
-            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+            {...{ setSelectedCard, setDeck, deck }}
           />
         </div>
       </div>
