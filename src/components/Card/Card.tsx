@@ -114,7 +114,11 @@ const Card = (props: CardProps) => {
             textColor="black"
             variant="cardTitle"
           />
-          <Editor setEditorState={props.setEditorState}></Editor>
+          <Editor
+            setEditorState={props.setEditorState}
+            card={props.card}
+            deck={props.deck}
+          ></Editor>
 
           {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>
@@ -128,13 +132,7 @@ const Card = (props: CardProps) => {
         <div
           className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
-            if (props.card.inHand) {
-              props.setSelectedCard(props.card);
-              //här ska vi lägga till funktionalitet som skapar ett big card och visar det
-            } else {
-              toggleInHand();
-              console.log('You pressed the card');
-            }
+            toggleInHand();
           }}
         >
           <div className="flex flex-row justify-between">

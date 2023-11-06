@@ -17,14 +17,8 @@ import { ListItemNode, ListNode } from '@lexical/list';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import ToolbarPlugin from '../../plugins/ToolbarPlugin';
-import { EditorState } from 'lexical';
+import { EditorState, LexicalEditor } from 'lexical';
 import { CardLinkNode, CardLinkPlugin } from '../../plugins/CardLinkPlugin';
-
-// import TreeViewPlugin from "./plugins/TreeViewPlugin";
-// import ToolbarPlugin from "./plugins/ToolbarPlugin";
-// import ListMaxIndentLevelPlugin from "./plugins/ListMaxIndentLevelPlugin";
-// import CodeHighlightPlugin from "./plugins/CodeHighlightPlugin";
-// import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 
 //Fix this any when Card is done enough to be properly typed
 interface EditorProps {
@@ -36,13 +30,14 @@ interface EditorProps {
         name: string;
         text: string;
       };
+  card?: any;
+  deck: EditorProps['card'][];
 }
 
-//Gör en riktig state och spara texten i.
 function MyOnChangeFunction(props: {
   onChange: (editorState: EditorState) => void;
 }): null {
-  const [editor] = useLexicalComposerContext(); //essential part of every lexical plugin
+  const [editor] = useLexicalComposerContext();
   const { onChange } = props;
   editor.registerUpdateListener(({ editorState }) => {
     onChange(editorState);
@@ -70,6 +65,7 @@ function Placeholder() {
 
 const editorConfig = {
   namespace: 'MyEditor',
+
   // The editor theme
   theme: exampleTheme,
   // Handling of errors during update
@@ -94,10 +90,25 @@ const editorConfig = {
 };
 
 const Editor = (props: EditorProps) => {
-  const { selectedCard } = props;
+  const { selectedCard, card, deck } = props;
+  // const [editor] = useLexicalComposerContext();
+  let initialEditorState = null;
+  if (card) {
+    const cardIndex = deck.findIndex(deckCard => {
+      if (card.id === deckCard.id) return true;
+      return false;
+    });
 
+    if (cardIndex === -1) return;
+    initialEditorState = deck[cardIndex].text;
+  }
   return (
-    <LexicalComposer initialConfig={editorConfig}>
+    <LexicalComposer
+      initialConfig={{
+        ...editorConfig,
+        editorState: initialEditorState,
+      }}
+    >
       <div className="editor-container">
         <ToolbarPlugin />
         <div className="editor-inner">

@@ -119,7 +119,11 @@ const NewEditorPage = () => {
           selectedStory={props.selectedStory}
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
-        <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
+        <Editor
+          setEditorState={setEditorState}
+          selectedCard={selectedCard}
+          deck={deck}
+        />
         {deck.map(card => {
           if (card.openCard)
             return (
