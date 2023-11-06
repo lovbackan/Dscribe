@@ -65,9 +65,17 @@ const Form: React.FC<FormProps> = ({
             onChange={onChange3}
           />
         )}
-        <Link to={ACCEPTED_ROUTES.HOME}>
-          <CTAButton title="Register" variant="primary" onClick={onClick} />
-        </Link>
+
+        <CTAButton title="Register" variant="primary" onClick={onClick} />
+
+        <div id="optionsContainer" className="flex flex-col">
+          <Link to={ACCEPTED_ROUTES.LOGIN}>
+            <p className="text-sm text-center">Login</p>
+          </Link>
+          <Link to={ACCEPTED_ROUTES.PASSWORDRESET}>
+            <p className="text-sm text-center">Forgot password?</p>
+          </Link>
+        </div>
       </>
     );
   } else if (variant === 'forgotPassword') {
@@ -75,9 +83,17 @@ const Form: React.FC<FormProps> = ({
       <>
         <Text variant="heading3" content="Reset password" textColor="black" />
         <Input variant="primary" placeholder="Email" onChange={onChange1} />
-        <Link to={ACCEPTED_ROUTES.HOME}>
-          <CTAButton title="Login" variant="primary" onClick={onClick} />
-        </Link>
+
+        <CTAButton title="Reset" variant="primary" onClick={onClick} />
+
+        <div id="optionsContainer" className="flex flex-col">
+          <Link to={ACCEPTED_ROUTES.LOGIN}>
+            <p className="text-sm text-center">Login</p>
+          </Link>
+          <Link to={ACCEPTED_ROUTES.REGISTER}>
+            <p className="text-sm text-center">Register</p>
+          </Link>
+        </div>
       </>
     );
   }
