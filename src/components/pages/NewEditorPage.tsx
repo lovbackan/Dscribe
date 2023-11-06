@@ -130,6 +130,7 @@ const NewEditorPage = () => {
                 deck={deck}
                 setDeck={setDeck}
                 setSelectedCard={setSelectedCard}
+                setEditorState={setEditorState}
               />
             );
         })}

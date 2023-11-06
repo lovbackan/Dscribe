@@ -12,23 +12,12 @@ import {
   $createParagraphNode,
   RangeSelection,
   SerializedElementNode,
-  $applyNodeReplacement,
-  INSERT_LINE_BREAK_COMMAND,
-  $isParagraphNode,
   $getNodeByKey,
 } from 'lexical';
 
-import { $setBlocksType } from '@lexical/selection';
-import { deckContext } from '../components/EditorPage/EditorPage';
+import { deckContext } from '../components/pages/NewEditorPage';
 import { useContext } from 'react';
-import { $isTextNode, $isElementNode } from 'lexical';
-import { $getNearestBlockElementAncestorOrThrow } from '@lexical/utils';
-import { $isHeadingNode, $isQuoteNode } from '@lexical/rich-text';
-import { $isDecoratorBlockNode } from '@lexical/react/LexicalDecoratorBlockNode';
-import {
-  $createRangeSelection,
-  internalCreateRangeSelection,
-} from 'lexical/LexicalSelection';
+import { $isElementNode } from 'lexical';
 
 type SerializedCardLinkNode = { cardId: number } & SerializedElementNode;
 

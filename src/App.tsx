@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Session, createClient } from '@supabase/supabase-js';
+import { Session } from '@supabase/supabase-js';
 import './App.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routings from './routes/routings.tsx';
