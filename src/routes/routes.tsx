@@ -1,14 +1,14 @@
 // import React from 'react';
 import type { PathRouteProps } from 'react-router-dom';
-import LoginPage from '../components/pages/LoginPage.tsx';
+import LoginPage from '../pages/LoginPage.tsx';
 
-import RegisterPage from '../components/pages/RegisterPage.tsx';
-import PasswordReset from '../components/pages/PasswordReset.tsx';
-import HomePage from '../components/pages/HomePage.tsx';
-import LandingPage from '../components/pages/LandingPage.tsx';
-import CommunityPage from '../components/pages/CommunityPage.tsx';
-import EditorPage from '../components/pages/EditorPage.tsx';
-import SettingsPage from '../components/pages/SettingsPage.tsx';
+import RegisterPage from '../pages/RegisterPage.tsx';
+import PasswordReset from '../pages/PasswordReset.tsx';
+import HomePage from '../pages/HomePage.tsx';
+import LandingPage from '../pages/LandingPage.tsx';
+import CommunityPage from '../pages/CommunityPage.tsx';
+import EditorPage from '../pages/EditorPage.tsx';
+import SettingsPage from '../pages/SettingsPage.tsx';
 
 // const Home = React.lazy(() => import('../components/pages/LandingPage.tsx'));
 export const ACCEPTED_ROUTES = {

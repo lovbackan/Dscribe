@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import ErrorPage from '../components/pages/ErrorPage';
+import ErrorPage from '../pages/ErrorPage';
 
 // import Page404 from '@/lib/pages/404';
 

@@ -1,26 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabase';
 
-import FormCard from '../Forms/FormCard';
-import Form from '../Forms/Form';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
+import { supabase } from '../supabase';
+
+import FormCard from '../components/Forms/FormCard';
+import Form from '../components/Forms/Form';
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState(''); //Values for testing account.
-  const [password, setPassword] = useState(''); ///////
+  const [email, setEmail] = useState('asd@asd'); //Values for testing account.
+  const [password, setPassword] = useState('asdasd123'); ///////
   const [error, setError] = useState<Error | null>(null);
   const [user, setUser] = useState('');
-
-  const navigate = useNavigate();
-  const signIn = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    console.log(data);
-    if (error) setError(error);
-  };
 
   const signUp = async () => {
     const { data, error } = await supabase.auth.signUp({
@@ -34,12 +23,7 @@ const RegisterPage = () => {
     });
     console.log(data);
     console.log(error);
-    if (error) {
-      setError(error);
-    } else {
-      await signIn(); // Wait for signIn to complete before navigating
-      navigate(ACCEPTED_ROUTES.HOME); //  avigate to the readingPage
-    }
+    if (error) setError(error);
   };
 
   return (
@@ -47,7 +31,7 @@ const RegisterPage = () => {
       <FormCard
         formComponent={
           <Form
-            variant="signup"
+            variant="forgotPassword"
             onChange1={e => setEmail(e.target.value)}
             onChange2={e => setPassword(e.target.value)}
             onChange3={e => setUser(e.target.value)}

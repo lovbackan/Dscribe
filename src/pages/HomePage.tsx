@@ -1,12 +1,12 @@
-import { Input } from '../Input/Input';
+import { Input } from '../components/Input/Input';
 import { useState } from 'react';
-import { supabase } from '../../supabase';
+import { supabase } from '../supabase';
 import { useEffect } from 'react';
-import StoryList from '../StoryList/StoryList';
-import { Text } from '../Text/Text';
-import Navbar from '../Navbar/Navbar';
-import { CTAButton } from '../CTAButton/CTAButton';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
+import StoryList from '../components/StoryList/StoryList';
+import { Text } from '../components/Text/Text';
+import Navbar from '../components/Navbar/Navbar';
+import { CTAButton } from '../components/CTAButton/CTAButton';
+import { ACCEPTED_ROUTES } from '../routes/routes';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {

@@ -1,4 +1,4 @@
-import LandingPage from '../components/pages/LandingPage.tsx';
+import LandingPage from '../pages/LandingPage.tsx';
 
 const Root = () => {
   return <LandingPage />;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { supabase } from '../../supabase';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
-import FormCard from '../Forms/FormCard';
-import Form from '../Forms/Form';
+import { supabase } from '../supabase';
+import { ACCEPTED_ROUTES } from '../routes/routes';
+import FormCard from '../components/Forms/FormCard';
+import Form from '../components/Forms/Form';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {

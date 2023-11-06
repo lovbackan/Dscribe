@@ -1,4 +1,4 @@
-import { deckContext } from '../components/pages/EditorPage';
+import { deckContext } from '../pages/EditorPage';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {

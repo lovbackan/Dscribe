@@ -1,14 +1,14 @@
 import { useLocation } from 'react-router-dom';
-import { supabase } from '../../supabase';
+import { supabase } from '../supabase';
 import { useState, useEffect, createContext } from 'react';
 import { EditorState } from 'lexical';
-import { CTAButton } from '../CTAButton/CTAButton';
-import { DeckView } from '../DeckView/DeckView';
-import Editor from '../Editor/Editor';
-import Hand from '../Hand/Hand';
-import Card from '../Card/Card';
+import { CTAButton } from '../components/CTAButton/CTAButton';
+import { DeckView } from '../components/DeckView/DeckView';
+import Editor from '../components/Editor/Editor';
+import Hand from '../components/Hand/Hand';
+import Card from '../components/Card/Card';
 import { useNavigate } from 'react-router-dom';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
+import { ACCEPTED_ROUTES } from '../routes/routes';
 
 export const deckContext = createContext<any[]>([]);
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Navbar from '../Navbar/Navbar';
-import { CTAButton } from '../CTAButton/CTAButton';
+import Navbar from '../components/Navbar/Navbar';
+import { CTAButton } from '../components/CTAButton/CTAButton';
 import { useNavigate } from 'react-router-dom';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
-import { supabase } from '../../supabase';
+import { ACCEPTED_ROUTES } from '../routes/routes';
+import { supabase } from '../supabase';
 
 const SettingsPage = () => {
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);

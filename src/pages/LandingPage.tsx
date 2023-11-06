@@ -1,7 +1,7 @@
-import { ACCEPTED_ROUTES } from '../../routes/routes.tsx';
-import { CTAButton } from '../CTAButton/CTAButton';
-import { CardDesign } from '../Card/CardDesign';
-import { Text } from '../Text/Text.tsx';
+import { ACCEPTED_ROUTES } from '../routes/routes.tsx';
+import { CTAButton } from '../components/CTAButton/CTAButton.tsx';
+import { CardDesign } from '../components/Card/CardDesign.tsx';
+import { Text } from '../components/Text/Text.tsx';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {

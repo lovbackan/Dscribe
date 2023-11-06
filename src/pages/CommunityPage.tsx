@@ -1,9 +1,9 @@
-import Navbar from '../Navbar/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
-import { supabase } from '../../supabase';
-import { CTAButton } from '../CTAButton/CTAButton';
+import { ACCEPTED_ROUTES } from '../routes/routes';
+import { supabase } from '../supabase';
+import { CTAButton } from '../components/CTAButton/CTAButton';
 
 const CommunityPage = () => {
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
