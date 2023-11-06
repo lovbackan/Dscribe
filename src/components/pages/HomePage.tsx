@@ -4,7 +4,7 @@ import { supabase } from '../../supabase';
 import { useEffect } from 'react';
 import StoryList from '../StoryList/StoryList';
 import { Text } from '../Text/Text';
-import NewNavbar from '../Navbar/NewNavbar';
+import Navbar from '../Navbar/Navbar';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +56,7 @@ const HomePage = () => {
 
   return (
     <div className={`w-screen min-h-screen `}>
-      <NewNavbar
+      <Navbar
         onClick={() => {
           setShowSignOutPopup(true);
         }}

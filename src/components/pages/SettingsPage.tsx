@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import NewNavbar from '../Navbar/NewNavbar';
+import Navbar from '../Navbar/Navbar';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
@@ -26,7 +26,7 @@ const SettingsPage = () => {
   }
   return (
     <div className="h-screen w-screen">
-      <NewNavbar
+      <Navbar
         onClick={() => {
           setShowSignOutPopup(true);
         }}

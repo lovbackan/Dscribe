@@ -5,9 +5,11 @@ type TextType =
   | 'heading1Bold'
   | 'heading2'
   | 'heading3'
+  | 'heading4'
   | 'p-primary'
   | 'p-secondary'
-  | 'cardTitle';
+  | 'cardTitle'
+  | 'logo';
 
 type TextColor = 'black' | 'white' | 'green';
 
@@ -37,7 +39,9 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     'p-primary': tailwindColorClass,
     'p-secondary': tailwindColorClass,
     cardTitle: `text-xl ${tailwindColorClass} break-words`,
+    heading4: `text-base ${tailwindColorClass}`,
     default: `text-sm ${tailwindColorClass}`,
+    logo: `text-1xl ${tailwindColorClass}`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
@@ -48,10 +52,12 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
       heading1Bold: 'h1',
       heading2: 'h2',
       heading3: 'h3',
+      heading4: 'h4',
       'p-primary': 'p',
       'p-secondary': 'p',
       cardTitle: 'h4',
       default: 'p',
+      logo: 'h1',
     }[variant] || 'p';
 
   return React.createElement(elementType, { className }, content);

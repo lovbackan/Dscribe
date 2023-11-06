@@ -15,7 +15,7 @@ import {
   $getNodeByKey,
 } from 'lexical';
 
-import { deckContext } from '../components/pages/NewEditorPage';
+import { deckContext } from '../components/pages/EditorPage';
 import { useContext } from 'react';
 import { $isElementNode } from 'lexical';
 

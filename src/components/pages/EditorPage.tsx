@@ -1,31 +1,24 @@
-import Editor from '../Editor/Editor';
-import Hand from '../Hand/Hand';
-// import StoriesContainer from '../StoriesContainer/StoriesContainer';
-// import Deck from '../Deck/Deck';
-import { SupabaseClient } from '@supabase/supabase-js';
+import { useLocation } from 'react-router-dom';
+import { supabase } from '../../supabase';
 import { useState, useEffect, createContext } from 'react';
 import { EditorState } from 'lexical';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { DeckView } from '../DeckView/DeckView';
+import Editor from '../Editor/Editor';
+import Hand from '../Hand/Hand';
+import Card from '../Card/Card';
+import { useNavigate } from 'react-router-dom';
+import { ACCEPTED_ROUTES } from '../../routes/routes';
 
-interface EditorPageProps {
-  supabase: SupabaseClient;
-  stories: Array<any>;
-  setStories: Function;
-  fetchStories: Function;
-  selectedStory: Story | null;
-  setSelectedStory: Function;
-}
-interface Story {
-  id: number;
-}
-
-//Using context so deck can be accessed by Lexical Editor nodes. Sending props to Editor works less than ideal.
 export const deckContext = createContext<any[]>([]);
 
-const EditorPage = (props: EditorPageProps) => {
+const EditorPage = () => {
+  const navigate = useNavigate();
+
   const [deck, setDeck] = useState<Array<any>>([]);
-  const [hand, setHand] = useState<Array<any>>([]);
+  const location = useLocation();
+  const selectedStory = location.state.selectedStory;
+
   const [editorState, setEditorState] = useState<EditorState>();
   const [categories, setCategories] = useState<Array<any>>([]);
   const [categoryId, setCategory] = useState<number>(0);
@@ -39,28 +32,30 @@ const EditorPage = (props: EditorPageProps) => {
   };
 
   useEffect(() => {
+    if (selectedStory === null) {
+      navigate(ACCEPTED_ROUTES.HOME);
+    }
     fetchDeck();
     fetchCategories();
     setCategory(0);
-    setHand([]);
-  }, [props.selectedStory]);
+  }, [selectedStory]);
 
   const fetchDeck = async () => {
-    const { data, error } = await props.supabase
+    const { data, error } = await supabase
       .from('cards')
       .select('*')
-      .match({ story_id: props.selectedStory ? props.selectedStory.id : 0 });
+      .match({ story_id: selectedStory ? selectedStory.id : 0 });
     console.log(data);
     if (error) console.log(error);
     else setDeck(...[data]);
   };
 
   const fetchCategories = async () => {
-    if (props.selectedStory) {
-      const { data, error } = await props.supabase
+    if (selectedStory) {
+      const { data, error } = await supabase
         .from('categories')
         .select('*')
-        .match({ story_id: props.selectedStory.id });
+        .match({ story_id: selectedStory.id });
       console.log(data);
       if (error) console.log(error);
       else setCategories(data);
@@ -70,15 +65,15 @@ const EditorPage = (props: EditorPageProps) => {
   const addCard = async () => {
     const editorStateJSON = JSON.stringify(editorState);
     const insertData = {
-      user_id: (await props.supabase.auth.getUser()).data.user?.id,
+      user_id: (await supabase.auth.getUser()).data.user?.id,
       name: 'Gundi',
-      story_id: props.selectedStory ? props.selectedStory.id : 0,
+      story_id: selectedStory ? selectedStory.id : 0,
       category_id: categories[categoryId].id,
       text: editorStateJSON,
     };
 
     console.log(editorState);
-    const { data, error } = await props.supabase
+    const { data, error } = await supabase
       .from('cards')
       .insert(insertData)
       .select()
@@ -95,11 +90,11 @@ const EditorPage = (props: EditorPageProps) => {
   const addCategory = async () => {
     const insertData = {
       name: 'Bundi',
-      story_id: props.selectedStory ? props.selectedStory.id : 0,
-      user_id: (await props.supabase.auth.getUser()).data.user?.id,
+      story_id: selectedStory ? selectedStory.id : 0,
+      user_id: (await supabase.auth.getUser()).data.user?.id,
     };
 
-    const { data, error } = await props.supabase
+    const { data, error } = await supabase
       .from('categories')
       .insert(insertData);
     if (error) {
@@ -115,7 +110,7 @@ const EditorPage = (props: EditorPageProps) => {
       <div className="h-screen w-screen relative overflow-hidden">
         <h1>
           Selected Story:
-          {props.selectedStory ? props.selectedStory.id : 'None'}
+          {selectedStory ? selectedStory.id : 'None'}
         </h1>
         {/* <StoriesContainer
           stories={props.stories}
@@ -124,7 +119,27 @@ const EditorPage = (props: EditorPageProps) => {
           selectedStory={props.selectedStory}
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
-        <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
+        <div className="absolute left-1/4 w-1/2 h-3/4">
+          <Editor
+            setEditorState={setEditorState}
+            selectedCard={selectedCard}
+            deck={deck}
+          />
+        </div>
+        {deck.map(card => {
+          if (card.openCard)
+            return (
+              <Card
+                card={card}
+                variant="openCard"
+                supabase={supabase}
+                deck={deck}
+                setDeck={setDeck}
+                setSelectedCard={setSelectedCard}
+                setEditorState={setEditorState}
+              />
+            );
+        })}
         <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
@@ -160,16 +175,14 @@ const EditorPage = (props: EditorPageProps) => {
           />
         </div>
 
-        {props.selectedStory ? (
+        {selectedStory ? (
           <div className="flex justify-center">
             <Hand
-              supabase={props.supabase}
+              supabase={supabase}
               {...{
                 setSelectedCard,
                 setDeck,
                 deck,
-                hand,
-                setHand,
               }}
             />
           </div>
@@ -183,8 +196,8 @@ const EditorPage = (props: EditorPageProps) => {
           <DeckView
             showDeckView={showDeck}
             toggleDeckView={toggleDeckView}
-            supabase={props.supabase}
-            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+            supabase={supabase}
+            {...{ setSelectedCard, setDeck, deck }}
           />
         </div>
       </div>

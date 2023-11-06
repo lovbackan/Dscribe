@@ -1,4 +1,4 @@
-import NewNavbar from '../Navbar/NewNavbar';
+import Navbar from '../Navbar/Navbar';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
@@ -26,7 +26,7 @@ const CommunityPage = () => {
   }
   return (
     <div className="w-screen h-screen">
-      <NewNavbar
+      <Navbar
         onClick={() => {
           setShowSignOutPopup(true);
         }}
