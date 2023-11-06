@@ -1,13 +1,14 @@
 // import React from 'react';
 import type { PathRouteProps } from 'react-router-dom';
 import TestLoginPage from '../components/pages/TestLoginPage.tsx';
-import { useState } from 'react';
+
 import RegisterPage from '../components/pages/RegisterPage.tsx';
 import PasswordReset from '../components/pages/PasswordReset.tsx';
 import HomePage from '../components/pages/HomePage.tsx';
 import LandingPage from '../components/pages/LandingPage.tsx';
 import CommunityPage from '../components/pages/CommunityPage.tsx';
 import NewEditorPage from '../components/pages/NewEditorPage.tsx';
+import SettingsPage from '../components/pages/SettingsPage.tsx';
 
 // const Home = React.lazy(() => import('../components/pages/LandingPage.tsx'));
 export const ACCEPTED_ROUTES = {
@@ -18,6 +19,7 @@ export const ACCEPTED_ROUTES = {
   PASSWORDRESET: '/passwordreset',
   COMMUNITY: '/community',
   EDITOR: '/editor',
+  SETTINGS: '/settings',
 };
 
 export const routes: Array<PathRouteProps> = [
@@ -42,6 +44,10 @@ export const routes: Array<PathRouteProps> = [
 export const privateRoutes: Array<PathRouteProps> = [
   { path: ACCEPTED_ROUTES.HOME, element: <HomePage /> },
   { path: ACCEPTED_ROUTES.COMMUNITY, element: <CommunityPage /> },
+  {
+    path: ACCEPTED_ROUTES.SETTINGS,
+    element: <SettingsPage />,
+  },
   {
     path: ACCEPTED_ROUTES.EDITOR,
     element: <NewEditorPage />,
