@@ -1,12 +1,13 @@
 // import React from 'react';
 import type { PathRouteProps } from 'react-router-dom';
 import TestLoginPage from '../components/pages/TestLoginPage.tsx';
-
+import { useState } from 'react';
 import RegisterPage from '../components/pages/RegisterPage.tsx';
 import PasswordReset from '../components/pages/PasswordReset.tsx';
 import HomePage from '../components/pages/HomePage.tsx';
 import LandingPage from '../components/pages/LandingPage.tsx';
 import CommunityPage from '../components/pages/CommunityPage.tsx';
+import NewEditorPage from '../components/pages/NewEditorPage.tsx';
 
 // const Home = React.lazy(() => import('../components/pages/LandingPage.tsx'));
 export const ACCEPTED_ROUTES = {
@@ -16,6 +17,7 @@ export const ACCEPTED_ROUTES = {
   REGISTER: '/register',
   PASSWORDRESET: '/passwordreset',
   COMMUNITY: '/community',
+  EDITOR: '/editor',
 };
 
 export const routes: Array<PathRouteProps> = [
@@ -40,5 +42,9 @@ export const routes: Array<PathRouteProps> = [
 export const privateRoutes: Array<PathRouteProps> = [
   { path: ACCEPTED_ROUTES.HOME, element: <HomePage /> },
   { path: ACCEPTED_ROUTES.COMMUNITY, element: <CommunityPage /> },
+  {
+    path: ACCEPTED_ROUTES.EDITOR,
+    element: <NewEditorPage />,
+  },
   //lägg till alla private routes här som du måste vara inloggad för att komma åt. Nu finns funktionalitet som redirectar dig till home
 ];

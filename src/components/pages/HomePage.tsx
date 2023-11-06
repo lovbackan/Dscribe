@@ -44,7 +44,14 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    //här ska redirecten vara till edtiorsidan med vald story
     console.log(selectedStory);
+    if (selectedStory) {
+      navigate(ACCEPTED_ROUTES.EDITOR, {
+        replace: true,
+        state: { selectedStory: selectedStory },
+      });
+    }
   }, [selectedStory]);
 
   return (
