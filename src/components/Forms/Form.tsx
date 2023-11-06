@@ -24,27 +24,32 @@ const Form: React.FC<FormProps> = ({
   if (variant === 'login') {
     return (
       <>
-        <Text variant="heading3" content="Login" textColor="black" />
-        <Input
-          id="email"
-          variant="primary"
-          placeholder="Email"
-          onChange={onChange1}
-        />
-        {onChange2 && (
+        <Text variant="heading3" content="Login" textColor="white" />
+        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4 ">
           <Input
-            id="password"
+            type="email"
+            id="email"
             variant="primary"
-            placeholder="Password"
-            onChange={onChange2}
+            placeholder="Email"
+            onChange={onChange1}
           />
-        )}
-
-        <CTAButton title="Login" variant="primary" onClick={onClick} />
+          {onChange2 && (
+            <Input
+              type="password"
+              id="password"
+              variant="primary"
+              placeholder="Password"
+              onChange={onChange2}
+            />
+          )}
+        </div>
+        <div className="py-5">
+          <CTAButton title="Login" variant="primary" onClick={onClick} />
+        </div>
 
         <div id="optionsContainer" className="flex flex-col">
           <Link to={ACCEPTED_ROUTES.REGISTER}>
-            <p className="text-sm text-center">Register</p>
+            <p className="text-sm text-center pb-1">Register</p>
           </Link>
           <Link to={ACCEPTED_ROUTES.PASSWORDRESET}>
             <p className="text-sm text-center">Forgot password?</p>
@@ -55,31 +60,37 @@ const Form: React.FC<FormProps> = ({
   } else if (variant === 'signup') {
     return (
       <>
-        <Text variant="heading3" content="Sign Up" textColor="black" />
-        <Input
-          id="email"
-          variant="primary"
-          placeholder="Email"
-          onChange={onChange1}
-        />
-        {onChange2 && (
+        <Text variant="heading3" content="Sign Up" textColor="white" />
+        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4 ">
           <Input
-            id="password"
+            type="email"
+            id="email"
             variant="primary"
-            placeholder="Password"
-            onChange={onChange2}
+            placeholder="Email"
+            onChange={onChange1}
           />
-        )}
-        {onChange3 && (
-          <Input
-            id="username"
-            variant="primary"
-            placeholder="Username"
-            onChange={onChange3}
-          />
-        )}
-
-        <CTAButton title="Register" variant="primary" onClick={onClick} />
+          {onChange2 && (
+            <Input
+              type="password"
+              id="password"
+              variant="primary"
+              placeholder="Password"
+              onChange={onChange2}
+            />
+          )}
+          {onChange3 && (
+            <Input
+              type="text"
+              id="username"
+              variant="primary"
+              placeholder="Username"
+              onChange={onChange3}
+            />
+          )}
+        </div>
+        <div className="py-5">
+          <CTAButton title="Register" variant="primary" onClick={onClick} />
+        </div>
 
         <div id="optionsContainer" className="flex flex-col">
           <Link to={ACCEPTED_ROUTES.LOGIN}>
@@ -94,8 +105,9 @@ const Form: React.FC<FormProps> = ({
   } else if (variant === 'forgotPassword') {
     return (
       <>
-        <Text variant="heading3" content="Reset password" textColor="black" />
+        <Text variant="heading3" content="Reset password" textColor="white" />
         <Input
+          type="email"
           id="email"
           variant="primary"
           placeholder="Email"

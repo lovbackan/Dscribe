@@ -71,6 +71,7 @@ const HomePage = () => {
       >
         <h1>Your Projects</h1>
         <Input
+          type="text"
           id="search"
           placeholder="Search"
           variant="secondary"

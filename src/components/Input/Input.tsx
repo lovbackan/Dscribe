@@ -6,6 +6,7 @@ interface InputProps {
   id: string;
   placeholder: string;
   variant: InputType;
+  type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -15,30 +16,18 @@ export const Input: React.FC<InputProps> = ({
   onChange,
   variant,
   id,
+  type,
 }) => {
   const containerClasses =
     variant === 'primary'
-      ? 'w-[120px] h-[30px] resize-none'
+      ? 'w-52 h-7 resize-none rounded-lg px-2 py-1 text-black'
       : variant === 'secondary'
-      ? 'w-[200px] h-[30px] resize-none'
-      : 'w-[540px] h-[30px] resize-none';
-
-  // const textClasses =
-  //   variant === 'primary'
-  //     ? 'text-white text-xl font-semibold'
-  //     : variant === 'secondary'
-  //     ? 'text-black text-xl font-semibold'
-  //     : variant === 'landing'
-  //     ? 'text-black text-3xl font-semibold'
-  //     : 'text-gray-400';
+      ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1'
+      : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1';
 
   return (
-    // <textarea
-    //         placeholder="Email..."
-    //         className="w-[120px] h-[30px] resize-none"
-    //         onChange={onChange1}
-    //       ></textarea>
     <input
+      type={type}
       autoComplete="on"
       id={id}
       placeholder={placeholder}

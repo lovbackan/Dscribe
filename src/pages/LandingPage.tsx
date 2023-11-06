@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router-dom';
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-screen bg-amber-50">
+    <div className="h-screen w-screen bg-gradient-to-b from-[#852158] to-[#FFFDD6]">
       <section
         id="LandingPageNavbar"
-        className="h-14 w-full bg-slate-400 flex flex-row"
+        className="h-14 w-full bg-inherit flex flex-row"
       >
-        <div className="flex-grow"></div>
+        <div className="flex-grow "></div>
         <CTAButton
           title="Log in"
           variant="landing"
@@ -27,12 +27,12 @@ const LandingPage = () => {
           id="logo"
           className="h-[200px] w-[133px] rounded-3xl border-2 border-black flex flex-col justify-center items-center"
         >
-          <Text variant="logo" textColor="black" content="Codeck" />
+          <Text variant="logo" textColor="white" content="Codeck" />
         </div>
 
         <Text
           variant="heading1Bold"
-          textColor="black"
+          textColor="white"
           content=" Unfold creativity and structure with
           card-based literacy!"
         />
@@ -40,9 +40,9 @@ const LandingPage = () => {
 
       <section id="StoryList" className="w-full h-[30%] px-5 ">
         <div className="flex flex-row pb-10">
-          <Text textColor="black" variant="heading2" content="Trending" />
+          <Text textColor="white" variant="heading2" content="Trending" />
 
-          <div className="w-full h-0.5 bg-black self-end"></div>
+          <div className="w-full h-0.5 bg-white self-end"></div>
         </div>
 
         {/* Add published works here 
