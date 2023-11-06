@@ -108,12 +108,14 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="bg-white h-[30%] w-[40%] rounded-xl absolute top-4 left-[50%]">
-          <Text
-            content={props.card.name}
-            textColor="black"
-            variant="cardTitle"
-          />
+        <div className="flex  absolute top-4 left-[50%] gap-0">
+          <div className="bg-white h-[300px] w-[200px] rounded-xl border-2 border-black">
+            <Text
+              content={props.card.name}
+              textColor="black"
+              variant="cardTitle"
+            />
+          </div>
           <Editor
             setEditorState={props.setEditorState}
             card={props.card}
