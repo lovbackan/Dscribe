@@ -6,6 +6,7 @@ import { CTAButton } from '../CTAButton/CTAButton';
 import { DeckView } from '../DeckView/DeckView';
 import Editor from '../Editor/Editor';
 import Hand from '../Hand/Hand';
+import Card from '../Card/Card';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
 
@@ -18,7 +19,6 @@ const NewEditorPage = () => {
   const location = useLocation();
   const selectedStory = location.state.selectedStory;
 
-  const [hand, setHand] = useState<Array<any>>([]);
   const [editorState, setEditorState] = useState<EditorState>();
   const [categories, setCategories] = useState<Array<any>>([]);
   const [categoryId, setCategory] = useState<number>(0);
@@ -38,7 +38,6 @@ const NewEditorPage = () => {
     fetchDeck();
     fetchCategories();
     setCategory(0);
-    setHand([]);
   }, [selectedStory]);
 
   const fetchDeck = async () => {
@@ -121,6 +120,19 @@ const NewEditorPage = () => {
           setSelectedStory={props.setSelectedStory}
         ></StoriesContainer> */}
         <Editor setEditorState={setEditorState} selectedCard={selectedCard} />
+        {deck.map(card => {
+          if (card.openCard)
+            return (
+              <Card
+                card={card}
+                variant="openCard"
+                supabase={supabase}
+                deck={deck}
+                setDeck={setDeck}
+                setSelectedCard={setSelectedCard}
+              />
+            );
+        })}
         <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
@@ -164,8 +176,6 @@ const NewEditorPage = () => {
                 setSelectedCard,
                 setDeck,
                 deck,
-                hand,
-                setHand,
               }}
             />
           </div>
@@ -180,7 +190,7 @@ const NewEditorPage = () => {
             showDeckView={showDeck}
             toggleDeckView={toggleDeckView}
             supabase={supabase}
-            {...{ setSelectedCard, setDeck, deck, hand, setHand }}
+            {...{ setSelectedCard, setDeck, deck }}
           />
         </div>
       </div>
