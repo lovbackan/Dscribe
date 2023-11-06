@@ -17,7 +17,7 @@ import { ListItemNode, ListNode } from '@lexical/list';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import ToolbarPlugin from '../../plugins/ToolbarPlugin';
-import { EditorState, LexicalEditor } from 'lexical';
+import { EditorState } from 'lexical';
 import { CardLinkNode, CardLinkPlugin } from '../../plugins/CardLinkPlugin';
 
 //Fix this any when Card is done enough to be properly typed

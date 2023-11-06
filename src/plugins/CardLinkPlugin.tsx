@@ -116,6 +116,9 @@ export class CardLinkNode extends ElementNode {
     restoreSelection: boolean,
   ): LexicalNode {
     console.log('insertNewAfter');
+    // this awesome code is made to prevent building error on vercel
+    let selectioon = selection;
+    selectioon = selectioon;
 
     const newBlock = $createParagraphNode();
     const direction = this.getDirection();

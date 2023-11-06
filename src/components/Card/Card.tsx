@@ -26,22 +26,22 @@ interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-  const removeSelf = async () => {
-    const result = await props.supabase
-      .from('cards')
-      .delete()
-      .match({ id: props.card.id });
-    if (result.error) console.log(result.error);
-    else {
-      const updatedDeck = props.deck;
-      const idToRemove = updatedDeck.findIndex(card => {
-        if (card.id === props.card.id) return true;
-        return false;
-      });
-      updatedDeck.splice(idToRemove, 1);
-      props.setDeck([...updatedDeck]);
-    }
-  };
+  // const removeSelf = async () => {
+  //   const result = await props.supabase
+  //     .from('cards')
+  //     .delete()
+  //     .match({ id: props.card.id });
+  //   if (result.error) console.log(result.error);
+  //   else {
+  //     const updatedDeck = props.deck;
+  //     const idToRemove = updatedDeck.findIndex(card => {
+  //       if (card.id === props.card.id) return true;
+  //       return false;
+  //     });
+  //     updatedDeck.splice(idToRemove, 1);
+  //     props.setDeck([...updatedDeck]);
+  //   }
+  // };
 
   const toggleInHand = () => {
     const cardIndex = props.deck.findIndex(card => {
