@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { Text } from '../Text/Text';
+import Editor from '../Editor/Editor';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -21,6 +22,7 @@ interface CardProps {
   deck: Array<any>;
   setDeck: Function;
   setSelectedCard: Function;
+  setEditorState?: Function;
 }
 
 const Card = (props: CardProps) => {
@@ -103,15 +105,16 @@ const Card = (props: CardProps) => {
       </>
     );
   }
-  if (props.variant === 'openCard') {
+  if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="bg-white h-[30%] w-[40%] rounded-xl">
+        <div className="bg-white h-[30%] w-[40%] rounded-xl absolute top-4 left-[50%]">
           <Text
             content={props.card.name}
             textColor="black"
             variant="cardTitle"
           />
+          <Editor setEditorState={props.setEditorState}></Editor>
 
           {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>
@@ -122,29 +125,28 @@ const Card = (props: CardProps) => {
   if (props.variant === 'deckCard') {
     return (
       <>
-        <>
-          <div
-            className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
-            onClick={() => {
-              if (props.card.inHand) {
-                props.setSelectedCard(props.card);
-                //här ska vi lägga till funktionalitet som skapar ett big card och visar det
-              } else {
-                toggleInHand();
-                console.log('You pressed the card');
-              }
-            }}
-          >
-            <div className="flex flex-row justify-between">
-              <CTAButton
-                variant="cardCategory"
-                title={props.card.category_id}
-                onClick={() => {
-                  console.log(props.card.text);
-                  console.log(props.card.category_id);
-                }}
-              />
-              {/* <div className="p-2">
+        <div
+          className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          onClick={() => {
+            if (props.card.inHand) {
+              props.setSelectedCard(props.card);
+              //här ska vi lägga till funktionalitet som skapar ett big card och visar det
+            } else {
+              toggleInHand();
+              console.log('You pressed the card');
+            }
+          }}
+        >
+          <div className="flex flex-row justify-between">
+            <CTAButton
+              variant="cardCategory"
+              title={props.card.category_id}
+              onClick={() => {
+                console.log(props.card.text);
+                console.log(props.card.category_id);
+              }}
+            />
+            {/* <div className="p-2">
                 <CTAButton
                   variant="edit"
                   title=""
@@ -154,14 +156,13 @@ const Card = (props: CardProps) => {
                   }}
                 />
               </div> */}
-            </div>
-            <Text
-              content={props.card.name}
-              textColor="white"
-              variant="cardTitle"
-            />
           </div>
-        </>
+          <Text
+            content={props.card.name}
+            textColor="white"
+            variant="cardTitle"
+          />
+        </div>
       </>
     );
   }
