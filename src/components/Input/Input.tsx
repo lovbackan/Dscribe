@@ -3,6 +3,7 @@ import React from 'react';
 type InputType = 'primary' | 'secondary' | 'landing';
 
 interface InputProps {
+  id: string;
   placeholder: string;
   variant: InputType;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +14,7 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   onChange,
   variant,
+  id,
 }) => {
   const containerClasses =
     variant === 'primary'
@@ -37,6 +39,8 @@ export const Input: React.FC<InputProps> = ({
     //         onChange={onChange1}
     //       ></textarea>
     <input
+      autoComplete="on"
+      id={id}
       placeholder={placeholder}
       onChange={onChange}
       className={` ${containerClasses}`}

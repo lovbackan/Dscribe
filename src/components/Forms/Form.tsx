@@ -25,9 +25,15 @@ const Form: React.FC<FormProps> = ({
     return (
       <>
         <Text variant="heading3" content="Login" textColor="black" />
-        <Input variant="primary" placeholder="Email" onChange={onChange1} />
+        <Input
+          id="email"
+          variant="primary"
+          placeholder="Email"
+          onChange={onChange1}
+        />
         {onChange2 && (
           <Input
+            id="password"
             variant="primary"
             placeholder="Password"
             onChange={onChange2}
@@ -50,9 +56,15 @@ const Form: React.FC<FormProps> = ({
     return (
       <>
         <Text variant="heading3" content="Sign Up" textColor="black" />
-        <Input variant="primary" placeholder="Email" onChange={onChange1} />
+        <Input
+          id="email"
+          variant="primary"
+          placeholder="Email"
+          onChange={onChange1}
+        />
         {onChange2 && (
           <Input
+            id="password"
             variant="primary"
             placeholder="Password"
             onChange={onChange2}
@@ -60,6 +72,7 @@ const Form: React.FC<FormProps> = ({
         )}
         {onChange3 && (
           <Input
+            id="username"
             variant="primary"
             placeholder="Username"
             onChange={onChange3}
@@ -82,7 +95,12 @@ const Form: React.FC<FormProps> = ({
     return (
       <>
         <Text variant="heading3" content="Reset password" textColor="black" />
-        <Input variant="primary" placeholder="Email" onChange={onChange1} />
+        <Input
+          id="email"
+          variant="primary"
+          placeholder="Email"
+          onChange={onChange1}
+        />
 
         <CTAButton title="Reset" variant="primary" onClick={onClick} />
 
