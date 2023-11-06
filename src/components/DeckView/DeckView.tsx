@@ -45,6 +45,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         <div className="flex flex-row">
           <Text variant="heading2" content="Filter" textColor="black" />
           <Input
+            id="search"
             variant="primary"
             placeholder="Search"
             onChange={() => {
