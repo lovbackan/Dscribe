@@ -3,6 +3,7 @@ import { CTAButton } from '../components/CTAButton/CTAButton.tsx';
 import { CardDesign } from '../components/Card/CardDesign.tsx';
 import { Text } from '../components/Text/Text.tsx';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../components/Logo/Logo.tsx';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -23,12 +24,13 @@ const LandingPage = () => {
       </section>
 
       <section id="hero" className="flex flex-row justify-center items-center ">
-        <div
+        <Logo variant="big" />
+        {/* <div
           id="logo"
           className="h-[200px] w-[133px] rounded-3xl border-2 border-black flex flex-col justify-center items-center"
         >
           <Text variant="logo" textColor="white" content="Codeck" />
-        </div>
+        </div> */}
 
         <Text
           variant="heading1Bold"

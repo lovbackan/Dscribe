@@ -1,4 +1,5 @@
 import { Text } from '../Text/Text';
+import Logo from '../Logo/Logo';
 interface FormCardProps {
   formComponent: React.ReactNode;
 }
@@ -14,7 +15,7 @@ const FormCard: React.FC<FormCardProps> = props => {
         id="logoContainer"
         className="w-[200px] h-full rounded-[20px] bg-inherit flex justify-center items-center border-white border-r-2"
       >
-        <Text variant="heading2" textColor="white" content="Codeck" />
+        <Text variant="logoBig" textColor="white" content="Codeck" />
       </div>
       <div
         id="infoContainer"

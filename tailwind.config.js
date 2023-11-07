@@ -2,6 +2,9 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      courier: ['Courier', 'monospace'],
+    },
     extend: {
       gridTemplateColumns: {
         // Simple 16 column grid
