@@ -1,5 +1,6 @@
-import React from 'react';
-
+import React, { useRef, useState } from 'react';
+import { supabase } from '../../supabase';
+import { useEffect } from 'react';
 import exampleTheme from '../../themes/ExampleTheme';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -47,15 +48,38 @@ function MyOnChangeFunction(props: {
 }
 
 //Fix this any. Make selectedCard interface or something
-function UpdateState(props: any): null {
+function SaveTimerPlugin(props: {
+  saveTimerRef: any;
+  card: any;
+  setSaveTimer: Function;
+}): null {
+  const { saveTimerRef, card, setSaveTimer } = props;
   const [editor] = useLexicalComposerContext();
+  useEffect(() => {
+    countdown();
+  }, []);
 
-  React.useEffect(() => {
-    if (props.selectedCard) {
-      console.log(props.selectedCard);
-      editor.setEditorState(editor.parseEditorState(props.selectedCard.text));
+  const countdown = async () => {
+    if (saveTimerRef.current > 0) {
+      const newSaveTimer = saveTimerRef.current - 100;
+      setSaveTimer(newSaveTimer);
+      if (newSaveTimer <= 0) {
+        if (card) {
+          const text = JSON.stringify(editor.getEditorState());
+          if (text !== card.text) {
+            card.text = text;
+            const result = await supabase
+              .from('cards')
+              .update({ text: text })
+              .eq('id', card.id);
+            console.log(result);
+          }
+        }
+      }
     }
-  }, [props.selectedCard]);
+    console.log(saveTimerRef.current);
+    setTimeout(countdown, 100);
+  };
   return null;
 }
 
@@ -91,7 +115,12 @@ const editorConfig = {
 
 const Editor = (props: EditorProps) => {
   const { selectedCard, card, deck } = props;
-  // const [editor] = useLexicalComposerContext();
+  const saveCooldown = 1000;
+  const [saveTimer, setSaveTimer] = useState<number>(0);
+  const saveTimerRef = useRef(saveTimer);
+  saveTimerRef.current = saveTimer;
+
+  //Get state from connected card, if there is one.
   let initialEditorState = null;
   if (card) {
     const cardIndex = deck.findIndex(deckCard => {
@@ -120,9 +149,14 @@ const Editor = (props: EditorProps) => {
           <MyOnChangeFunction
             onChange={editorState => {
               props.setEditorState(editorState);
+              setSaveTimer(saveCooldown);
             }}
           />
-          <UpdateState selectedCard={selectedCard} />
+          <SaveTimerPlugin
+            saveTimerRef={saveTimerRef}
+            setSaveTimer={setSaveTimer}
+            card={card}
+          />
           <CardLinkPlugin />
           <HistoryPlugin />
           <AutoFocusPlugin />
