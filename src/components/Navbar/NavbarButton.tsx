@@ -10,18 +10,21 @@ type ButtonType = 'home' | 'community' | 'settings' | 'logout';
 interface NavbarButtonProps {
   variant: ButtonType;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  userName?: string ;
 }
 
 //FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
 export const NavbarButton: React.FC<NavbarButtonProps> = ({
   variant,
   onClick,
+  userName,
 }) => {
   if (variant === 'home') {
     return (
       <Link to={ACCEPTED_ROUTES.HOME}>
         <div className="flex flex-col justify-center items-center">
           <Logo variant="small" />
+          <Text variant="p-primary" content={userName} textColor="white" />
         </div>
       </Link>
     );

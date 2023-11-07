@@ -14,6 +14,7 @@ const HomePage = () => {
   const [stories, setStories] = useState<Array<any>>([]);
   const [selectedStory, setSelectedStory] = useState<any>(null);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
+  const [userName, setUserName] = useState<string>('');
 
   if (showSignOutPopup) {
     document.body.style.overflow = 'hidden';
@@ -21,9 +22,23 @@ const HomePage = () => {
     document.body.style.overflow = 'auto';
   }
 
+  const fetchUser = async () => {
+    let { data, error } = await supabase.auth.getUser();
+    const userId = data.user?.id;
+    const result = await supabase
+      .from('users')
+      .select('username')
+      .eq('id', userId)
+      .single();
+
+    if (error) console.log(error);
+    else setUserName(result.data?.username);
+  };
+
   const fetchStories = async () => {
     const { data, error } = await supabase.from('stories').select('*');
     // console.log(data);
+    console.log(supabase.auth.getUser());
     if (error) console.log(error);
     else setStories(data);
   };
@@ -41,6 +56,7 @@ const HomePage = () => {
 
   useEffect(() => {
     fetchStories();
+    fetchUser();
   }, []);
 
   useEffect(() => {
@@ -57,6 +73,7 @@ const HomePage = () => {
   return (
     <div className={`w-screen min-h-screen `}>
       <Navbar
+        userName={userName}
         onClick={() => {
           setShowSignOutPopup(true);
         }}

@@ -1,4 +1,3 @@
-import { Text } from '../Text/Text';
 import Logo from '../Logo/Logo';
 interface FormCardProps {
   formComponent: React.ReactNode;
