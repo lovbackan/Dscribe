@@ -2,6 +2,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { Text } from '../Text/Text';
 import Editor from '../Editor/Editor';
+import { Input } from '../Input/Input';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -108,19 +109,43 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="flex  absolute top-4 left-[50%] gap-0">
-          <div className="bg-white h-[300px] w-[200px] rounded-xl border-2 border-black">
-            <Text
-              content={props.card.name}
-              textColor="black"
+        <div className="flex  absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
+          <div className="bg-green-400 h-[300px] w-[200px] rounded-xl border-2 border-black">
+            <CTAButton
+              variant="cardCategory"
+              title={props.card.category_id}
+              onClick={() => {
+                console.log(props.card.text);
+                console.log(props.card.category_id);
+              }}
+            />
+
+            <Input
+              id="CardTitle"
               variant="cardTitle"
+              placeholder={props.card.name}
+              onChange={() => {}}
+              type="text"
             />
           </div>
-          <Editor
-            setEditorState={props.setEditorState}
-            card={props.card}
-            deck={props.deck}
-          ></Editor>
+          <div className="w-[490px] flex flex-row ">
+            <div className="w-[490px] pt-4">
+              <Editor
+                setEditorState={props.setEditorState}
+                card={props.card}
+                deck={props.deck}
+              />
+            </div>
+            <div className="z-10">
+              <CTAButton
+                title="-"
+                variant="minimize/close"
+                onClick={() => {
+                  toggleOpenCard();
+                }}
+              />
+            </div>
+          </div>
 
           {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>

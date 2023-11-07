@@ -39,7 +39,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'edit'
       ? 'w-6 h-6 bg-white  flex justify-center items-center hover:border-black hover:border rounded '
       : variant === 'minimize/close'
-      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
+      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white cursor-pointer'
       : 'bg-purple-400';
 
   const textClasses =
