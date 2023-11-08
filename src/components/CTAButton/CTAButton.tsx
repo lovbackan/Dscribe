@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text } from '../Text/Text';
+import { useState } from 'react';
 
 type ButtonType =
   | 'primary'
@@ -25,6 +26,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   onClick,
   variant,
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const containerClasses =
     variant === 'primary'
       ? 'bg-white  h-[27px] w-[80px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
@@ -43,7 +45,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'minimize/close'
       ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
       : variant === 'cardSubCategory'
-      ? 'w-[60px] h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border'
+      ? 'w-auto h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border px-2'
       : 'bg-purple-400';
 
   const textClasses =
@@ -84,15 +86,27 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     );
   } else if (variant === 'cardSubCategory') {
     return (
-      <button onClick={onClick} className={` ${containerClasses}`}>
-        <span className={` ${textClasses}`}>{title}</span>
-        <div
-          id="removeCateogry"
-          className="rounded-full h-3 w-3 bg-white border border-black flex justify-center items-center absolute mb-4 ml-10 "
-        >
-          <Text content="x" variant="subCategory" textColor="black" />
-        </div>
-      </button>
+      <div
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        <button onClick={onClick} className={` ${containerClasses}`}>
+          <span className={` ${textClasses}`}>{title}</span>
+
+          <div
+            className={`${
+              isVisible ? 'inline-block' : 'hidden'
+            } relative top-[-10px] `}
+          >
+            <button
+              id="removeCateogry"
+              className="rounded-full h-3 w-3 bg-white border border-black flex justify-center items-center "
+            >
+              <Text content="x" variant="subCategory" textColor="black" />
+            </button>
+          </div>
+        </button>
+      </div>
     );
   } else {
     return (

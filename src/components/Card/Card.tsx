@@ -130,39 +130,50 @@ const Card = (props: CardProps) => {
               onChange={() => {}}
               type="text"
             />
-            <div
-              id="SubCategoryWrapper"
-              className="flex flex-row justify-evenly flex-wrap "
-            >
-              <CTAButton
-                variant="cardSubCategory"
-                title="Hackerman"
-                onClick={() => {
-                  console.log('hello');
-                }}
-              />
-              <CTAButton
-                variant="cardSubCategory"
-                title="Albatross"
-                onClick={() => {
-                  console.log('hello');
-                }}
-              />
-              <CTAButton
-                variant="cardSubCategory"
-                title="Weapon"
-                onClick={() => {
-                  console.log('Amalgam');
-                }}
-              />
-              <CTAButton
-                variant="cardSubCategory"
-                title="Weapon"
-                onClick={() => {
-                  console.log('Amalgam');
-                }}
-              />
-            </div>
+            {/* Inte bra med bottom-9, borde vara dynamiskt */}
+            <section id="subCategory" className="mt-48 ">
+              <div
+                id="SubCategoryWrapper"
+                className=" flex flex-row flex-wrap gap-1 px-1"
+              >
+                {/* Mockup subcategories, should be fetched from the database with title and id */}
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Hackerman"
+                  onClick={() => {
+                    console.log();
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="X"
+                  onClick={() => {
+                    console.log();
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Albatross"
+                  onClick={() => {
+                    console.log('hello');
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Weapon"
+                  onClick={() => {
+                    console.log('Amalgam');
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Weapon"
+                  onClick={() => {
+                    console.log('Amalgam');
+                  }}
+                />
+              </div>
+            </section>
           </div>
           <div className="w-[490px] flex flex-row ">
             <div className="w-[490px] pt-4">
