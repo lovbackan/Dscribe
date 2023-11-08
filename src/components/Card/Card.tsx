@@ -109,8 +109,11 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="flex  absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
-          <div className="bg-green-400 h-[300px] w-[200px] rounded-xl border-2 border-black">
+        <div className="flex absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
+          <div
+            id="Card"
+            className="bg-green-400 h-[300px] w-[200px] rounded-xl border-2 border-black"
+          >
             <CTAButton
               variant="cardCategory"
               title={props.card.category_id}
@@ -127,6 +130,39 @@ const Card = (props: CardProps) => {
               onChange={() => {}}
               type="text"
             />
+            <div
+              id="SubCategoryWrapper"
+              className="flex flex-row justify-evenly flex-wrap "
+            >
+              <CTAButton
+                variant="cardSubCategory"
+                title="Hackerman"
+                onClick={() => {
+                  console.log('hello');
+                }}
+              />
+              <CTAButton
+                variant="cardSubCategory"
+                title="Albatross"
+                onClick={() => {
+                  console.log('hello');
+                }}
+              />
+              <CTAButton
+                variant="cardSubCategory"
+                title="Weapon"
+                onClick={() => {
+                  console.log('Amalgam');
+                }}
+              />
+              <CTAButton
+                variant="cardSubCategory"
+                title="Weapon"
+                onClick={() => {
+                  console.log('Amalgam');
+                }}
+              />
+            </div>
           </div>
           <div className="w-[490px] flex flex-row ">
             <div className="w-[490px] pt-4">

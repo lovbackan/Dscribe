@@ -11,7 +11,8 @@ type TextType =
   | 'cardTitle'
   | 'logoBig'
   | 'logoMedium'
-  | 'logoSmall';
+  | 'logoSmall'
+  | 'subCategory';
 
 type TextColor = 'black' | 'white' | 'green';
 
@@ -46,6 +47,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     logoBig: `text-3xl font-courier ${tailwindColorClass}`,
     logoMedium: `text-2xl font-courier ${tailwindColorClass}`,
     logoSmall: `text-xl font-courier ${tailwindColorClass}`,
+    subCategory: `text-[10px] ${tailwindColorClass}`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
@@ -64,6 +66,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
       logoBig: 'h1',
       logoMedium: 'h2',
       logoSmall: 'h3',
+      subCategory: 'p',
     }[variant] || 'p';
 
   return React.createElement(elementType, { className }, content);

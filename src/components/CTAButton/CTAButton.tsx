@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from '../Text/Text';
 
 type ButtonType =
   | 'primary'
@@ -6,6 +7,7 @@ type ButtonType =
   | 'landing'
   | 'minimize/close'
   | 'cardCategory'
+  | 'cardSubCategory'
   | 'deckViewCategory'
   | 'disabled'
   | 'deck'
@@ -39,7 +41,9 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'edit'
       ? 'w-6 h-6 bg-white  flex justify-center items-center hover:border-black hover:border rounded '
       : variant === 'minimize/close'
-      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white cursor-pointer'
+      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
+      : variant === 'cardSubCategory'
+      ? 'w-[60px] h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border'
       : 'bg-purple-400';
 
   const textClasses =
@@ -57,6 +61,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'text-black text-[32px]'
       : variant === 'minimize/close'
       ? 'text-black text-[12px]'
+      : variant === 'cardSubCategory'
+      ? 'text-white text-[10px]'
       : 'text-purple-400';
 
   if (variant === 'edit') {
@@ -76,11 +82,23 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         </svg>
       </button>
     );
+  } else if (variant === 'cardSubCategory') {
+    return (
+      <button onClick={onClick} className={` ${containerClasses}`}>
+        <span className={` ${textClasses}`}>{title}</span>
+        <div
+          id="removeCateogry"
+          className="rounded-full h-3 w-3 bg-white border border-black flex justify-center items-center absolute mb-4 ml-10 "
+        >
+          <Text content="x" variant="subCategory" textColor="black" />
+        </div>
+      </button>
+    );
+  } else {
+    return (
+      <button onClick={onClick} className={` ${containerClasses}`}>
+        <span className={` ${textClasses}`}>{title}</span>
+      </button>
+    );
   }
-
-  return (
-    <button onClick={onClick} className={` ${containerClasses}`}>
-      <span className={` ${textClasses}`}>{title}</span>
-    </button>
-  );
 };
