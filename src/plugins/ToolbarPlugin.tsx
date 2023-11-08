@@ -576,7 +576,7 @@ export default function ToolbarPlugin(): JSX.Element {
   //     </button>
   //   );
   // }
-  // activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
+  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
 
   return (
     <div className="toolbar">
