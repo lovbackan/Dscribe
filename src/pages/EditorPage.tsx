@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { supabase } from '../supabase';
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useRef } from 'react';
 import { EditorState } from 'lexical';
 import { CTAButton } from '../components/CTAButton/CTAButton';
 import { DeckView } from '../components/DeckView/DeckView';
@@ -16,16 +16,51 @@ const EditorPage = () => {
   const navigate = useNavigate();
 
   const [deck, setDeck] = useState<Array<any>>([]);
+  const [deckChanges, setDeckChanges] = useState<Array<any>>([]);
   const location = useLocation();
   const selectedStory = location.state.selectedStory;
 
   const [editorState, setEditorState] = useState<EditorState>();
   const [categories, setCategories] = useState<Array<any>>([]);
   const [categoryId, setCategory] = useState<number>(0);
+  const [showDeck, setShowDeck] = useState<boolean>(false);
+
+  const [saveTimer, setSaveTimer] = useState(0);
+  const saveTimerRef = useRef(saveTimer);
+  saveTimerRef.current = saveTimer;
+
+  const [saveTimerIsRunning, setSaveTimerIsRunning] = useState(false);
 
   //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
   const [selectedCard, setSelectedCard] = useState<Object>();
-  const [showDeck, setShowDeck] = useState<boolean>(false);
+
+  useEffect(() => {
+    //Several instances of this is running at the same time, due to React strict mode.
+    if (!saveTimerIsRunning) {
+      setSaveTimerIsRunning(false);
+      console.log('These are my co0untdowns');
+      saveCountdown();
+    }
+  }, []);
+
+  const saveCountdown = () => {
+    if (saveTimerRef.current >= 0) {
+      const newTime = saveTimerRef.current - 100;
+      setSaveTimer(newTime);
+      if (newTime <= 0) {
+        //Saving happens here. Needs error handling.
+        deckChanges.forEach(async card => {
+          console.log(card);
+          const { data, error } = await supabase
+            .from('cards')
+            .update({ text: card.text })
+            .eq('id', card.id);
+          if (!error) setDeckChanges([]);
+        });
+      }
+    }
+    setTimeout(saveCountdown, 100);
+  };
 
   const toggleDeckView = () => {
     setShowDeck(!showDeck);
@@ -39,6 +74,13 @@ const EditorPage = () => {
     fetchCategories();
     setCategory(0);
   }, [selectedStory]);
+
+  useEffect(() => {
+    //Change this magic number?
+    if (deckChanges.length === 0) return;
+    console.log('CHA CHA CHA CHA CHANGES');
+    setSaveTimer(500);
+  }, [deckChanges]);
 
   const fetchDeck = async () => {
     const { data, error } = await supabase
@@ -118,6 +160,7 @@ const EditorPage = () => {
             setEditorState={setEditorState}
             selectedCard={selectedCard}
             deck={deck}
+            setDeck={setDeck}
           />
         </div>
         {deck.map(card => {
@@ -131,6 +174,8 @@ const EditorPage = () => {
                 setDeck={setDeck}
                 setSelectedCard={setSelectedCard}
                 setEditorState={setEditorState}
+                deckChanges={deckChanges}
+                setDeckChanges={setDeckChanges}
               />
             );
         })}
