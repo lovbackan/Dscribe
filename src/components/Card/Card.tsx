@@ -210,6 +210,15 @@ const Card = (props: CardProps) => {
             </section>
           </div>
           <div className="w-[490px] flex flex-row ">
+            <div className=" absolute right-0 z-10">
+              <CTAButton
+                title="-"
+                variant="minimize/close"
+                onClick={() => {
+                  toggleOpenCard();
+                }}
+              />
+            </div>
             <div className="w-[490px] pt-4">
               <Editor
                 setEditorState={props.setEditorState}
@@ -218,15 +227,6 @@ const Card = (props: CardProps) => {
                 setDeck={props.setDeck}
                 deckChanges={props.deckChanges}
                 setDeckChanges={props.setDeckChanges}
-              />
-            </div>
-            <div className="z-10">
-              <CTAButton
-                title="-"
-                variant="minimize/close"
-                onClick={() => {
-                  toggleOpenCard();
-                }}
               />
             </div>
           </div>
