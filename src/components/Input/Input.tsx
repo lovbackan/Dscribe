@@ -9,6 +9,7 @@ interface InputProps {
   type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  autoComplete?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
