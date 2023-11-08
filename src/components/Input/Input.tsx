@@ -7,6 +7,7 @@ interface InputProps {
   placeholder: string;
   variant: InputType;
   type: string;
+  autoComplete: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -17,6 +18,7 @@ export const Input: React.FC<InputProps> = ({
   variant,
   id,
   type,
+  autoComplete,
 }) => {
   const containerClasses =
     variant === 'primary'
@@ -24,13 +26,13 @@ export const Input: React.FC<InputProps> = ({
       : variant === 'secondary'
       ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1'
       : variant === 'cardTitle'
-      ? 'w-[100px] h-[30px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70'
+      ? 'w-[100px] h-[30px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70 placeholder-opacity-50'
       : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1';
 
   return (
     <input
       type={type}
-      autoComplete="on"
+      autoComplete={autoComplete}
       id={id}
       placeholder={placeholder}
       onChange={onChange}

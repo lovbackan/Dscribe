@@ -76,6 +76,7 @@ const HomePage = () => {
           id="search"
           placeholder="Search"
           variant="secondary"
+          autoComplete="off"
           onChange={e => {
             console.log(e.target.value);
           }}

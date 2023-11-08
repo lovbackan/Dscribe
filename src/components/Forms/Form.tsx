@@ -32,6 +32,7 @@ const Form: React.FC<FormProps> = ({
             variant="primary"
             placeholder="Email"
             onChange={onChange1}
+            autoComplete="on"
           />
           {onChange2 && (
             <Input
@@ -40,6 +41,7 @@ const Form: React.FC<FormProps> = ({
               variant="primary"
               placeholder="Password"
               onChange={onChange2}
+              autoComplete="on"
             />
           )}
         </div>
@@ -68,6 +70,7 @@ const Form: React.FC<FormProps> = ({
             variant="primary"
             placeholder="Email"
             onChange={onChange1}
+            autoComplete="on"
           />
           {onChange2 && (
             <Input
@@ -76,6 +79,7 @@ const Form: React.FC<FormProps> = ({
               variant="primary"
               placeholder="Password"
               onChange={onChange2}
+              autoComplete="on"
             />
           )}
           {onChange3 && (
@@ -85,6 +89,7 @@ const Form: React.FC<FormProps> = ({
               variant="primary"
               placeholder="Username"
               onChange={onChange3}
+              autoComplete="off"
             />
           )}
         </div>
@@ -112,6 +117,7 @@ const Form: React.FC<FormProps> = ({
           variant="primary"
           placeholder="Email"
           onChange={onChange1}
+          autoComplete="on"
         />
 
         <CTAButton title="Reset" variant="primary" onClick={onClick} />

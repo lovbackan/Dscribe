@@ -109,7 +109,7 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="flex absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
+        <div className="flex absolute top-[50%] left-[10%] gap-0 w-[720px] h-[300px] bg-slate-400 ">
           <div
             id="Card"
             className="bg-green-400 h-[300px] w-[200px] rounded-xl border-2 border-black"
@@ -129,6 +129,7 @@ const Card = (props: CardProps) => {
               placeholder={props.card.name}
               onChange={() => {}}
               type="text"
+              autoComplete="off"
             />
             {/* Inte bra med bottom-9, borde vara dynamiskt */}
             <section id="subCategory" className="mt-48 ">
@@ -175,15 +176,15 @@ const Card = (props: CardProps) => {
               </div>
             </section>
           </div>
-          <div className="w-[490px] flex flex-row ">
-            <div className="w-[490px] pt-4">
+          <div className="w-[520px] flex flex-row ">
+            <div className="w-[520px] pt-4">
               <Editor
                 setEditorState={props.setEditorState}
                 card={props.card}
                 deck={props.deck}
               />
             </div>
-            <div className="z-10">
+            <div className="z-10 absolute right-0">
               <CTAButton
                 title="-"
                 variant="minimize/close"
