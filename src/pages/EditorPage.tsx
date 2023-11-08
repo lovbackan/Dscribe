@@ -51,9 +51,13 @@ const EditorPage = () => {
         //Saving happens here. Needs error handling.
         deckChanges.forEach(async card => {
           console.log(card);
+          const updatedValues: { text?: string; name?: string } = {};
+          if (card.text) updatedValues.text = card.text;
+          if (card.name) updatedValues.name = card.name;
+
           const { data, error } = await supabase
             .from('cards')
-            .update({ text: card.text })
+            .update(updatedValues)
             .eq('id', card.id);
           if (!error) setDeckChanges([]);
         });

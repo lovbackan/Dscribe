@@ -8,15 +8,16 @@ interface InputProps {
   variant: InputType;
   type: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-//FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
 export const Input: React.FC<InputProps> = ({
   placeholder,
   onChange,
   variant,
   id,
   type,
+  onBlur,
 }) => {
   const containerClasses =
     variant === 'primary'
@@ -34,6 +35,7 @@ export const Input: React.FC<InputProps> = ({
       id={id}
       placeholder={placeholder}
       onChange={onChange}
+      onBlur={onBlur}
       className={` ${containerClasses}`}
     ></input>
   );
