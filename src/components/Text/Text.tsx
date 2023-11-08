@@ -9,12 +9,15 @@ type TextType =
   | 'p-primary'
   | 'p-secondary'
   | 'cardTitle'
-  | 'logo';
+  | 'logoBig'
+  | 'logoMedium'
+  | 'logoSmall'
+  | 'subCategory';
 
 type TextColor = 'black' | 'white' | 'green';
 
 interface TextProps {
-  content: string;
+  content?: string;
   variant: TextType;
   textColor: TextColor;
 }
@@ -41,7 +44,10 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     cardTitle: `text-xl ${tailwindColorClass} break-words`,
     heading4: `text-base ${tailwindColorClass}`,
     default: `text-sm ${tailwindColorClass}`,
-    logo: `text-1xl ${tailwindColorClass}`,
+    logoBig: `text-3xl font-courier ${tailwindColorClass}`,
+    logoMedium: `text-2xl font-courier ${tailwindColorClass}`,
+    logoSmall: `text-xl font-courier ${tailwindColorClass}`,
+    subCategory: `text-[10px] ${tailwindColorClass}`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
@@ -57,7 +63,10 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
       'p-secondary': 'p',
       cardTitle: 'h4',
       default: 'p',
-      logo: 'h1',
+      logoBig: 'h1',
+      logoMedium: 'h2',
+      logoSmall: 'h3',
+      subCategory: 'p',
     }[variant] || 'p';
 
   return React.createElement(elementType, { className }, content);

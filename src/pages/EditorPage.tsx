@@ -154,13 +154,7 @@ const EditorPage = () => {
           Selected Story:
           {selectedStory ? selectedStory.id : 'None'}
         </h1>
-        {/* <StoriesContainer
-          stories={props.stories}
-          supabase={props.supabase}
-          setStories={props.setStories}
-          selectedStory={props.selectedStory}
-          setSelectedStory={props.setSelectedStory}
-        ></StoriesContainer> */}
+
         <div className="absolute left-1/4 w-1/2 h-3/4">
           <Editor
             setEditorState={setEditorState}

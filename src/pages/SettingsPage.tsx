@@ -7,6 +7,7 @@ import { supabase } from '../supabase';
 
 const SettingsPage = () => {
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
+
   const navigate = useNavigate();
   const handleSignOut = async () => {
     const result = await supabase.auth.signOut();
@@ -24,6 +25,7 @@ const SettingsPage = () => {
   } else {
     document.body.style.overflow = 'auto';
   }
+
   return (
     <div className="h-screen w-screen">
       <Navbar

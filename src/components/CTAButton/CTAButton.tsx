@@ -1,4 +1,6 @@
 import React from 'react';
+import { Text } from '../Text/Text';
+import { useState } from 'react';
 
 type ButtonType =
   | 'primary'
@@ -6,6 +8,7 @@ type ButtonType =
   | 'landing'
   | 'minimize/close'
   | 'cardCategory'
+  | 'cardSubCategory'
   | 'deckViewCategory'
   | 'disabled'
   | 'deck'
@@ -23,6 +26,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   onClick,
   variant,
 }) => {
+  const [isVisible, setIsVisible] = useState(false);
   const containerClasses =
     variant === 'primary'
       ? 'bg-white  h-[27px] w-[80px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
@@ -40,6 +44,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'w-6 h-6 bg-white  flex justify-center items-center hover:border-black hover:border rounded '
       : variant === 'minimize/close'
       ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
+      : variant === 'cardSubCategory'
+      ? 'w-auto h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border px-2'
       : 'bg-purple-400';
 
   const textClasses =
@@ -57,6 +63,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'text-black text-[32px]'
       : variant === 'minimize/close'
       ? 'text-black text-[12px]'
+      : variant === 'cardSubCategory'
+      ? 'text-white text-[10px]'
       : 'text-purple-400';
 
   if (variant === 'edit') {
@@ -76,11 +84,35 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         </svg>
       </button>
     );
-  }
+  } else if (variant === 'cardSubCategory') {
+    return (
+      <div
+        onMouseEnter={() => setIsVisible(true)}
+        onMouseLeave={() => setIsVisible(false)}
+      >
+        <button onClick={onClick} className={` ${containerClasses}`}>
+          <span className={` ${textClasses}`}>{title}</span>
 
-  return (
-    <button onClick={onClick} className={` ${containerClasses}`}>
-      <span className={` ${textClasses}`}>{title}</span>
-    </button>
-  );
+          <div
+            className={`${
+              isVisible ? 'inline-block' : 'hidden'
+            } relative top-[-10px] `}
+          >
+            <button
+              id="removeCateogry"
+              className="rounded-full h-3 w-3 bg-white border border-black flex justify-center items-center "
+            >
+              <Text content="x" variant="subCategory" textColor="black" />
+            </button>
+          </div>
+        </button>
+      </div>
+    );
+  } else {
+    return (
+      <button onClick={onClick} className={` ${containerClasses}`}>
+        <span className={` ${textClasses}`}>{title}</span>
+      </button>
+    );
+  }
 };

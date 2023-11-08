@@ -2,6 +2,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { Text } from '../Text/Text';
 import Editor from '../Editor/Editor';
+import { Input } from '../Input/Input';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -111,22 +112,93 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="flex  absolute top-4 left-[50%] gap-0">
-          <div className="bg-white h-[300px] w-[200px] rounded-xl border-2 border-black">
-            <Text
-              content={props.card.name}
-              textColor="black"
-              variant="cardTitle"
+        <div className="flex absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
+          <div
+            id="Card"
+            className="bg-green-400 h-[300px] w-[200px] rounded-xl border-2 border-black"
+          >
+            <CTAButton
+              variant="cardCategory"
+              title={props.card.category_id}
+              onClick={() => {
+                console.log(props.card.text);
+                console.log(props.card.category_id);
+              }}
             />
+
+            <Input
+              id="CardTitle"
+              variant="cardTitle"
+              placeholder={props.card.name}
+              onChange={() => {}}
+              type="text"
+            />
+            {/* Inte bra med bottom-9, borde vara dynamiskt */}
+            <section id="subCategory" className="mt-48 ">
+              <div
+                id="SubCategoryWrapper"
+                className=" flex flex-row flex-wrap gap-1 px-1"
+              >
+                {/* Mockup subcategories, should be fetched from the database with title and id */}
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Hackerman"
+                  onClick={() => {
+                    console.log();
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="X"
+                  onClick={() => {
+                    console.log();
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Albatross"
+                  onClick={() => {
+                    console.log('hello');
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Weapon"
+                  onClick={() => {
+                    console.log('Amalgam');
+                  }}
+                />
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="Weapon"
+                  onClick={() => {
+                    console.log('Amalgam');
+                  }}
+                />
+              </div>
+            </section>
           </div>
-          <Editor
-            setEditorState={props.setEditorState}
-            card={props.card}
-            deck={props.deck}
-            setDeck={props.setDeck}
-            deckChanges={props.deckChanges}
-            setDeckChanges={props.setDeckChanges}
-          ></Editor>
+          <div className="w-[490px] flex flex-row ">
+            <div className="w-[490px] pt-4">
+              <Editor
+                setEditorState={props.setEditorState}
+                card={props.card}
+                deck={props.deck}
+                setDeck={props.setDeck}
+                deckChanges={props.deckChanges}
+                setDeckChanges={props.setDeckChanges}
+              />
+            </div>
+            <div className="z-10">
+              <CTAButton
+                title="-"
+                variant="minimize/close"
+                onClick={() => {
+                  toggleOpenCard();
+                }}
+              />
+            </div>
+          </div>
 
           {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>
