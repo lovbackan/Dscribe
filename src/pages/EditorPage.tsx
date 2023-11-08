@@ -28,6 +28,8 @@ const EditorPage = () => {
   const [saveTimer, setSaveTimer] = useState(0);
   const saveTimerRef = useRef(saveTimer);
   saveTimerRef.current = saveTimer;
+  const deckChangesRef = useRef(deckChanges);
+  deckChangesRef.current = deckChanges;
 
   const [saveTimerIsRunning, setSaveTimerIsRunning] = useState(false);
 
@@ -38,7 +40,6 @@ const EditorPage = () => {
     //Several instances of this is running at the same time, due to React strict mode.
     if (!saveTimerIsRunning) {
       setSaveTimerIsRunning(false);
-      console.log('These are my co0untdowns');
       saveCountdown();
     }
   }, []);
@@ -49,9 +50,10 @@ const EditorPage = () => {
       setSaveTimer(newTime);
       if (newTime <= 0) {
         //Saving happens here. Needs error handling.
-        deckChanges.forEach(async card => {
+        deckChangesRef.current.forEach(async card => {
           console.log(card);
           const updatedValues: { text?: string; name?: string } = {};
+
           if (card.text) updatedValues.text = card.text;
           if (card.name) updatedValues.name = card.name;
 
@@ -59,7 +61,10 @@ const EditorPage = () => {
             .from('cards')
             .update(updatedValues)
             .eq('id', card.id);
-          if (!error) setDeckChanges([]);
+          if (!error) {
+            console.log('Emptying changes');
+            setDeckChanges([]);
+          }
         });
       }
     }

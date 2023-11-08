@@ -156,8 +156,10 @@ const Card = (props: CardProps) => {
                   console.log('Updateis');
                   newDeckChanges?.push({
                     id: props.card.id,
-                    name: e.target.value,
+                    name: newName,
                   });
+                } else {
+                  newDeckChanges[cardChangesIndex].name = newName;
                 }
                 props.setDeck([...newDeck]);
                 props.setDeckChanges([...newDeckChanges]);
