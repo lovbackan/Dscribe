@@ -53,7 +53,7 @@ import {
   CODE_LANGUAGE_MAP,
   getLanguageFriendlyName,
 } from '@lexical/code';
-// import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
+import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
   $findMatchingParent,
   // $getNearestBlockElementAncestorOrThrow,
@@ -61,8 +61,8 @@ import {
   mergeRegister,
 } from '@lexical/utils';
 import DropDown, { DropDownItem } from '../ui/DropDown';
-// import { getSelectedNode } from '../utils/getSelectedNode';
-// import { sanitizeUrl } from '../utils/url';
+import { getSelectedNode } from '../utils/getSelectedNode';
+import { sanitizeUrl } from '../utils/url';
 import { INSERT_CARDLINK_COMMAND } from './CardLinkPlugin';
 
 const blockTypeToBlockName = {
@@ -294,9 +294,9 @@ function BlockFormatDropDown({
   );
 }
 
-// function Divider(): JSX.Element {
-//   return <div className="divider" />;
-// }
+function Divider(): JSX.Element {
+  return <div className="divider" />;
+}
 
 function FontDropDown({
   editor,
@@ -367,7 +367,7 @@ export default function ToolbarPlugin(): JSX.Element {
   // const [fontColor, setFontColor] = useState<string>('#000');
   // const [bgColor, setBgColor] = useState<string>('#fff');
   const [fontFamily, setFontFamily] = useState<string>('Arial');
-  // const [isLink, setIsLink] = useState(false);
+  const [isLink, setIsLink] = useState(false);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
@@ -417,13 +417,13 @@ export default function ToolbarPlugin(): JSX.Element {
       // setIsRTL($isParentElementRTL(selection));
 
       // Update links
-      // const node = getSelectedNode(selection);
-      // const parent = node.getParent();
-      // if ($isLinkNode(parent) || $isLinkNode(node)) {
-      //   setIsLink(true);
-      // } else {
-      //   setIsLink(false);
-      // }
+      const node = getSelectedNode(selection);
+      const parent = node.getParent();
+      if ($isLinkNode(parent) || $isLinkNode(node)) {
+        setIsLink(true);
+      } else {
+        setIsLink(false);
+      }
 
       if (elementDOM !== null) {
         setSelectedElementKey(elementKey);
@@ -528,55 +528,52 @@ export default function ToolbarPlugin(): JSX.Element {
     [activeEditor, selectedElementKey],
   );
 
-  // const insertLink = useCallback(() => {
-  //   if (!isLink) {
-  //     editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
-  //   } else {
-  //     editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-  //   }
-  // }, [editor, isLink]);
+  const insertLink = useCallback(() => {
+    if (!isLink) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
+    } else {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    }
+  }, [editor, isLink]);
 
   // const insertCardLink = useCallback(() => {
   //   editor.dispatchCommand(INSERT_CARD_LINK_COMMAND, undefined);
   //   console.log('clickat på knapp');
   // }, [editor]);
 
-  // function CardLinkToolbarPlugin(): JSX.Element {
-  //   useEffect(() => {
-  //     const handleKeyDown = (event: KeyboardEvent) => {
-  //       if ((event.metaKey || event.ctrlKey) && event.key === 'h') {
-  //         event.preventDefault(); // Prevent the default behavior of the browser
-  //         activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, undefined);
-  //       }
-  //     };
+  function CardLinkToolbarPlugin(): JSX.Element {
+    useEffect(() => {
+      const handleKeyDown = (event: KeyboardEvent) => {
+        if ((event.metaKey || event.ctrlKey) && event.key === 'h') {
+          event.preventDefault(); // Prevent the default behavior of the browser
+          activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, undefined);
+        }
+      };
 
-  //     document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keydown', handleKeyDown);
 
-  //     return () => {
-  //       document.removeEventListener('keydown', handleKeyDown);
-  //     };
-  //   }, []);
-  //   return (
-  //     <button
-  //       title={IS_APPLE ? 'CardLink (⌘H)' : 'CardLink (Ctrl+H)'}
-  //       aria-label={`Format text as cardLink. Shortcut: ${
-  //         IS_APPLE ? '⌘H' : 'Ctrl+H'
-  //       }`}
-  //       onClick={() => {
-  //         ///DROPDOWN!
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }, []);
+    return (
+      <button
+        title={IS_APPLE ? 'CardLink (⌘H)' : 'CardLink (Ctrl+H)'}
+        aria-label={`Format text as cardLink. Shortcut: ${
+          IS_APPLE ? '⌘H' : 'Ctrl+H'
+        }`}
+        onClick={() => {
+          ///DROPDOWN!
 
-  //         //Placeholder hardcoded values. Should implement some sort of card selector.
-  //         console.log('Heeej :^D');
-  //         activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
-  //       }}
-  //       type="button"
-  //       className="toolbar-item spaced"
-  //     >
-  //       <span> C</span>
-  //     </button>
-  //   );
-  // }
-  activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
+          //Placeholder hardcoded values. Should implement some sort of card selector.
+          console.log('Heeej :^D');
+          activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
+        }}
+        type="button"
+      ></button>
+    );
+  }
+  // activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
 
   return (
     <div className="toolbar">
@@ -604,7 +601,7 @@ export default function ToolbarPlugin(): JSX.Element {
       >
         <i className="format redo" />
       </button>
-      {/* <Divider /> */}
+      <Divider />
       {blockType in blockTypeToBlockName && activeEditor === editor && (
         <>
           <BlockFormatDropDown
@@ -612,7 +609,7 @@ export default function ToolbarPlugin(): JSX.Element {
             blockType={blockType}
             editor={editor}
           />
-          {/* <Divider /> */}
+          <Divider />
         </>
       )}
       {blockType === 'code' ? (
@@ -717,11 +714,11 @@ export default function ToolbarPlugin(): JSX.Element {
           >
             <i className="format link" />
           </button> */}
-          {/* <Divider /> */}
+          <Divider />
           <DropDown
             disabled={!isEditable}
             buttonLabel="Align"
-            buttonIconClassName=""
+            buttonIconClassName=" left-align"
             buttonClassName="toolbar-item spaced alignment"
             buttonAriaLabel="Formatting options for text alignment"
           >
@@ -761,18 +758,18 @@ export default function ToolbarPlugin(): JSX.Element {
               <i className="icon justify-align" />
               <span className="text">Justify Align</span>
             </DropDownItem>
-            {/* <Divider /> */}
+            <Divider />
           </DropDown>
         </>
       )}
       {/* <button onClick={insertCardLink}> cardlink</button> */}
-      {/* <CardLinkToolbarPlugin /> */}
-      {/* <Divider /> */}
+      <CardLinkToolbarPlugin />
+      <Divider />
       <DropDown
         disabled={!isEditable}
-        buttonLabel="L"
-        buttonIconClassName=""
-        buttonClassName="toolbar-item spaced"
+        buttonLabel="C"
+        buttonIconClassName=" left-align"
+        buttonClassName="toolbar-item spaced alignment"
         buttonAriaLabel="Link card to text."
       >
         {deck.map(card => {
