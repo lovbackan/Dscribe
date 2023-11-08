@@ -23,6 +23,9 @@ interface CardProps {
   setDeck: Function;
   setSelectedCard: Function;
   setEditorState?: Function;
+  editorState?: any[];
+  deckChanges?: any[];
+  setDeckChanges?: Function;
 }
 
 const Card = (props: CardProps) => {
@@ -120,6 +123,9 @@ const Card = (props: CardProps) => {
             setEditorState={props.setEditorState}
             card={props.card}
             deck={props.deck}
+            setDeck={props.setDeck}
+            deckChanges={props.deckChanges}
+            setDeckChanges={props.setDeckChanges}
           ></Editor>
 
           {/* <RichTextViewer editorState={props.card.text} /> */}
