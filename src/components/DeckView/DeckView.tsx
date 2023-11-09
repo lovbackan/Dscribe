@@ -58,7 +58,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         </div>
 
         <CTAButton
-          variant="deck"
+          variant="addCard"
           onClick={() => {
             props.addCard();
           }}

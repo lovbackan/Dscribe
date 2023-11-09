@@ -12,7 +12,9 @@ type ButtonType =
   | 'deckViewCategory'
   | 'disabled'
   | 'deck'
-  | 'edit';
+  | 'edit'
+  | 'viewDeck'
+  | 'addCard';
 
 interface CTAButtonProps {
   title: string | number;
@@ -38,7 +40,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'bg-black h-4 min-w-[40px] w-auto rounded-tl-[5px] rounded-br-[5px] flex justify-center items-center hover:border-white hover:border'
       : variant === 'deckViewCategory'
       ? 'w-14  h-5 rounded-xl bg-black flex justify-center items-center hover:border-white hover:border'
-      : variant === 'deck'
+      : variant === 'addCard'
       ? 'w-12 h-20 rounded-xl bg-white border-2 border-black flex justify-center items-center hover:border-green-700 hover:border-4'
       : variant === 'edit'
       ? 'w-6 h-6 bg-white  flex justify-center items-center hover:border-black hover:border rounded '
@@ -46,6 +48,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
       : variant === 'cardSubCategory'
       ? 'w-auto h-[20px] rounded-[12px] bg-green-200 flex justify-center items-center hover:border-white hover:border px-2'
+      : variant === 'viewDeck'
+      ? 'w-14 h-20 deck-icon'
       : 'bg-purple-400';
 
   const textClasses =
@@ -59,7 +63,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'text-white text-xs'
       : variant === 'deckViewCategory'
       ? 'text-white text-xs'
-      : variant === 'deck'
+      : variant === 'addCard'
       ? 'text-black text-[32px]'
       : variant === 'minimize/close'
       ? 'text-black text-[12px]'
