@@ -179,7 +179,7 @@ const EditorPage = () => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="h-screen w-screen relative overflow-hidden">
+      <div className="h-screen w-screen relative overflow-hidden md:bg-slate-400 lg:bg-slate-700 ">
         <div className="absolute flex justify-center items-center w-screen">
           <Text
             variant="heading1Bold"
@@ -190,7 +190,7 @@ const EditorPage = () => {
 
         <Logo variant="editor" />
 
-        <div className="absolute left-1/4 w-1/2 h-3/4 mt-12">
+        <div className="absolute left-1/4 w-[60%] h-[90%] mt-12">
           {story ? (
             <Editor
               setEditorState={setEditorState}
