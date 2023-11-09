@@ -59,19 +59,38 @@ const Card = (props: CardProps) => {
     props.setDeck([...props.deck]);
   };
 
-  const changeCardName = async (newName: string) => {
-    const id = props.card.id;
-    console.log(id, newName);
-    const { data, error } = await supabase
-      .from('cards')
-      .update({ name: newName })
-      .eq('id', id);
-    if (error) {
-      console.log(error);
-    }
-    console.log(data);
+  const changeCardName = async (e: React.FocusEvent<HTMLInputElement>) => {
+    {
+      const newName = e.target.value;
+      const cardIndex = props.deck.findIndex(deckCard => {
+        if (props.card.id === deckCard.id) return true;
+        return false;
+      });
+      const newDeck = props.deck;
+      newDeck[cardIndex].name = newName;
+      if (
+        props.deck[cardIndex] === newName ||
+        !props.deckChanges ||
+        !props.setDeckChanges
+      )
+        return;
 
-    // write your logic here for updating name of story
+      const newDeckChanges = props.deckChanges;
+      const cardChangesIndex = newDeckChanges?.findIndex(deckCard => {
+        if (props.card.id === deckCard.id) return true;
+        return false;
+      });
+      if (cardChangesIndex === -1) {
+        newDeckChanges?.push({
+          id: props.card.id,
+          name: newName,
+        });
+      } else {
+        newDeckChanges[cardChangesIndex].name = newName;
+      }
+      props.setDeck([...newDeck]);
+      props.setDeckChanges([...newDeckChanges]);
+    }
   };
 
   const toggleOpenCard = () => {
@@ -301,12 +320,7 @@ const Card = (props: CardProps) => {
               placeholder={props.card.name}
               onChange={() => {}}
               type="text"
-              onBlur={e => {
-                const newName = e.target.value;
-                changeCardName(newName);
-
-                console.log(e.target.value);
-              }}
+              onBlur={e => changeCardName(e)}
             />
           </div>
         </div>

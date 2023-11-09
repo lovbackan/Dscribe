@@ -12,9 +12,11 @@ interface DeckViewProps {
   showDeckView: boolean;
   supabase: SupabaseClient;
   setDeck: Function;
-  deck: Array<any>;
+  deck: any[];
   toggleDeckView: Function;
   addCard: Function;
+  deckChanges: any[];
+  setDeckChanges: Function;
 }
 
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
@@ -67,6 +69,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           {props.deck.map(card => {
             return (
               <CTAButton
+                key={card.id}
                 title={card.category_id ? card.category_id : 'No category'}
                 variant="deckViewCategory"
                 onClick={() => {
@@ -92,11 +95,13 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             return (
               <Card
                 key={card.id}
-                supabase={props.supabase}
                 card={card}
+                variant="deckCard"
+                supabase={props.supabase}
                 deck={props.deck}
                 setDeck={props.setDeck}
-                variant="deckCard"
+                deckChanges={props.deckChanges}
+                setDeckChanges={props.setDeckChanges}
               />
             );
           })}
