@@ -119,7 +119,6 @@ const EditorPage = () => {
       user_id: (await supabase.auth.getUser()).data.user?.id,
       name: 'New Card',
       story_id: selectedStory ? selectedStory.id : 0,
-      category_id: categories[categoryId].id,
       // text: editorStateJSON,
     };
 
@@ -185,7 +184,7 @@ const EditorPage = () => {
               />
             );
         })}
-        <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
+        {/* <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
             onClick={() => {
@@ -201,7 +200,7 @@ const EditorPage = () => {
             }}
             title="Add category"
           />
-        </div>
+        </div> */}
 
         <div className="absolute bottom-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
           {/* <CTAButton

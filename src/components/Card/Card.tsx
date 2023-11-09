@@ -14,7 +14,7 @@ interface CardProps {
   card: {
     name: string;
     id: number;
-    category_id: number;
+    category_id: number | null;
     text: string;
     inHand?: Boolean;
     openCard?: Boolean;
@@ -100,7 +100,9 @@ const Card = (props: CardProps) => {
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
-              title={props.card.category_id}
+              title={
+                props.card.category_id ? props.card.category_id : 'No cateogry'
+              }
               onClick={() => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);
@@ -135,7 +137,9 @@ const Card = (props: CardProps) => {
           >
             <CTAButton
               variant="cardCategory"
-              title={props.card.category_id}
+              title={
+                props.card.category_id ? props.card.category_id : 'No cateogry'
+              }
               onClick={() => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);
@@ -267,7 +271,9 @@ const Card = (props: CardProps) => {
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
-              title={props.card.category_id}
+              title={
+                props.card.category_id ? props.card.category_id : 'No cateogry'
+              }
               onClick={() => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);

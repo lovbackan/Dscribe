@@ -68,7 +68,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           {props.deck.map(card => {
             return (
               <CTAButton
-                title={card.category_id}
+                title={card.category_id ? card.category_id : 'No category'}
                 variant="deckViewCategory"
                 onClick={() => {
                   console.log(card.category_id);

@@ -13,7 +13,7 @@ const StoryList = (props: StoryListProps) => {
   const addStory = async () => {
     const insertData = {
       user_id: (await props.supabase.auth.getUser()).data.user?.id,
-      name: 'Gundi',
+      name: 'New story',
     };
     const { data, error } = await props.supabase
       .from('stories')
