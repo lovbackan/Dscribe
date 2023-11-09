@@ -815,3 +815,11 @@ i.logo {
   width: 25px;
   background-image: url(./images/icons/card-link.svg);
 }
+
+.close-icon {
+  background-image: url(./images/icons/close-icon.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
