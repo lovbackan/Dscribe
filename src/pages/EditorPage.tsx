@@ -19,10 +19,13 @@ const EditorPage = () => {
   const [deckChanges, setDeckChanges] = useState<Array<any>>([]);
   const location = useLocation();
   const selectedStory = location.state.selectedStory;
+  const [story, setStory] = useState<any>(); //Should be type story | null
+  const [storyChanges, setStoryChanges] = useState<{ text?: string }>({});
+  const storyChangesRef = useRef(storyChanges);
+  storyChangesRef.current = storyChanges;
 
   const [editorState, setEditorState] = useState<EditorState>();
   const [categories, setCategories] = useState<Array<any>>([]);
-  const [categoryId, setCategory] = useState<number>(0);
   const [showDeck, setShowDeck] = useState<boolean>(false);
 
   const [saveTimer, setSaveTimer] = useState(0);
@@ -32,9 +35,6 @@ const EditorPage = () => {
   deckChangesRef.current = deckChanges;
 
   const [saveTimerIsRunning, setSaveTimerIsRunning] = useState(false);
-
-  //Temporary for testing. Different editors will have their own selected cards etc. Main editor may have several cards.
-  const [selectedCard, setSelectedCard] = useState<Object>();
 
   useEffect(() => {
     //Several instances of this is running at the same time, due to React strict mode.
@@ -66,6 +66,16 @@ const EditorPage = () => {
             setDeckChanges([]);
           }
         });
+        if (storyChangesRef.current.text) {
+          supabase
+            .from('stories')
+            .update({ text: storyChangesRef.current.text })
+            .eq('id', selectedStory.id)
+            .then(result => {
+              if (!result.error) setStoryChanges({});
+              console.log(result);
+            });
+        }
       }
     }
     setTimeout(saveCountdown, 100);
@@ -81,15 +91,15 @@ const EditorPage = () => {
     }
     fetchDeck();
     fetchCategories();
-    setCategory(0);
+    fetchStory();
   }, [selectedStory]);
 
   useEffect(() => {
     //Change this magic number?
-    if (deckChanges.length === 0) return;
-    console.log('CHA CHA CHA CHA CHANGES');
+    if (deckChanges.length === 0 && Object.keys(storyChanges).length === 0)
+      return;
     setSaveTimer(500);
-  }, [deckChanges]);
+  }, [deckChanges, storyChanges]);
 
   const fetchDeck = async () => {
     const { data, error } = await supabase
@@ -107,12 +117,22 @@ const EditorPage = () => {
         .from('categories')
         .select('*')
         .match({ story_id: selectedStory.id });
-      console.log(data);
       if (error) console.log(error);
       else setCategories(data);
     }
   };
-  //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
+
+  const fetchStory = async () => {
+    const { data, error } = await supabase
+      .from('stories')
+      .select('*')
+      .eq('id', selectedStory.id)
+      .single();
+    if (error) console.log(error);
+    else setStory(data);
+    console.log('story:', data);
+  };
+
   const addCard = async () => {
     // const editorStateJSON = JSON.stringify(editorState);
     const insertData = {
@@ -158,15 +178,19 @@ const EditorPage = () => {
   return (
     <deckContext.Provider value={deck}>
       <div className="h-screen w-screen relative overflow-hidden">
-        <h1>{selectedStory ? selectedStory.name : 'None'}</h1>
+        <h1>{story ? story.name : ''}</h1>
 
         <div className="absolute left-1/4 w-1/2 h-3/4">
-          <Editor
-            setEditorState={setEditorState}
-            selectedCard={selectedCard}
-            deck={deck}
-            setDeck={setDeck}
-          />
+          {story ? (
+            <Editor
+              setEditorState={setEditorState}
+              deck={deck}
+              setDeck={setDeck}
+              story={story}
+              setStory={setStory}
+              setStoryChanges={setStoryChanges}
+            />
+          ) : null}
         </div>
         {deck.map(card => {
           if (card.openCard)
@@ -177,7 +201,6 @@ const EditorPage = () => {
                 supabase={supabase}
                 deck={deck}
                 setDeck={setDeck}
-                setSelectedCard={setSelectedCard}
                 setEditorState={setEditorState}
                 deckChanges={deckChanges}
                 setDeckChanges={setDeckChanges}
@@ -224,7 +247,6 @@ const EditorPage = () => {
             <Hand
               supabase={supabase}
               {...{
-                setSelectedCard,
                 setDeck,
                 deck,
               }}
@@ -242,7 +264,7 @@ const EditorPage = () => {
             showDeckView={showDeck}
             toggleDeckView={toggleDeckView}
             supabase={supabase}
-            {...{ setSelectedCard, setDeck, deck }}
+            {...{ setDeck, deck }}
           />
         </div>
       </div>

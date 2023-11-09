@@ -11,7 +11,6 @@ import { Text } from '../Text/Text';
 interface DeckViewProps {
   showDeckView: boolean;
   supabase: SupabaseClient;
-  setSelectedCard: Function;
   setDeck: Function;
   deck: Array<any>;
   toggleDeckView: Function;
@@ -95,7 +94,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 key={card.id}
                 supabase={props.supabase}
                 card={card}
-                setSelectedCard={props.setSelectedCard}
                 deck={props.deck}
                 setDeck={props.setDeck}
                 variant="deckCard"

@@ -34,19 +34,37 @@ interface EditorProps {
   setDeck: Function;
   deckChanges?: any[];
   setDeckChanges?: Function;
+  story?: {
+    text?: string;
+  }; //For main editor from story.text
+  stories?: EditorProps['story'][];
+  setStory?: Function;
+  setStoryChanges?: Function;
 }
 
 function SaveOnChange(props: {
-  card: any;
-  deck: any[];
-  setDeck: Function;
-  deckChanges: any[] | undefined;
-  setDeckChanges: Function | undefined;
+  card?: any;
+  deck?: any[];
+  setDeck?: Function;
+  deckChanges?: any[] | undefined;
+  setDeckChanges?: Function | undefined;
+  story?: { text?: string };
+  setStory?: Function;
+  setStoryChanges?: Function;
 }): null {
   const [editor] = useLexicalComposerContext();
-  const { card, deck, setDeck, deckChanges, setDeckChanges } = props;
+  const {
+    card,
+    deck,
+    setDeck,
+    deckChanges,
+    setDeckChanges,
+    story,
+    setStory,
+    setStoryChanges,
+  } = props;
   editor.registerUpdateListener(({ editorState }) => {
-    if (card && deckChanges && setDeckChanges) {
+    if (card && deck && setDeck && deckChanges && setDeckChanges) {
       const cardIndex = deck.findIndex(deckCard => {
         if (card.id === deckCard.id) return true;
         return false;
@@ -69,46 +87,18 @@ function SaveOnChange(props: {
       else newDeckChanges[deckChangesCardIndex].text = newText;
       setDeckChanges([...newDeckChanges]);
     }
+    if (story && setStory && setStoryChanges) {
+      const newText = JSON.stringify(editor.getEditorState());
+      if (newText === story.text) return;
+      const newStory = story;
+      newStory.text = newText;
+      setStory({ ...newStory });
+      setStoryChanges({ text: newText });
+    }
   });
 
   return null;
 }
-
-//For reference. Being replaced with a useEffect on deck to look for and update all changes at the same place.
-// function SaveTimerPlugin(props: {
-//   saveTimerRef: any;
-//   card: any;
-//   setSaveTimer: Function;
-// }): null {
-//   const { saveTimerRef, card, setSaveTimer } = props;
-//   const [editor] = useLexicalComposerContext();
-//   useEffect(() => {
-//     countdown();
-//   }, []);
-
-//   const countdown = async () => {
-//     if (saveTimerRef.current > 0) {
-//       const newSaveTimer = saveTimerRef.current - 100;
-//       setSaveTimer(newSaveTimer);
-//       if (newSaveTimer <= 0) {
-//         if (card) {
-//           const text = JSON.stringify(editor.getEditorState());
-//           if (text !== card.text) {
-//             card.text = text;
-//             const result = await supabase
-//               .from('cards')
-//               .update({ text: text })
-//               .eq('id', card.id);
-//             console.log(result);
-//           }
-//         }
-//       }
-//     }
-//     console.log(saveTimerRef.current);
-//     setTimeout(countdown, 100);
-//   };
-//   return null;
-// }
 
 function Placeholder() {
   return <div className="editor-placeholder">Enter some rich text...</div>;
@@ -141,15 +131,23 @@ const editorConfig = {
 };
 
 const Editor = (props: EditorProps) => {
-  const { card, deck, setDeck, deckChanges, setDeckChanges } = props;
-  const saveCooldown = 1000;
-  const [saveTimer, setSaveTimer] = useState<number>(0);
-  const saveTimerRef = useRef(saveTimer);
-  saveTimerRef.current = saveTimer;
+  const {
+    card,
+    deck,
+    setDeck,
+    deckChanges,
+    setDeckChanges,
+    story,
+    setStory,
+    setStoryChanges,
+  } = props;
 
   //Get state from connected card, if there is one.
   let initialEditorState = null;
-  if (card) {
+  let editorState = null;
+  if (story?.text) {
+    editorState = story.text;
+  } else if (card) {
     const cardIndex = deck.findIndex(deckCard => {
       if (card.id === deckCard.id) return true;
       return false;
@@ -157,8 +155,11 @@ const Editor = (props: EditorProps) => {
 
     if (cardIndex === -1) return;
 
-    //Set initial state if not empty. Lexical can't handle empty editor states.
-    const editorState = deck[cardIndex].text;
+    editorState = deck[cardIndex].text;
+  }
+
+  //Set initial state if editorState not empty. Lexical can't handle empty editor states.
+  if (editorState) {
     const decodedEditorState = JSON.parse(editorState);
     if (
       decodedEditorState &&
@@ -189,6 +190,9 @@ const Editor = (props: EditorProps) => {
             setDeck={setDeck}
             deckChanges={deckChanges}
             setDeckChanges={setDeckChanges}
+            story={story}
+            setStory={setStory}
+            setStoryChanges={setStoryChanges}
           />
           <CardLinkPlugin />
           <HistoryPlugin />

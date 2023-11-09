@@ -23,7 +23,6 @@ interface CardProps {
   supabase: SupabaseClient;
   deck: Array<any>;
   setDeck: Function;
-  setSelectedCard: Function;
   setEditorState?: Function;
   editorState?: any[];
   deckChanges?: any[];
