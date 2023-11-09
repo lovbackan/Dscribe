@@ -10,6 +10,7 @@ import Card from '../components/Card/Card';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
+import { Text } from '../components/Text/Text';
 
 export const deckContext = createContext<any[]>([]);
 
@@ -160,11 +161,18 @@ const EditorPage = () => {
   return (
     <deckContext.Provider value={deck}>
       <div className="h-screen w-screen relative overflow-hidden">
-        <h1>{selectedStory ? selectedStory.name : 'None'}</h1>
+        <div className="absolute flex justify-center items-center w-screen">
+          <Text
+            variant="heading1Bold"
+            textColor="white"
+            content={selectedStory ? selectedStory.name : 'No story selected'}
+          />
+        </div>
+        {/* <h1>{selectedStory ? selectedStory.name : 'None'}</h1> */}
 
         <Logo variant="editor" />
 
-        <div className="absolute left-1/4 w-1/2 h-3/4">
+        <div className="absolute left-1/4 w-1/2 h-3/4 mt-12">
           <Editor
             setEditorState={setEditorState}
             selectedCard={selectedCard}
@@ -236,18 +244,20 @@ const EditorPage = () => {
           </div>
         ) : null}
 
-        <div
-          className={`justify-center items-center absolute top-[5%] z-10 ${
-            showDeck ? 'flex' : 'hidden'
-          }`}
-        >
-          <DeckView
-            addCard={addCard}
-            showDeckView={showDeck}
-            toggleDeckView={toggleDeckView}
-            supabase={supabase}
-            {...{ setSelectedCard, setDeck, deck }}
-          />
+        <div className="w-screen h-screen flex justify-center items-center">
+          <div
+            className={`justify-center items-center absolute z-10 ${
+              showDeck ? 'flex' : 'hidden'
+            }`}
+          >
+            <DeckView
+              addCard={addCard}
+              showDeckView={showDeck}
+              toggleDeckView={toggleDeckView}
+              supabase={supabase}
+              {...{ setSelectedCard, setDeck, deck }}
+            />
+          </div>
         </div>
       </div>
     </deckContext.Provider>
