@@ -15,6 +15,7 @@ interface DeckViewProps {
   setDeck: Function;
   deck: Array<any>;
   toggleDeckView: Function;
+  addCard: Function;
 }
 
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
@@ -54,6 +55,14 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             }}
           />
         </div>
+
+        <CTAButton
+          variant="deck"
+          onClick={() => {
+            props.addCard();
+          }}
+          title="+"
+        />
 
         <div className="flex flex-row w-[100%]">
           {props.deck.map(card => {

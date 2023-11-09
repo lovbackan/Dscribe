@@ -114,13 +114,13 @@ const EditorPage = () => {
   };
   //Mostly testing database interactions. Works fine but values are hardcoded. Cards should only be allowed to have story_id to stories corresponding to their user_id. Leaving as is for now to make testing easier.
   const addCard = async () => {
-    const editorStateJSON = JSON.stringify(editorState);
+    // const editorStateJSON = JSON.stringify(editorState);
     const insertData = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
-      name: 'Gundi',
+      name: 'New Card',
       story_id: selectedStory ? selectedStory.id : 0,
       category_id: categories[categoryId].id,
-      text: editorStateJSON,
+      // text: editorStateJSON,
     };
 
     console.log(editorState);
@@ -159,10 +159,7 @@ const EditorPage = () => {
   return (
     <deckContext.Provider value={deck}>
       <div className="h-screen w-screen relative overflow-hidden">
-        <h1>
-          Selected Story:
-          {selectedStory ? selectedStory.id : 'None'}
-        </h1>
+        <h1>{selectedStory ? selectedStory.name : 'None'}</h1>
 
         <div className="absolute left-1/4 w-1/2 h-3/4">
           <Editor
@@ -207,13 +204,13 @@ const EditorPage = () => {
         </div>
 
         <div className="absolute bottom-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
-          <CTAButton
+          {/* <CTAButton
             variant="deck"
             onClick={() => {
               addCard();
             }}
             title="+"
-          />
+          /> */}
           <CTAButton
             title="D"
             variant="deck"
@@ -242,6 +239,7 @@ const EditorPage = () => {
           }`}
         >
           <DeckView
+            addCard={addCard}
             showDeckView={showDeck}
             toggleDeckView={toggleDeckView}
             supabase={supabase}

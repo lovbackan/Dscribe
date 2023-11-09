@@ -3,6 +3,7 @@ import { CTAButton } from '../CTAButton/CTAButton';
 import { Text } from '../Text/Text';
 import Editor from '../Editor/Editor';
 import { Input } from '../Input/Input';
+import { supabase } from '../../supabase';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -57,6 +58,21 @@ const Card = (props: CardProps) => {
     else props.deck[cardIndex].inHand = true;
 
     props.setDeck([...props.deck]);
+  };
+
+  const changeCardName = async (newName: string) => {
+    const id = props.card.id;
+    console.log(id, newName);
+    const { data, error } = await supabase
+      .from('cards')
+      .update({ name: newName })
+      .eq('id', id);
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
+
+    // write your logic here for updating name of story
   };
 
   const toggleOpenCard = () => {
@@ -268,11 +284,26 @@ const Card = (props: CardProps) => {
                 />
               </div> */}
           </div>
-          <Text
-            content={props.card.name}
-            textColor="white"
-            variant="cardTitle"
-          />
+          <div
+            onClick={event => {
+              event.stopPropagation(); // Stop the event from propagating to the parent div
+              console.log('edit');
+            }}
+          >
+            <Input
+              id={props.card.id.toString()}
+              variant="cardTitle"
+              placeholder={props.card.name}
+              onChange={() => {}}
+              type="text"
+              onBlur={e => {
+                const newName = e.target.value;
+                changeCardName(newName);
+
+                console.log(e.target.value);
+              }}
+            />
+          </div>
         </div>
       </>
     );

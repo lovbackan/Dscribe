@@ -53,14 +53,14 @@ const StoryCard = (props: StoryCardProps) => {
   const changeName = async (newName: string) => {
     const id = props.story.id;
     console.log(id, newName);
-    const result = await supabase
+    const { data, error } = await supabase
       .from('stories')
       .update({ name: newName })
       .eq('id', id);
-    // if (error) {
-    //   console.log(error);
-    // }
-    console.log(result);
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
 
     // write your logic here for updating name of story
   };
