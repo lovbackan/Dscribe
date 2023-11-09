@@ -9,6 +9,7 @@ import Hand from '../components/Hand/Hand';
 import Card from '../components/Card/Card';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../routes/routes';
+import Logo from '../components/Logo/Logo';
 
 export const deckContext = createContext<any[]>([]);
 
@@ -65,6 +66,7 @@ const EditorPage = () => {
             console.log('Emptying changes');
             setDeckChanges([]);
           }
+          console.log(data);
         });
       }
     }
@@ -159,6 +161,8 @@ const EditorPage = () => {
     <deckContext.Provider value={deck}>
       <div className="h-screen w-screen relative overflow-hidden">
         <h1>{selectedStory ? selectedStory.name : 'None'}</h1>
+
+        <Logo variant="editor" />
 
         <div className="absolute left-1/4 w-1/2 h-3/4">
           <Editor
