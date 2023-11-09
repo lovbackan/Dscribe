@@ -209,6 +209,7 @@ const EditorPage = () => {
           if (card.openCard)
             return (
               <Card
+                key={card.id}
                 card={card}
                 variant="openCard"
                 supabase={supabase}
@@ -278,7 +279,7 @@ const EditorPage = () => {
               showDeckView={showDeck}
               toggleDeckView={toggleDeckView}
               supabase={supabase}
-              {...{ setDeck, deck }}
+              {...{ setDeck, deck, setDeckChanges, deckChanges }}
             />
           </div>
         </div>
