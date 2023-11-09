@@ -3,25 +3,18 @@ import { useCallback, useEffect, useState, useContext } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import {
   $createParagraphNode,
-  $getNodeByKey,
-  // $getRoot,
   $getSelection,
   $isRangeSelection,
   $isRootOrShadowRoot,
-  // $isTextNode,
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
   DEPRECATED_$isGridSelection,
   FORMAT_ELEMENT_COMMAND,
   FORMAT_TEXT_COMMAND,
-  // INDENT_CONTENT_COMMAND,
   LexicalEditor,
-  NodeKey,
-  // OUTDENT_CONTENT_COMMAND,
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
-  // TextNode,
   UNDO_COMMAND,
 } from 'lexical';
 
@@ -33,9 +26,7 @@ import {
 } from '@lexical/rich-text';
 import {
   $getSelectionStyleValueForProperty,
-  // $isParentElementRTL,
   $patchStyleText,
-  // $selectAll,
   $setBlocksType,
 } from '@lexical/selection';
 import {
@@ -47,22 +38,11 @@ import {
   REMOVE_LIST_COMMAND,
 } from '@lexical/list';
 import {
-  // $createCodeNode,
-  $isCodeNode,
-  CODE_LANGUAGE_FRIENDLY_NAME_MAP,
-  CODE_LANGUAGE_MAP,
-  getLanguageFriendlyName,
-} from '@lexical/code';
-import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
-import {
   $findMatchingParent,
-  // $getNearestBlockElementAncestorOrThrow,
   $getNearestNodeOfType,
   mergeRegister,
 } from '@lexical/utils';
 import DropDown, { DropDownItem } from '../ui/DropDown';
-import { getSelectedNode } from '../utils/getSelectedNode';
-import { sanitizeUrl } from '../utils/url';
 import { INSERT_CARDLINK_COMMAND } from './CardLinkPlugin';
 
 const blockTypeToBlockName = {
@@ -79,20 +59,6 @@ const blockTypeToBlockName = {
   paragraph: 'Normal',
   quote: 'Quote',
 };
-
-function getCodeLanguageOptions(): [string, string][] {
-  const options: [string, string][] = [];
-
-  for (const [lang, friendlyName] of Object.entries(
-    CODE_LANGUAGE_FRIENDLY_NAME_MAP,
-  )) {
-    options.push([lang, friendlyName]);
-  }
-
-  return options;
-}
-
-const CODE_LANGUAGE_OPTIONS = getCodeLanguageOptions();
 
 const FONT_FAMILY_OPTIONS: [string, string][] = [
   ['Arial', 'Arial'],
@@ -194,31 +160,6 @@ function BlockFormatDropDown({
       });
     }
   };
-
-  // const formatCode = () => {
-  //   if (blockType !== 'code') {
-  //     editor.update(() => {
-  //       let selection = $getSelection();
-
-  //       if (
-  //         $isRangeSelection(selection) ||
-  //         DEPRECATED_$isGridSelection(selection)
-  //       ) {
-  //         if (selection.isCollapsed()) {
-  //           $setBlocksType(selection, () => $createCodeNode());
-  //         } else {
-  //           const textContent = selection.getTextContent();
-  //           const codeNode = $createCodeNode();
-  //           selection.insertNodes([codeNode]);
-  //           selection = $getSelection();
-  //           if ($isRangeSelection(selection))
-  //             selection.insertRawText(textContent);
-  //         }
-  //       }
-  //     });
-  //   }
-  // };
-
   return (
     <DropDown
       disabled={disabled}
@@ -283,13 +224,6 @@ function BlockFormatDropDown({
         <i className="icon quote" />
         <span className="text">Quote</span>
       </DropDownItem>
-      {/* <DropDownItem
-        className={'item ' + dropDownActiveClass(blockType === 'code')}
-        onClick={formatCode}
-      >
-        <i className="icon code" />
-        <span className="text">Code Block</span>
-      </DropDownItem> */}
     </DropDown>
   );
 }
@@ -360,30 +294,16 @@ export default function ToolbarPlugin(): JSX.Element {
   const [activeEditor, setActiveEditor] = useState(editor);
   const [blockType, setBlockType] =
     useState<keyof typeof blockTypeToBlockName>('paragraph');
-  const [selectedElementKey, setSelectedElementKey] = useState<NodeKey | null>(
-    null,
-  );
   const [fontSize, setFontSize] = useState<string>('15px');
-  // const [fontColor, setFontColor] = useState<string>('#000');
-  // const [bgColor, setBgColor] = useState<string>('#fff');
   const [fontFamily, setFontFamily] = useState<string>('Arial');
-  const [isLink, setIsLink] = useState(false);
+
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
-  // const [isStrikethrough, setIsStrikethrough] = useState(false);
-  // const [isSubscript, setIsSubscript] = useState(false);
-  // const [isSuperscript, setIsSuperscript] = useState(false);
-  // const [isCode, setIsCode] = useState(false);
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
-  //   const [modal, showModal] = useModal();
-  // const [isRTL, setIsRTL] = useState(false);
-  const [codeLanguage, setCodeLanguage] = useState<string>('');
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
   const deck = useContext(deckContext);
-
-  // const [isCardLink, setIsCardLink] = useState(false);
   const IS_APPLE = false;
 
   const updateToolbar = useCallback(() => {
@@ -405,28 +325,11 @@ export default function ToolbarPlugin(): JSX.Element {
       const elementKey = element.getKey();
       const elementDOM = activeEditor.getElementByKey(elementKey);
 
-      // Update text format
       setIsBold(selection.hasFormat('bold'));
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
-      // setIsCardLink(selection.hasFormat('cardLink'));
-      // setIsStrikethrough(selection.hasFormat('strikethrough'));
-      // setIsSubscript(selection.hasFormat('subscript'));
-      // setIsSuperscript(selection.hasFormat('superscript'));
-      // setIsCode(selection.hasFormat('code'));
-      // setIsRTL($isParentElementRTL(selection));
-
-      // Update links
-      const node = getSelectedNode(selection);
-      const parent = node.getParent();
-      if ($isLinkNode(parent) || $isLinkNode(node)) {
-        setIsLink(true);
-      } else {
-        setIsLink(false);
-      }
 
       if (elementDOM !== null) {
-        setSelectedElementKey(elementKey);
         if ($isListNode(element)) {
           const parentList = $getNearestNodeOfType<ListNode>(
             anchorNode,
@@ -443,30 +346,12 @@ export default function ToolbarPlugin(): JSX.Element {
           if (type in blockTypeToBlockName) {
             setBlockType(type as keyof typeof blockTypeToBlockName);
           }
-          if ($isCodeNode(element)) {
-            const language =
-              element.getLanguage() as keyof typeof CODE_LANGUAGE_MAP;
-            setCodeLanguage(
-              language ? CODE_LANGUAGE_MAP[language] || language : '',
-            );
-            return;
-          }
         }
       }
-      // Handle buttons
       setFontSize(
         $getSelectionStyleValueForProperty(selection, 'font-size', '15px'),
       );
-      // setFontColor(
-      //   $getSelectionStyleValueForProperty(selection, 'color', '#000'),
-      // );
-      // setBgColor(
-      //   $getSelectionStyleValueForProperty(
-      //     selection,
-      //     'background-color',
-      //     '#fff',
-      //   ),
-      // );
+
       setFontFamily(
         $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial'),
       );
@@ -514,28 +399,6 @@ export default function ToolbarPlugin(): JSX.Element {
     );
   }, [activeEditor, editor, updateToolbar]);
 
-  const onCodeLanguageSelect = useCallback(
-    (value: string) => {
-      activeEditor.update(() => {
-        if (selectedElementKey !== null) {
-          const node = $getNodeByKey(selectedElementKey);
-          if ($isCodeNode(node)) {
-            node.setLanguage(value);
-          }
-        }
-      });
-    },
-    [activeEditor, selectedElementKey],
-  );
-
-  const insertLink = useCallback(() => {
-    if (!isLink) {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl('https://'));
-    } else {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-    }
-  }, [editor, isLink]);
-
   // const insertCardLink = useCallback(() => {
   //   editor.dispatchCommand(INSERT_CARD_LINK_COMMAND, undefined);
   //   console.log('clickat på knapp');
@@ -573,7 +436,6 @@ export default function ToolbarPlugin(): JSX.Element {
       ></button>
     );
   }
-  // activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
 
   return (
     <div className="toolbar">
@@ -613,28 +475,7 @@ export default function ToolbarPlugin(): JSX.Element {
         </>
       )}
       {blockType === 'code' ? (
-        <>
-          <DropDown
-            disabled={!isEditable}
-            buttonClassName="toolbar-item code-language"
-            buttonLabel={getLanguageFriendlyName(codeLanguage)}
-            buttonAriaLabel="Select language"
-          >
-            {CODE_LANGUAGE_OPTIONS.map(([value, name]) => {
-              return (
-                <DropDownItem
-                  className={`item ${dropDownActiveClass(
-                    value === codeLanguage,
-                  )}`}
-                  onClick={() => onCodeLanguageSelect(value)}
-                  key={value}
-                >
-                  <span className="text">{name}</span>
-                </DropDownItem>
-              );
-            })}
-          </DropDown>
-        </>
+        <></>
       ) : (
         <>
           <FontDropDown
@@ -691,29 +532,6 @@ export default function ToolbarPlugin(): JSX.Element {
           >
             <i className="format underline" />
           </button>
-
-          {/* <button
-            disabled={!isEditable}
-            onClick={() => {
-              activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, 'code');
-            }}
-            className={'toolbar-item spaced ' + (isCode ? 'active' : '')}
-            title="Insert code block"
-            type="button"
-            aria-label="Insert code block"
-          >
-            <i className="format code" />
-          </button> */}
-          {/* <button
-            disabled={!isEditable}
-            onClick={insertLink}
-            className={'toolbar-item spaced ' + (isLink ? 'active' : '')}
-            aria-label="Insert link"
-            title="Insert link"
-            type="button"
-          >
-            <i className="format link" />
-          </button> */}
           <Divider />
           <DropDown
             disabled={!isEditable}
@@ -762,7 +580,6 @@ export default function ToolbarPlugin(): JSX.Element {
           </DropDown>
         </>
       )}
-      {/* <button onClick={insertCardLink}> cardlink</button> */}
       <CardLinkToolbarPlugin />
       <Divider />
 
