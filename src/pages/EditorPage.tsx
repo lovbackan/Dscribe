@@ -201,7 +201,7 @@ const EditorPage = () => {
               setStoryChanges={setStoryChanges}
             />
           ) : null}
-          <div className="absolute h-[10%] w-[100%] mt-12 bg-white">
+          <div className="absolute h-[20%] w-[100%] mt-12 bg-white">
             <p>ldsaldsa</p>
           </div>
         </div>
@@ -248,8 +248,8 @@ const EditorPage = () => {
             title="+"
           /> */}
           <CTAButton
-            title="D"
-            variant="deck"
+            title=" "
+            variant="viewDeck"
             onClick={() => {
               toggleDeckView();
             }}

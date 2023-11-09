@@ -823,3 +823,19 @@ i.logo {
   background-repeat: no-repeat;
   display: inline-block;
 }
+
+.deck-icon {
+  background-image: url(./images/icons/deck-icon.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.deck-icon-black {
+  background-image: url(./images/icons/deck-icon-black.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
