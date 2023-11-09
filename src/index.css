@@ -798,8 +798,20 @@ i.right-align {
 
 i.justify-align {
   background-image: url(./images/icons/justify.svg);
+  /* background-image: url(./images/icons/link-card.svg); */
 }
 
 i.logo {
   background-image: url(./images/icons/LOGO.svg);
+}
+
+.card-link {
+  background-color: transparent;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  background-image: url(./images/icons/card-link.svg);
 }

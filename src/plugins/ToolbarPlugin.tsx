@@ -719,7 +719,7 @@ export default function ToolbarPlugin(): JSX.Element {
             disabled={!isEditable}
             buttonLabel="Align"
             buttonIconClassName=" left-align"
-            buttonClassName="toolbar-item spaced alignment"
+            buttonClassName=" toolbar-item spaced alignment"
             buttonAriaLabel="Formatting options for text alignment"
           >
             <DropDownItem
@@ -765,10 +765,11 @@ export default function ToolbarPlugin(): JSX.Element {
       {/* <button onClick={insertCardLink}> cardlink</button> */}
       <CardLinkToolbarPlugin />
       <Divider />
+
       <DropDown
         disabled={!isEditable}
-        buttonLabel="C"
-        buttonIconClassName=" left-align"
+        // buttonLabel="C"
+        buttonIconClassName="card-link"
         buttonClassName="toolbar-item spaced alignment"
         buttonAriaLabel="Link card to text."
       >
@@ -781,8 +782,7 @@ export default function ToolbarPlugin(): JSX.Element {
               }}
               className="item"
             >
-              <i className="icon justify-align" />
-              <span className="text">{card.id}</span>
+              <span className="text">{card.name}</span>
             </DropDownItem>
           );
         })}
