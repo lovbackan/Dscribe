@@ -23,7 +23,7 @@ const HomePage = () => {
 
   const fetchStories = async () => {
     const { data, error } = await supabase.from('stories').select('*');
-    // console.log(data);
+    console.log(data);
     console.log(supabase.auth.getUser());
     if (error) console.log(error);
     else setStories(data);

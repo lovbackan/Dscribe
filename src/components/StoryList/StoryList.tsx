@@ -41,10 +41,10 @@ const StoryList = (props: StoryListProps) => {
       })}
 
       <div
-        className="w-[200px] h-[300px] rounded-[20px] bg-white cursor-pointer hover:border hover:border-black text-black flex justify-center items-center border-8 border-slate-300"
+        className="w-[200px] h-[300px] rounded-[20px] bg-slate-200 cursor-pointer hover:border-4 hover:border-black text-black flex justify-center items-center border-4 border-white"
         onClick={() => addStory()}
       >
-        <h2 className="text-black text-[64px] flex justify-center items-center">
+        <h2 className="text-white text-[44px] flex justify-center items-center">
           +
         </h2>
       </div>
