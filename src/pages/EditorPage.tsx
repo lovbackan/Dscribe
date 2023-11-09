@@ -41,7 +41,7 @@ const EditorPage = () => {
   useEffect(() => {
     //Several instances of this is running at the same time, due to React strict mode.
     if (!saveTimerIsRunning) {
-      setSaveTimerIsRunning(false);
+      setSaveTimerIsRunning(true);
       saveCountdown();
     }
   }, []);

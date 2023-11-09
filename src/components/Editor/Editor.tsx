@@ -10,7 +10,7 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-
+import { useEffect } from 'react';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ListItemNode, ListNode } from '@lexical/list';
@@ -63,7 +63,28 @@ function SaveOnChange(props: {
     setStory,
     setStoryChanges,
   } = props;
-  editor.registerUpdateListener(({ editorState }) => {
+  const [saveTimer, setSaveTimer] = useState(500);
+  const saveTimerRef = useRef(saveTimer);
+  saveTimerRef.current = saveTimer;
+
+  useEffect(() => {
+    setTimeout(saveCountDown, 100);
+  }, []);
+
+  const saveCountDown = () => {
+    const saveTimer = saveTimerRef.current;
+    if (saveTimer > 0) {
+      const newSaveTimer = saveTimer - 100;
+      setSaveTimer(newSaveTimer);
+      if (newSaveTimer <= 0) {
+        save();
+      }
+    }
+    setTimeout(saveCountDown, 100);
+  };
+
+  const save = () => {
+    console.log('ost');
     if (card && deck && setDeck && deckChanges && setDeckChanges) {
       const cardIndex = deck.findIndex(deckCard => {
         if (card.id === deckCard.id) return true;
@@ -95,6 +116,9 @@ function SaveOnChange(props: {
       setStory({ ...newStory });
       setStoryChanges({ text: newText });
     }
+  };
+  editor.registerUpdateListener(({ editorState }) => {
+    setSaveTimer(500);
   });
 
   return null;
