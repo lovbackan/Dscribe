@@ -1,6 +1,8 @@
 import { Text } from '../Text/Text';
+import { ACCEPTED_ROUTES } from '../../routes/routes';
+import { Link } from 'react-router-dom';
 
-type LogoType = 'big' | 'medium' | 'small' | 'login';
+type LogoType = 'big' | 'medium' | 'small' | 'login' | 'editor';
 
 interface LogoProps {
   variant: LogoType;
@@ -15,6 +17,8 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
       'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
     small:
       'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
+    editor:
+      'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center absolute cursor-pointer',
   };
 
   const className = logoClasses[variant] || logoClasses.big;
@@ -42,6 +46,14 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
       <div id="logo" className={`${className}`}>
         <Text variant="logoSmall" textColor="white" content="Codeck" />
       </div>
+    );
+  } else if (variant === 'editor') {
+    return (
+      <Link to={ACCEPTED_ROUTES.HOME}>
+        <div id="logo" className={`${className}`}>
+          <Text variant="logoSmall" textColor="white" content="Codeck" />
+        </div>
+      </Link>
     );
   }
 };

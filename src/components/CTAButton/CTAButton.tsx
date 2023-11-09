@@ -45,7 +45,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'minimize/close'
       ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white'
       : variant === 'cardSubCategory'
-      ? 'w-auto h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border px-2'
+      ? 'w-auto h-[20px] rounded-[12px] bg-green-200 flex justify-center items-center hover:border-white hover:border px-2'
       : 'bg-purple-400';
 
   const textClasses =
@@ -100,9 +100,9 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
           >
             <button
               id="removeCateogry"
-              className="rounded-full h-3 w-3 bg-white border border-black flex justify-center items-center "
+              className="close-icon rounded-full h-5 w-5 hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black "
             >
-              <Text content="x" variant="subCategory" textColor="black" />
+              {/* <Text content="x" variant="subCategory" textColor="white" /> */}
             </button>
           </div>
         </button>
