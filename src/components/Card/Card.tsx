@@ -16,6 +16,7 @@ interface CardProps {
     id: number;
     category_id: number | null;
     text: string;
+    tags: any[];
     inHand?: Boolean;
     openCard?: Boolean;
   };
@@ -27,6 +28,8 @@ interface CardProps {
   editorState?: any[];
   deckChanges?: any[];
   setDeckChanges?: Function;
+  categories?: any[];
+  setCategories?: Function;
 }
 
 const Card = (props: CardProps) => {
@@ -177,42 +180,18 @@ const Card = (props: CardProps) => {
                 id="SubCategoryWrapper"
                 className=" flex flex-row flex-wrap gap-1 px-1"
               >
-                {/* Mockup subcategories, should be fetched from the database with title and id */}
-                <CTAButton
-                  variant="cardSubCategory"
-                  title="Hackerman"
-                  onClick={() => {
-                    console.log();
-                  }}
-                />
-                <CTAButton
-                  variant="cardSubCategory"
-                  title="X"
-                  onClick={() => {
-                    console.log();
-                  }}
-                />
-                <CTAButton
-                  variant="cardSubCategory"
-                  title="Albatross"
-                  onClick={() => {
-                    console.log('hello');
-                  }}
-                />
-                <CTAButton
-                  variant="cardSubCategory"
-                  title="Weapon"
-                  onClick={() => {
-                    console.log('Amalgam');
-                  }}
-                />
-                <CTAButton
-                  variant="cardSubCategory"
-                  title="Weapon"
-                  onClick={() => {
-                    console.log('Amalgam');
-                  }}
-                />
+                {props.card.tags.map(tag => {
+                  return (
+                    <CTAButton
+                      key={tag.id}
+                      variant="cardSubCategory"
+                      title={tag.name}
+                      onClick={() => {
+                        console.log('Slackerman');
+                      }}
+                    />
+                  );
+                })}
               </div>
             </section>
           </div>

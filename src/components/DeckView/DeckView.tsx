@@ -17,6 +17,8 @@ interface DeckViewProps {
   addCard: Function;
   deckChanges: any[];
   setDeckChanges: Function;
+  categories: any[];
+  setCategories: Function;
 }
 
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
@@ -102,6 +104,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 setDeck={props.setDeck}
                 deckChanges={props.deckChanges}
                 setDeckChanges={props.setDeckChanges}
+                categories={props.categories}
+                setCategories={props.setCategories}
               />
             );
           })}
