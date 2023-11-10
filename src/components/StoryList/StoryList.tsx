@@ -5,7 +5,10 @@ interface StoryListProps {
   stories: Array<any>;
   setStories: Function;
   setSelectedStory: Function;
+  setChangeCardId: Function;
   supabase: SupabaseClient;
+  deleteCard: Function;
+  changePicture: Function;
 }
 
 const StoryList = (props: StoryListProps) => {
@@ -36,6 +39,13 @@ const StoryList = (props: StoryListProps) => {
             key={story.id}
             story={story}
             setSelectedStory={props.setSelectedStory}
+            setChangeCardId={props.setChangeCardId}
+            deleteCard={() => {
+              props.deleteCard();
+            }}
+            changePicture={() => {
+              props.changePicture();
+            }}
           />
         );
       })}

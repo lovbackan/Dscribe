@@ -5,7 +5,10 @@ import { useState } from 'react';
 
 interface StoryCardProps {
   story: { id: number; name: string };
+  setChangeCardId: Function;
   setSelectedStory: Function;
+  deleteCard: Function;
+  changePicture: Function;
 }
 
 {
@@ -72,6 +75,7 @@ const StoryCard = (props: StoryCardProps) => {
 
   return (
     <div
+      id={props.story.name}
       className="  w-[200px] h-[300px] rounded-[20px] bg-slate-300 cursor-pointer hover:border hover:border-white"
       onClick={() => props.setSelectedStory(props.story)}
       onMouseEnter={() => setIsHovered(true)}
@@ -87,8 +91,11 @@ const StoryCard = (props: StoryCardProps) => {
             <CTAButton
               variant="deleteCard"
               title=""
+              // onClick={() => props.setChangeCardId(props.story)}
               onClick={() => {
-                console.log(`Delete card id: ${props.story.id}`);
+                props.deleteCard();
+                props.setChangeCardId(props.story);
+                console.log(`Delete card id: ${props.story.name} `);
               }}
             />
           )}
@@ -97,7 +104,10 @@ const StoryCard = (props: StoryCardProps) => {
               variant="changePicture"
               title=""
               onClick={() => {
-                console.log(`Change picture card id: ${props.story.id}`);
+                // props.setSelectedStory(props.story);
+                // props.setChangeCardId(props.story.id);
+                // props.changePicture();
+                console.log(`Change card picture id: ${props.story.id} `);
               }}
             />
           )}

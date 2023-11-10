@@ -13,7 +13,9 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState<Array<any>>([]);
   const [selectedStory, setSelectedStory] = useState<any>(null);
+  const [changeCardId, setChangeCardId] = useState<any>(null);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
 
   if (showSignOutPopup) {
     document.body.style.overflow = 'hidden';
@@ -37,6 +39,20 @@ const HomePage = () => {
       setShowSignOutPopup(false); // Close the popup after sign out
       navigate(ACCEPTED_ROUTES.LANDING);
       console.log('signed out');
+    }
+  };
+
+  const deleteStory = async (id: number) => {
+    const { data, error } = await supabase
+      .from('stories')
+      .delete()
+      .match({ id: id });
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+      // Filter out the deleted story from the stories state
+      setStories(stories.filter(story => story.id !== id));
     }
   };
 
@@ -88,7 +104,43 @@ const HomePage = () => {
         stories={stories}
         setSelectedStory={setSelectedStory}
         setStories={setStories}
+        setChangeCardId={setChangeCardId}
+        deleteCard={() => {
+          setShowDeletePopup(true);
+          console.log(`Delete card id: ${changeCardId} `);
+        }}
+        changePicture={() => {}}
       />
+
+      {showDeletePopup && (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
+          <Text
+            variant="heading2"
+            textColor="white"
+            content={`Are you sure you want to delete story:`}
+          />
+          <Text
+            variant="heading2"
+            textColor="white"
+            content={`  ${changeCardId.name}`}
+          />
+          <div className="flex flex-row justify-between">
+            <CTAButton
+              title="Delete story"
+              variant="primary"
+              onClick={() => {
+                deleteStory(changeCardId.id);
+                setShowDeletePopup(false);
+              }}
+            />
+            <CTAButton
+              title="Cancel"
+              variant="secondary"
+              onClick={() => setShowDeletePopup(false)}
+            />
+          </div>
+        </div>
+      )}
 
       {showSignOutPopup && (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
