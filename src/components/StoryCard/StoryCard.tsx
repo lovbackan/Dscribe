@@ -75,21 +75,20 @@ const StoryCard = (props: StoryCardProps) => {
           e.stopPropagation();
         }}
       >
-        <Input
-          id={props.story.id.toString()}
-          variant="cardTitle"
-          placeholder={props.story.name}
-          onChange={() => {}}
-          type="text"
-          onBlur={e => {
-            const newName = e.target.value;
+        <div className="mt-[42px]">
+          <Input
+            id={props.story.id.toString()}
+            variant="cardTitle"
+            placeholder={props.story.name}
+            onChange={() => {}}
+            type="text"
+            onBlur={e => {
+              const newName = e.target.value;
 
-            changeName(newName);
-
-            //write logic to update story name
-            // console.log(e.target.value);
-          }}
-        />
+              changeName(newName);
+            }}
+          />
+        </div>
       </div>
       {/* <h2 className="text-black">Story: {props.story.id}</h2> */}
     </div>

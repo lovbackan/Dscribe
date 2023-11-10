@@ -18,7 +18,7 @@ type TextType =
 type TextColor = 'black' | 'white' | 'green';
 
 interface TextProps {
-  content?: string;
+  content: string;
   variant: TextType;
   textColor: TextColor;
 }

@@ -27,7 +27,7 @@ const Navbar: React.FC<NewNavbarProps> = ({ onClick }) => {
   }, []);
 
   return (
-    <div className=" fixed left-0 w-32 h-full bg-slate-600 flex flex-col justify-between">
+    <div className=" fixed left-0 w-32 h-full flex flex-col justify-between py-[111px]">
       <NavbarButton variant="home" userName={userName} />
       <NavbarButton variant="community" />
       <NavbarButton variant="settings" />
