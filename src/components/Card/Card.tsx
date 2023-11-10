@@ -4,6 +4,7 @@ import { Text } from '../Text/Text';
 import Editor from '../Editor/Editor';
 import { Input } from '../Input/Input';
 import { supabase } from '../../supabase';
+import { useState } from 'react';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -22,7 +23,7 @@ interface CardProps {
   };
   variant: CardType;
   supabase: SupabaseClient;
-  deck: Array<any>;
+  deck: any[];
   setDeck: Function;
   setEditorState?: Function;
   editorState?: any[];
@@ -30,9 +31,13 @@ interface CardProps {
   setDeckChanges?: Function;
   categories?: any[];
   setCategories?: Function;
+  tags?: any[];
+  setTags?: Function;
 }
 
 const Card = (props: CardProps) => {
+  const [addTagsWindow, setAddTagsWindow] = useState(false);
+  const [addCategoryWindow, setAddCategoryWindow] = useState(false);
   // const removeSelf = async () => {
   //   const result = await props.supabase
   //     .from('cards')
@@ -65,10 +70,8 @@ const Card = (props: CardProps) => {
   const changeCardName = async (e: React.FocusEvent<HTMLInputElement>) => {
     {
       const newName = e.target.value;
-      const cardIndex = props.deck.findIndex(deckCard => {
-        if (props.card.id === deckCard.id) return true;
-        return false;
-      });
+      const cardIndex = getCardIndex();
+
       const newDeck = props.deck;
       newDeck[cardIndex].name = newName;
       if (
@@ -79,10 +82,7 @@ const Card = (props: CardProps) => {
         return;
 
       const newDeckChanges = props.deckChanges;
-      const cardChangesIndex = newDeckChanges?.findIndex(deckCard => {
-        if (props.card.id === deckCard.id) return true;
-        return false;
-      });
+      const cardChangesIndex = getCardChangesIndex();
       if (cardChangesIndex === -1) {
         newDeckChanges?.push({
           id: props.card.id,
@@ -94,6 +94,49 @@ const Card = (props: CardProps) => {
       props.setDeck([...newDeck]);
       props.setDeckChanges([...newDeckChanges]);
     }
+  };
+
+  const addTag = (tagId: number) => {
+    if (!props.tags || !props.deckChanges || !props.setDeckChanges) {
+      console.log('Neccessary props missing from card component.');
+      return;
+    }
+    const cardIndex = getCardIndex();
+    const cardChangesIndex = getCardChangesIndex();
+    const tagIndex = props.tags.findIndex(tag => {
+      if (tag.id === tagId) return true;
+      return false;
+    });
+
+    const newDeck = props.deck;
+    newDeck[cardIndex].tags.push(props.tags[tagIndex]);
+    props.setDeck([...newDeck]);
+
+    const newDeckChanges = props.deckChanges;
+    if (cardChangesIndex === -1) {
+      newDeckChanges.push({ id: props.card.id, tags: [props.tags[tagIndex]] });
+    } else {
+      newDeckChanges[cardChangesIndex].tags.push(props.tags[tagIndex]);
+    }
+    props.setDeckChanges([...newDeckChanges]);
+  };
+
+  const getCardIndex = (): number => {
+    const cardIndex = props.deck.findIndex(deckCard => {
+      if (props.card.id === deckCard.id) return true;
+      return false;
+    });
+
+    return cardIndex;
+  };
+
+  const getCardChangesIndex = (): number => {
+    let cardChangesIndex = props.deckChanges?.findIndex(deckCard => {
+      if (props.card.id === deckCard.id) return true;
+      return false;
+    });
+    if (cardChangesIndex === undefined) cardChangesIndex = -1;
+    return cardChangesIndex;
   };
 
   const toggleOpenCard = () => {
@@ -192,6 +235,12 @@ const Card = (props: CardProps) => {
                     />
                   );
                 })}
+                {/* Should be special "+" button. Placeholder CTAButton for now.  */}
+                <CTAButton
+                  variant="cardSubCategory"
+                  title="New Category"
+                  onClick={() => console.log('Dance!')}
+                />
               </div>
             </section>
           </div>
@@ -269,6 +318,59 @@ const Card = (props: CardProps) => {
               onBlur={e => changeCardName(e)}
             />
           </div>
+          <section id="subCategory" className="mt-48 ">
+            <div
+              id="SubCategoryWrapper"
+              className=" flex flex-row flex-wrap gap-1 px-1"
+            >
+              {props.card.tags?.map(tag => {
+                return (
+                  <CTAButton
+                    key={tag.id}
+                    variant="cardSubCategory"
+                    title={tag.name}
+                    onClick={event => {
+                      event.stopPropagation();
+                      console.log(tag.name);
+                    }}
+                  />
+                );
+              })}
+              {/* Should be special "+" button. Placeholder CTAButton for now.  */}
+              <CTAButton
+                variant="cardSubCategory"
+                title="New Category"
+                onClick={event => {
+                  event.stopPropagation();
+                  setAddTagsWindow(!addTagsWindow);
+                }}
+              />
+            </div>
+          </section>
+          {addTagsWindow ? (
+            <div className="bg-black w-full h-20">
+              {props.tags?.map(tag => {
+                const tagExistsOnCard = props.card.tags.find(cardTag => {
+                  if (cardTag.id === tag.id) return true;
+                  return false;
+                });
+                if (tagExistsOnCard) return null;
+
+                return (
+                  <h1
+                    className="text-cyan-300"
+                    onClick={e => {
+                      e.stopPropagation();
+                      addTag(tag.id);
+                    }}
+                    key={tag.id}
+                  >
+                    {tag.name}
+                  </h1>
+                );
+              })}
+            </div>
+          ) : null}
         </div>
       </>
     );

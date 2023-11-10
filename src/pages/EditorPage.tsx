@@ -40,22 +40,35 @@ const EditorPage = () => {
 
   const [saveTimerIsRunning, setSaveTimerIsRunning] = useState(false);
 
+  const [onceState, setOnceState] = useState(0);
+
   useEffect(() => {
-    //Several instances of this is running at the same time, due to React strict mode.
-    if (!saveTimerIsRunning) {
-      setSaveTimerIsRunning(true);
-      saveCountdown();
-    }
+    const timeout = setTimeout(saveCountdown, 500);
+    return () => clearTimeout(timeout); //Gets around this running twice due to strict mode. Should probably be a state thats updated with the current timeout instead.
   }, []);
 
-  const saveCountdown = () => {
+  const saveCountdown = async () => {
     if (saveTimerRef.current >= 0) {
       const newTime = saveTimerRef.current - 100;
       setSaveTimer(newTime);
       if (newTime <= 0) {
         //Saving happens here. Needs error handling.
+        const userId = (await supabase.auth.getUser()).data.user?.id;
+        const deckErrors = [];
         deckChangesRef.current.forEach(async card => {
-          console.log(card);
+          if (card.tags)
+            card.tags.forEach(async (tag: any) => {
+              const { data, error } = await supabase.from('cards_tags').insert({
+                tag_id: tag.id,
+                card_id: card.id,
+                user_id: userId,
+              });
+              if (error) {
+                console.log(error);
+                deckErrors.push(error);
+              }
+            });
+
           const updatedValues: { text?: string; name?: string } = {};
 
           if (card.text) updatedValues.text = card.text;
@@ -65,11 +78,13 @@ const EditorPage = () => {
             .from('cards')
             .update(updatedValues)
             .eq('id', card.id);
-          if (!error) {
-            console.log('Emptying changes');
-            setDeckChanges([]);
+
+          if (error) {
+            console.log(error);
+            deckErrors.push(error);
           }
         });
+        if (deckErrors.length === 0) setDeckChanges([]);
         if (storyChangesRef.current.text) {
           supabase
             .from('stories')
@@ -169,6 +184,7 @@ const EditorPage = () => {
     } else {
       const newDeck = deck;
       const newCard = data;
+      newCard.tags = [];
       setDeck([...newDeck, newCard]);
     }
   };
@@ -302,6 +318,8 @@ const EditorPage = () => {
                 deckChanges,
                 categories,
                 setCategories,
+                tags,
+                setTags,
               }}
             />
           </div>
