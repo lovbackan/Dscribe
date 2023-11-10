@@ -25,7 +25,7 @@ const Form: React.FC<FormProps> = ({
     return (
       <>
         <Text variant="heading3" content="Login" textColor="white" />
-        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4 ">
+        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4  ">
           <Input
             type="email"
             id="email"
@@ -44,11 +44,11 @@ const Form: React.FC<FormProps> = ({
             />
           )}
         </div>
-        <div className="py-5">
-          <CTAButton title="Login" variant="primary" onClick={onClick} />
-        </div>
+        <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
+          <div className="mb-[20px]">
+            <CTAButton title="Login" variant="primary" onClick={onClick} />
+          </div>
 
-        <div id="optionsContainer" className="flex flex-col">
           <Link to={ACCEPTED_ROUTES.REGISTER}>
             <p className="text-sm text-center pb-1">Register</p>
           </Link>
@@ -90,13 +90,14 @@ const Form: React.FC<FormProps> = ({
             />
           )}
         </div>
-        <div className="py-5">
-          <CTAButton title="Register" variant="primary" onClick={onClick} />
-        </div>
 
-        <div id="optionsContainer" className="flex flex-col">
+        <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
+          <div className="mb-[20px]">
+            <CTAButton title="Register" variant="primary" onClick={onClick} />
+          </div>
+
           <Link to={ACCEPTED_ROUTES.LOGIN}>
-            <p className="text-sm text-center">Login</p>
+            <p className="text-sm text-center pb-1">Login</p>
           </Link>
           <Link to={ACCEPTED_ROUTES.PASSWORDRESET}>
             <p className="text-sm text-center">Forgot password?</p>

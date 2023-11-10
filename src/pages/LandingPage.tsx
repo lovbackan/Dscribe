@@ -8,10 +8,10 @@ import Logo from '../components/Logo/Logo.tsx';
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-screen w-screen bg-gradient-to-b from-[#852158] to-[#FFFDD6]">
+    <div className="h-screen w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
       <section
         id="LandingPageNavbar"
-        className="h-14 w-full bg-inherit flex flex-row"
+        className="h-[101px] w-full bg-inherit flex flex-row justify-center items-center px-[20px]"
       >
         <div className="flex-grow "></div>
         <CTAButton
@@ -23,7 +23,10 @@ const LandingPage = () => {
         />
       </section>
 
-      <section id="hero" className="flex flex-row justify-center items-center ">
+      <section
+        id="hero"
+        className="flex flex-row justify-center items-center  "
+      >
         <Logo variant="big" />
         {/* <div
           id="logo"
@@ -31,16 +34,16 @@ const LandingPage = () => {
         >
           <Text variant="logo" textColor="white" content="Codeck" />
         </div> */}
-
-        <Text
-          variant="heading1Bold"
-          textColor="white"
-          content=" Unfold creativity and structure with
-          card-based literacy!"
-        />
+        <div className="w-[661px] h-[200px] text-left ml-[73px]">
+          <Text
+            variant="hero"
+            textColor="white"
+            content=" Unfold creativity and structure with card-based writing!"
+          />
+        </div>
       </section>
 
-      <section id="StoryList" className="w-full h-[30%] px-5 ">
+      <section id="StoryList" className="w-full h-[30%] px-[140px] ">
         <div className="flex flex-row pb-10">
           <Text textColor="white" variant="heading2" content="Trending" />
 
