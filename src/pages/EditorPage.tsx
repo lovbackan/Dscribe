@@ -17,8 +17,11 @@ export const deckContext = createContext<any[]>([]);
 const EditorPage = () => {
   const navigate = useNavigate();
 
-  const [deck, setDeck] = useState<Array<any>>([]);
-  const [deckChanges, setDeckChanges] = useState<Array<any>>([]);
+  const [deck, setDeck] = useState<any[]>([]);
+  const [deckChanges, setDeckChanges] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [tags, setTags] = useState<any[]>([]);
+
   const location = useLocation();
   const selectedStory = location.state.selectedStory;
   const [story, setStory] = useState<any>(); //Should be type story | null
@@ -27,7 +30,6 @@ const EditorPage = () => {
   storyChangesRef.current = storyChanges;
 
   const [editorState, setEditorState] = useState<EditorState>();
-  const [categories, setCategories] = useState<Array<any>>([]);
   const [showDeck, setShowDeck] = useState<boolean>(false);
 
   const [saveTimer, setSaveTimer] = useState(0);
@@ -94,6 +96,7 @@ const EditorPage = () => {
     fetchDeck();
     fetchCategories();
     fetchStory();
+    fetchTags();
   }, [selectedStory]);
 
   useEffect(() => {
@@ -106,11 +109,12 @@ const EditorPage = () => {
   const fetchDeck = async () => {
     const { data, error } = await supabase
       .from('cards')
-      .select('*')
+      .select('*, tags (*)')
       .match({ story_id: selectedStory ? selectedStory.id : 0 });
     console.log(data);
     if (error) console.log(error);
     else setDeck(...[data]);
+    console.log(data);
   };
 
   const fetchCategories = async () => {
@@ -118,9 +122,9 @@ const EditorPage = () => {
       const { data, error } = await supabase
         .from('categories')
         .select('*')
-        .match({ story_id: selectedStory.id });
+        .eq('story_id', selectedStory.id);
       if (error) console.log(error);
-      else setCategories(data);
+      else setCategories([...data]);
     }
   };
 
@@ -132,7 +136,17 @@ const EditorPage = () => {
       .single();
     if (error) console.log(error);
     else setStory(data);
-    console.log('story:', data);
+  };
+
+  const fetchTags = async () => {
+    const { data, error } = await supabase
+      .from('tags')
+      .select('*')
+      .eq('story_id', selectedStory.id);
+    if (error) console.log(error);
+    else setTags(data);
+    console.log('tags:', data);
+    console.log(selectedStory.id);
   };
 
   const addCard = async () => {
@@ -218,6 +232,8 @@ const EditorPage = () => {
                 setEditorState={setEditorState}
                 deckChanges={deckChanges}
                 setDeckChanges={setDeckChanges}
+                categories={categories}
+                setCategories={setCategories}
               />
             );
         })}
@@ -279,7 +295,14 @@ const EditorPage = () => {
               showDeckView={showDeck}
               toggleDeckView={toggleDeckView}
               supabase={supabase}
-              {...{ setDeck, deck, setDeckChanges, deckChanges }}
+              {...{
+                setDeck,
+                deck,
+                setDeckChanges,
+                deckChanges,
+                categories,
+                setCategories,
+              }}
             />
           </div>
         </div>
