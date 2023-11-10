@@ -21,6 +21,7 @@ interface DeckViewProps {
   setCategories: Function;
   tags: any[];
   setTags: Function;
+  createTag: Function;
 }
 
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
@@ -110,6 +111,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 setCategories={props.setCategories}
                 tags={props.tags}
                 setTags={props.setTags}
+                createTag={props.createTag}
               />
             );
           })}

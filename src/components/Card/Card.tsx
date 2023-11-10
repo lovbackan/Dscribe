@@ -33,6 +33,7 @@ interface CardProps {
   setCategories?: Function;
   tags?: any[];
   setTags?: Function;
+  createTag?: Function;
 }
 
 const Card = (props: CardProps) => {
@@ -235,12 +236,6 @@ const Card = (props: CardProps) => {
                     />
                   );
                 })}
-                {/* Should be special "+" button. Placeholder CTAButton for now.  */}
-                <CTAButton
-                  variant="cardSubCategory"
-                  title="New Category"
-                  onClick={() => console.log('Dance!')}
-                />
               </div>
             </section>
           </div>
@@ -348,7 +343,12 @@ const Card = (props: CardProps) => {
             </div>
           </section>
           {addTagsWindow ? (
-            <div className="bg-black w-full h-20">
+            <div
+              className="bg-black w-full h-10"
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
               {props.tags?.map(tag => {
                 const tagExistsOnCard = props.card.tags.find(cardTag => {
                   if (cardTag.id === tag.id) return true;
@@ -369,6 +369,16 @@ const Card = (props: CardProps) => {
                   </h1>
                 );
               })}
+              <h1
+                className=" bg-red-200"
+                onClick={() => {
+                  console.log(props);
+                  if (props.createTag) props.createTag();
+                  else console.log('Card component missing createTag prop.');
+                }}
+              >
+                Add new tag!
+              </h1>
             </div>
           ) : null}
         </div>

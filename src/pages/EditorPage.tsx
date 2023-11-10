@@ -189,7 +189,7 @@ const EditorPage = () => {
     }
   };
 
-  const addCategory = async () => {
+  const createCategory = async () => {
     const insertData = {
       name: 'Bundi',
       story_id: selectedStory ? selectedStory.id : 0,
@@ -205,6 +205,26 @@ const EditorPage = () => {
       console.log(data);
     }
     fetchCategories();
+  };
+
+  const createTag = async () => {
+    const insertData = {
+      user_id: (await supabase.auth.getUser()).data.user?.id,
+      name: 'New Tag',
+      story_id: selectedStory.id,
+    };
+    const { data, error } = await supabase
+      .from('tags')
+      .insert(insertData)
+      .select()
+      .single();
+    if (error) {
+      console.log(error);
+    } else {
+      const newTags = tags;
+      const newTag = data;
+      setTags([...newTags, newTag]);
+    }
   };
 
   return (
@@ -320,6 +340,7 @@ const EditorPage = () => {
                 setCategories,
                 tags,
                 setTags,
+                createTag,
               }}
             />
           </div>
