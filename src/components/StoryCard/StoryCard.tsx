@@ -76,7 +76,7 @@ const StoryCard = (props: StoryCardProps) => {
   return (
     <div
       id={props.story.name}
-      className="  w-[200px] h-[300px] rounded-[20px] bg-slate-300 cursor-pointer hover:border hover:border-white"
+      className="  w-[200px] h-[300px] rounded-[20px] bg-[#5179D9] cursor-pointer hover:border hover:border-white"
       onClick={() => props.setSelectedStory(props.story)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

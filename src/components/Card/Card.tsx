@@ -156,7 +156,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          className=" bg-[#5179D9] h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
             toggleOpenCard();
           }}
@@ -197,7 +197,7 @@ const Card = (props: CardProps) => {
         <div className="flex absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
           <div
             id="Card"
-            className="bg-green-400 h-[300px] w-[200px] rounded-xl border-2 border-black"
+            className="bg-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black"
           >
             <CTAButton
               variant="cardCategory"
@@ -271,7 +271,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-green-500 h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          className=" bg-[#5179D9] h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
             toggleInHand();
           }}
