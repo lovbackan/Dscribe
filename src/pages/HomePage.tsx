@@ -119,6 +119,7 @@ const HomePage = () => {
             textColor="white"
             content={`Are you sure you want to delete story:`}
           />
+          {/* if u change the name of a story and try to delete it the old name will show up */}
           <Text
             variant="heading2"
             textColor="white"

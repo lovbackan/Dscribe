@@ -25,7 +25,7 @@ const CommunityPage = () => {
     document.body.style.overflow = 'auto';
   }
   return (
-    <div className="w-screen h-screen">
+    <div className="w-screen min-h-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
       <Navbar
         onClick={() => {
           setShowSignOutPopup(true);

@@ -27,7 +27,7 @@ const SettingsPage = () => {
   }
 
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
       <Navbar
         onClick={() => {
           setShowSignOutPopup(true);
