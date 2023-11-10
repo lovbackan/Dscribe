@@ -103,7 +103,6 @@ const Card = (props: CardProps) => {
     else props.deck[cardIndex].openCard = true;
 
     props.setDeck([...props.deck]);
-    console.log(props.deck[cardIndex]);
   };
 
   if (props.variant === 'smallCard') {
@@ -169,39 +168,7 @@ const Card = (props: CardProps) => {
               variant="cardTitle"
               placeholder={props.card.name}
               onChange={() => {}}
-              onBlur={e => {
-                const newName = e.target.value;
-                const cardIndex = props.deck.findIndex(deckCard => {
-                  if (props.card.id === deckCard.id) return true;
-                  return false;
-                });
-                const newDeck = props.deck;
-                newDeck[cardIndex].name = newName;
-                if (
-                  props.deck[cardIndex] === newName ||
-                  !props.deckChanges ||
-                  !props.setDeckChanges
-                )
-                  return;
-
-                const newDeckChanges = props.deckChanges;
-                const cardChangesIndex = newDeckChanges?.findIndex(deckCard => {
-                  if (props.card.id === deckCard.id) return true;
-                  return false;
-                });
-                console.log('Preupdate');
-                if (cardChangesIndex === -1) {
-                  console.log('Updateis');
-                  newDeckChanges?.push({
-                    id: props.card.id,
-                    name: newName,
-                  });
-                } else {
-                  newDeckChanges[cardChangesIndex].name = newName;
-                }
-                props.setDeck([...newDeck]);
-                props.setDeckChanges([...newDeckChanges]);
-              }}
+              onBlur={e => changeCardName(e)}
               type="text"
             />
             {/* Inte bra med bottom-9, borde vara dynamiskt */}
