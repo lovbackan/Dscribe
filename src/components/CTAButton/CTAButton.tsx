@@ -14,7 +14,9 @@ type ButtonType =
   | 'deck'
   | 'edit'
   | 'viewDeck'
-  | 'addCard';
+  | 'addCard'
+  | 'deleteCard'
+  | 'changePicture';
 
 interface CTAButtonProps {
   title: string | number;
@@ -35,7 +37,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'secondary'
       ? 'bg-white border-black h-[27px] w-[139px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
       : variant === 'landing'
-      ? ''
+      ? 'w-[126px] h-[48px] border border-white rounded-[5px] flex justify-center items-center hover:border-2'
       : variant === 'cardCategory'
       ? 'bg-black h-4 min-w-[40px] w-auto rounded-tl-[5px] rounded-br-[5px] flex justify-center items-center hover:border-white hover:border'
       : variant === 'deckViewCategory'
@@ -50,6 +52,10 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'w-auto h-[20px] rounded-[12px] bg-green-200 flex justify-center items-center hover:border-white hover:border px-2'
       : variant === 'viewDeck'
       ? 'w-14 h-20 deck-icon'
+      : variant === 'deleteCard'
+      ? 'deleteCard hover:border-2 hover:border-white'
+      : variant === 'changePicture'
+      ? 'uploadPicture hover:border-2 hover:border-white'
       : 'bg-purple-400';
 
   const textClasses =
@@ -58,7 +64,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'secondary'
       ? 'text-black text-[12px]'
       : variant === 'landing'
-      ? 'text-black text-3xl font-semibold'
+      ? 'text-white text-3xl '
       : variant === 'cardCategory'
       ? 'text-white text-xs'
       : variant === 'deckViewCategory'

@@ -57,31 +57,32 @@ const HomePage = () => {
   }, [selectedStory]);
 
   return (
-    <div className={`w-screen min-h-screen `}>
+    <div
+      className={`w-full min-h-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]`}
+    >
       <Navbar
         onClick={() => {
           setShowSignOutPopup(true);
         }}
       />
 
-      <div className="flex justify-center items-center">
-        <Text variant="heading1" textColor="black" content="Codeck" />
-      </div>
-      <section
-        id="headingWrapper"
-        className="flex justify-between px-[200px] pt-[140px] items-center"
+      <div
+        id="search-bar"
+        className="flex flex-col w-[500px] text-left pl-[212px] pt-[140px] pb-[40px] gap-6"
       >
-        <h1>Your Projects</h1>
+        <Text variant="heading1" textColor="white" content="Your Projects" />
         <Input
           type="text"
           id="search"
+          autoComplete="off"
           placeholder="Search"
           variant="secondary"
           onChange={e => {
             console.log(e.target.value);
           }}
         />
-      </section>
+      </div>
+
       <StoryList
         supabase={supabase}
         stories={stories}

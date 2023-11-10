@@ -12,12 +12,13 @@ type TextType =
   | 'logoBig'
   | 'logoMedium'
   | 'logoSmall'
-  | 'subCategory';
+  | 'subCategory'
+  | 'hero';
 
 type TextColor = 'black' | 'white' | 'green';
 
 interface TextProps {
-  content?: string;
+  content: string;
   variant: TextType;
   textColor: TextColor;
 }
@@ -36,6 +37,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
 
   const tailwindClasses = {
     heading1: `text-3xl ${tailwindColorClass}`,
+    hero: `text-5xl ${tailwindColorClass} font-source`,
     heading1Bold: `text-3xl ${tailwindColorClass} font-bold`,
     heading2: `text-2xl ${tailwindColorClass}`,
     heading3: `text-3xl ${tailwindColorClass}`,
@@ -55,6 +57,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
   const elementType =
     {
       heading1: 'h1',
+      hero: 'h1',
       heading1Bold: 'h1',
       heading2: 'h2',
       heading3: 'h3',

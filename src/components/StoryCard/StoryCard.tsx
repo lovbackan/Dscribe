@@ -1,5 +1,7 @@
 import { Input } from '../Input/Input';
 import { supabase } from '../../supabase';
+import { CTAButton } from '../CTAButton/CTAButton';
+import { useState } from 'react';
 
 interface StoryCardProps {
   story: { id: number; name: string };
@@ -50,6 +52,9 @@ interface StoryCardProps {
 }
 
 const StoryCard = (props: StoryCardProps) => {
+  //can you make me a solution to see if card is hovered over and then show the delete button
+  const [isHovered, setIsHovered] = useState(false);
+
   const changeName = async (newName: string) => {
     const id = props.story.id;
     console.log(id, newName);
@@ -69,27 +74,48 @@ const StoryCard = (props: StoryCardProps) => {
     <div
       className="  w-[200px] h-[300px] rounded-[20px] bg-slate-300 cursor-pointer hover:border hover:border-white"
       onClick={() => props.setSelectedStory(props.story)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div
         onClick={e => {
           e.stopPropagation();
         }}
       >
-        <Input
-          id={props.story.id.toString()}
-          variant="cardTitle"
-          placeholder={props.story.name}
-          onChange={() => {}}
-          type="text"
-          onBlur={e => {
-            const newName = e.target.value;
+        <div className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2">
+          {isHovered && (
+            <CTAButton
+              variant="deleteCard"
+              title=""
+              onClick={() => {
+                console.log(`Delete card id: ${props.story.id}`);
+              }}
+            />
+          )}
+          {isHovered && (
+            <CTAButton
+              variant="changePicture"
+              title=""
+              onClick={() => {
+                console.log(`Change picture card id: ${props.story.id}`);
+              }}
+            />
+          )}
+        </div>
+        <div className="">
+          <Input
+            id={props.story.id.toString()}
+            variant="cardTitle"
+            placeholder={props.story.name}
+            onChange={() => {}}
+            type="text"
+            onBlur={e => {
+              const newName = e.target.value;
 
-            changeName(newName);
-
-            //write logic to update story name
-            // console.log(e.target.value);
-          }}
-        />
+              changeName(newName);
+            }}
+          />
+        </div>
       </div>
       {/* <h2 className="text-black">Story: {props.story.id}</h2> */}
     </div>

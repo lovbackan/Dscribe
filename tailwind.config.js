@@ -4,6 +4,7 @@ export default {
   theme: {
     fontFamily: {
       courier: ['Courier', 'monospace'],
+      source: ['Courier Prime', 'monospace'],
     },
     extend: {
       gridTemplateColumns: {

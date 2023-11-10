@@ -43,7 +43,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#852158] to-[#FFFDD6]">
+    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
       <FormCard
         formComponent={
           <Form

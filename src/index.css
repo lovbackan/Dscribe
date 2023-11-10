@@ -839,3 +839,55 @@ i.logo {
   background-repeat: no-repeat;
   display: inline-block;
 }
+
+.navBar-settings {
+  background-image: url(./images/icons/settings.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 50px;
+  height: 51px;
+}
+
+.navBar-community {
+  background-image: url(./images/icons/community.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 50px;
+  height: 51px;
+}
+
+.navBar-logout {
+  background-image: url(./images/icons/logout.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 50px;
+  height: 51px;
+}
+
+.deleteCard {
+  background-image: url(./images/icons/trashcan.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.uploadPicture {
+  background-image: url(./images/icons/addPicture.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
