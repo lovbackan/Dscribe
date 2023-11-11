@@ -29,15 +29,32 @@ export const Input: React.FC<InputProps> = ({
       ? 'w-[100px] h-[30px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70'
       : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1';
 
-  return (
-    <input
-      type={type}
-      autoComplete="on"
-      id={id}
-      placeholder={placeholder}
-      onChange={onChange}
-      onBlur={onBlur}
-      className={` ${containerClasses}`}
-    ></input>
-  );
+  if (variant === 'cardTitle') {
+    return (
+      <div className="inline-block inputWrapper ">
+        <div className="editSymbol pr-44 pt-5 pointer-events-none"></div>
+        <input
+          type={type}
+          autoComplete="on"
+          id={id}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={onBlur}
+          className={` ${containerClasses}`}
+        ></input>
+      </div>
+    );
+  } else {
+    return (
+      <input
+        type={type}
+        autoComplete="on"
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+        onBlur={onBlur}
+        className={` ${containerClasses}`}
+      ></input>
+    );
+  }
 };
