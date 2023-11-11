@@ -27,9 +27,10 @@ const EditorPage = () => {
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number } | null>(
     null,
   );
+  const [openCardCount, setOpenCardCount] = useState(0);
 
   useEffect(() => {
-    const handleMouseMove = e => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (shouldFollowCursor && dragOffset) {
         setCardPositions(prevPositions => ({
           ...prevPositions,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
-import { CTAButton } from '../components/CTAButton/CTAButton';
+import PopUp from '../components/PopUp/PopUp';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import { supabase } from '../supabase';
@@ -36,21 +36,13 @@ const SettingsPage = () => {
       <h1>Settings Page</h1>
 
       {showSignOutPopup && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
-          <h2>Are you sure</h2>
-          <div className="flex flex-row justify-between">
-            <CTAButton
-              title="Sign out"
-              variant="primary"
-              onClick={handleSignOut}
-            />
-            <CTAButton
-              title="Cancel"
-              variant="secondary"
-              onClick={() => setShowSignOutPopup(false)}
-            />
-          </div>
-        </div>
+        <PopUp
+          variant="logOut"
+          action={handleSignOut}
+          cancel={() => {
+            setShowSignOutPopup(false);
+          }}
+        />
       )}
     </div>
   );
