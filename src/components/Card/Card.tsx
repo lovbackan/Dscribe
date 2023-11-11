@@ -194,7 +194,7 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="flex absolute top-4 left-[50%] gap-0 w-[690px] h-[300px] bg-white">
+        <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white">
           <div
             id="Card"
             className="bg-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black"

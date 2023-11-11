@@ -13,10 +13,44 @@ import Logo from '../components/Logo/Logo';
 import { Text } from '../components/Text/Text';
 
 export const deckContext = createContext<any[]>([]);
+type CardPositions = {
+  [key: string]: { x: number; y: number };
+};
 
 const EditorPage = () => {
+  //cursor position
+  const [cardPositions, setCardPositions] = useState<CardPositions>({});
+
+  const [shouldFollowCursor, setShouldFollowCursor] = useState<string | null>(
+    null,
+  );
+  useEffect(() => {
+    const handleMouseMove = e => {
+      if (shouldFollowCursor) {
+        e.preventDefault();
+        setCardPositions(prevPositions => ({
+          ...prevPositions,
+          [shouldFollowCursor]: { x: e.clientX, y: e.clientY },
+        }));
+      }
+    };
+
+    const handleMouseUp = () => {
+      setShouldFollowCursor(null);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [shouldFollowCursor]);
   const navigate = useNavigate();
 
+  // make z-index state for openCards and on click increase its value so it has the highest z-index
+  const [zIndex, setZIndex] = useState(10);
   const [deck, setDeck] = useState<any[]>([]);
   const [deckChanges, setDeckChanges] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -251,26 +285,36 @@ const EditorPage = () => {
               setStoryChanges={setStoryChanges}
             />
           ) : null}
-          <div className="absolute h-[20%] w-[100%] mt-12 bg-white">
-            <p>ldsaldsa</p>
-          </div>
+          <div className="absolute h-[20%] w-[100%] mt-12 bg-white"></div>
         </div>
         {deck.map(card => {
           if (card.openCard)
             return (
-              <Card
-                key={card.id}
-                card={card}
-                variant="openCard"
-                supabase={supabase}
-                deck={deck}
-                setDeck={setDeck}
-                setEditorState={setEditorState}
-                deckChanges={deckChanges}
-                setDeckChanges={setDeckChanges}
-                categories={categories}
-                setCategories={setCategories}
-              />
+              <div
+                id={card.id + 'openCard'}
+                className="inline-block absolute "
+                style={{
+                  left: cardPositions[card.id]?.x || 0,
+                  top: cardPositions[card.id]?.y || 0,
+                }}
+                onMouseDown={() => {
+                  setShouldFollowCursor(card.id);
+                }}
+              >
+                <Card
+                  key={card.id}
+                  card={card}
+                  variant="openCard"
+                  supabase={supabase}
+                  deck={deck}
+                  setDeck={setDeck}
+                  setEditorState={setEditorState}
+                  deckChanges={deckChanges}
+                  setDeckChanges={setDeckChanges}
+                  categories={categories}
+                  setCategories={setCategories}
+                />
+              </div>
             );
         })}
         {/* <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
