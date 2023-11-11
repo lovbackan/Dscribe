@@ -50,7 +50,7 @@ const EditorPage = () => {
   const navigate = useNavigate();
 
   // make z-index state for openCards and on click increase its value so it has the highest z-index
-  const [zIndex, setZIndex] = useState(10);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
   const [deck, setDeck] = useState<any[]>([]);
   const [deckChanges, setDeckChanges] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
@@ -296,9 +296,11 @@ const EditorPage = () => {
                 style={{
                   left: cardPositions[card.id]?.x || 0,
                   top: cardPositions[card.id]?.y || 0,
+                  zIndex: activeCard === card.id ? 11 : 10,
                 }}
                 onMouseDown={() => {
                   setShouldFollowCursor(card.id);
+                  setActiveCard(card.id);
                 }}
               >
                 <Card

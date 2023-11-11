@@ -158,6 +158,7 @@ const Card = (props: CardProps) => {
         <div
           className=" bg-[#5179D9] h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
+            //here we should also make it so that the latest card has the highest z-index
             toggleOpenCard();
           }}
         >
