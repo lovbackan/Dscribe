@@ -24,15 +24,20 @@ const EditorPage = () => {
   const [shouldFollowCursor, setShouldFollowCursor] = useState<string | null>(
     null,
   );
+  const [dragOffset, setDragOffset] = useState<{ x: number; y: number } | null>(
+    null,
+  );
 
   //now the card will follow the cursor, this creates an ugly jump when you move the card since it will position the div at the curser
   useEffect(() => {
     const handleMouseMove = e => {
-      if (shouldFollowCursor) {
-        e.preventDefault();
+      if (shouldFollowCursor && dragOffset) {
         setCardPositions(prevPositions => ({
           ...prevPositions,
-          [shouldFollowCursor]: { x: e.clientX, y: e.clientY },
+          [shouldFollowCursor]: {
+            x: e.clientX - dragOffset.x,
+            y: e.clientY - dragOffset.y,
+          },
         }));
       }
     };
@@ -300,7 +305,12 @@ const EditorPage = () => {
                   top: cardPositions[card.id]?.y || 0,
                   zIndex: activeCard === card.id ? 11 : 10,
                 }}
-                onMouseDown={() => {
+                onMouseDown={e => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setDragOffset({
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top,
+                  });
                   setShouldFollowCursor(card.id);
                   setActiveCard(card.id);
                 }}
