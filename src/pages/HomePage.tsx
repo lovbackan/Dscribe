@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 import StoryList from '../components/StoryList/StoryList';
 import { Text } from '../components/Text/Text';
 import Navbar from '../components/Navbar/Navbar';
-import { CTAButton } from '../components/CTAButton/CTAButton';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import { useNavigate } from 'react-router-dom';
+import PopUp from '../components/PopUp/PopUp';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -113,52 +113,27 @@ const HomePage = () => {
       />
 
       {showDeletePopup && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
-          <Text
-            variant="heading2"
-            textColor="white"
-            content={`Are you sure you want to delete story:`}
-          />
-          {/* if u change the name of a story and try to delete it the old name will show up */}
-          <Text
-            variant="heading2"
-            textColor="white"
-            content={`  ${changeCardId.name}`}
-          />
-          <div className="flex flex-row justify-between">
-            <CTAButton
-              title="Delete story"
-              variant="primary"
-              onClick={() => {
-                deleteStory(changeCardId.id);
-                setShowDeletePopup(false);
-              }}
-            />
-            <CTAButton
-              title="Cancel"
-              variant="secondary"
-              onClick={() => setShowDeletePopup(false)}
-            />
-          </div>
-        </div>
+        <PopUp
+          variant="deleteStory"
+          changeCardId={changeCardId.name}
+          action={() => {
+            deleteStory(changeCardId.id);
+            setShowDeletePopup(false);
+          }}
+          cancel={() => {
+            setShowDeletePopup(false);
+          }}
+        />
       )}
 
       {showSignOutPopup && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
-          <h2>Are you sure</h2>
-          <div className="flex flex-row justify-between">
-            <CTAButton
-              title="Sign out"
-              variant="primary"
-              onClick={handleSignOut}
-            />
-            <CTAButton
-              title="Cancel"
-              variant="secondary"
-              onClick={() => setShowSignOutPopup(false)}
-            />
-          </div>
-        </div>
+        <PopUp
+          variant="logOut"
+          action={handleSignOut}
+          cancel={() => {
+            setShowSignOutPopup(false);
+          }}
+        />
       )}
     </div>
   );

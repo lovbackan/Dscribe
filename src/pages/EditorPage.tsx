@@ -24,6 +24,8 @@ const EditorPage = () => {
   const [shouldFollowCursor, setShouldFollowCursor] = useState<string | null>(
     null,
   );
+
+  //now the card will follow the cursor, this creates an ugly jump when you move the card since it will position the div at the curser
   useEffect(() => {
     const handleMouseMove = e => {
       if (shouldFollowCursor) {
