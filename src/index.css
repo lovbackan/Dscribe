@@ -568,7 +568,7 @@ i.chevron-down {
 }
 
 .dropdown {
-  z-index: 5;
+  z-index: 12;
   display: block;
   position: absolute;
   box-shadow:
