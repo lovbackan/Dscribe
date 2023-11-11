@@ -832,6 +832,10 @@ i.logo {
   display: inline-block;
 }
 
+.deck-icon:hover {
+  background-image: url(./images/icons/deck-icon-black.svg);
+}
+
 .deck-icon-black {
   background-image: url(./images/icons/deck-icon-black.svg);
   background-size: fill;

@@ -18,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     small:
       'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
     editor:
-      'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center absolute cursor-pointer',
+      'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center absolute cursor-pointer hover:border-4',
   };
 
   const className = logoClasses[variant] || logoClasses.big;

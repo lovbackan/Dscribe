@@ -19,6 +19,7 @@ export const Input: React.FC<InputProps> = ({
   id,
   type,
   onBlur,
+  autoComplete,
 }) => {
   const containerClasses =
     variant === 'primary'
@@ -35,7 +36,7 @@ export const Input: React.FC<InputProps> = ({
         <div className="editSymbol pr-44 pt-5 pointer-events-none"></div>
         <input
           type={type}
-          autoComplete="on"
+          autoComplete={autoComplete}
           id={id}
           placeholder={placeholder}
           onChange={onChange}
@@ -48,7 +49,7 @@ export const Input: React.FC<InputProps> = ({
     return (
       <input
         type={type}
-        autoComplete="on"
+        autoComplete={autoComplete}
         id={id}
         placeholder={placeholder}
         onChange={onChange}

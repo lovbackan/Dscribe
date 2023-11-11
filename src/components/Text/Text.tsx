@@ -40,7 +40,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     hero: `text-5xl ${tailwindColorClass} font-source`,
     heading1Bold: `text-3xl ${tailwindColorClass} font-bold`,
     heading2: `text-2xl ${tailwindColorClass}`,
-    heading3: `text-3xl ${tailwindColorClass}`,
+    heading3: `text-xl ${tailwindColorClass}`,
     'p-primary': tailwindColorClass,
     'p-secondary': tailwindColorClass,
     cardTitle: `text-xl ${tailwindColorClass} break-words`,

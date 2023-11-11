@@ -17,7 +17,7 @@ const PopUp: React.FC<PopUpProps> = ({
 }) => {
   if (variant === 'logOut') {
     return (
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center">
         <Text
           variant="heading2"
           textColor="white"
@@ -27,15 +27,15 @@ const PopUp: React.FC<PopUpProps> = ({
 
         <div className="flex flex-row justify-between">
           <CTAButton
-            title="log out"
+            title="Yes"
             variant="primary"
             onClick={() => {
               action();
             }}
           />
           <CTAButton
-            title="Cancel"
-            variant="secondary"
+            title="No"
+            variant="primary"
             onClick={() => {
               cancel();
             }}
@@ -45,9 +45,9 @@ const PopUp: React.FC<PopUpProps> = ({
     );
   } else if (variant === 'deleteStory') {
     return (
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[300px] w-[500px] flex-col justify-center items-center">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-600 p-8 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center">
         <Text
-          variant="heading2"
+          variant="heading3"
           textColor="white"
           content={`Are you sure you want to delete story:`}
         />
@@ -59,17 +59,13 @@ const PopUp: React.FC<PopUpProps> = ({
         />
         <div className="flex flex-row justify-between">
           <CTAButton
-            title="Delete story"
+            title="Yes"
             variant="primary"
             onClick={() => {
               action();
             }}
           />
-          <CTAButton
-            title="Cancel"
-            variant="secondary"
-            onClick={() => cancel()}
-          />
+          <CTAButton title="No" variant="primary" onClick={() => cancel()} />
         </div>
       </div>
     );
