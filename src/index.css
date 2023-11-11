@@ -90,7 +90,7 @@ h1 {
 
 .editor-inner {
   width: 100%;
-  overflow: scroll;
+  /* overflow: scroll; */
   background: #fff;
   position: relative;
   height: 100%;
@@ -98,7 +98,7 @@ h1 {
 
 .editor-input {
   min-height: 150px;
-  overflow: scroll;
+  overflow-y: scroll;
   height: 100%;
   width: 100%;
   resize: none;
@@ -144,13 +144,13 @@ h1 {
   text-decoration: underline;
 }
 
-.editor-text-strikethrough {
+/* .editor-text-strikethrough {
   text-decoration: line-through;
-}
+} */
 
-.editor-text-underlineStrikethrough {
+/* .editor-text-underlineStrikethrough {
   text-decoration: underline line-through;
-}
+} */
 
 .editor-text-code {
   background-color: rgb(240, 242, 245);

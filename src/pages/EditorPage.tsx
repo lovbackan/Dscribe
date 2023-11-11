@@ -18,7 +18,7 @@ type CardPositions = {
 };
 
 const EditorPage = () => {
-  //cursor position
+  //Code for dragging cards
   const [cardPositions, setCardPositions] = useState<CardPositions>({});
 
   const [shouldFollowCursor, setShouldFollowCursor] = useState<string | null>(
@@ -28,7 +28,6 @@ const EditorPage = () => {
     null,
   );
 
-  //now the card will follow the cursor, this creates an ugly jump when you move the card since it will position the div at the curser
   useEffect(() => {
     const handleMouseMove = e => {
       if (shouldFollowCursor && dragOffset) {
@@ -54,10 +53,10 @@ const EditorPage = () => {
       window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [shouldFollowCursor]);
-  const navigate = useNavigate();
-
   // make z-index state for openCards and on click increase its value so it has the highest z-index
   const [activeCard, setActiveCard] = useState<string | null>(null);
+
+  const navigate = useNavigate();
   const [deck, setDeck] = useState<any[]>([]);
   const [deckChanges, setDeckChanges] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
