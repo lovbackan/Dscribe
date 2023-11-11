@@ -98,7 +98,7 @@ h1 {
 
 .editor-input {
   min-height: 150px;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100%;
   width: 100%;
   resize: none;
