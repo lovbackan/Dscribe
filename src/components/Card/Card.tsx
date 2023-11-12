@@ -152,6 +152,8 @@ const Card = (props: CardProps) => {
     props.setDeck([...props.deck]);
   };
 
+  const [isHovered, setIsHovered] = useState(false);
+
   if (props.variant === 'smallCard') {
     return (
       <>
@@ -274,6 +276,8 @@ const Card = (props: CardProps) => {
       <>
         <div
           className=" bg-gradient-to-b from-[#5179D9] to-[#0F172A] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
             toggleInHand();
           }}
@@ -289,16 +293,32 @@ const Card = (props: CardProps) => {
                 console.log(props.card.category_id);
               }}
             />
-            {/* <div className="p-2">
+            <div
+              className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2"
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
+              {isHovered && (
                 <CTAButton
-                  variant="edit"
+                  variant="deleteCard"
                   title=""
-                  onClick={event => {
-                    event.stopPropagation(); // Stop the event from propagating to the parent div
-                    console.log('edit');
+                  // onClick={() => props.setChangeCardId(props.story)}
+                  onClick={() => {
+                    console.log('delete card from deck');
                   }}
                 />
-              </div> */}
+              )}
+              {isHovered && (
+                <CTAButton
+                  variant="changePicture"
+                  title=""
+                  onClick={() => {
+                    console.log('Change picture of card');
+                  }}
+                />
+              )}
+            </div>
           </div>
           <div
             onClick={event => {
@@ -315,7 +335,7 @@ const Card = (props: CardProps) => {
               onBlur={e => changeCardName(e)}
             />
           </div>
-          <section id="subCategory" className="mt-48 ">
+          <section id="subCategory" className="mt-40 ">
             <div
               id="SubCategoryWrapper"
               className=" flex flex-row flex-wrap gap-1 px-1"

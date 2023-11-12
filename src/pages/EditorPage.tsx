@@ -27,7 +27,6 @@ const EditorPage = () => {
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number } | null>(
     null,
   );
-  const [openCardCount, setOpenCardCount] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -214,7 +213,6 @@ const EditorPage = () => {
       // text: editorStateJSON,
     };
 
-    console.log(editorState);
     const { data, error } = await supabase
       .from('cards')
       .insert(insertData)
@@ -380,7 +378,7 @@ const EditorPage = () => {
 
         <div className="w-screen h-screen flex justify-center items-center">
           <div
-            className={`justify-center items-center absolute z-10 ${
+            className={`justify-center items-center absolute z-20 ${
               showDeck ? 'flex' : 'hidden'
             }`}
           >

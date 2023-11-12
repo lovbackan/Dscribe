@@ -112,6 +112,7 @@ const StoryCard = (props: StoryCardProps) => {
             />
           )}
         </div>
+
         <div className="">
           <Input
             id={props.story.id.toString()}
