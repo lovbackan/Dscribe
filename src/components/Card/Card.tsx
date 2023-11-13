@@ -3,7 +3,8 @@ import { CTAButton } from '../CTAButton/CTAButton';
 import { Text } from '../Text/Text';
 import Editor from '../Editor/Editor';
 import { Input } from '../Input/Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { supabase } from '../../supabase';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
 
@@ -14,9 +15,11 @@ interface CardProps {
   card: {
     name: string;
     id: number;
+    user_id: string;
     category_id: number | null;
     text: string;
     tags: any[];
+    image_path?: string;
     inHand?: Boolean;
     openCard?: Boolean;
   };
@@ -89,22 +92,65 @@ const Dropdown = (props: DropdownProps) => {
 const Card = (props: CardProps) => {
   const [addTagsWindow, setAddTagsWindow] = useState(false);
   const [addCategoryWindow, setAddCategoryWindow] = useState(false);
-  // const removeSelf = async () => {
-  //   const result = await props.supabase
-  //     .from('cards')
-  //     .delete()
-  //     .match({ id: props.card.id });
-  //   if (result.error) console.log(result.error);
-  //   else {
-  //     const updatedDeck = props.deck;
-  //     const idToRemove = updatedDeck.findIndex(card => {
-  //       if (card.id === props.card.id) return true;
-  //       return false;
-  //     });
-  //     updatedDeck.splice(idToRemove, 1);
-  //     props.setDeck([...updatedDeck]);
-  //   }
-  // };
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!props.card.image_path) return;
+
+    const result = supabase.storage
+      .from('images')
+      .getPublicUrl(props.card.image_path);
+    console.log(result);
+    setImageUrl(result.data.publicUrl);
+  }, []);
+
+  useEffect(() => {
+    console.log(imageUrl);
+  }, [imageUrl]);
+
+  const uploadImage = async (file: File) => {
+    console.log('Hej');
+    if (file === null) return;
+    //Add ${uuidv4()}-
+    const filepath = `${props.card.user_id}/${file.name}`;
+
+    const { data, error } = await supabase.storage
+      .from('images')
+      .upload(filepath, file, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+    console.log(data, error);
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+    console.log(data);
+    const result = await supabase
+      .from('cards')
+      .update({ image_path: filepath })
+      .eq('id', props.card.id);
+
+    if (result.error) console.log(result.error);
+  };
+
+  const removeSelf = async () => {
+    const result = await props.supabase
+      .from('cards')
+      .delete()
+      .match({ id: props.card.id });
+    if (result.error) console.log(result.error);
+    else {
+      const updatedDeck = props.deck;
+      const idToRemove = updatedDeck.findIndex(card => {
+        if (card.id === props.card.id) return true;
+        return false;
+      });
+      updatedDeck.splice(idToRemove, 1);
+      props.setDeck([...updatedDeck]);
+    }
+  };
 
   const toggleInHand = () => {
     const cardIndex = props.deck.findIndex(card => {
@@ -182,17 +228,7 @@ const Card = (props: CardProps) => {
     const cardChangesIndex = getCardChangesIndex();
 
     const newDeck = props.deck;
-
-    console.log(
-      'Deck: ',
-      props.deck,
-      'Newdeck: ',
-      newDeck,
-      'setDeck; ',
-      props.setDeck,
-    );
     newDeck[cardIndex].category_id = categoryId;
-
     props.setDeck([...newDeck]);
 
     const newDeckChanges = props.deckChanges;
@@ -248,6 +284,7 @@ const Card = (props: CardProps) => {
             toggleOpenCard();
           }}
         >
+          {imageUrl && <img src={imageUrl} alt="" className="absolute -z-10" />}
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
@@ -284,8 +321,11 @@ const Card = (props: CardProps) => {
         <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg">
           <div
             id="Card"
-            className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black"
+            className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
           >
+            {imageUrl && (
+              <img src={imageUrl} alt="" className="absolute  -z-10" />
+            )}
             <CTAButton
               variant="cardCategory"
               title={
@@ -307,6 +347,7 @@ const Card = (props: CardProps) => {
               autoComplete="off"
             />
             {/* Inte bra med bottom-9, borde vara dynamiskt */}
+
             <section id="subCategory" className="mt-48 ">
               <div
                 id="SubCategoryWrapper"
@@ -366,6 +407,9 @@ const Card = (props: CardProps) => {
             toggleInHand();
           }}
         >
+          {imageUrl && (
+            <img src={imageUrl} alt="" className="absolute  -z-10" />
+          )}
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
@@ -385,21 +429,37 @@ const Card = (props: CardProps) => {
               }}
             >
               {isHovered && !addCategoryWindow && (
-                <CTAButton
-                  variant="deleteCard"
-                  title=""
-                  // onClick={() => props.setChangeCardId(props.story)}
-                  onClick={() => {
-                    console.log('delete card from deck');
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
                   }}
-                />
+                >
+                  <input
+                    className=" hidden"
+                    id="file-upload"
+                    type="file"
+                    name="image"
+                    onChange={e => {
+                      e.preventDefault();
+                      if (e.target.files) uploadImage(e.target.files[0]);
+                    }}
+                  />
+                  <label htmlFor="file-upload" className="custom-file-upload">
+                    <CTAButton
+                      variant="changePicture"
+                      title=""
+                      onClick={() => {}}
+                    />
+                  </label>
+                </form>
               )}
               {isHovered && !addCategoryWindow && (
                 <CTAButton
-                  variant="changePicture"
+                  variant="deleteCard"
                   title=""
                   onClick={() => {
-                    console.log('Change picture of card');
+                    //Needs a confirmation box.
+                    removeSelf();
                   }}
                 />
               )}

@@ -21,7 +21,7 @@ type ButtonType =
 interface CTAButtonProps {
   title: string | number;
   variant: ButtonType;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 //FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
@@ -100,7 +100,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
       >
-        <button onClick={onClick} className={` ${containerClasses}`}>
+        <div onClick={onClick} className={` ${containerClasses}`}>
           <span className={` ${textClasses}`}>{title}</span>
 
           <div
@@ -108,21 +108,21 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
               isVisible ? 'inline-block' : 'hidden'
             } relative top-[-10px] `}
           >
-            <button
+            <div
               id="removeCateogry"
               className="close-icon rounded-full h-5 w-5 hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black "
             >
               {/* <Text content="x" variant="subCategory" textColor="white" /> */}
-            </button>
+            </div>
           </div>
-        </button>
+        </div>
       </div>
     );
   } else {
     return (
-      <button onClick={onClick} className={` ${containerClasses}`}>
+      <div onClick={onClick} className={` ${containerClasses}`}>
         <span className={` ${textClasses}`}>{title}</span>
-      </button>
+      </div>
     );
   }
 };
