@@ -109,10 +109,15 @@ const EditorPage = () => {
               }
             });
 
-          const updatedValues: { text?: string; name?: string } = {};
+          const updatedValues: {
+            text?: string;
+            name?: string;
+            category_id?: number;
+          } = {};
 
           if (card.text) updatedValues.text = card.text;
           if (card.name) updatedValues.name = card.name;
+          if (card.category_id) updatedValues.category_id = card.category_id;
 
           const { data, error } = await supabase
             .from('cards')
@@ -397,6 +402,7 @@ const EditorPage = () => {
                 tags,
                 setTags,
                 createTag,
+                createCategory,
               }}
             />
           </div>

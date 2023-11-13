@@ -3,7 +3,6 @@ import { CTAButton } from '../CTAButton/CTAButton';
 import { Text } from '../Text/Text';
 import Editor from '../Editor/Editor';
 import { Input } from '../Input/Input';
-import { supabase } from '../../supabase';
 import { useState } from 'react';
 
 type CardType = 'openCard' | 'smallCard' | 'deckCard';
@@ -34,7 +33,58 @@ interface CardProps {
   tags?: any[];
   setTags?: Function;
   createTag?: Function;
+  createCategory?: Function;
 }
+
+interface DropdownProps {
+  add: Function;
+  create: Function | undefined;
+  mappable: any[] | undefined; //Tags or Categories
+  card: CardProps['card'];
+  variant: 'tags' | 'categories';
+}
+
+const Dropdown = (props: DropdownProps) => {
+  return (
+    <div
+      className="bg-black w-full h-10 z-50"
+      onClick={e => {
+        e.stopPropagation();
+      }}
+    >
+      {props.mappable?.map(object => {
+        if (props.variant === 'tags') {
+          const tagExistsOnCard = props.card.tags.find(cardTag => {
+            if (cardTag.id === object.id) return true;
+            return false;
+          });
+          if (tagExistsOnCard) return null;
+        }
+        return (
+          <h1
+            className="text-cyan-300"
+            onClick={e => {
+              e.stopPropagation();
+              props.add(object.id);
+            }}
+            key={object.id}
+          >
+            {object.name}
+          </h1>
+        );
+      })}
+      <h1
+        className=" bg-red-200"
+        onClick={() => {
+          if (props.create) props.create();
+          else console.log('Card component missing createTag prop.');
+        }}
+      >
+        {props.variant === 'tags' ? 'Add new tag!' : 'Add new category!'}
+      </h1>
+    </div>
+  );
+};
 
 const Card = (props: CardProps) => {
   const [addTagsWindow, setAddTagsWindow] = useState(false);
@@ -120,6 +170,40 @@ const Card = (props: CardProps) => {
       newDeckChanges[cardChangesIndex].tags.push(props.tags[tagIndex]);
     }
     props.setDeckChanges([...newDeckChanges]);
+  };
+
+  const setCategory = (categoryId: number) => {
+    console.log(categoryId);
+    if (!props.deckChanges || !props.setDeckChanges) {
+      console.log('Neccessary props missing from card component.');
+      return;
+    }
+    const cardIndex = getCardIndex();
+    const cardChangesIndex = getCardChangesIndex();
+
+    const newDeck = props.deck;
+
+    console.log(
+      'Deck: ',
+      props.deck,
+      'Newdeck: ',
+      newDeck,
+      'setDeck; ',
+      props.setDeck,
+    );
+    newDeck[cardIndex].category_id = categoryId;
+
+    props.setDeck([...newDeck]);
+
+    const newDeckChanges = props.deckChanges;
+    if (cardChangesIndex === -1) {
+      newDeckChanges.push({ id: props.card.id, category_id: categoryId });
+    } else {
+      newDeckChanges[cardChangesIndex].category_id = categoryId;
+    }
+    props.setDeckChanges([...newDeckChanges]);
+
+    console.log(props.deckChanges);
   };
 
   const getCardIndex = (): number => {
@@ -288,18 +372,19 @@ const Card = (props: CardProps) => {
               title={
                 props.card.category_id ? props.card.category_id : 'No cateogry'
               }
-              onClick={() => {
-                console.log(props.card.text);
-                console.log(props.card.category_id);
+              onClick={e => {
+                e.stopPropagation();
+                setAddCategoryWindow(!addCategoryWindow);
               }}
             />
+
             <div
               className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2"
               onClick={e => {
                 e.stopPropagation();
               }}
             >
-              {isHovered && (
+              {isHovered && !addCategoryWindow && (
                 <CTAButton
                   variant="deleteCard"
                   title=""
@@ -309,7 +394,7 @@ const Card = (props: CardProps) => {
                   }}
                 />
               )}
-              {isHovered && (
+              {isHovered && !addCategoryWindow && (
                 <CTAButton
                   variant="changePicture"
                   title=""
@@ -320,6 +405,17 @@ const Card = (props: CardProps) => {
               )}
             </div>
           </div>
+          {addCategoryWindow && (
+            <div className=" absolute top-4 w-full">
+              <Dropdown
+                add={setCategory}
+                create={props.createCategory}
+                card={props.card}
+                mappable={props.categories}
+                variant="categories"
+              />
+            </div>
+          )}
           <div
             onClick={event => {
               event.stopPropagation(); // Stop the event from propagating to the parent div
@@ -365,43 +461,13 @@ const Card = (props: CardProps) => {
             </div>
           </section>
           {addTagsWindow ? (
-            <div
-              className="bg-black w-full h-10"
-              onClick={e => {
-                e.stopPropagation();
-              }}
-            >
-              {props.tags?.map(tag => {
-                const tagExistsOnCard = props.card.tags.find(cardTag => {
-                  if (cardTag.id === tag.id) return true;
-                  return false;
-                });
-                if (tagExistsOnCard) return null;
-
-                return (
-                  <h1
-                    className="text-cyan-300"
-                    onClick={e => {
-                      e.stopPropagation();
-                      addTag(tag.id);
-                    }}
-                    key={tag.id}
-                  >
-                    {tag.name}
-                  </h1>
-                );
-              })}
-              <h1
-                className=" bg-red-200"
-                onClick={() => {
-                  console.log(props);
-                  if (props.createTag) props.createTag();
-                  else console.log('Card component missing createTag prop.');
-                }}
-              >
-                Add new tag!
-              </h1>
-            </div>
+            <Dropdown
+              mappable={props.tags}
+              card={props.card}
+              add={addTag}
+              create={props.createTag}
+              variant="tags"
+            />
           ) : null}
         </div>
       </>
