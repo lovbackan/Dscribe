@@ -304,6 +304,7 @@ const Card = (props: CardProps) => {
               src={imageUrl}
               alt=""
               className="absolute -z-10 w-full h-full rounded-xl"
+              draggable="false"
             />
           )}
           <div className="flex flex-row justify-between">
@@ -347,6 +348,7 @@ const Card = (props: CardProps) => {
                 src={imageUrl}
                 alt=""
                 className="absolute -z-10 h-full w-full rounded-xl"
+                draggable="false"
               />
             )}
             <CTAButton
@@ -433,6 +435,7 @@ const Card = (props: CardProps) => {
               src={imageUrl}
               alt=""
               className="absolute  -z-10 w-full h-full rounded-xl"
+              draggable="false"
             />
           )}
           <div className="flex flex-row justify-between">
