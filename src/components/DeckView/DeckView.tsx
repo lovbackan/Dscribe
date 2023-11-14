@@ -112,7 +112,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           title="+"
         /> */}
 
-        <div className="flex flex-row w-[100%]">
+        <div className="flex flex-row w-[100%] h-auto">
           {props.categories.map(category => {
             return (
               <CTAButton
@@ -127,7 +127,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           })}
         </div>
 
-        <div className="flex flex-row w-[100%]">
+        <div className="flex flex-row w-[100%] h-auto flex-wrap ">
           {props.tags.map(tag => {
             return (
               <CTAButton

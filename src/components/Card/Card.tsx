@@ -412,10 +412,13 @@ const Card = (props: CardProps) => {
             />
             {/* Inte bra med bottom-9, borde vara dynamiskt */}
 
-            <section id="subCategory" className="mt-48 ">
+            <section
+              id="subCategory"
+              className="relative h-[200px] overflow-auto flex flex-col justify-end "
+            >
               <div
                 id="SubCategoryWrapper"
-                className=" flex flex-row flex-wrap gap-1 px-1"
+                className="flex flex-row flex-wrap gap-1 px-1"
               >
                 {props.card.tags.map(tag => {
                   return (
@@ -580,6 +583,12 @@ const Card = (props: CardProps) => {
                     onClick={event => {
                       event.stopPropagation();
                       console.log(tag.name);
+                    }}
+                    removeSubCategory={() => {
+                      //DAN, HÄR SKA DU TA BORT TAGGEN FRÅN KORTET (COPILOT)
+                      console.log(
+                        `ta bort ${tag.name} från ${props.card.name}`,
+                      );
                     }}
                   />
                 );
