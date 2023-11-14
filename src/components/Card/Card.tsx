@@ -333,7 +333,7 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard' && props.setEditorState) {
     return (
       <>
-        <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg">
+        <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
           <div
             id="Card"
             className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
@@ -387,7 +387,7 @@ const Card = (props: CardProps) => {
             </section>
           </div>
           <div className="w-[490px] flex flex-row ">
-            <div className=" absolute right-0 z-10">
+            <div className=" absolute right-0 z-10 cursor-pointer">
               <CTAButton
                 title="-"
                 variant="minimize/close"
