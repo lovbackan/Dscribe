@@ -12,6 +12,7 @@ import PopUp from '../components/PopUp/PopUp';
 const HomePage = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState<Array<any>>([]);
+  const [filteredStories, setFilteredStories] = useState(stories);
   const [selectedStory, setSelectedStory] = useState<any>(null);
   const [changeCardId, setChangeCardId] = useState<any>(null);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
@@ -22,6 +23,9 @@ const HomePage = () => {
   } else {
     document.body.style.overflow = 'auto';
   }
+  useEffect(() => {
+    setFilteredStories(stories);
+  }, [stories]);
 
   const fetchStories = async () => {
     const { data, error } = await supabase.from('stories').select('*');
@@ -132,14 +136,26 @@ const HomePage = () => {
           placeholder="Search"
           variant="secondary"
           onChange={e => {
-            console.log(e.target.value);
+            const value = e.target.value.toLowerCase();
+            if (value === '') {
+              setFilteredStories(stories);
+            } else {
+              setFilteredStories(
+                stories.filter(
+                  story =>
+                    story &&
+                    story.name &&
+                    story.name.toLowerCase().includes(value),
+                ),
+              );
+            }
           }}
         />
       </div>
 
       <StoryList
         supabase={supabase}
-        stories={stories}
+        stories={filteredStories}
         setSelectedStory={setSelectedStory}
         setStories={setStories}
         setChangeCardId={setChangeCardId}

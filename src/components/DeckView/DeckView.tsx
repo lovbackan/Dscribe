@@ -2,11 +2,12 @@
 
 import React from 'react';
 import Card from '../Card/Card';
-
+import { useEffect } from 'react';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { Input } from '../Input/Input';
 import { Text } from '../Text/Text';
+import { useState } from 'react';
 
 interface DeckViewProps {
   showDeckView: boolean;
@@ -25,7 +26,47 @@ interface DeckViewProps {
   createCategory: Function;
 }
 
+interface Card {
+  card: {
+    name: string;
+    id: number;
+    user_id: string;
+    category_id: number | null;
+    text: string;
+    tags: any[];
+    image_path?: string;
+    inHand?: Boolean;
+    openCard?: Boolean;
+    categories: { name: string };
+  };
+}
+
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
+  const [filteredCards, setFilteredCards] = useState(props.deck);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [allCards, setAllCards] = useState(props.deck);
+
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredCards(allCards);
+    } else {
+      setFilteredCards(
+        allCards.filter(
+          card =>
+            card && card.name && card.name.toLowerCase().includes(searchTerm),
+        ),
+      );
+    }
+  }, [allCards, searchTerm]);
+
+  useEffect(() => {
+    setFilteredCards(props.deck);
+  }, [props.deck]);
+
+  useEffect(() => {
+    setAllCards(props.deck);
+  }, [props.deck]);
+
   if (props.showDeckView === false) return null;
   return (
     <div
@@ -57,8 +98,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             id="search"
             variant="primary"
             placeholder="Search"
-            onChange={() => {
-              console.log('u are writing here');
+            onChange={e => {
+              setSearchTerm(e.target.value.toLowerCase());
             }}
           />
         </div>
@@ -121,7 +162,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             </h2>
           </div>
 
-          {props.deck.map(card => {
+          {filteredCards.map(card => {
             return (
               <Card
                 key={card.id}
