@@ -40,12 +40,8 @@ const StoryList = (props: StoryListProps) => {
             story={story}
             setSelectedStory={props.setSelectedStory}
             setChangeCardId={props.setChangeCardId}
-            deleteCard={() => {
-              props.deleteCard();
-            }}
-            changePicture={() => {
-              props.changePicture();
-            }}
+            deleteCard={props.deleteCard}
+            changePicture={props.changePicture}
           />
         );
       })}

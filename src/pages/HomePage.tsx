@@ -56,6 +56,44 @@ const HomePage = () => {
     }
   };
 
+  const changePicture = async (id: number, image: File) => {
+    if (image === null) return;
+    const user = (await supabase.auth.getUser()).data.user;
+    console.log(image);
+    const filepath = `${user?.id}/${image.name}`;
+
+    const result = await supabase.storage
+      .from('images')
+      .upload(filepath, image, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+
+    const uploadError: any = result.error;
+    if (uploadError) console.log(uploadError);
+    if (uploadError && uploadError.statusCode === '409') {
+      alert('File already exists');
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('stories')
+      .update({ image_path: filepath })
+      .eq('id', id);
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    const newStories = stories;
+    const index = stories.findIndex(story => {
+      if (story.id === id) return true;
+      return false;
+    });
+    newStories[index].image_path = filepath;
+    setStories([...newStories]);
+  };
+
   useEffect(() => {
     fetchStories();
   }, []);
@@ -109,7 +147,7 @@ const HomePage = () => {
           setShowDeletePopup(true);
           console.log(`Delete card id: ${changeCardId} `);
         }}
-        changePicture={() => {}}
+        changePicture={changePicture}
       />
 
       {showDeletePopup && (
