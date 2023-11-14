@@ -284,7 +284,13 @@ const Card = (props: CardProps) => {
             toggleOpenCard();
           }}
         >
-          {imageUrl && <img src={imageUrl} alt="" className="absolute -z-10" />}
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt=""
+              className="absolute -z-10 w-full h-full"
+            />
+          )}
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
@@ -324,7 +330,11 @@ const Card = (props: CardProps) => {
             className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
           >
             {imageUrl && (
-              <img src={imageUrl} alt="" className="absolute  -z-10" />
+              <img
+                src={imageUrl}
+                alt=""
+                className="absolute -z-10 h-full w-full"
+              />
             )}
             <CTAButton
               variant="cardCategory"
@@ -408,7 +418,11 @@ const Card = (props: CardProps) => {
           }}
         >
           {imageUrl && (
-            <img src={imageUrl} alt="" className="absolute  -z-10" />
+            <img
+              src={imageUrl}
+              alt=""
+              className="absolute  -z-10 w-ful h-full"
+            />
           )}
           <div className="flex flex-row justify-between">
             <CTAButton
