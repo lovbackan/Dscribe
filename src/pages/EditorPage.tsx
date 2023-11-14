@@ -13,6 +13,7 @@ import Logo from '../components/Logo/Logo';
 import { Text } from '../components/Text/Text';
 
 export const deckContext = createContext<any[]>([]);
+export const setDeckContext = createContext<Function>(() => {});
 type CardPositions = {
   [key: string]: { x: number; y: number };
 };
@@ -272,69 +273,70 @@ const EditorPage = () => {
   };
 
   return (
-    <deckContext.Provider value={deck}>
-      <div className="h-screen w-screen relative flex justify-center overflow-hidden md:bg-slate-400 lg:bg-slate-700 ">
-        <div className="absolute flex justify-center items-center w-screen">
-          <Text
-            variant="heading1Bold"
-            textColor="white"
-            content={story ? story.name : ''}
-          />
-        </div>
-
-        <Logo variant="editor" />
-
-        <div className="absolute w-[60%] h-[90%] mt-12">
-          {story ? (
-            <Editor
-              setEditorState={setEditorState}
-              deck={deck}
-              setDeck={setDeck}
-              story={story}
-              setStory={setStory}
-              setStoryChanges={setStoryChanges}
+    <setDeckContext.Provider value={setDeck}>
+      <deckContext.Provider value={deck}>
+        <div className="h-screen w-screen relative flex justify-center overflow-hidden md:bg-slate-400 lg:bg-slate-700 ">
+          <div className="absolute flex justify-center items-center w-screen">
+            <Text
+              variant="heading1Bold"
+              textColor="white"
+              content={story ? story.name : ''}
             />
-          ) : null}
-          <div className="absolute h-[20%] w-[100%] mt-10 bg-white"></div>
-        </div>
-        {deck.map(card => {
-          if (card.openCard)
-            return (
-              <div
-                id={card.id + 'openCard'}
-                className="inline-block absolute  "
-                style={{
-                  left: cardPositions[card.id]?.x || 0,
-                  top: cardPositions[card.id]?.y || 0,
-                  zIndex: activeCard === card.id ? 11 : 10,
-                }}
-                onMouseDown={e => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  setDragOffset({
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top,
-                  });
-                  setShouldFollowCursor(card.id);
-                  setActiveCard(card.id);
-                }}
-              >
-                <Card
-                  key={card.id}
-                  card={card}
-                  variant="openCard"
-                  supabase={supabase}
-                  deck={deck}
-                  setDeck={setDeck}
-                  setEditorState={setEditorState}
-                  deckChanges={deckChanges}
-                  setDeckChanges={setDeckChanges}
-                  categories={categories}
-                  setCategories={setCategories}
-                />
-              </div>
-            );
-        })}
-        {/* <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
+          </div>
+
+          <Logo variant="editor" />
+
+          <div className="absolute w-[60%] h-[90%] mt-12">
+            {story ? (
+              <Editor
+                setEditorState={setEditorState}
+                deck={deck}
+                setDeck={setDeck}
+                story={story}
+                setStory={setStory}
+                setStoryChanges={setStoryChanges}
+              />
+            ) : null}
+            <div className="absolute h-[20%] w-[100%] mt-10 bg-white"></div>
+          </div>
+          {deck.map(card => {
+            if (card.openCard)
+              return (
+                <div
+                  id={card.id + 'openCard'}
+                  className="inline-block absolute  "
+                  style={{
+                    left: cardPositions[card.id]?.x || 0,
+                    top: cardPositions[card.id]?.y || 0,
+                    zIndex: activeCard === card.id ? 11 : 10,
+                  }}
+                  onMouseDown={e => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                      x: e.clientX - rect.left,
+                      y: e.clientY - rect.top,
+                    });
+                    setShouldFollowCursor(card.id);
+                    setActiveCard(card.id);
+                  }}
+                >
+                  <Card
+                    key={card.id}
+                    card={card}
+                    variant="openCard"
+                    supabase={supabase}
+                    deck={deck}
+                    setDeck={setDeck}
+                    setEditorState={setEditorState}
+                    deckChanges={deckChanges}
+                    setDeckChanges={setDeckChanges}
+                    categories={categories}
+                    setCategories={setCategories}
+                  />
+                </div>
+              );
+          })}
+          {/* <div className="flex flex-col right-0 top-0 absolute w-full justify-evenly">
           <CTAButton
             variant="secondary"
             onClick={() => {
@@ -352,62 +354,63 @@ const EditorPage = () => {
           />
         </div> */}
 
-        <div className="absolute bottom-0 left-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
-          {/* <CTAButton
+          <div className="absolute bottom-0 left-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
+            {/* <CTAButton
             variant="deck"
             onClick={() => {
               addCard();
             }}
             title="+"
           /> */}
-          <CTAButton
-            title=" "
-            variant="viewDeck"
-            onClick={() => {
-              toggleDeckView();
-            }}
-          />
-        </div>
+            <CTAButton
+              title=" "
+              variant="viewDeck"
+              onClick={() => {
+                toggleDeckView();
+              }}
+            />
+          </div>
 
-        {selectedStory ? (
-          <Hand
-            supabase={supabase}
-            {...{
-              setDeck,
-              deck,
-              categories,
-            }}
-          />
-        ) : null}
-
-        <div className=" h-screen w-screen flex justify-center items-center">
-          <div
-            className={`justify-center items-center absolute z-20 ${
-              showDeck ? 'flex' : 'hidden'
-            }`}
-          >
-            <DeckView
-              addCard={addCard}
-              showDeckView={showDeck}
-              toggleDeckView={toggleDeckView}
+          {selectedStory ? (
+            <Hand
               supabase={supabase}
               {...{
                 setDeck,
                 deck,
-                setDeckChanges,
-                deckChanges,
                 categories,
-                setCategories,
-                tags,
-                setTags,
-                createTag,
-                createCategory,
               }}
             />
+          ) : null}
+
+          <div className=" h-screen w-screen flex justify-center items-center">
+            <div
+              className={`justify-center items-center absolute z-20 ${
+                showDeck ? 'flex' : 'hidden'
+              }`}
+            >
+              <DeckView
+                addCard={addCard}
+                showDeckView={showDeck}
+                toggleDeckView={toggleDeckView}
+                supabase={supabase}
+                {...{
+                  setDeck,
+                  deck,
+                  setDeckChanges,
+                  deckChanges,
+                  categories,
+                  setCategories,
+                  tags,
+                  setTags,
+                  createTag,
+                  createCategory,
+                }}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </deckContext.Provider>
+      </deckContext.Provider>
+    </setDeckContext.Provider>
   );
 };
 

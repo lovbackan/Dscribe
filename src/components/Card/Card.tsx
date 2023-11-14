@@ -144,30 +144,25 @@ const Card = (props: CardProps) => {
   }, [imageUrl]);
 
   const uploadImage = async (file: File) => {
-    console.log('Hej');
     if (file === null) return;
-    //Add ${uuidv4()}-
     const filepath = `${props.card.user_id}/${file.name}`;
 
-    const { data, error } = await supabase.storage
+    const result = await supabase.storage
       .from('images')
       .upload(filepath, file, {
         cacheControl: '3600',
         upsert: false,
       });
-    console.log(data, error);
 
-    if (error) {
-      console.log(error);
-      return;
-    }
-    console.log(data);
-    const result = await supabase
+    const uploadError: any = result.error;
+    if (uploadError && uploadError.statusCode === '409')
+      alert('File already exists');
+
+    const { data, error } = await supabase
       .from('cards')
       .update({ image_path: filepath })
       .eq('id', props.card.id);
-
-    if (result.error) console.log(result.error);
+    if (error) console.log(error);
   };
 
   const removeSelf = async () => {
@@ -501,7 +496,14 @@ const Card = (props: CardProps) => {
                     name="image"
                     onChange={e => {
                       e.preventDefault();
-                      if (e.target.files) uploadImage(e.target.files[0]);
+
+                      if (e.target.files) {
+                        if (e.target.files[0].size > 2097152) {
+                          alert('File is too big!');
+                          return;
+                        }
+                        uploadImage(e.target.files[0]);
+                      }
                     }}
                   />
                   <label htmlFor="file-upload" className="custom-file-upload">

@@ -15,14 +15,15 @@ import {
   $getNodeByKey,
 } from 'lexical';
 
-import { deckContext } from '../pages/EditorPage';
+import { deckContext, setDeckContext } from '../pages/EditorPage';
 import { useContext } from 'react';
 import { $isElementNode } from 'lexical';
 
 type SerializedCardLinkNode = { cardId: number } & SerializedElementNode;
 
 //I suspect this is pretty bad practice but it works for now. I should circle back to this when I understand Lexical better. //Dan 30-10-2023
-let deck: undefined | any[];
+let deck: any[] | undefined;
+let setDeck: Function | undefined;
 let editor: LexicalEditor;
 
 export class CardLinkNode extends ElementNode {
@@ -91,12 +92,14 @@ export class CardLinkNode extends ElementNode {
       //Should display linked card in popup //Dan 31/10/2023
       const cardId = this.__cardId;
       const index = deck?.findIndex(card => {
-        console.log(cardId);
-        console.log(card.id);
         if (cardId === card.id) return true;
         else return false;
       });
-      if (deck && index != undefined && index >= 0) console.log(deck[index]);
+      if (deck && index != undefined && index >= 0) {
+        const newDeck = deck;
+        newDeck[index].openCard = !deck[index].openCard;
+        if (setDeck) setDeck([...newDeck]);
+      }
 
       this.__cardId;
       console.log('index: ' + index);
@@ -171,6 +174,7 @@ export const INSERT_CARDLINK_COMMAND = createCommand('insertCardLink');
 
 export function CardLinkPlugin(): null {
   deck = useContext(deckContext);
+  setDeck = useContext(setDeckContext);
   [editor] = useLexicalComposerContext();
 
   if (!editor.hasNode(CardLinkNode)) {
