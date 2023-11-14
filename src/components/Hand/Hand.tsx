@@ -5,6 +5,7 @@ interface HandProps {
   deck: Array<any>;
   supabase: SupabaseClient;
   setDeck: Function;
+  categories: any[];
 }
 
 const Hand = (props: HandProps) => {
@@ -21,6 +22,7 @@ const Hand = (props: HandProps) => {
               deck={props.deck}
               setDeck={props.setDeck}
               variant="smallCard"
+              categories={props.categories}
             />
           </div>
         ) : null;
