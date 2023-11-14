@@ -56,6 +56,39 @@ const Dropdown = (props: DropdownProps) => {
         e.stopPropagation();
       }}
     >
+      <Input
+        id="NewCategoryInput"
+        variant="secondary"
+        placeholder={
+          props.variant === 'tags' ? 'Add new tag!' : 'Add new category!'
+        }
+        type="text"
+        autoComplete="off"
+        onChange={() => {}}
+        onBlur={e => {
+          if (e.target.value === '') return;
+
+          if (props.create)
+            props.create(e.target.value) && console.log('jajajaj');
+          else console.log('Card component missing createCategory prop.');
+        }}
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          console.log('Key pressed: ', e.key);
+          if (e.key === 'Enter') {
+            const input = e.target as HTMLInputElement;
+            if (input.value === '') return;
+            if (props.create) {
+              props.create(input.value);
+              console.log(input.value);
+              console.log('BORDE LÄGGAS TILL');
+            } else {
+              console.log('Card component missing createCategory prop.');
+            }
+
+            console.log('Enter key pressed');
+          }
+        }}
+      />
       {props.mappable?.map(object => {
         if (props.variant === 'tags') {
           const tagExistsOnCard = props.card.tags.find(cardTag => {
@@ -65,19 +98,20 @@ const Dropdown = (props: DropdownProps) => {
           if (tagExistsOnCard) return null;
         }
         return (
-          <h1
-            className="text-cyan-300"
+          <div
+            className="w-auto h-auto bg-black"
             onClick={e => {
               e.stopPropagation();
               props.add(object.id);
             }}
             key={object.id}
           >
-            {object.name}
-          </h1>
+            <Text content={object.name} variant="p-primary" textColor="white" />
+          </div>
         );
       })}
-      <h1
+
+      {/* <h1
         className=" bg-red-200"
         onClick={() => {
           if (props.create) props.create();
@@ -85,7 +119,7 @@ const Dropdown = (props: DropdownProps) => {
         }}
       >
         {props.variant === 'tags' ? 'Add new tag!' : 'Add new category!'}
-      </h1>
+      </h1> */}
     </div>
   );
 };
