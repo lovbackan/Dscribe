@@ -72,14 +72,29 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         /> */}
 
         <div className="flex flex-row w-[100%]">
-          {props.deck.map(card => {
+          {props.categories.map(category => {
             return (
               <CTAButton
-                key={card.id}
-                title={card.category_id ? card.category_id : 'No category'}
+                key={category.id}
+                title={category.name}
                 variant="deckViewCategory"
                 onClick={() => {
-                  console.log(card.category_id);
+                  console.log(category.name);
+                }}
+              />
+            );
+          })}
+        </div>
+
+        <div className="flex flex-row w-[100%]">
+          {props.tags.map(tag => {
+            return (
+              <CTAButton
+                key={tag.id}
+                title={tag.name}
+                variant="deckViewCategory"
+                onClick={() => {
+                  console.log(tag.name);
                 }}
               />
             );

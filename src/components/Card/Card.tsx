@@ -299,7 +299,13 @@ const Card = (props: CardProps) => {
             toggleOpenCard();
           }}
         >
-          {imageUrl && <img src={imageUrl} alt="" className="absolute -z-10" />}
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt=""
+              className="absolute -z-10 w-full h-full rounded-xl"
+            />
+          )}
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
@@ -337,7 +343,11 @@ const Card = (props: CardProps) => {
             className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
           >
             {imageUrl && (
-              <img src={imageUrl} alt="" className="absolute  -z-10" />
+              <img
+                src={imageUrl}
+                alt=""
+                className="absolute -z-10 h-full w-full rounded-xl"
+              />
             )}
             <CTAButton
               variant="cardCategory"
@@ -389,7 +399,7 @@ const Card = (props: CardProps) => {
                 }}
               />
             </div>
-            <div className="w-[490px] pt-4">
+            <div className="w-[490px] pt-4 h-[300px]">
               <Editor
                 setEditorState={props.setEditorState}
                 card={props.card}
@@ -419,7 +429,11 @@ const Card = (props: CardProps) => {
           }}
         >
           {imageUrl && (
-            <img src={imageUrl} alt="" className="absolute  -z-10" />
+            <img
+              src={imageUrl}
+              alt=""
+              className="absolute  -z-10 w-full h-full rounded-xl"
+            />
           )}
           <div className="flex flex-row justify-between">
             <CTAButton
