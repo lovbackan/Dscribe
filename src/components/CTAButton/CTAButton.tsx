@@ -41,7 +41,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'cardCategory'
       ? 'bg-black h-4 min-w-[40px] w-auto rounded-tl-[5px] rounded-br-[5px] flex justify-center items-center hover:border-white hover:border'
       : variant === 'deckViewCategory'
-      ? 'w-14  h-5 rounded-xl bg-black flex justify-center items-center hover:border-white hover:border'
+      ? 'w-auto p-2 h-5 rounded-xl bg-black flex justify-center items-center hover:border-white hover:border'
       : variant === 'addCard'
       ? 'w-12 h-20 rounded-xl bg-white border-2 border-black flex justify-center items-center hover:border-green-700 hover:border-4'
       : // : variant === 'edit'
