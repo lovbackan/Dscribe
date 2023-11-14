@@ -295,7 +295,7 @@ const EditorPage = () => {
               setStoryChanges={setStoryChanges}
             />
           ) : null}
-          <div className="absolute h-[20%] w-[100%] mt-12 bg-white"></div>
+          <div className="absolute h-[20%] w-[100%] mt-10 bg-white"></div>
         </div>
         {deck.map(card => {
           if (card.openCard)

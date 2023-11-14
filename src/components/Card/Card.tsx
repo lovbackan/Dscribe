@@ -288,7 +288,7 @@ const Card = (props: CardProps) => {
             <img
               src={imageUrl}
               alt=""
-              className="absolute -z-10 w-full h-full"
+              className="absolute -z-10 w-full h-full rounded-xl"
             />
           )}
           <div className="flex flex-row justify-between">
@@ -333,7 +333,7 @@ const Card = (props: CardProps) => {
               <img
                 src={imageUrl}
                 alt=""
-                className="absolute -z-10 h-full w-full"
+                className="absolute -z-10 h-full w-full rounded-xl"
               />
             )}
             <CTAButton
@@ -388,7 +388,7 @@ const Card = (props: CardProps) => {
                 }}
               />
             </div>
-            <div className="w-[490px] pt-4">
+            <div className="w-[490px] pt-4 h-[300px]">
               <Editor
                 setEditorState={props.setEditorState}
                 card={props.card}
@@ -421,7 +421,7 @@ const Card = (props: CardProps) => {
             <img
               src={imageUrl}
               alt=""
-              className="absolute  -z-10 w-ful h-full"
+              className="absolute  -z-10 w-full h-full rounded-xl"
             />
           )}
           <div className="flex flex-row justify-between">
