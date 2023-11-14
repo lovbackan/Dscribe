@@ -51,7 +51,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'cardSubCategory'
       ? 'w-auto h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border px-2'
       : variant === 'viewDeck'
-      ? 'w-14 h-20 deck-icon'
+      ? 'w-14 h-24 deck-icon'
       : variant === 'deleteCard'
       ? 'deleteCard hover:border-2 hover:border-white'
       : variant === 'changePicture'
