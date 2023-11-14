@@ -137,7 +137,7 @@ const Card = (props: CardProps) => {
       .getPublicUrl(props.card.image_path);
     console.log(result);
     setImageUrl(result.data.publicUrl);
-  }, []);
+  }, [props.card.image_path]);
 
   useEffect(() => {
     console.log(imageUrl);
@@ -155,14 +155,26 @@ const Card = (props: CardProps) => {
       });
 
     const uploadError: any = result.error;
-    if (uploadError && uploadError.statusCode === '409')
+    if (uploadError) console.log(uploadError);
+    if (uploadError && uploadError.statusCode === '409') {
       alert('File already exists');
+      return;
+    }
 
     const { data, error } = await supabase
       .from('cards')
       .update({ image_path: filepath })
       .eq('id', props.card.id);
-    if (error) console.log(error);
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    const newDeck = props.deck;
+    const index = getCardIndex();
+    newDeck[index].image_path = filepath;
+    props.setDeck([...newDeck]);
+    console.log(newDeck);
   };
 
   const removeSelf = async () => {
