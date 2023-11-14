@@ -111,7 +111,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
 
           <div className="w-full h-0.5 bg-black self-end"></div>
         </div>
-        <div className="flex flex-wrap gap-10 my-2 justify-start items-center mb-[30px]">
+        <div className="flex flex-wrap gap-10 my-2 justify-center items-center mb-[30px]">
           <div
             className="w-[200px] h-[300px] rounded-[20px]  cursor-pointer hover:border-4  text-black flex justify-center items-center border-2 border-white"
             onClick={() => props.addCard()}
