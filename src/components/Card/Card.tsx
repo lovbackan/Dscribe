@@ -459,6 +459,7 @@ const Card = (props: CardProps) => {
                     className=" hidden"
                     id="file-upload"
                     type="file"
+                    accept=" .png, .jpg, .gif"
                     name="image"
                     onChange={e => {
                       e.preventDefault();
