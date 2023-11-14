@@ -273,7 +273,7 @@ const EditorPage = () => {
 
   return (
     <deckContext.Provider value={deck}>
-      <div className="h-screen w-screen relative overflow-hidden md:bg-slate-400 lg:bg-slate-700 ">
+      <div className="h-screen w-screen relative flex justify-center overflow-hidden md:bg-slate-400 lg:bg-slate-700 ">
         <div className="absolute flex justify-center items-center w-screen">
           <Text
             variant="heading1Bold"
@@ -284,7 +284,7 @@ const EditorPage = () => {
 
         <Logo variant="editor" />
 
-        <div className="absolute left-1/4 w-[60%] h-[90%] mt-12">
+        <div className="absolute w-[60%] h-[90%] mt-12">
           {story ? (
             <Editor
               setEditorState={setEditorState}
@@ -302,7 +302,7 @@ const EditorPage = () => {
             return (
               <div
                 id={card.id + 'openCard'}
-                className="inline-block absolute "
+                className="inline-block absolute  "
                 style={{
                   left: cardPositions[card.id]?.x || 0,
                   top: cardPositions[card.id]?.y || 0,
@@ -352,7 +352,7 @@ const EditorPage = () => {
           />
         </div> */}
 
-        <div className="absolute bottom-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
+        <div className="absolute bottom-0 left-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
           {/* <CTAButton
             variant="deck"
             onClick={() => {
@@ -370,18 +370,16 @@ const EditorPage = () => {
         </div>
 
         {selectedStory ? (
-          <div className="flex justify-center">
-            <Hand
-              supabase={supabase}
-              {...{
-                setDeck,
-                deck,
-              }}
-            />
-          </div>
+          <Hand
+            supabase={supabase}
+            {...{
+              setDeck,
+              deck,
+            }}
+          />
         ) : null}
 
-        <div className="w-screen h-screen flex justify-center items-center">
+        <div className=" h-screen w-screen flex justify-center items-center">
           <div
             className={`justify-center items-center absolute z-20 ${
               showDeck ? 'flex' : 'hidden'

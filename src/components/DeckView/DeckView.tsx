@@ -30,7 +30,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   return (
     <div
       id="deckView"
-      className="  bg-slate-500 overflow-y-auto rounded-3xl  w-[75vw] h-[85vh]"
+      className="  bg-slate-500 overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
       <div className="flex flex-row justify-end ">
         <div className="fixed pr-6 pt-3">

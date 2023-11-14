@@ -49,11 +49,13 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     );
   } else if (variant === 'editor') {
     return (
-      <Link to={ACCEPTED_ROUTES.HOME}>
-        <div id="logo" className={`${className}`}>
-          <Text variant="logoSmall" textColor="white" content="Codeck" />
-        </div>
-      </Link>
+      <div className="pl-6 pt-6">
+        <Link to={ACCEPTED_ROUTES.HOME}>
+          <div id="logo" className={`${className}`}>
+            <Text variant="logoSmall" textColor="white" content="Codeck" />
+          </div>
+        </Link>
+      </div>
     );
   }
 };
