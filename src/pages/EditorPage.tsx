@@ -169,7 +169,7 @@ const EditorPage = () => {
   const fetchDeck = async () => {
     const { data, error } = await supabase
       .from('cards')
-      .select('*, tags (*)')
+      .select('*, tags (*), categories(*)')
       .match({ story_id: selectedStory ? selectedStory.id : 0 });
     console.log(data);
     if (error) console.log(error);
@@ -376,6 +376,7 @@ const EditorPage = () => {
               {...{
                 setDeck,
                 deck,
+                categories,
               }}
             />
           </div>

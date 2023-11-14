@@ -22,6 +22,7 @@ interface CardProps {
     image_path?: string;
     inHand?: Boolean;
     openCard?: Boolean;
+    categories: { name: string };
   };
   variant: CardType;
   supabase: SupabaseClient;
@@ -273,6 +274,20 @@ const Card = (props: CardProps) => {
   };
 
   const [isHovered, setIsHovered] = useState(false);
+  const [categoryName, setCategoryName] = useState<string>('');
+
+  useEffect(() => {
+    setCategoryName(
+      props.card.category_id && props.categories
+        ? props.categories[
+            props.categories?.findIndex(category => {
+              if (category.id === props.card.category_id) return true;
+              else return false;
+            })
+          ].name
+        : 'No cateogry',
+    );
+  }, [props.card.category_id]);
 
   if (props.variant === 'smallCard') {
     return (
@@ -288,9 +303,7 @@ const Card = (props: CardProps) => {
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
-              title={
-                props.card.category_id ? props.card.category_id : 'No cateogry'
-              }
+              title={categoryName}
               onClick={() => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);
@@ -328,9 +341,7 @@ const Card = (props: CardProps) => {
             )}
             <CTAButton
               variant="cardCategory"
-              title={
-                props.card.category_id ? props.card.category_id : 'No cateogry'
-              }
+              title={categoryName}
               onClick={() => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);
@@ -413,9 +424,7 @@ const Card = (props: CardProps) => {
           <div className="flex flex-row justify-between">
             <CTAButton
               variant="cardCategory"
-              title={
-                props.card.category_id ? props.card.category_id : 'No cateogry'
-              }
+              title={categoryName}
               onClick={e => {
                 e.stopPropagation();
                 setAddCategoryWindow(!addCategoryWindow);
