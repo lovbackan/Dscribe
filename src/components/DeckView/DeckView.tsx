@@ -43,9 +43,28 @@ interface Card {
 
 export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   const [filteredCards, setFilteredCards] = useState(props.deck);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [allCards, setAllCards] = useState(props.deck);
+
+  useEffect(() => {
+    if (searchTerm === '') {
+      setFilteredCards(allCards);
+    } else {
+      setFilteredCards(
+        allCards.filter(
+          card =>
+            card && card.name && card.name.toLowerCase().includes(searchTerm),
+        ),
+      );
+    }
+  }, [allCards, searchTerm]);
 
   useEffect(() => {
     setFilteredCards(props.deck);
+  }, [props.deck]);
+
+  useEffect(() => {
+    setAllCards(props.deck);
   }, [props.deck]);
 
   if (props.showDeckView === false) return null;
@@ -80,19 +99,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             variant="primary"
             placeholder="Search"
             onChange={e => {
-              const value = e.target.value.toLowerCase();
-              if (value === '') {
-                setFilteredCards(props.deck);
-              } else {
-                setFilteredCards(
-                  props.deck.filter(
-                    card =>
-                      card &&
-                      card.name &&
-                      card.name.toLowerCase().includes(value),
-                  ),
-                );
-              }
+              setSearchTerm(e.target.value.toLowerCase());
             }}
           />
         </div>
