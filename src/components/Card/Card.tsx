@@ -26,7 +26,7 @@ interface CardProps {
   };
   variant: CardType;
   supabase: SupabaseClient;
-  deck: any[];
+  deck: CardProps['card'][];
   setDeck: Function;
   setEditorState?: Function;
   editorState?: any[];
@@ -160,23 +160,6 @@ const Card = (props: CardProps) => {
     console.log(newDeck);
   };
 
-  const removeSelf = async () => {
-    const result = await props.supabase
-      .from('cards')
-      .delete()
-      .match({ id: props.card.id });
-    if (result.error) console.log(result.error);
-    else {
-      const updatedDeck = props.deck;
-      const idToRemove = updatedDeck.findIndex(card => {
-        if (card.id === props.card.id) return true;
-        return false;
-      });
-      updatedDeck.splice(idToRemove, 1);
-      props.setDeck([...updatedDeck]);
-    }
-  };
-
   const toggleInHand = () => {
     const cardIndex = props.deck.findIndex(card => {
       if (props.card.id === card.id) return true;
@@ -197,7 +180,7 @@ const Card = (props: CardProps) => {
       const newDeck = props.deck;
       newDeck[cardIndex].name = newName;
       if (
-        props.deck[cardIndex] === newName ||
+        props.deck[cardIndex].name === newName ||
         !props.deckChanges ||
         !props.setDeckChanges
       )
@@ -230,8 +213,6 @@ const Card = (props: CardProps) => {
       return false;
     });
 
-    //Make removeTag function here
-
     const newDeck = props.deck;
     newDeck[cardIndex].tags.push(props.tags[tagIndex]);
     props.setDeck([...newDeck]);
@@ -243,6 +224,30 @@ const Card = (props: CardProps) => {
       newDeckChanges[cardChangesIndex].tags.push(props.tags[tagIndex]);
     }
     props.setDeckChanges([...newDeckChanges]);
+  };
+
+  const removeTag = async (tagId: number) => {
+    const cardIndex = getCardIndex();
+    const cardChangesIndex = getCardChangesIndex();
+    const tagIndex = props.deck[cardIndex].tags.findIndex(
+      (tag: { id: number }) => {
+        if (tag.id === tagId) return true;
+        return false;
+      },
+    );
+
+    const { data, error } = await supabase
+      .from('cards_tags')
+      .delete()
+      .match({ tag_id: tagId, card_id: props.card.id });
+    if (error) {
+      alert('Failed to delete. Error: ' + error.message);
+      return;
+    }
+
+    const newDeck = props.deck;
+    newDeck[cardIndex].tags.splice(tagIndex, 1);
+    props.setDeck([...newDeck]);
   };
 
   const setCategory = (categoryId: number) => {
@@ -572,11 +577,9 @@ const Card = (props: CardProps) => {
                       event.stopPropagation();
                       console.log(tag.name);
                     }}
-                    removeSubCategory={() => {
+                    removeTag={() => {
                       //Here our remove tag function should be
-                      console.log(
-                        `ta bort ${tag.name}: ${tag.id} från ${props.card.name}`,
-                      );
+                      removeTag(tag.id);
                     }}
                   />
                 );
