@@ -272,19 +272,19 @@ const EditorPage = () => {
     }
   };
 
-  const removeTag = async (tagId: number) => {
-    console.log('does this work?');
-    const { data, error } = await supabase
-      .from('tags')
-      .delete()
-      .match({ id: tagId });
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(data);
-      setTags(tags.filter(tag => tag.id !== tagId));
-    }
-  };
+  // const removeTag = async (tagId: number) => {
+  //   console.log('does this work?');
+  //   const { data, error } = await supabase
+  //     .from('tags')
+  //     .delete()
+  //     .match({ id: tagId });
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     console.log(data);
+  //     setTags(tags.filter(tag => tag.id !== tagId));
+  //   }
+  // };
 
   return (
     <setDeckContext.Provider value={setDeck}>
@@ -407,7 +407,6 @@ const EditorPage = () => {
                 showDeckView={showDeck}
                 toggleDeckView={toggleDeckView}
                 supabase={supabase}
-                removeSubCategory={removeTag}
                 {...{
                   setDeck,
                   deck,

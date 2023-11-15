@@ -79,8 +79,6 @@ const Dropdown = (props: DropdownProps) => {
             if (input.value === '') return;
             if (props.create) {
               props.create(input.value);
-              console.log(input.value);
-              console.log('BORDE LÄGGAS TILL');
             } else {
               console.log('Card component missing createCategory prop.');
             }
@@ -501,6 +499,16 @@ const Card = (props: CardProps) => {
               }}
             >
               {isHovered && !addCategoryWindow && (
+                <CTAButton
+                  variant="deleteCard"
+                  title=""
+                  onClick={() => {
+                    //Needs a confirmation box.
+                    removeSelf();
+                  }}
+                />
+              )}
+              {isHovered && !addCategoryWindow && (
                 <form
                   onSubmit={e => {
                     e.preventDefault();
@@ -532,16 +540,6 @@ const Card = (props: CardProps) => {
                     />
                   </label>
                 </form>
-              )}
-              {isHovered && !addCategoryWindow && (
-                <CTAButton
-                  variant="deleteCard"
-                  title=""
-                  onClick={() => {
-                    //Needs a confirmation box.
-                    removeSelf();
-                  }}
-                />
               )}
             </div>
           </div>
