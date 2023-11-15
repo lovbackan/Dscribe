@@ -66,15 +66,7 @@ const Dropdown = (props: DropdownProps) => {
         type="text"
         autoComplete="off"
         onChange={() => {}}
-        onBlur={e => {
-          if (e.target.value === '') return;
-
-          if (props.create)
-            props.create(e.target.value) && console.log('jajajaj');
-          else console.log('Card component missing createCategory prop.');
-        }}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-          console.log('Key pressed: ', e.key);
           if (e.key === 'Enter') {
             const input = e.target as HTMLInputElement;
             if (input.value === '') return;
@@ -83,8 +75,6 @@ const Dropdown = (props: DropdownProps) => {
             } else {
               console.log('Card component missing createCategory prop.');
             }
-
-            console.log('Enter key pressed');
           }
         }}
       />
@@ -109,16 +99,6 @@ const Dropdown = (props: DropdownProps) => {
           </div>
         );
       })}
-
-      {/* <h1
-        className=" bg-red-200"
-        onClick={() => {
-          if (props.create) props.create();
-          else console.log('Card component missing createTag prop.');
-        }}
-      >
-        {props.variant === 'tags' ? 'Add new tag!' : 'Add new category!'}
-      </h1> */}
     </div>
   );
 };

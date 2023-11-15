@@ -234,9 +234,9 @@ const EditorPage = () => {
     }
   };
 
-  const createCategory = async () => {
+  const createCategory = async (name: string) => {
     const insertData = {
-      name: 'Bundi',
+      name: name,
       story_id: selectedStory ? selectedStory.id : 0,
       user_id: (await supabase.auth.getUser()).data.user?.id,
     };
@@ -252,10 +252,10 @@ const EditorPage = () => {
     fetchCategories();
   };
 
-  const createTag = async () => {
+  const createTag = async (name: string) => {
     const insertData = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
-      name: 'New Tag',
+      name: name,
       story_id: selectedStory.id,
     };
     const { data, error } = await supabase
