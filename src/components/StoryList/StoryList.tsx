@@ -31,7 +31,7 @@ const StoryList = (props: StoryListProps) => {
   };
 
   return (
-    <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[128px] pb-12 ">
+    <>
       {props.stories.map(story => {
         // console.log(story);
         return (
@@ -54,7 +54,7 @@ const StoryList = (props: StoryListProps) => {
           +
         </h2>
       </div>
-    </div>
+    </>
   );
 };
 

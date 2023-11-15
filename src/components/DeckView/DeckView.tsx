@@ -69,9 +69,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
 
   if (props.showDeckView === false) return null;
   return (
-    <div
+    <section
       id="deckView"
-      className="  bg-slate-500 overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
+      className="  bg-slate-400 overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
       <div className="flex flex-row justify-end ">
         <div className="fixed pr-6 pt-3">
@@ -104,15 +104,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             }}
           />
         </div>
-
-        {/* <CTAButton
-          variant="addCard"
-          onClick={() => {
-            props.addCard();
-          }}
-          title="+"
-        /> */}
-
         <div className="flex flex-row w-[100%] h-auto">
           {props.categories.map(category => {
             return (
@@ -142,12 +133,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             );
           })}
         </div>
-
-        {/* <div className="flex flex-row pb-10">
-          <Text textColor="black" variant="heading2" content="Chapters" />
-
-          <div className="w-full h-0.5 bg-black self-end"></div>
-        </div> */}
         <div className="flex flex-row pb-10">
           <Text textColor="black" variant="heading2" content="Cards" />
 
@@ -185,6 +170,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };

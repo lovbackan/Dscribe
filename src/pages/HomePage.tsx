@@ -152,19 +152,20 @@ const HomePage = () => {
           }}
         />
       </div>
-
-      <StoryList
-        supabase={supabase}
-        stories={filteredStories}
-        setSelectedStory={setSelectedStory}
-        setStories={setStories}
-        setChangeCardId={setChangeCardId}
-        deleteCard={() => {
-          setShowDeletePopup(true);
-          console.log(`Delete card id: ${changeCardId} `);
-        }}
-        changePicture={changePicture}
-      />
+      <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
+        <StoryList
+          supabase={supabase}
+          stories={filteredStories}
+          setSelectedStory={setSelectedStory}
+          setStories={setStories}
+          setChangeCardId={setChangeCardId}
+          deleteCard={() => {
+            setShowDeletePopup(true);
+            console.log(`Delete card id: ${changeCardId} `);
+          }}
+          changePicture={changePicture}
+        />
+      </div>
 
       {showDeletePopup && (
         <PopUp
