@@ -55,9 +55,6 @@ const Dropdown = (props: DropdownProps) => {
     <div
       className="bg-black w-full h-10 z-50"
       //Prevents deselection of input field.
-      onMouseDown={e => {
-        e.preventDefault();
-      }}
     >
       <Input
         id="NewCategoryInput"
@@ -92,6 +89,9 @@ const Dropdown = (props: DropdownProps) => {
         }
         return (
           <div
+            onMouseDown={e => {
+              e.preventDefault();
+            }}
             className="w-auto h-auto bg-black"
             onClick={e => {
               e.stopPropagation();
