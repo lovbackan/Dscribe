@@ -8,6 +8,7 @@ import { CTAButton } from '../CTAButton/CTAButton';
 import { Input } from '../Input/Input';
 import { Text } from '../Text/Text';
 import { useState } from 'react';
+import PopUp from '../PopUp/PopUp';
 
 interface DeckViewProps {
   showDeckView: boolean;
@@ -45,7 +46,23 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   const [filteredCards, setFilteredCards] = useState(props.deck);
   const [searchTerm, setSearchTerm] = useState('');
   const [allCards, setAllCards] = useState(props.deck);
+  const [changeCardId, setChangeCardId] = useState<any>(null);
 
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+
+  const deleteCard = async (cardId: number) => {
+    const result = await props.supabase
+      .from('cards')
+      .delete()
+      .match({ id: cardId });
+    if (result.error) console.log(result.error);
+    else {
+      const updatedDeck = props.deck;
+      const idToRemove = updatedDeck.findIndex(card => card.id === cardId);
+      updatedDeck.splice(idToRemove, 1);
+      props.setDeck([...updatedDeck]);
+    }
+  };
   useEffect(() => {
     if (searchTerm === '') {
       setFilteredCards(allCards);
@@ -165,11 +182,29 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 setTags={props.setTags}
                 createTag={props.createTag}
                 createCategory={props.createCategory}
+                toggleDeletePopup={() => {
+                  setShowDeletePopup(true);
+                  setChangeCardId(card);
+                }}
               />
             );
           })}
         </div>
       </div>
+      {showDeletePopup && (
+        <PopUp
+          variant="deleteStory"
+          changeCardId={changeCardId.name}
+          action={() => {
+            deleteCard(changeCardId.id);
+            // deleteStory(changeCardId.id);
+            setShowDeletePopup(false);
+          }}
+          cancel={() => {
+            setShowDeletePopup(false);
+          }}
+        />
+      )}
     </section>
   );
 };

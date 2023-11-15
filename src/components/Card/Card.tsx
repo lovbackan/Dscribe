@@ -38,6 +38,7 @@ interface CardProps {
   setTags?: Function;
   createTag?: Function;
   createCategory?: Function;
+  toggleDeletePopup?: Function;
 }
 
 interface DropdownProps {
@@ -503,9 +504,13 @@ const Card = (props: CardProps) => {
                   variant="deleteCard"
                   title=""
                   onClick={() => {
-                    //Needs a confirmation box.
-                    removeSelf();
+                    if (props.toggleDeletePopup) {
+                      props.toggleDeletePopup();
+                    }
+                    console.log('press form card component');
                   }}
+                  //Needs a confirmation box.
+                  // removeSelf();
                 />
               )}
               {isHovered && !addCategoryWindow && (
