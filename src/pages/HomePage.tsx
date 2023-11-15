@@ -135,6 +135,7 @@ const HomePage = () => {
           autoComplete="off"
           placeholder="Search"
           variant="secondary"
+          autoFocus={true}
           onChange={e => {
             const value = e.target.value.toLowerCase();
             if (value === '') {

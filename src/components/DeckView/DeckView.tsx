@@ -116,6 +116,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             variant="primary"
             placeholder="Search"
             autoComplete="off"
+            autoFocus={true}
             onChange={e => {
               setSearchTerm(e.target.value.toLowerCase());
             }}

@@ -47,14 +47,16 @@ interface DropdownProps {
   mappable: any[] | undefined; //Tags or Categories
   card: CardProps['card'];
   variant: 'tags' | 'categories';
+  setThisOpen: Function;
 }
 
 const Dropdown = (props: DropdownProps) => {
   return (
     <div
       className="bg-black w-full h-10 z-50"
-      onClick={e => {
-        e.stopPropagation();
+      //Prevents deselection of input field.
+      onMouseDown={e => {
+        e.preventDefault();
       }}
     >
       <Input
@@ -66,6 +68,8 @@ const Dropdown = (props: DropdownProps) => {
         type="text"
         autoComplete="off"
         onChange={() => {}}
+        onBlur={() => props.setThisOpen(false)}
+        autoFocus={true}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           if (e.key === 'Enter') {
             const input = e.target as HTMLInputElement;
@@ -437,8 +441,6 @@ const Card = (props: CardProps) => {
               />
             </div>
           </div>
-
-          {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>
       </>
     );
@@ -536,12 +538,13 @@ const Card = (props: CardProps) => {
                 card={props.card}
                 mappable={props.categories}
                 variant="categories"
+                setThisOpen={setAddCategoryWindow}
               />
             </div>
           )}
           <div
             onClick={event => {
-              event.stopPropagation(); // Stop the event from propagating to the parent div
+              event.stopPropagation();
               console.log('edit');
             }}
           >
@@ -596,6 +599,7 @@ const Card = (props: CardProps) => {
               add={addTag}
               create={props.createTag}
               variant="tags"
+              setThisOpen={setAddTagsWindow}
             />
           ) : null}
         </div>

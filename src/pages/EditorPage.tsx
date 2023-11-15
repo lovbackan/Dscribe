@@ -79,10 +79,6 @@ const EditorPage = () => {
   const deckChangesRef = useRef(deckChanges);
   deckChangesRef.current = deckChanges;
 
-  const [saveTimerIsRunning, setSaveTimerIsRunning] = useState(false);
-
-  const [onceState, setOnceState] = useState(0);
-
   useEffect(() => {
     const timeout = setTimeout(saveCountdown, 500);
     return () => clearTimeout(timeout); //Gets around this running twice due to strict mode. Should probably be a state thats updated with the current timeout instead.

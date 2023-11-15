@@ -101,6 +101,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       <div
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
+        onMouseDown={e => e.preventDefault()}
       >
         <div onClick={onClick} className={` ${containerClasses}`}>
           <span className={` ${textClasses}`}>{title}</span>
@@ -124,7 +125,11 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     );
   } else {
     return (
-      <div onClick={onClick} className={` ${containerClasses}`}>
+      <div
+        onClick={onClick}
+        className={` ${containerClasses}`}
+        onMouseDown={e => e.preventDefault()}
+      >
         <span className={` ${textClasses}`}>{title}</span>
       </div>
     );
