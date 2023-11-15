@@ -247,6 +247,8 @@ const Card = (props: CardProps) => {
       return false;
     });
 
+    //Make removeTag function here
+
     const newDeck = props.deck;
     newDeck[cardIndex].tags.push(props.tags[tagIndex]);
     props.setDeck([...newDeck]);
@@ -585,9 +587,9 @@ const Card = (props: CardProps) => {
                       console.log(tag.name);
                     }}
                     removeSubCategory={() => {
-                      //DAN, HÄR SKA DU TA BORT TAGGEN FRÅN KORTET (COPILOT)
+                      //Here our remove tag function should be
                       console.log(
-                        `ta bort ${tag.name} från ${props.card.name}`,
+                        `ta bort ${tag.name}: ${tag.id} från ${props.card.name}`,
                       );
                     }}
                   />
