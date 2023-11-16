@@ -53,18 +53,52 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
     'card' | 'category' | 'tag' | null
   >(null);
 
+  const [filterTags, setFilterTags] = useState<any[]>([]);
+  const [filterCategories, setFilterCategories] = useState<any[]>([]);
+
   useEffect(() => {
-    if (searchTerm === '') {
-      setFilteredCards(allCards);
-    } else {
-      setFilteredCards(
-        allCards.filter(
-          card =>
-            card && card.name && card.name.toLowerCase().includes(searchTerm),
-        ),
+    let newFilteredCards = allCards;
+    if (searchTerm !== '') {
+      newFilteredCards = allCards.filter(
+        card =>
+          card && card.name && card.name.toLowerCase().includes(searchTerm),
       );
     }
-  }, [allCards, searchTerm]);
+
+    if (filterCategories.length > 0) {
+      newFilteredCards = newFilteredCards.filter(card => {
+        let hasCategory = false;
+        filterCategories.forEach(categoryId => {
+          if (card.category_id === categoryId) {
+            hasCategory = true;
+            return;
+          }
+        });
+
+        return hasCategory;
+      });
+    }
+
+    if (filterTags.length > 0) {
+      newFilteredCards = newFilteredCards.filter(card => {
+        let hasTags = true;
+        const tagIds: any[] = card.tags.map((tag: { id: number }) => {
+          return tag.id;
+        });
+
+        filterTags.forEach(tag => {
+          if (!tagIds.includes(tag)) {
+            hasTags = false;
+            return;
+          }
+        });
+
+        return hasTags;
+      });
+    }
+
+    setFilteredCards(newFilteredCards);
+  }, [allCards, searchTerm, filterTags, filterCategories]);
 
   useEffect(() => {
     setFilteredCards(props.deck);
@@ -73,6 +107,22 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   useEffect(() => {
     setAllCards(props.deck);
   }, [props.deck]);
+
+  const toggleFilterCategory = (id: number) => {
+    const newFilterCategories = filterCategories;
+    const index = filterCategories.indexOf(id);
+    if (index === -1) newFilterCategories.push(id);
+    else newFilterCategories.splice(index, 1);
+    setFilterCategories([...newFilterCategories]);
+  };
+
+  const toggleFilterTag = (id: number) => {
+    const newFilterTags = filterTags;
+    const index = filterTags.indexOf(id);
+    if (index === -1) newFilterTags.push(id);
+    else newFilterTags.splice(index, 1);
+    setFilterTags([...newFilterTags]);
+  };
 
   const deleteCard = async (cardId: number) => {
     const result = await props.supabase
@@ -195,7 +245,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 title={category.name}
                 variant="deckViewCategory"
                 color={category.color_id}
-                onClick={() => {}}
+                onClick={() => {
+                  toggleFilterCategory(category.id);
+                }}
                 remove={() => {
                   setShowDeletePopup(true);
                   setToBeDeleted(category);
@@ -214,7 +266,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 title={tag.name}
                 variant="deckViewCategory"
                 color={tag.color_id}
-                onClick={() => {}}
+                onClick={() => {
+                  toggleFilterTag(tag.id);
+                }}
                 remove={() => {
                   setShowDeletePopup(true);
                   setToBeDeleted(tag);
