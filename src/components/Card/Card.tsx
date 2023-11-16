@@ -588,10 +588,8 @@ const Card = (props: CardProps) => {
                     title={tag.name}
                     onClick={event => {
                       event.stopPropagation();
-                      console.log(tag.name);
                     }}
-                    removeTag={() => {
-                      //Here our remove tag function should be
+                    remove={() => {
                       removeTag(tag.id);
                     }}
                     color={tag.color_id}

@@ -23,7 +23,7 @@ interface CTAButtonProps {
   title: string | number;
   variant: ButtonType;
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-  removeTag?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  remove?: (event: React.MouseEvent<HTMLDivElement>) => void;
   color?: number | null;
 }
 
@@ -32,7 +32,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   title,
   onClick,
   variant,
-  removeTag,
+  remove,
   color,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -114,7 +114,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   //       </svg>
   //     </button>
   //   );
-  if (variant === 'cardSubCategory') {
+  if (variant === 'cardSubCategory' || variant === 'deckViewCategory') {
     return (
       <div
         onMouseEnter={() => setIsVisible(true)}
@@ -123,7 +123,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       >
         <div
           onClick={onClick}
-          className={` ${containerClasses} ${color && colors[color]}`}
+          className={` ${containerClasses} ${color != null && colors[color]}`}
         >
           <span className={` ${textClasses}`}>{title}</span>
 
@@ -136,7 +136,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
             <div
               id="removeCateogry"
               className="close-icon absolute rounded-full h-5 w-5 hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black "
-              onClick={removeTag}
+              onClick={remove}
             >
               {/* <Text content="x" variant="subCategory" textColor="white" /> */}
             </div>

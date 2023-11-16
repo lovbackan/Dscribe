@@ -254,6 +254,7 @@ const EditorPage = () => {
       user_id: (await supabase.auth.getUser()).data.user?.id,
       name: name,
       story_id: selectedStory.id,
+      color_id: Math.floor(Math.random() * 8),
     };
     const { data, error } = await supabase
       .from('tags')
@@ -265,23 +266,10 @@ const EditorPage = () => {
     } else {
       const newTags = tags;
       const newTag = data;
-      setTags([...newTags, newTag]);
+      fetchTags();
+      // setTags([...newTags, newTag])
     }
   };
-
-  // const removeTag = async (tagId: number) => {
-  //   console.log('does this work?');
-  //   const { data, error } = await supabase
-  //     .from('tags')
-  //     .delete()
-  //     .match({ id: tagId });
-  //   if (error) {
-  //     console.log(error);
-  //   } else {
-  //     console.log(data);
-  //     setTags(tags.filter(tag => tag.id !== tagId));
-  //   }
-  // };
 
   return (
     <setDeckContext.Provider value={setDeck}>
