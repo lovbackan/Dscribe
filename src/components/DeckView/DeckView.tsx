@@ -191,6 +191,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 key={category.id}
                 title={category.name}
                 variant="deckViewCategory"
+                color={category.color_id}
                 onClick={() => {
                   //Should be a button on the tag that opens a "Are you sure window?"
                   deleteCategory(category.id);
@@ -207,6 +208,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 key={tag.id}
                 title={tag.name}
                 variant="deckViewCategory"
+                color={tag.color_id}
                 onClick={() => {
                   //Should be a button on the tag that opens a "Are you sure window?"
                   deleteTag(tag.id);

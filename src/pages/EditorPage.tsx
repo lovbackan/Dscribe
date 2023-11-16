@@ -235,6 +235,7 @@ const EditorPage = () => {
       name: name,
       story_id: selectedStory ? selectedStory.id : 0,
       user_id: (await supabase.auth.getUser()).data.user?.id,
+      color_id: Math.floor(Math.random() * 8),
     };
 
     const { data, error } = await supabase

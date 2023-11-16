@@ -306,18 +306,27 @@ const Card = (props: CardProps) => {
 
   const [isHovered, setIsHovered] = useState(false);
   const [categoryName, setCategoryName] = useState<string>('');
+  const [categoryColor, setCategoryColor] = useState<number | null>(null);
 
   useEffect(() => {
-    setCategoryName(
-      props.card.category_id && props.categories
-        ? props.categories[
-            props.categories?.findIndex(category => {
-              if (category.id === props.card.category_id) return true;
-              else return false;
-            })
-          ].name
-        : 'No cateogry',
-    );
+    const categoryIndex = props.categories?.findIndex(category => {
+      if (category.id === props.card.category_id) return true;
+      else return false;
+    });
+
+    if (
+      categoryIndex === -1 ||
+      categoryIndex === undefined ||
+      props.card.category_id === null ||
+      props.categories === undefined
+    ) {
+      setCategoryName('No category');
+      setCategoryColor(null);
+      return;
+    }
+    const category = props.categories[categoryIndex];
+    setCategoryName(category.name);
+    setCategoryColor(category.color_id);
   }, [props.card.category_id]);
 
   if (props.variant === 'smallCard') {
@@ -346,6 +355,7 @@ const Card = (props: CardProps) => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);
               }}
+              color={categoryColor}
             />
 
             <CTAButton
@@ -389,6 +399,7 @@ const Card = (props: CardProps) => {
                 console.log(props.card.text);
                 console.log(props.card.category_id);
               }}
+              color={categoryColor}
             />
 
             <Input
@@ -419,6 +430,7 @@ const Card = (props: CardProps) => {
                       onClick={() => {
                         console.log('Slackerman');
                       }}
+                      color={tag.color_id}
                     />
                   );
                 })}
@@ -478,6 +490,7 @@ const Card = (props: CardProps) => {
                 e.stopPropagation();
                 setAddCategoryWindow(!addCategoryWindow);
               }}
+              color={categoryColor}
             />
 
             <div
@@ -581,6 +594,7 @@ const Card = (props: CardProps) => {
                       //Here our remove tag function should be
                       removeTag(tag.id);
                     }}
+                    color={tag.color_id}
                   />
                 );
               })}
