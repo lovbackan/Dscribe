@@ -46,9 +46,12 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   const [filteredCards, setFilteredCards] = useState(props.deck);
   const [searchTerm, setSearchTerm] = useState('');
   const [allCards, setAllCards] = useState(props.deck);
-  const [changeCardId, setChangeCardId] = useState<any>(null);
+  const [toBeDeleted, setToBeDeleted] = useState<any>(null);
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [deleteType, setDeleteType] = useState<
+    'card' | 'category' | 'tag' | null
+  >(null);
 
   useEffect(() => {
     if (searchTerm === '') {
@@ -192,9 +195,11 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 title={category.name}
                 variant="deckViewCategory"
                 color={category.color_id}
-                onClick={() => {
-                  //Should be a button on the tag that opens a "Are you sure window?"
-                  deleteCategory(category.id);
+                onClick={() => {}}
+                remove={() => {
+                  setShowDeletePopup(true);
+                  setToBeDeleted(category);
+                  setDeleteType('category');
                 }}
               />
             );
@@ -209,9 +214,11 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 title={tag.name}
                 variant="deckViewCategory"
                 color={tag.color_id}
-                onClick={() => {
-                  //Should be a button on the tag that opens a "Are you sure window?"
-                  deleteTag(tag.id);
+                onClick={() => {}}
+                remove={() => {
+                  setShowDeletePopup(true);
+                  setToBeDeleted(tag);
+                  setDeleteType('tag');
                 }}
               />
             );
@@ -251,7 +258,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 createCategory={props.createCategory}
                 toggleDeletePopup={() => {
                   setShowDeletePopup(true);
-                  setChangeCardId(card);
+                  setToBeDeleted(card);
+                  setDeleteType('card');
                 }}
               />
             );
@@ -261,10 +269,11 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       {showDeletePopup && (
         <PopUp
           variant="deleteStory"
-          changeCardId={changeCardId.name}
+          changeCardId={toBeDeleted.name}
           action={() => {
-            deleteCard(changeCardId.id);
-            // deleteStory(changeCardId.id);
+            if (deleteType === 'card') deleteCard(toBeDeleted.id);
+            if (deleteType === 'category') deleteCategory(toBeDeleted.id);
+            if (deleteType === 'tag') deleteTag(toBeDeleted.id);
             setShowDeletePopup(false);
           }}
           cancel={() => {

@@ -61,6 +61,9 @@ export const Input: React.FC<InputProps> = ({
         className={` ${containerClasses}`}
         onKeyDown={onKeyDown}
         autoFocus={autoFocus}
+        onClick={e => {
+          e.stopPropagation();
+        }}
       ></input>
     );
   }
