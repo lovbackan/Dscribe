@@ -383,7 +383,7 @@ const Card = (props: CardProps) => {
       <>
         <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
           <div
-            id="Card"
+            id="cardWrapper"
             className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
             onMouseDown={props.handleMouseDown}
           >
@@ -440,12 +440,11 @@ const Card = (props: CardProps) => {
               </div>
             </section>
           </div>
-          <div className="w-[490px] flex flex-row ">
+          <div className="w-[490px] flex flex-row">
             <div
-              className="absolute w-[490px] bg-slate-300 h-5 flex justify-end"
+              className="absolute w-[490px] bg-slate-300 h-5 flex justify-end z-10"
               onMouseDown={props.handleMouseDown}
             >
-              <div className=" absolute right-0 z-10 cursor-pointer"></div>
               <CTAButton
                 title="-"
                 variant="minimize/close"
@@ -454,6 +453,7 @@ const Card = (props: CardProps) => {
                 }}
               />
             </div>
+
             <div className="w-[490px] pt-4 h-[300px]">
               <Editor
                 setEditorState={props.setEditorState}
