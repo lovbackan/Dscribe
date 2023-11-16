@@ -36,7 +36,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   color,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const containerClasses =
+  let containerClasses =
     variant === 'primary'
       ? 'bg-white  h-[27px] w-[80px] rounded-[5px] flex justify-center items-center hover:border-black hover:border'
       : variant === 'secondary'
@@ -96,6 +96,10 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     'bg-[#BA8A76]',
     'bg-[#E579CE]',
   ];
+
+  if (color != null) {
+    containerClasses = containerClasses.replace('bg-black', colors[color]);
+  }
 
   // if (variant === 'edit') {
   //   return (
