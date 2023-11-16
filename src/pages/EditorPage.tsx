@@ -56,7 +56,7 @@ const EditorPage = () => {
   }, [shouldFollowCursor]);
   // make z-index state for openCards and on click increase its value so it has the highest z-index
   const [activeCard, setActiveCard] = useState<string | null>(null);
-
+  const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const [deck, setDeck] = useState<any[]>([]);
   const [deckChanges, setDeckChanges] = useState<any[]>([]);
@@ -290,7 +290,7 @@ const EditorPage = () => {
           <Logo variant="editor" />
 
           <div
-            className={`absolute w-[60%] h-[90%] mt-12 ${
+            className={`absolute w-[60%] h-[90%] mt-12 rounded-tl-lg rounded-tr-lg ${
               showDeck ? 'bg-[#0B0B0B] ' : 'bg-white'
             }`}
           >
@@ -315,21 +315,13 @@ const EditorPage = () => {
             if (card.openCard)
               return (
                 <div
+                  ref={cardRef}
                   id={card.id + 'openCard'}
                   className="inline-block absolute  "
                   style={{
                     left: cardPositions[card.id]?.x || 0,
                     top: cardPositions[card.id]?.y || 0,
                     zIndex: activeCard === card.id ? 11 : 10,
-                  }}
-                  onMouseDown={e => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    setDragOffset({
-                      x: e.clientX - rect.left,
-                      y: e.clientY - rect.top,
-                    });
-                    setShouldFollowCursor(card.id);
-                    setActiveCard(card.id);
                   }}
                 >
                   <Card
@@ -344,6 +336,17 @@ const EditorPage = () => {
                     setDeckChanges={setDeckChanges}
                     categories={categories}
                     setCategories={setCategories}
+                    handleMouseDown={e => {
+                      if (cardRef.current) {
+                        const rect = cardRef.current.getBoundingClientRect();
+                        setDragOffset({
+                          x: e.clientX - rect.left,
+                          y: e.clientY - rect.top,
+                        });
+                        setShouldFollowCursor(card.id);
+                        setActiveCard(card.id);
+                      }
+                    }}
                   />
                 </div>
               );

@@ -443,8 +443,8 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
   return (
     <div
       id="toolbar"
-      className={`toolbar flex mb-[1px] ${
-        props.deckViewOpen ? 'bg-white opacity-50' : 'bg-white'
+      className={`toolbar flex mb-[1px] bg-white ${
+        props.deckViewOpen ? 'opacity-50' : ' opacity-100'
       } p-1 w-full rounded-tl-lg rounded-tr-lg align-middle`}
     >
       <button
