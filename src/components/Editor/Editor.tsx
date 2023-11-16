@@ -40,6 +40,7 @@ interface EditorProps {
   stories?: EditorProps['story'][];
   setStory?: Function;
   setStoryChanges?: Function;
+  deckViewOpen?: boolean;
 }
 
 function SaveOnChange(props: {
@@ -200,11 +201,21 @@ const Editor = (props: EditorProps) => {
         editorState: initialEditorState,
       }}
     >
-      <div className="editor-container">
-        <ToolbarPlugin />
-        <div className="editor-inner">
+      <div
+        id="editorContainer"
+        className=" rounded-sm text-black relative leading-5 font-normal text-left rounded-tl-lg rounded-tr-lg w-full h-[84%]"
+      >
+        <ToolbarPlugin deckViewOpen={props.deckViewOpen} />
+        <div
+          id="editorInner"
+          className={`w-full ${
+            props.deckViewOpen ? 'bg-[#0B0B0B]' : 'bg-white'
+          } relative h-full`}
+        >
           <RichTextPlugin
-            contentEditable={<ContentEditable className="editor-input" />}
+            contentEditable={
+              <ContentEditable className="min-h-[150px] overflow-y-auto h-full w-full resize-none text-[15px] relative outline-none px-2.5 py-3.75" />
+            }
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />

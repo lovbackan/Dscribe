@@ -229,7 +229,7 @@ function BlockFormatDropDown({
 }
 
 function Divider(): JSX.Element {
-  return <div className="divider" />;
+  return <div className="divider " />;
 }
 
 function FontDropDown({
@@ -288,8 +288,11 @@ function FontDropDown({
     </DropDown>
   );
 }
+interface ToolbarPluginProps {
+  deckViewOpen?: boolean;
+}
 
-export default function ToolbarPlugin(): JSX.Element {
+export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
   const [blockType, setBlockType] =
@@ -438,7 +441,12 @@ export default function ToolbarPlugin(): JSX.Element {
   }
 
   return (
-    <div className="toolbar">
+    <div
+      id="toolbar"
+      className={`toolbar flex mb-[1px] ${
+        props.deckViewOpen ? 'bg-white opacity-50' : 'bg-white'
+      } p-1 w-full rounded-tl-lg rounded-tr-lg align-middle`}
+    >
       <button
         disabled={!canUndo || !isEditable}
         onClick={() => {

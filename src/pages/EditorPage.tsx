@@ -286,7 +286,11 @@ const EditorPage = () => {
   return (
     <setDeckContext.Provider value={setDeck}>
       <deckContext.Provider value={deck}>
-        <div className="h-screen w-screen relative flex justify-center overflow-hidden md:bg-slate-400 lg:bg-slate-700 ">
+        <div
+          className={`h-screen w-screen relative flex justify-center overflow-hidden  ${
+            showDeck ? 'bg-[#0C101A] ' : 'bg-[#0F172A]'
+          } `}
+        >
           <div className="absolute flex justify-center items-center w-screen">
             <Text
               variant="heading1Bold"
@@ -297,7 +301,11 @@ const EditorPage = () => {
 
           <Logo variant="editor" />
 
-          <div className="absolute w-[60%] h-[90%] mt-12">
+          <div
+            className={`absolute w-[60%] h-[90%] mt-12 ${
+              showDeck ? 'bg-[#0B0B0B] ' : 'bg-white'
+            }`}
+          >
             {story ? (
               <Editor
                 setEditorState={setEditorState}
@@ -306,9 +314,14 @@ const EditorPage = () => {
                 story={story}
                 setStory={setStory}
                 setStoryChanges={setStoryChanges}
+                deckViewOpen={showDeck}
               />
             ) : null}
-            <div className="absolute h-[20%] w-[100%] mt-10 bg-white"></div>
+            <div
+              className={`absolute h-[20%] w-[100%] mt-10 ${
+                showDeck ? 'bg-white opacity-50 ' : 'bg-white'
+              }`}
+            ></div>
           </div>
           {deck.map(card => {
             if (card.openCard)
@@ -374,7 +387,7 @@ const EditorPage = () => {
             title="+"
           /> */}
             <CTAButton
-              title=" "
+              title=""
               variant="viewDeck"
               onClick={() => {
                 toggleDeckView();
