@@ -8,7 +8,7 @@ type LoginCardType = 'login' | 'signup' | 'forgotPassword';
 
 interface FormProps {
   variant: LoginCardType;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
   onChange1: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange2?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange3?: (event: React.ChangeEvent<HTMLInputElement>) => void;

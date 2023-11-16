@@ -1,6 +1,5 @@
 import { ACCEPTED_ROUTES } from '../routes/routes.tsx';
 import { CTAButton } from '../components/CTAButton/CTAButton.tsx';
-import { CardDesign } from '../components/Card/CardDesign.tsx';
 import { Text } from '../components/Text/Text.tsx';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo/Logo.tsx';
