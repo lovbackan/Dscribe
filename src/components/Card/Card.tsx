@@ -442,7 +442,7 @@ const Card = (props: CardProps) => {
           </div>
           <div className="w-[490px] flex flex-row ">
             <div
-              className="absolute w-full "
+              className="absolute w-[490px] bg-slate-300 h-5 flex justify-end"
               onMouseDown={props.handleMouseDown}
             >
               <div className=" absolute right-0 z-10 cursor-pointer"></div>
