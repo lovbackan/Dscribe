@@ -55,7 +55,7 @@ const EditorPage = () => {
   }, [shouldFollowCursor]);
   // make z-index state for openCards and on click increase its value so it has the highest z-index
   const [activeCard, setActiveCard] = useState<string | null>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
+  // const cardRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const [deck, setDeck] = useState<any[]>([]);
   const [deckChanges, setDeckChanges] = useState<any[]>([]);
