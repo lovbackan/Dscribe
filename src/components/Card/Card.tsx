@@ -440,11 +440,12 @@ const Card = (props: CardProps) => {
               </div>
             </section>
           </div>
-          <div
-            className="w-[490px] flex flex-row "
-            onMouseDown={props.handleMouseDown}
-          >
-            <div className=" absolute right-0 z-10 cursor-pointer">
+          <div className="w-[490px] flex flex-row ">
+            <div
+              className="absolute w-full "
+              onMouseDown={props.handleMouseDown}
+            >
+              <div className=" absolute right-0 z-10 cursor-pointer"></div>
               <CTAButton
                 title="-"
                 variant="minimize/close"
