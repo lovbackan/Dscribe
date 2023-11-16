@@ -50,19 +50,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
 
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
-  const deleteCard = async (cardId: number) => {
-    const result = await props.supabase
-      .from('cards')
-      .delete()
-      .match({ id: cardId });
-    if (result.error) console.log(result.error);
-    else {
-      const updatedDeck = props.deck;
-      const idToRemove = updatedDeck.findIndex(card => card.id === cardId);
-      updatedDeck.splice(idToRemove, 1);
-      props.setDeck([...updatedDeck]);
-    }
-  };
   useEffect(() => {
     if (searchTerm === '') {
       setFilteredCards(allCards);
@@ -83,6 +70,81 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   useEffect(() => {
     setAllCards(props.deck);
   }, [props.deck]);
+
+  const deleteCard = async (cardId: number) => {
+    const result = await props.supabase
+      .from('cards')
+      .delete()
+      .match({ id: cardId });
+    if (result.error) console.log(result.error);
+    else {
+      const updatedDeck = props.deck;
+      const idToRemove = updatedDeck.findIndex(card => card.id === cardId);
+      updatedDeck.splice(idToRemove, 1);
+      props.setDeck([...updatedDeck]);
+    }
+  };
+
+  const deleteCategory = async (categoryId: number) => {
+    const { error } = await props.supabase
+      .from('categories')
+      .delete()
+      .match({ id: categoryId });
+
+    if (error) {
+      alert('Failed to delete. Error: ' + error.message);
+      return;
+    }
+
+    const newCategories = props.categories;
+    const index = props.categories.findIndex(category => {
+      if (category.id == categoryId) return true;
+      return false;
+    });
+    newCategories.splice(index, 1);
+    props.setCategories([...newCategories]);
+
+    console.log(props.deck);
+    const newDeck = props.deck.map(card => {
+      if (card.category_id === categoryId) card.category_id = null;
+      return card;
+    });
+
+    props.setDeck([...newDeck]);
+  };
+
+  const deleteTag = async (tagId: number) => {
+    const { error } = await props.supabase
+      .from('tags')
+      .delete()
+      .match({ id: tagId });
+
+    if (error) {
+      alert('Failed to delete. Error: ' + error.message);
+      return;
+    }
+
+    const newTags = props.tags;
+    const index = props.tags.findIndex(tag => {
+      if (tag.id == tagId) return true;
+      return false;
+    });
+    newTags.splice(index, 1);
+    props.setTags([...newTags]);
+
+    console.log(props.deck);
+    const newDeck = props.deck.map(card => {
+      const index = card.tags.findIndex((tag: { id: number }) => {
+        if (tag.id === tagId) return true;
+        return false;
+      });
+      if (index === -1) return card;
+      card.tags.splice(index, 1);
+      return card;
+    });
+
+    props.setDeck([...newDeck]);
+  };
 
   if (props.showDeckView === false) return null;
   return (
@@ -116,6 +178,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             variant="primary"
             placeholder="Search"
             autoComplete="off"
+            autoFocus={true}
             onChange={e => {
               setSearchTerm(e.target.value.toLowerCase());
             }}
@@ -129,7 +192,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 title={category.name}
                 variant="deckViewCategory"
                 onClick={() => {
-                  console.log(category.name);
+                  //Should be a button on the tag that opens a "Are you sure window?"
+                  deleteCategory(category.id);
                 }}
               />
             );
@@ -144,7 +208,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
                 title={tag.name}
                 variant="deckViewCategory"
                 onClick={() => {
-                  console.log(tag.name);
+                  //Should be a button on the tag that opens a "Are you sure window?"
+                  deleteTag(tag.id);
                 }}
               />
             );

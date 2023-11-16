@@ -23,7 +23,7 @@ interface CTAButtonProps {
   title: string | number;
   variant: ButtonType;
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-  removeSubCategory?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  removeTag?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 //FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
@@ -31,7 +31,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   title,
   onClick,
   variant,
-  removeSubCategory,
+  removeTag,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerClasses =
@@ -106,6 +106,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       <div
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
+        onMouseDown={e => e.preventDefault()}
       >
         <div onClick={onClick} className={` ${containerClasses}`}>
           <span className={` ${textClasses}`}>{title}</span>
@@ -119,7 +120,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
             <div
               id="removeCateogry"
               className="close-icon absolute rounded-full h-5 w-5 hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black "
-              onClick={removeSubCategory}
+              onClick={removeTag}
             >
               {/* <Text content="x" variant="subCategory" textColor="white" /> */}
             </div>
@@ -129,7 +130,11 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     );
   } else {
     return (
-      <div onClick={onClick} className={` ${containerClasses}`}>
+      <div
+        onClick={onClick}
+        className={` ${containerClasses}`}
+        onMouseDown={e => e.preventDefault()}
+      >
         <span className={` ${textClasses}`}>{title}</span>
       </div>
     );

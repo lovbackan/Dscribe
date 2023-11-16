@@ -82,6 +82,7 @@ const HomePage = () => {
           autoComplete="off"
           placeholder="Search"
           variant="secondary"
+          autoFocus={true}
           onChange={e => {
             console.log(e.target.value);
           }}

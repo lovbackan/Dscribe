@@ -26,7 +26,7 @@ interface CardProps {
   };
   variant: CardType;
   supabase: SupabaseClient;
-  deck: any[];
+  deck: CardProps['card'][];
   setDeck: Function;
   setEditorState?: Function;
   editorState?: any[];
@@ -47,15 +47,14 @@ interface DropdownProps {
   mappable: any[] | undefined; //Tags or Categories
   card: CardProps['card'];
   variant: 'tags' | 'categories';
+  setThisOpen: Function;
 }
 
 const Dropdown = (props: DropdownProps) => {
   return (
     <div
       className="bg-black w-full h-10 z-50"
-      onClick={e => {
-        e.stopPropagation();
-      }}
+      //Prevents deselection of input field.
     >
       <Input
         id="NewCategoryInput"
@@ -66,6 +65,8 @@ const Dropdown = (props: DropdownProps) => {
         type="text"
         autoComplete="off"
         onChange={() => {}}
+        onBlur={() => props.setThisOpen(false)}
+        autoFocus={true}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           if (e.key === 'Enter') {
             const input = e.target as HTMLInputElement;
@@ -88,6 +89,9 @@ const Dropdown = (props: DropdownProps) => {
         }
         return (
           <div
+            onMouseDown={e => {
+              e.preventDefault();
+            }}
             className="w-auto h-auto bg-black"
             onClick={e => {
               e.stopPropagation();
@@ -156,23 +160,6 @@ const Card = (props: CardProps) => {
     console.log(newDeck);
   };
 
-  const removeSelf = async () => {
-    const result = await props.supabase
-      .from('cards')
-      .delete()
-      .match({ id: props.card.id });
-    if (result.error) console.log(result.error);
-    else {
-      const updatedDeck = props.deck;
-      const idToRemove = updatedDeck.findIndex(card => {
-        if (card.id === props.card.id) return true;
-        return false;
-      });
-      updatedDeck.splice(idToRemove, 1);
-      props.setDeck([...updatedDeck]);
-    }
-  };
-
   const toggleInHand = () => {
     const cardIndex = props.deck.findIndex(card => {
       if (props.card.id === card.id) return true;
@@ -193,7 +180,7 @@ const Card = (props: CardProps) => {
       const newDeck = props.deck;
       newDeck[cardIndex].name = newName;
       if (
-        props.deck[cardIndex] === newName ||
+        props.deck[cardIndex].name === newName ||
         !props.deckChanges ||
         !props.setDeckChanges
       )
@@ -226,8 +213,6 @@ const Card = (props: CardProps) => {
       return false;
     });
 
-    //Make removeTag function here
-
     const newDeck = props.deck;
     newDeck[cardIndex].tags.push(props.tags[tagIndex]);
     props.setDeck([...newDeck]);
@@ -239,6 +224,30 @@ const Card = (props: CardProps) => {
       newDeckChanges[cardChangesIndex].tags.push(props.tags[tagIndex]);
     }
     props.setDeckChanges([...newDeckChanges]);
+  };
+
+  const removeTag = async (tagId: number) => {
+    const cardIndex = getCardIndex();
+    const cardChangesIndex = getCardChangesIndex();
+    const tagIndex = props.deck[cardIndex].tags.findIndex(
+      (tag: { id: number }) => {
+        if (tag.id === tagId) return true;
+        return false;
+      },
+    );
+
+    const { data, error } = await supabase
+      .from('cards_tags')
+      .delete()
+      .match({ tag_id: tagId, card_id: props.card.id });
+    if (error) {
+      alert('Failed to delete. Error: ' + error.message);
+      return;
+    }
+
+    const newDeck = props.deck;
+    newDeck[cardIndex].tags.splice(tagIndex, 1);
+    props.setDeck([...newDeck]);
   };
 
   const setCategory = (categoryId: number) => {
@@ -437,8 +446,6 @@ const Card = (props: CardProps) => {
               />
             </div>
           </div>
-
-          {/* <RichTextViewer editorState={props.card.text} /> */}
         </div>
       </>
     );
@@ -536,12 +543,13 @@ const Card = (props: CardProps) => {
                 card={props.card}
                 mappable={props.categories}
                 variant="categories"
+                setThisOpen={setAddCategoryWindow}
               />
             </div>
           )}
           <div
             onClick={event => {
-              event.stopPropagation(); // Stop the event from propagating to the parent div
+              event.stopPropagation();
               console.log('edit');
             }}
           >
@@ -569,11 +577,9 @@ const Card = (props: CardProps) => {
                       event.stopPropagation();
                       console.log(tag.name);
                     }}
-                    removeSubCategory={() => {
+                    removeTag={() => {
                       //Here our remove tag function should be
-                      console.log(
-                        `ta bort ${tag.name}: ${tag.id} från ${props.card.name}`,
-                      );
+                      removeTag(tag.id);
                     }}
                   />
                 );
@@ -596,6 +602,7 @@ const Card = (props: CardProps) => {
               add={addTag}
               create={props.createTag}
               variant="tags"
+              setThisOpen={setAddTagsWindow}
             />
           ) : null}
         </div>

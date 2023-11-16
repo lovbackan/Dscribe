@@ -11,6 +11,7 @@ interface InputProps {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   autoComplete?: string;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  autoFocus?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -22,6 +23,7 @@ export const Input: React.FC<InputProps> = ({
   onBlur,
   autoComplete,
   onKeyDown,
+  autoFocus,
 }) => {
   const containerClasses =
     variant === 'primary'
@@ -58,6 +60,7 @@ export const Input: React.FC<InputProps> = ({
         onBlur={onBlur}
         className={` ${containerClasses}`}
         onKeyDown={onKeyDown}
+        autoFocus={autoFocus}
       ></input>
     );
   }
