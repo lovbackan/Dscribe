@@ -310,7 +310,6 @@ const EditorPage = () => {
             if (card.openCard)
               return (
                 <div
-                  ref={cardRef}
                   id={card.id + 'openCard'}
                   className="inline-block absolute  "
                   style={{
@@ -331,15 +330,13 @@ const EditorPage = () => {
                     categories={categories}
                     setCategories={setCategories}
                     handleMouseDown={e => {
-                      if (cardRef.current) {
-                        const rect = cardRef.current.getBoundingClientRect();
-                        setDragOffset({
-                          x: e.clientX - rect.left,
-                          y: e.clientY - rect.top,
-                        });
-                        setShouldFollowCursor(card.id);
-                        setActiveCard(card.id);
-                      }
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top,
+                      });
+                      setShouldFollowCursor(card.id);
+                      setActiveCard(card.id);
                     }}
                   />
                 </div>
