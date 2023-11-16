@@ -39,6 +39,8 @@ interface CardProps {
   createTag?: Function;
   createCategory?: Function;
   toggleDeletePopup?: Function;
+  onMouseDown?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  handleMouseDown?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 interface DropdownProps {
@@ -383,6 +385,7 @@ const Card = (props: CardProps) => {
           <div
             id="Card"
             className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
+            onMouseDown={props.handleMouseDown}
           >
             {imageUrl && (
               <img
@@ -437,7 +440,10 @@ const Card = (props: CardProps) => {
               </div>
             </section>
           </div>
-          <div className="w-[490px] flex flex-row ">
+          <div
+            className="w-[490px] flex flex-row "
+            onMouseDown={props.handleMouseDown}
+          >
             <div className=" absolute right-0 z-10 cursor-pointer">
               <CTAButton
                 title="-"
