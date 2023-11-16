@@ -80,7 +80,7 @@ const HomePage = () => {
       return;
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('stories')
       .update({ image_path: filepath })
       .eq('id', id);

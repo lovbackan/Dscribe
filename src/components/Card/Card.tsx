@@ -28,8 +28,6 @@ interface CardProps {
   supabase: SupabaseClient;
   deck: CardProps['card'][];
   setDeck: Function;
-  setEditorState?: Function;
-  editorState?: any[];
   deckChanges?: any[];
   setDeckChanges?: Function;
   categories?: any[];
@@ -146,7 +144,7 @@ const Card = (props: CardProps) => {
       return;
     }
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('cards')
       .update({ image_path: filepath })
       .eq('id', props.card.id);
@@ -230,7 +228,6 @@ const Card = (props: CardProps) => {
 
   const removeTag = async (tagId: number) => {
     const cardIndex = getCardIndex();
-    const cardChangesIndex = getCardChangesIndex();
     const tagIndex = props.deck[cardIndex].tags.findIndex(
       (tag: { id: number }) => {
         if (tag.id === tagId) return true;
@@ -238,7 +235,7 @@ const Card = (props: CardProps) => {
       },
     );
 
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('cards_tags')
       .delete()
       .match({ tag_id: tagId, card_id: props.card.id });
@@ -378,7 +375,7 @@ const Card = (props: CardProps) => {
       </>
     );
   }
-  if (props.variant === 'openCard' && props.setEditorState) {
+  if (props.variant === 'openCard') {
     return (
       <>
         <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
@@ -455,7 +452,6 @@ const Card = (props: CardProps) => {
             </div>
             <div className="w-[490px] pt-4 h-[300px]">
               <Editor
-                setEditorState={props.setEditorState}
                 card={props.card}
                 deck={props.deck}
                 setDeck={props.setDeck}

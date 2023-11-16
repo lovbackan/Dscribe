@@ -21,7 +21,6 @@ import { CardLinkNode, CardLinkPlugin } from '../../plugins/CardLinkPlugin';
 
 //Fix this any when Card is done enough to be properly typed
 interface EditorProps {
-  setEditorState: Function;
   selectedCard?:
     | any
     | {
@@ -118,7 +117,8 @@ function SaveOnChange(props: {
       setStoryChanges({ text: newText });
     }
   };
-  editor.registerUpdateListener(({ editorState }) => {
+
+  editor.registerUpdateListener(() => {
     setSaveTimer(500);
   });
 

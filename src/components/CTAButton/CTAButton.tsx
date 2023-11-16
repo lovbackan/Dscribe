@@ -11,6 +11,7 @@ type ButtonType =
   | 'cardCategory'
   | 'cardSubCategory'
   | 'deckViewCategory'
+  | 'deckViewCategoryFiltered'
   | 'disabled'
   | 'deck'
   // | 'edit'
@@ -46,9 +47,11 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'landing2'
       ? 'w-[307x] h-[48px] border border-white rounded-[5px] flex justify-center items-center hover:border-2'
       : variant === 'cardCategory'
-      ? 'bg-black h-4 min-w-[40px] w-auto rounded-tl-[5px] rounded-br-[5px] flex justify-center items-center hover:border-white hover:border'
+      ? 'bg-black h-4 min-w-[40px] w-auto rounded-tl-[5px] rounded-br-[5px] flex justify-center items-center hover:border-black hover:border'
       : variant === 'deckViewCategory'
-      ? 'w-auto p-2 h-5 rounded-xl bg-black flex justify-center items-center hover:border-white hover:border'
+      ? 'w-auto p-2 h-5 rounded-xl bg-black flex justify-center items-center hover:border-black hover:border'
+      : variant === 'deckViewCategoryFiltered'
+      ? 'w-auto p-2 h-5 rounded-xl bg-black flex justify-center items-center border-black border border-2'
       : variant === 'addCard'
       ? 'w-12 h-20 rounded-xl bg-white border-2 border-black flex justify-center items-center hover:border-green-700 hover:border-4'
       : // : variant === 'edit'
@@ -76,7 +79,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'text-white text-3xl '
       : variant === 'cardCategory'
       ? 'text-white text-xs'
-      : variant === 'deckViewCategory'
+      : variant === 'deckViewCategory' || variant === 'deckViewCategoryFiltered'
       ? 'text-white text-xs'
       : variant === 'addCard'
       ? 'text-black text-[32px]'
@@ -118,17 +121,18 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   //       </svg>
   //     </button>
   //   );
-  if (variant === 'cardSubCategory' || variant === 'deckViewCategory') {
+  if (
+    variant === 'cardSubCategory' ||
+    variant === 'deckViewCategory' ||
+    variant === 'deckViewCategoryFiltered'
+  ) {
     return (
       <div
         onMouseEnter={() => setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
         onMouseDown={e => e.preventDefault()}
       >
-        <div
-          onClick={onClick}
-          className={` ${containerClasses} ${color != null && colors[color]}`}
-        >
+        <div onClick={onClick} className={` ${containerClasses}`}>
           <span className={` ${textClasses}`}>{title}</span>
 
           <div
@@ -152,7 +156,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
     return (
       <div
         onClick={onClick}
-        className={` ${containerClasses} ${color != null && colors[color]}`}
+        className={` ${containerClasses}`}
         onMouseDown={e => e.preventDefault()}
       >
         <span className={` ${textClasses}`}>{title}</span>

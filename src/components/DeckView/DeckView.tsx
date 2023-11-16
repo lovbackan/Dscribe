@@ -149,6 +149,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       return;
     }
 
+    if (filterCategories.includes(categoryId)) toggleFilterCategory(categoryId);
     const newCategories = props.categories;
     const index = props.categories.findIndex(category => {
       if (category.id == categoryId) return true;
@@ -157,7 +158,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
     newCategories.splice(index, 1);
     props.setCategories([...newCategories]);
 
-    console.log(props.deck);
     const newDeck = props.deck.map(card => {
       if (card.category_id === categoryId) card.category_id = null;
       return card;
@@ -177,6 +177,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       return;
     }
 
+    if (filterTags.includes(tagId)) toggleFilterTag(tagId);
     const newTags = props.tags;
     const index = props.tags.findIndex(tag => {
       if (tag.id == tagId) return true;
@@ -243,7 +244,11 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
               <CTAButton
                 key={category.id}
                 title={category.name}
-                variant="deckViewCategory"
+                variant={
+                  filterCategories.includes(category.id)
+                    ? 'deckViewCategoryFiltered'
+                    : 'deckViewCategory'
+                }
                 color={category.color_id}
                 onClick={() => {
                   toggleFilterCategory(category.id);
@@ -264,7 +269,11 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
               <CTAButton
                 key={tag.id}
                 title={tag.name}
-                variant="deckViewCategory"
+                variant={
+                  filterTags.includes(tag.id)
+                    ? 'deckViewCategoryFiltered'
+                    : 'deckViewCategory'
+                }
                 color={tag.color_id}
                 onClick={() => {
                   toggleFilterTag(tag.id);

@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { supabase } from '../supabase';
 import { useState, useEffect, createContext, useRef } from 'react';
-import { EditorState } from 'lexical';
 import { CTAButton } from '../components/CTAButton/CTAButton';
 import { DeckView } from '../components/DeckView/DeckView';
 import Editor from '../components/Editor/Editor';
@@ -70,7 +69,6 @@ const EditorPage = () => {
   const storyChangesRef = useRef(storyChanges);
   storyChangesRef.current = storyChanges;
 
-  const [editorState, setEditorState] = useState<EditorState>();
   const [showDeck, setShowDeck] = useState<boolean>(false);
 
   const [saveTimer, setSaveTimer] = useState(0);
@@ -95,7 +93,7 @@ const EditorPage = () => {
         deckChangesRef.current.forEach(async card => {
           if (card.tags)
             card.tags.forEach(async (tag: any) => {
-              const { data, error } = await supabase.from('cards_tags').insert({
+              const { error } = await supabase.from('cards_tags').insert({
                 tag_id: tag.id,
                 card_id: card.id,
                 user_id: userId,
@@ -116,7 +114,7 @@ const EditorPage = () => {
           if (card.name) updatedValues.name = card.name;
           if (card.category_id) updatedValues.category_id = card.category_id;
 
-          const { data, error } = await supabase
+          const { error } = await supabase
             .from('cards')
             .update(updatedValues)
             .eq('id', card.id);
@@ -207,12 +205,10 @@ const EditorPage = () => {
   };
 
   const addCard = async () => {
-    // const editorStateJSON = JSON.stringify(editorState);
     const insertData = {
       user_id: (await supabase.auth.getUser()).data.user?.id,
       name: 'New Card',
       story_id: selectedStory ? selectedStory.id : 0,
-      // text: editorStateJSON,
     };
 
     const { data, error } = await supabase
@@ -256,7 +252,7 @@ const EditorPage = () => {
       story_id: selectedStory.id,
       color_id: Math.floor(Math.random() * 8),
     };
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('tags')
       .insert(insertData)
       .select()
@@ -264,9 +260,9 @@ const EditorPage = () => {
     if (error) {
       console.log(error);
     } else {
-      const newTags = tags;
-      const newTag = data;
       fetchTags();
+      // const newTags = tags;
+      // const newTag = data;
       // setTags([...newTags, newTag])
     }
   };
@@ -296,7 +292,6 @@ const EditorPage = () => {
           >
             {story ? (
               <Editor
-                setEditorState={setEditorState}
                 deck={deck}
                 setDeck={setDeck}
                 story={story}
@@ -331,7 +326,6 @@ const EditorPage = () => {
                     supabase={supabase}
                     deck={deck}
                     setDeck={setDeck}
-                    setEditorState={setEditorState}
                     deckChanges={deckChanges}
                     setDeckChanges={setDeckChanges}
                     categories={categories}

@@ -1,8 +1,8 @@
 import { Input } from '../components/Input/Input';
 import { useState } from 'react';
 import { supabase } from '../supabase';
-import { useEffect } from 'react';
-import StoryList from '../components/StoryList/StoryList';
+// import { useEffect } from 'react';
+// import StoryList from '../components/StoryList/StoryList';
 import { Text } from '../components/Text/Text';
 import Navbar from '../components/Navbar/Navbar';
 import { ACCEPTED_ROUTES } from '../routes/routes';
@@ -11,9 +11,9 @@ import PopUp from '../components/PopUp/PopUp';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [stories, setStories] = useState<Array<any>>([]);
-  const [selectedStory, setSelectedStory] = useState<any>(null);
-  const [changeCardId, setChangeCardId] = useState<any>(null);
+  // const [stories, setStories] = useState<Array<any>>([]);
+  // const [selectedStory, setSelectedStory] = useState<any>(null);
+  // const [changeCardId, setChangeCardId] = useState<any>(null);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
 
   if (showSignOutPopup) {
