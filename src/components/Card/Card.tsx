@@ -6,7 +6,7 @@ import { Input } from '../Input/Input';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabase';
 
-type CardType = 'openCard' | 'smallCard' | 'deckCard';
+type CardType = 'openCard' | 'smallCard' | 'deckCard' | 'publishedCard';
 
 // Come up with a better name for this component and CardDesign, this card is the one that is used in the deck view and contains its data.
 //But the CardDesign is the one that is used to create newCards and show the stories (but they should propably also be card.tsx because
@@ -621,6 +621,19 @@ const Card = (props: CardProps) => {
           ) : null}
         </div>
       </>
+    );
+  }
+
+  if (props.variant === 'publishedCard') {
+    return (
+      <div
+        onClick={() => {
+          console.log('published');
+        }}
+        className={`h-72  w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border bg-white border-black`}
+      >
+        <Text content="{title}" textColor="black" variant="cardTitle" />
+      </div>
     );
   }
 };
