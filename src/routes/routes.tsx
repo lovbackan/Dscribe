@@ -9,6 +9,7 @@ import LandingPage from '../pages/LandingPage.tsx';
 import CommunityPage from '../pages/CommunityPage.tsx';
 import EditorPage from '../pages/EditorPage.tsx';
 import SettingsPage from '../pages/SettingsPage.tsx';
+import ReadingPage from '../pages/ReadingPage.tsx';
 
 // const Home = React.lazy(() => import('../components/pages/LandingPage.tsx'));
 export const ACCEPTED_ROUTES = {
@@ -20,6 +21,7 @@ export const ACCEPTED_ROUTES = {
   COMMUNITY: '/community',
   EDITOR: '/editor',
   SETTINGS: '/settings',
+  READER: '/reader',
 };
 
 export const routes: Array<PathRouteProps> = [
@@ -52,5 +54,10 @@ export const privateRoutes: Array<PathRouteProps> = [
     path: ACCEPTED_ROUTES.EDITOR,
     element: <EditorPage />,
   },
+  {
+    path: ACCEPTED_ROUTES.READER,
+    element: <ReadingPage />,
+  },
+
   //lägg till alla private routes här som du måste vara inloggad för att komma åt. Nu finns funktionalitet som redirectar dig till home
 ];
