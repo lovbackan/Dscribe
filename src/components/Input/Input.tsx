@@ -27,12 +27,12 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const containerClasses =
     variant === 'primary'
-      ? 'w-52 h-7 resize-none rounded-lg px-2 py-1 text-black'
+      ? 'w-52 h-7 resize-none rounded-lg px-2 py-1 text-black font-inter'
       : variant === 'secondary'
-      ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1'
+      ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter'
       : variant === 'cardTitle'
-      ? 'w-[100px] h-[30px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70'
-      : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1';
+      ? 'w-[100px] h-[30px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70 font-inter'
+      : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter';
 
   if (variant === 'cardTitle') {
     return (

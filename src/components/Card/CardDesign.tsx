@@ -7,6 +7,7 @@ interface CardDesignProps {
   title: string;
   variant: CardType;
   onClick: () => void;
+  imageUrl: string;
 }
 
 //FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
@@ -17,6 +18,7 @@ export const CardDesign: React.FC<CardDesignProps> = ({
   title,
   onClick,
   variant,
+  imageUrl,
 }) => {
   const containerClasses =
     variant === 'bigCard' ? 'bg-white border-black' : 'bg-white';
@@ -26,9 +28,12 @@ export const CardDesign: React.FC<CardDesignProps> = ({
   return (
     <div
       onClick={onClick}
-      className={`h-72  w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border ${containerClasses}`}
+      className={`h-[300px] w-[200px] rounded-[12px] cursor-pointer ${containerClasses}`}
     >
-      <Text content={title} textColor="black" variant="cardTitle" />
+      <img src={imageUrl} className="absolute  rounded-xl"></img>
+      <div className=" h-auto h-max-[68px] w-[150px] ml-[23px] mt-[42px] bg-black opacity-70 rounded-lg p-3">
+        <Text content={title} textColor="white" variant="cardTitle" />
+      </div>
     </div>
   );
 };

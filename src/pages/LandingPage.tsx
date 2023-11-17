@@ -4,11 +4,12 @@ import { Text } from '../components/Text/Text.tsx';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo/Logo.tsx';
 import mockUpImage from '../images/mock-up.jpg';
+import { CardDesign } from '../components/Card/CardDesign.tsx';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-full w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
+    <div className="h-full w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default ">
       <section
         id="LandingPageNavbar"
         className="h-[101px] w-full bg-inherit flex flex-row justify-center items-center px-[20px]"
@@ -25,7 +26,7 @@ const LandingPage = () => {
 
       <section
         id="hero"
-        className="flex flex-row justify-center items-center  "
+        className="flex flex-row justify-center items-center   "
       >
         <Logo variant="big" />
         {/* <div
@@ -34,7 +35,7 @@ const LandingPage = () => {
         >
           <Text variant="logo" textColor="white" content="Codeck" />
         </div> */}
-        <div className="w-[661px] h-[200px] text-left ml-[73px]">
+        <div className="w-[600px] h-[200px] text-left ml-[73px] ">
           <Text
             variant="hero"
             textColor="white"
@@ -43,11 +44,15 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="flex flex-row">
-        <div className="flex flex-col w-[445px]">
-          <Text variant="logoBig" textColor="white" content="Why Codeck?" />
+      <section className="flex flex-row h-[500px] gap-[25px] max-w-[1160px]">
+        <div className="flex flex-col h-auto max-w-[497px] text-left gap-[36px] my-[35px] ">
           <Text
-            variant="p-primary"
+            variant="heroHeading2"
+            textColor="white"
+            content="Why Codeck?"
+          />
+          <Text
+            variant="pSecondary"
             textColor="white"
             content="Unlock a new dimension in writing. Seamlessly blend your main text with card-based notes, ensuring clarity without the clutter. Tailor your narrative effortlessly, whether you're drafting documents, crafting stories, or enhancing your communication. Codeck empowers you to express more, with precision and ease!"
           />
@@ -60,7 +65,7 @@ const LandingPage = () => {
           />
         </div>
 
-        <div className="w-[445px] ">
+        <div className="w-[600px] h-[428px] drop-shadow-lg ">
           <img
             src={mockUpImage}
             alt="mock-up"
@@ -69,52 +74,75 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section>
-        <div className="w-[800px]">
-          <Text variant="logoBig" textColor="white" content="What is Codeck?" />
+      <section className="max-w-[1160px] flex flex-row ">
+        <div className="max-w-[1160px] text-left">
           <Text
-            variant="p-primary"
+            variant="heroHeading2"
             textColor="white"
-            content="Codeck is a web-base word processing service that redefines the art of writing by providing a dynamic platform where words and concise notes intertwine seamlessly. Unlike tradtional word processors, Codeck empowers you to craft comeplling narratives while using side-by-side cards for supplementary details. Whether you're a writer, student, or professional comunicator, Codeck is your key to efficient and expressive writing, simplifying the process of conveying informations and ideas."
+            content="What is Codeck?"
+          />
+          <Text
+            variant="pSecondary"
+            textColor="white"
+            content="Codeck is a web-based word processing service that redefines the art of writing by providing a dynamic platform where words and concise notes intertwine seamlessly. Unlike traditional word processors, Codeck empowers you to craft compelling narratives while using side-by-side cards for supplementary details. Whether you're a writer, student, or professional communicator, Codeck is your key to efficient and expressive writing, simplifying the process of conveying information and ideas."
           />
         </div>
       </section>
 
-      {/* <section id="StoryList" className="w-full h-[30%] px-[140px] ">
-        <div className="flex flex-row pb-10">
+      <section id="StoryList" className="max-w-[1160px] h-[396px]">
+        <div className="flex flex-row pb-10 w-[1160px] h-[56px]">
           <Text textColor="white" variant="heading2" content="Trending" />
 
-          <div className="w-full h-0.5 bg-white self-end"></div>
+          <div className="w-full h-0.5  bg-white mt-[27px]"></div>
         </div>
 
-        <div className="flex flex-row justify-between w-[80%]">
+        <div className="flex flex-row justify-between w-full mt-[40px]">
           <CardDesign
-            title="The Great Gatsby"
+            title="Adventure is coming"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="images/heroPagePictures/adventure.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
-            title="Lord of the rings"
+            title="Future City"
             variant="bigCard"
-            onClick={() => console.log('Lord of the rings clicked')}
+            imageUrl="images/heroPagePictures/futureCity.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
-            title="The Great Gatsby"
+            title="The Witch"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="images/heroPagePictures/theWitch.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
-            title="The Great Gatsby"
+            title="Brothers (manuscript)"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="images/heroPagePictures/brothers.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
-            title="The Great Gatsby"
+            title="Why"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="images/heroPagePictures/why.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
         </div>
-      </section> */}
+      </section>
+      <section className="h-[250px]">
+        <div className="w-screen h-0.5  bg-white "></div>
+        <div className="flex flex-row justify-between my-[57px] px-[140px]">
+          <div>
+            <Text content="Contact us" variant="heading2" textColor="white" />
+            <Text
+              content="info@codeck.com"
+              variant="pPrimary"
+              textColor="white"
+            />
+          </div>
+          <Text content="Copyright 2023" variant="heading2" textColor="white" />
+        </div>
+      </section>
     </div>
   );
 };

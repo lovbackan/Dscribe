@@ -6,14 +6,16 @@ type TextType =
   | 'heading2'
   | 'heading3'
   | 'heading4'
-  | 'p-primary'
-  | 'p-secondary'
+  | 'pPrimary'
+  | 'pSecondary'
   | 'cardTitle'
   | 'logoBig'
   | 'logoMedium'
   | 'logoSmall'
   | 'subCategory'
-  | 'hero';
+  | 'hero'
+  | 'heroHeading2'
+  | 'loginLogo';
 
 type TextColor = 'black' | 'white' | 'green';
 
@@ -36,20 +38,22 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     textColorClasses[textColor] || textColorClasses.default;
 
   const tailwindClasses = {
-    heading1: `text-3xl ${tailwindColorClass}`,
-    hero: `text-5xl ${tailwindColorClass} font-source`,
-    heading1Bold: `text-3xl ${tailwindColorClass} font-bold`,
-    heading2: `text-2xl ${tailwindColorClass}`,
-    heading3: `text-xl ${tailwindColorClass}`,
-    'p-primary': tailwindColorClass,
-    'p-secondary': tailwindColorClass,
-    cardTitle: `text-xl ${tailwindColorClass} break-words`,
-    heading4: `text-base ${tailwindColorClass}`,
-    default: `text-sm ${tailwindColorClass}`,
-    logoBig: `text-3xl font-courier ${tailwindColorClass}`,
+    heading1: `text-3xl ${tailwindColorClass} font-inter`,
+    hero: `text-5xl ${tailwindColorClass} font-source font-bold`,
+    heading1Bold: `text-3xl ${tailwindColorClass} font-bold font-inter`,
+    heading2: `text-3xl ${tailwindColorClass} font-inter`,
+    heading3: `text-xl ${tailwindColorClass} font-inter`,
+    cardTitle: `text-xl ${tailwindColorClass} break-words font-inter`,
+    heading4: `text-base ${tailwindColorClass} font-inter`,
+    default: `text-sm ${tailwindColorClass} font-inter`,
+    logoBig: `text-[28px] font-courier ${tailwindColorClass} font-bold`,
     logoMedium: `text-2xl font-courier ${tailwindColorClass}`,
-    logoSmall: `text-xl font-courier ${tailwindColorClass}`,
-    subCategory: `text-[10px] ${tailwindColorClass}`,
+    logoSmall: `text-[20px] font-courier ${tailwindColorClass} font-bold`,
+    subCategory: `text-[10px] ${tailwindColorClass} font-inter`,
+    pPrimary: `text-[12px] font-inter ${tailwindColorClass}`,
+    pSecondary: `text-[20px] font-inter ${tailwindColorClass}`,
+    heroHeading2: `text-[36px] font-courier ${tailwindColorClass} font-bold`,
+    loginLogo: `text-[40px] font-courier ${tailwindColorClass} font-bold`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
@@ -62,14 +66,16 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
       heading2: 'h2',
       heading3: 'h3',
       heading4: 'h4',
-      'p-primary': 'p',
-      'p-secondary': 'p',
+      pPrimary: 'p',
+      pSecondary: 'p',
       cardTitle: 'h4',
       default: 'p',
       logoBig: 'h1',
       logoMedium: 'h2',
       logoSmall: 'h3',
       subCategory: 'p',
+      heroHeading2: 'h2',
+      loginLogo: 'h1',
     }[variant] || 'p';
 
   return React.createElement(elementType, { className }, content);

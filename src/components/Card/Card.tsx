@@ -99,7 +99,7 @@ const Dropdown = (props: DropdownProps) => {
             }}
             key={object.id}
           >
-            <Text content={object.name} variant="p-primary" textColor="white" />
+            <Text content={object.name} variant="pPrimary" textColor="white" />
           </div>
         );
       })}

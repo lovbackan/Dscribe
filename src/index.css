@@ -10,7 +10,7 @@
 
   color-scheme: light;
   color: rgba(255, 255, 255, 0.87);
-  background-color: white;
+  background-color: #0f172a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -923,4 +923,30 @@ i.logo {
 
 .inputWrapper:hover .editSymbol {
   opacity: 1;
+}
+
+@font-face {
+  font-family: 'Courier';
+  src:
+    local('Courier'),
+    url('./fonts/Courier-New-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Source';
+  src:
+    local('Source'),
+    url('./fonts/Source-Serif-Pro-Black.otf') format('truetype');
+}
+
+.font-courier {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.font-source {
+  font-family: 'Source Serif Pro', serif;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
 }
