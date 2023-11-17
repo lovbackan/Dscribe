@@ -1,5 +1,4 @@
 import React from 'react';
-
 import exampleTheme from '../../themes/ExampleTheme';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
@@ -18,7 +17,6 @@ import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { CardLinkPlugin } from '../../plugins/CardLinkPlugin';
 import { CardLinkNode } from '../../plugins/CardLinkPlugin';
-// import { EditorState } from 'lexical';
 
 interface EditorProps {
   editorState: string | undefined;
