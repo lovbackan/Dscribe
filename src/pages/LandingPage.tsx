@@ -100,27 +100,32 @@ const LandingPage = () => {
           <CardDesign
             title="Adventure is coming"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="src/images/heroPagePictures/adventure.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Future City"
             variant="bigCard"
-            onClick={() => console.log('Lord of the rings clicked')}
+            imageUrl="src/images/heroPagePictures/futureCity.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="The Witch"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="src/images/heroPagePictures/theWitch.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Brothers (manuscript)"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="src/images/heroPagePictures/brothers.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Why"
             variant="bigCard"
-            onClick={() => console.log('The Great Gatsby clicked')}
+            imageUrl="src/images/heroPagePictures/why.png"
+            onClick={() => console.log('Mockup published work clicked')}
           />
         </div>
       </section>
