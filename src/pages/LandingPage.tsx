@@ -100,31 +100,31 @@ const LandingPage = () => {
           <CardDesign
             title="Adventure is coming"
             variant="bigCard"
-            imageUrl="images/heroPagePictures/adventure.png"
+            imageUrl="src/images/heroPagePictures/adventure.png"
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Future City"
             variant="bigCard"
-            imageUrl="images/heroPagePictures/futureCity.png"
+            imageUrl="src/images/heroPagePictures/futureCity.png"
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="The Witch"
             variant="bigCard"
-            imageUrl="images/heroPagePictures/theWitch.png"
+            imageUrl="src/images/heroPagePictures/theWitch.png"
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Brothers (manuscript)"
             variant="bigCard"
-            imageUrl="images/heroPagePictures/brothers.png"
+            imageUrl="src/images/heroPagePictures/brothers.png"
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Why"
             variant="bigCard"
-            imageUrl="images/heroPagePictures/why.png"
+            imageUrl="src/images/heroPagePictures/why.png"
             onClick={() => console.log('Mockup published work clicked')}
           />
         </div>
