@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ACCEPTED_ROUTES } from '../../routes/routes';
-import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
 import Logo from '../Logo/Logo';
 import { useNavigate } from 'react-router-dom';

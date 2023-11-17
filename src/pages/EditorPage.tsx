@@ -10,11 +10,12 @@ import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
 import { Text } from '../components/Text/Text';
 
-export const deckContext = createContext<any[]>([]);
-export const setDeckContext = createContext<Function>(() => {});
 type CardPositions = {
   [key: string]: { x: number; y: number };
 };
+
+export const deckContext = createContext<any[]>([]);
+export const setDeckContext = createContext<Function>(() => {});
 
 const EditorPage = () => {
   //Code for dragging cards
