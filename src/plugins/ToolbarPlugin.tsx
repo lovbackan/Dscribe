@@ -445,7 +445,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
       id="toolbar"
       className={`toolbar flex mb-[1px] bg-white ${
         props.deckViewOpen ? 'opacity-50' : ' opacity-100'
-      } p-1 w-full rounded-tl-lg rounded-tr-lg align-middle`}
+      } p-1 w-full rounded-tl-lg rounded-tr-lg align-middle select-none`}
     >
       <button
         disabled={!canUndo || !isEditable}
