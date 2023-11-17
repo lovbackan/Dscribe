@@ -1,6 +1,6 @@
 import { CTAButton } from '../CTAButton/CTAButton';
 import { Input } from '../Input/Input';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
 import { Text } from '../Text/Text';
 
@@ -21,6 +21,7 @@ const Form: React.FC<FormProps> = ({
   onChange2,
   onChange3,
 }) => {
+  const navigate = useNavigate();
   if (variant === 'login') {
     return (
       <>
@@ -49,12 +50,27 @@ const Form: React.FC<FormProps> = ({
             <CTAButton title="Login" variant="primary" onClick={onClick} />
           </div>
 
-          <Link to={ACCEPTED_ROUTES.REGISTER}>
-            <p className="text-sm text-center pb-1">Register</p>
-          </Link>
-          <Link to={ACCEPTED_ROUTES.PASSWORDRESET}>
-            <p className="text-sm text-center">Forgot password?</p>
-          </Link>
+          <div
+            onClick={() => navigate(ACCEPTED_ROUTES.REGISTER)}
+            className="cursor-pointer"
+          >
+            <Text
+              variant="pPrimary"
+              content="Create account"
+              textColor="white"
+            />
+          </div>
+
+          <div
+            onClick={() => navigate(ACCEPTED_ROUTES.PASSWORDRESET)}
+            className="cursor-pointer"
+          >
+            <Text
+              variant="pPrimary"
+              content="Forgot Password?"
+              textColor="white"
+            />
+          </div>
         </div>
       </>
     );
@@ -96,12 +112,22 @@ const Form: React.FC<FormProps> = ({
             <CTAButton title="Register" variant="primary" onClick={onClick} />
           </div>
 
-          <Link to={ACCEPTED_ROUTES.LOGIN}>
-            <p className="text-sm text-center pb-1">Login</p>
-          </Link>
-          <Link to={ACCEPTED_ROUTES.PASSWORDRESET}>
-            <p className="text-sm text-center">Forgot password?</p>
-          </Link>
+          <div
+            onClick={() => navigate(ACCEPTED_ROUTES.LOGIN)}
+            className="cursor-pointer"
+          >
+            <Text variant="pPrimary" content="Login" textColor="white" />
+          </div>
+          <div
+            onClick={() => navigate(ACCEPTED_ROUTES.PASSWORDRESET)}
+            className="cursor-pointer"
+          >
+            <Text
+              variant="pPrimary"
+              content="Forgot password?"
+              textColor="white"
+            />
+          </div>
         </div>
       </>
     );
@@ -121,12 +147,22 @@ const Form: React.FC<FormProps> = ({
         <CTAButton title="Reset" variant="primary" onClick={onClick} />
 
         <div id="optionsContainer" className="flex flex-col">
-          <Link to={ACCEPTED_ROUTES.LOGIN}>
-            <p className="text-sm text-center">Login</p>
-          </Link>
-          <Link to={ACCEPTED_ROUTES.REGISTER}>
-            <p className="text-sm text-center">Register</p>
-          </Link>
+          <div
+            onClick={() => navigate(ACCEPTED_ROUTES.LOGIN)}
+            className="cursor-pointer"
+          >
+            <Text variant="pPrimary" content="Login" textColor="white" />
+          </div>
+          <div
+            onClick={() => navigate(ACCEPTED_ROUTES.REGISTER)}
+            className="cursor-pointer"
+          >
+            <Text
+              variant="pPrimary"
+              content="Create account"
+              textColor="white"
+            />
+          </div>
         </div>
       </>
     );

@@ -86,7 +86,9 @@ const StoryCard = (props: StoryCardProps) => {
   return (
     <div
       id={props.story.name}
-      className="  w-[200px] h-[300px] rounded-[20px] bg-[#5179D9] cursor-pointer hover:border hover:border-white drop-shadow-lg"
+      className={`  w-[200px] h-[300px] rounded-[20px] bg-[#5179D9] cursor-pointer  drop-shadow-lg ${
+        imageUrl ? '' : 'hover:border-2 hover:border-white'
+      }`}
       onClick={() => props.setSelectedStory(props.story)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -95,7 +97,7 @@ const StoryCard = (props: StoryCardProps) => {
         <img
           src={imageUrl}
           alt=""
-          className="absolute -z-10 w-full h-full rounded-xl"
+          className="absolute -z-10 w-full h-full rounded-xl hover:border-2 hover:border-white"
           draggable="false"
         />
       )}
