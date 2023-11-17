@@ -3,7 +3,7 @@ import React from 'react';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
 import { Text } from '../Text/Text';
 import Logo from '../Logo/Logo';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 type ButtonType = 'home' | 'community' | 'settings' | 'logout';
 
@@ -20,11 +20,16 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
   // userName,
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isSelected = location.pathname.includes(variant);
 
   if (variant === 'home') {
     return (
       <div
-        className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[207px] rounded-r-lg cursor-pointer"
+        className={`flex flex-col justify-center items-center hover:bg-[#0F172A] h-[207px] rounded-r-lg cursor-pointer ${
+          isSelected ? 'bg-[#0F172A]' : ''
+        }`}
         onClick={() => navigate(ACCEPTED_ROUTES.HOME)}
       >
         <Logo variant="small" />
@@ -34,7 +39,10 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
   } else if (variant === 'community') {
     return (
       <div
-        className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg cursor-pointer"
+        className={`flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg cursor-pointer ${
+          isSelected ? 'bg-[#0F172A]' : ''
+        }
+        `}
         onClick={() => navigate(ACCEPTED_ROUTES.COMMUNITY)}
       >
         <div className="navBar-community"></div>
@@ -44,7 +52,8 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
   } else if (variant === 'settings') {
     return (
       <div
-        className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg cursor-pointer"
+        className={`flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg cursor-pointer 
+        ${isSelected ? 'bg-[#0F172A]' : ''}`}
         onClick={() => navigate(ACCEPTED_ROUTES.SETTINGS)}
       >
         <div className="navBar-settings"></div>

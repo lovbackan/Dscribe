@@ -126,7 +126,7 @@ const HomePage = () => {
 
       <div
         id="search-bar"
-        className="flex flex-col w-[500px] text-left pl-[212px] pt-[140px] pb-[40px] gap-6"
+        className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] pb-[40px] gap-6"
       >
         <Text variant="heading1" textColor="white" content="Your Projects" />
         <Input

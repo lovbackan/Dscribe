@@ -18,7 +18,8 @@ type ButtonType =
   | 'addCard'
   | 'deleteCard'
   | 'changePicture'
-  | 'addTags';
+  | 'addTags'
+  | 'publishStory';
 
 interface CTAButtonProps {
   title: string | number;
@@ -68,27 +69,31 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'uploadPicture hover:border-2 hover:border-white cursor-pointer'
       : variant === 'addTags'
       ? 'addTags hover:border-2 hover:border-white cursor-pointer'
+      : variant === 'publishStory'
+      ? 'w-[100px] h-[25px] rounded-[5px] flex justify-center items-center hover:border-white hover:border-2 cursor-pointer bg-black bg-opacity-50'
       : 'bg-purple-400';
 
   const textClasses =
     variant === 'primary'
-      ? 'text-black text-[12px]'
+      ? 'text-black text-[12px] font-inter'
       : variant === 'secondary'
-      ? 'text-black text-[12px]'
+      ? 'text-black text-[12px] font-inter'
       : variant === 'landing'
-      ? 'text-white text-3xl '
+      ? 'text-white text-3xl font-inter '
       : variant === 'landing2'
-      ? 'text-white text-3xl '
+      ? 'text-white text-3xl font-inter '
       : variant === 'cardCategory'
-      ? 'text-white text-xs'
+      ? 'text-white text-xs font-inter'
       : variant === 'deckViewCategory' || variant === 'deckViewCategoryFiltered'
-      ? 'text-white text-xs'
+      ? 'text-white text-xs font-inter'
       : variant === 'addCard'
-      ? 'text-black text-[32px]'
+      ? 'text-black text-[32px] font-inter'
       : variant === 'minimize/close'
-      ? 'text-black text-[12px]'
+      ? 'text-black text-[12px] font-inter'
       : variant === 'cardSubCategory'
-      ? 'text-white text-[10px]'
+      ? 'text-white text-[10px] font-inter'
+      : variant === 'publishStory'
+      ? 'text-white text-[12px] font-inter'
       : 'text-purple-400';
 
   const colors = [

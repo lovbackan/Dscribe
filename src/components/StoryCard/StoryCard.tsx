@@ -110,6 +110,16 @@ const StoryCard = (props: StoryCardProps) => {
             <div className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2">
               {isHovered && (
                 <CTAButton
+                  variant="publishStory"
+                  title="Make public"
+                  onClick={() => {
+                    console.log(`publish story: ${props.story.name} `);
+                  }}
+                />
+              )}
+
+              {isHovered && (
+                <CTAButton
                   variant="deleteCard"
                   title=""
                   // onClick={() => props.setChangeCardId(props.story)}

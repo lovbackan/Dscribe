@@ -4,6 +4,8 @@ import PopUp from '../components/PopUp/PopUp';
 import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import { supabase } from '../supabase';
+import { Text } from '../components/Text/Text';
+import { Input } from '../components/Input/Input';
 
 const SettingsPage = () => {
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
@@ -33,8 +35,23 @@ const SettingsPage = () => {
           setShowSignOutPopup(true);
         }}
       />
-      <h1>Settings Page</h1>
-
+      <div
+        id="search-bar"
+        className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] pb-[40px] gap-6"
+      >
+        <Text variant="heading1" textColor="white" content="Settings" />
+        <Input
+          type="text"
+          id="search"
+          autoComplete="off"
+          placeholder="Search"
+          variant="secondary"
+          autoFocus={true}
+          onChange={e => {
+            console.log(e.target.value);
+          }}
+        />
+      </div>
       {showSignOutPopup && (
         <PopUp
           variant="logOut"
