@@ -58,6 +58,4 @@ export const privateRoutes: Array<PathRouteProps> = [
     path: ACCEPTED_ROUTES.READER,
     element: <ReadingPage />,
   },
-
-  //lägg till alla private routes här som du måste vara inloggad för att komma åt. Nu finns funktionalitet som redirectar dig till home
 ];
