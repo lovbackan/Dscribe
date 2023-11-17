@@ -21,7 +21,7 @@ import { CardLinkNode } from '../../plugins/CardLinkPlugin';
 // import { EditorState } from 'lexical';
 
 interface EditorProps {
-  editorState: string;
+  editorState: string | undefined;
 }
 
 function Placeholder() {
@@ -58,18 +58,29 @@ const RichTextViewer = (props: EditorProps) => {
   function UpdateState(): null {
     const [editor] = useLexicalComposerContext();
     React.useEffect(() => {
-      // console.log(props.editorState);
-      // if (props.editorState) console.log(editor.parseEditorState(props.editorState));
-      if (props.editorState)
-        editor.setEditorState(editor.parseEditorState(props.editorState));
+      if (props.editorState) {
+        const decodedEditorState = JSON.parse(props.editorState);
+        if (
+          decodedEditorState &&
+          decodedEditorState.root.children &&
+          decodedEditorState.root.children[0]
+        )
+          editor.setEditorState(editor.parseEditorState(props.editorState));
+      }
     }, [props.editorState]);
     return null;
   }
 
   return (
     <LexicalComposer initialConfig={editorConfig}>
-      <div className="editor-container">
-        <div className="editor-inner">
+      <div
+        id=" editor-container"
+        className=" rounded-sm text-black relative leading-5  font-normal text-left rounded-tl-lg rounded-tr-lg w-full h-[84%]"
+      >
+        <div
+          id=" editor-inner"
+          className=" w-full relative h-full bg-white rounded-t-lg"
+        >
           <RichTextPlugin
             contentEditable={<ContentEditable className="editor-input" />}
             placeholder={<Placeholder />}

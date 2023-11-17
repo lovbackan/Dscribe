@@ -203,7 +203,7 @@ const Editor = (props: EditorProps) => {
     >
       <div
         id="editorContainer"
-        className=" rounded-sm text-black relative leading-5  font-normal text-left rounded-tl-lg rounded-tr-lg w-full h-[84%]"
+        className=" rounded-sm text-black relative leading-5  font-normal text-left rounded-tl-lg rounded-tr-lg w-full h-[84%] "
       >
         <ToolbarPlugin deckViewOpen={props.deckViewOpen} />
         <div

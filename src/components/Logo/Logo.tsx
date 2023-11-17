@@ -18,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     small:
       'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
     editor:
-      'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center absolute cursor-pointer hover:border-4',
+      'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center absolute cursor-pointer hover:border-4 left-6 top-6',
   };
 
   const className = logoClasses[variant] || logoClasses.big;
@@ -49,13 +49,11 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     );
   } else if (variant === 'editor') {
     return (
-      <div className="pl-6 pt-6">
-        <Link to={ACCEPTED_ROUTES.HOME}>
-          <div id="logo" className={`${className}`}>
-            <Text variant="logoSmall" textColor="white" content="Codeck" />
-          </div>
-        </Link>
-      </div>
+      <Link to={ACCEPTED_ROUTES.HOME}>
+        <div id="logo" className={`${className}`}>
+          <Text variant="logoSmall" textColor="white" content="Codeck" />
+        </div>
+      </Link>
     );
   }
 };

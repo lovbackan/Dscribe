@@ -1,19 +1,21 @@
 import { Input } from '../components/Input/Input';
 import { useState } from 'react';
 import { supabase } from '../supabase';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 // import StoryList from '../components/StoryList/StoryList';
 import { Text } from '../components/Text/Text';
 import Navbar from '../components/Navbar/Navbar';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import { useNavigate } from 'react-router-dom';
 import PopUp from '../components/PopUp/PopUp';
+import StoryList from '../components/StoryList/StoryList';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  // const [stories, setStories] = useState<Array<any>>([]);
-  // const [selectedStory, setSelectedStory] = useState<any>(null);
-  // const [changeCardId, setChangeCardId] = useState<any>(null);
+  const [stories, setStories] = useState<Array<any>>([]);
+  const [selectedStory, setSelectedStory] = useState<any>(null);
+  //const [changeCardId, setChangeCardId] = useState<any>(null);
+  //const [filteredStories, setFilteredStories] = useState(stories);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
 
   if (showSignOutPopup) {
@@ -22,13 +24,13 @@ const HomePage = () => {
     document.body.style.overflow = 'auto';
   }
 
-  // const fetchStories = async () => {
-  //   const { data, error } = await supabase.from('stories').select('*');
-  //   console.log(data);
-  //   console.log(supabase.auth.getUser());
-  //   if (error) console.log(error);
-  //   else setStories(data);
-  // };
+  const fetchStories = async () => {
+    const { data, error } = await supabase.from('stories').select('*');
+    console.log(data);
+    console.log(supabase.auth.getUser());
+    if (error) console.log(error);
+    else setStories(data);
+  };
 
   const handleSignOut = async () => {
     const result = await supabase.auth.signOut();
@@ -41,21 +43,20 @@ const HomePage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchStories();
-  // }, []);
+  useEffect(() => {
+    fetchStories();
+  }, []);
 
-  // useEffect(() => {
-  //   console.log(selectedStory);
-  //   if (selectedStory) {
-  //     navigate(ACCEPTED_ROUTES.EDITOR, {
-  //       replace: true,
-  //       state: {
-  //         selectedStory: selectedStory,
-  //       },
-  //     });
-  //   }
-  // }, [selectedStory]);
+  useEffect(() => {
+    if (selectedStory) {
+      navigate(ACCEPTED_ROUTES.READER, {
+        replace: true,
+        state: {
+          selectedStory: selectedStory,
+        },
+      });
+    }
+  }, [selectedStory]);
 
   return (
     <div
@@ -86,6 +87,14 @@ const HomePage = () => {
           onChange={e => {
             console.log(e.target.value);
           }}
+        />
+      </div>
+      <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
+        <StoryList
+          supabase={supabase}
+          stories={stories}
+          setSelectedStory={setSelectedStory}
+          setStories={setStories}
         />
       </div>
 
