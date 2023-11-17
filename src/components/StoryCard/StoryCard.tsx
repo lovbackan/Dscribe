@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 
 interface StoryCardProps {
   story: { id: number; name: string; image_path?: string };
-  setChangeCardId: Function;
+  setChangeCardId?: Function;
   setSelectedStory: Function;
-  deleteCard: Function;
-  changePicture: Function;
+  deleteCard?: Function;
+  changePicture?: Function;
 }
 
 {
@@ -104,54 +104,63 @@ const StoryCard = (props: StoryCardProps) => {
           e.stopPropagation();
         }}
       >
-        <div className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2">
-          {isHovered && (
-            <CTAButton
-              variant="deleteCard"
-              title=""
-              // onClick={() => props.setChangeCardId(props.story)}
-              onClick={() => {
-                props.deleteCard();
-                props.setChangeCardId(props.story);
-                console.log(`Delete card id: ${props.story.name}`);
-              }}
-            />
-          )}
-          {isHovered && (
-            <form
-              onSubmit={e => {
-                e.preventDefault();
-              }}
-            >
-              <input
-                className=" hidden"
-                id="file-upload"
-                type="file"
-                accept=" .png, .jpg, .gif"
-                name="image"
-                onChange={e => {
-                  e.preventDefault();
-
-                  if (e.target.files) {
-                    if (e.target.files[0].size > 2097152) {
-                      alert('File is too big!');
-                      return;
-                    }
-                    props.changePicture(props.story.id, e.target.files[0]);
-                    // props.changePicture(props.story.id, image);
-                  }
-                }}
-              />
-              <label htmlFor="file-upload">
+        {props.deleteCard !== undefined &&
+          props.changePicture !== undefined &&
+          props.setChangeCardId !== undefined && (
+            <div className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2">
+              {isHovered && (
                 <CTAButton
-                  variant="changePicture"
+                  variant="deleteCard"
                   title=""
-                  onClick={() => {}}
+                  // onClick={() => props.setChangeCardId(props.story)}
+                  onClick={() => {
+                    props.deleteCard !== undefined && props.deleteCard();
+                    props.setChangeCardId !== undefined &&
+                      props.setChangeCardId(props.story);
+                    console.log(`Delete card id: ${props.story.name}`);
+                  }}
                 />
-              </label>
-            </form>
+              )}
+              {isHovered && (
+                <form
+                  onSubmit={e => {
+                    e.preventDefault();
+                  }}
+                >
+                  <input
+                    className=" hidden"
+                    id="file-upload"
+                    type="file"
+                    accept=" .png, .jpg, .gif"
+                    name="image"
+                    onChange={e => {
+                      e.preventDefault();
+
+                      if (e.target.files) {
+                        if (e.target.files[0].size > 2097152) {
+                          alert('File is too big!');
+                          return;
+                        }
+                        props.changePicture !== undefined &&
+                          props.changePicture(
+                            props.story.id,
+                            e.target.files[0],
+                          );
+                        // props.changePicture(props.story.id, image);
+                      }
+                    }}
+                  />
+                  <label htmlFor="file-upload">
+                    <CTAButton
+                      variant="changePicture"
+                      title=""
+                      onClick={() => {}}
+                    />
+                  </label>
+                </form>
+              )}
+            </div>
           )}
-        </div>
 
         <div className="">
           <Input

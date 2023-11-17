@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabase';
 import { useState, useEffect, createContext, useRef } from 'react';
 import { CTAButton } from '../components/CTAButton/CTAButton';
@@ -6,7 +6,6 @@ import { DeckView } from '../components/DeckView/DeckView';
 import Editor from '../components/Editor/Editor';
 import Hand from '../components/Hand/Hand';
 import Card from '../components/Card/Card';
-import { useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
 import { Text } from '../components/Text/Text';
@@ -64,7 +63,11 @@ const EditorPage = () => {
 
   const location = useLocation();
   const selectedStory = location.state.selectedStory;
-  const [story, setStory] = useState<any>(); //Should be type story | null
+  const [story, setStory] = useState<{
+    id: string;
+    name: string;
+    text: string;
+  } | null>();
   const [storyChanges, setStoryChanges] = useState<{ text?: string }>({});
   const storyChangesRef = useRef(storyChanges);
   storyChangesRef.current = storyChanges;

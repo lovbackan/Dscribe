@@ -5,10 +5,10 @@ interface StoryListProps {
   stories: Array<any>;
   setStories: Function;
   setSelectedStory: Function;
-  setChangeCardId: Function;
+  setChangeCardId?: Function;
   supabase: SupabaseClient;
-  deleteCard: Function;
-  changePicture: Function;
+  deleteCard?: Function;
+  changePicture?: Function;
 }
 
 const StoryList = (props: StoryListProps) => {
