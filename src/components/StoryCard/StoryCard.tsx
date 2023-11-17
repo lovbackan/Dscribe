@@ -113,7 +113,7 @@ const StoryCard = (props: StoryCardProps) => {
                   variant="publishStory"
                   title="Make public"
                   onClick={() => {
-                    console.log('publish');
+                    console.log(`publish story: ${props.story.name} `);
                   }}
                 />
               )}
