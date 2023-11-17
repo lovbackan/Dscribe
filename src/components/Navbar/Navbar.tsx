@@ -2,11 +2,11 @@ import { NavbarButton } from './NavbarButton';
 // import { supabase } from '../../supabase';
 // import { useEffect, useState } from 'react';
 
-interface NewNavbarProps {
+interface NavbarProps {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-const Navbar: React.FC<NewNavbarProps> = ({ onClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onClick }) => {
   // const [userName, setUserName] = useState<string>('');
 
   // const fetchUser = async () => {
