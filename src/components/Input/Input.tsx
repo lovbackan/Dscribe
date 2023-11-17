@@ -27,9 +27,9 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const containerClasses =
     variant === 'primary'
-      ? 'w-52 h-7 resize-none rounded-lg px-2 py-1 text-black font-inter'
+      ? 'w-52 h-7 resize-none rounded-lg px-2 py-1 text-black font-inter hover:border-black hover:border '
       : variant === 'secondary'
-      ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter'
+      ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter hover:border-black hover:border'
       : variant === 'cardTitle'
       ? 'w-[100px] h-[30px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70 font-inter'
       : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter';
