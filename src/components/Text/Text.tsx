@@ -14,7 +14,8 @@ type TextType =
   | 'logoSmall'
   | 'subCategory'
   | 'hero'
-  | 'heroHeading2';
+  | 'heroHeading2'
+  | 'loginLogo';
 
 type TextColor = 'black' | 'white' | 'green';
 
@@ -47,11 +48,12 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     default: `text-sm ${tailwindColorClass} font-inter`,
     logoBig: `text-[28px] font-courier ${tailwindColorClass} font-bold`,
     logoMedium: `text-2xl font-courier ${tailwindColorClass}`,
-    logoSmall: `text-xl font-courier ${tailwindColorClass}`,
+    logoSmall: `text-[20px] font-courier ${tailwindColorClass} font-bold`,
     subCategory: `text-[10px] ${tailwindColorClass} font-inter`,
     pPrimary: `text-[12px] font-inter ${tailwindColorClass}`,
     pSecondary: `text-[20px] font-inter ${tailwindColorClass}`,
     heroHeading2: `text-[36px] font-courier ${tailwindColorClass} font-bold`,
+    loginLogo: `text-[40px] font-courier ${tailwindColorClass} font-bold`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
@@ -73,6 +75,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
       logoSmall: 'h3',
       subCategory: 'p',
       heroHeading2: 'h2',
+      loginLogo: 'h1',
     }[variant] || 'p';
 
   return React.createElement(elementType, { className }, content);

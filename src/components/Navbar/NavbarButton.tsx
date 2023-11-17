@@ -24,7 +24,7 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
       <Link to={ACCEPTED_ROUTES.HOME}>
         <div className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[207px] rounded-r-lg">
           <Logo variant="small" />
-          <Text variant="p-primary" content="Home" textColor="white" />
+          <Text variant="pSecondary" content="Home" textColor="white" />
         </div>
       </Link>
     );
@@ -33,7 +33,7 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
       <Link to={ACCEPTED_ROUTES.COMMUNITY}>
         <div className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg">
           <div className="navBar-community"></div>
-          <Text variant="p-primary" content="Community" textColor="white" />
+          <Text variant="pSecondary" content="Community" textColor="white" />
         </div>
       </Link>
     );
@@ -42,7 +42,7 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
       <Link to={ACCEPTED_ROUTES.SETTINGS}>
         <div className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg">
           <div className="navBar-settings"></div>
-          <Text variant="p-primary" content="Settings" textColor="white" />
+          <Text variant="pSecondary" content="Settings" textColor="white" />
         </div>
       </Link>
     );
@@ -53,7 +53,7 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
         className="cursor-pointer flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg"
       >
         <div className="navBar-logout"></div>
-        <Text variant="p-primary" textColor="white" content="Log out" />
+        <Text variant="pSecondary" textColor="white" content="Log out" />
       </div>
     );
   }

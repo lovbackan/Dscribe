@@ -9,7 +9,7 @@ import { CardDesign } from '../components/Card/CardDesign.tsx';
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-full w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center ">
+    <div className="h-full w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default ">
       <section
         id="LandingPageNavbar"
         className="h-[101px] w-full bg-inherit flex flex-row justify-center items-center px-[20px]"
@@ -26,7 +26,7 @@ const LandingPage = () => {
 
       <section
         id="hero"
-        className="flex flex-row justify-center items-center  "
+        className="flex flex-row justify-center items-center   "
       >
         <Logo variant="big" />
         {/* <div
@@ -35,7 +35,7 @@ const LandingPage = () => {
         >
           <Text variant="logo" textColor="white" content="Codeck" />
         </div> */}
-        <div className="w-[600px] h-[200px] text-left ml-[73px]">
+        <div className="w-[600px] h-[200px] text-left ml-[73px] ">
           <Text
             variant="hero"
             textColor="white"
@@ -45,7 +45,7 @@ const LandingPage = () => {
       </section>
 
       <section className="flex flex-row h-[500px] gap-[25px] max-w-[1160px]">
-        <div className="flex flex-col h-auto max-w-[497px] text-left gap-[36px] my-[35px]">
+        <div className="flex flex-col h-auto max-w-[497px] text-left gap-[36px] my-[35px] ">
           <Text
             variant="heroHeading2"
             textColor="white"
@@ -74,7 +74,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="max-w-[1160px] flex flex-row">
+      <section className="max-w-[1160px] flex flex-row ">
         <div className="max-w-[1160px] text-left">
           <Text
             variant="heroHeading2"
@@ -91,40 +91,53 @@ const LandingPage = () => {
 
       <section id="StoryList" className="max-w-[1160px] h-[396px]">
         <div className="flex flex-row pb-10 w-[1160px] h-[56px]">
-          <Text textColor="white" variant="heroHeading2" content="Trending" />
+          <Text textColor="white" variant="heading2" content="Trending" />
 
-          <div className="w-full h-0.5  bg-white mt-[38px]"></div>
+          <div className="w-full h-0.5  bg-white mt-[27px]"></div>
         </div>
 
         <div className="flex flex-row justify-between w-full mt-[40px]">
           <CardDesign
-            title="The Great Gatsby"
+            title="Adventure is coming"
             variant="bigCard"
             onClick={() => console.log('The Great Gatsby clicked')}
           />
           <CardDesign
-            title="Lord of the rings"
+            title="Future City"
             variant="bigCard"
             onClick={() => console.log('Lord of the rings clicked')}
           />
           <CardDesign
-            title="The Great Gatsby"
+            title="The Witch"
             variant="bigCard"
             onClick={() => console.log('The Great Gatsby clicked')}
           />
           <CardDesign
-            title="The Great Gatsby"
+            title="Brothers (manuscript)"
             variant="bigCard"
             onClick={() => console.log('The Great Gatsby clicked')}
           />
           <CardDesign
-            title="The Great Gatsby"
+            title="Why"
             variant="bigCard"
             onClick={() => console.log('The Great Gatsby clicked')}
           />
         </div>
       </section>
-      <section className="h-[250px]"></section>
+      <section className="h-[250px]">
+        <div className="w-screen h-0.5  bg-white "></div>
+        <div className="flex flex-row justify-between my-[57px] px-[140px]">
+          <div>
+            <Text content="Contact us" variant="heading2" textColor="white" />
+            <Text
+              content="info@codeck.com"
+              variant="pPrimary"
+              textColor="white"
+            />
+          </div>
+          <Text content="Copyright 2023" variant="heading2" textColor="white" />
+        </div>
+      </section>
     </div>
   );
 };

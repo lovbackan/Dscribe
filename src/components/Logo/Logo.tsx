@@ -12,7 +12,7 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
   const logoClasses = {
     big: 'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center ',
     login:
-      'w-[200px] w-[200px] rounded-[20px] bg-inherit flex justify-center items-center border-white border-r-2 ',
+      'w-[200px] h-[300px] rounded-[20px] bg-inherit flex justify-center items-center border-white border-r-2 ',
     medium:
       'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
     small:
@@ -32,7 +32,7 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
   } else if (variant === 'login') {
     return (
       <div id="logo" className={`${className}`}>
-        <Text variant="logoBig" textColor="white" content="Codeck" />
+        <Text variant="loginLogo" textColor="white" content="Codeck" />
       </div>
     );
   } else if (variant === 'medium') {
