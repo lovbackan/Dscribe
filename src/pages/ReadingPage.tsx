@@ -69,9 +69,8 @@ const ReadingPage = () => {
       navigate(ACCEPTED_ROUTES.HOME);
     }
     fetchDeck();
-    // fetchCategories();
+    fetchCategories();
     fetchStory();
-    // fetchTags();
   }, [selectedStory]);
 
   const fetchDeck = async () => {
@@ -83,6 +82,17 @@ const ReadingPage = () => {
     if (error) console.log(error);
     else setDeck(...[data]);
     console.log(data);
+  };
+
+  const fetchCategories = async () => {
+    if (selectedStory) {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*')
+        .eq('story_id', selectedStory.id);
+      if (error) console.log(error);
+      else setCategories([...data]);
+    }
   };
 
   const fetchStory = async () => {
@@ -138,7 +148,7 @@ const ReadingPage = () => {
                     <Card
                       key={card.id}
                       card={card}
-                      variant="openCard"
+                      variant="openCardRead"
                       supabase={supabase}
                       deck={deck}
                       setDeck={setDeck}

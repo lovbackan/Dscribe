@@ -80,7 +80,9 @@ const RichTextViewer = (props: EditorProps) => {
           className=" w-full relative h-full bg-white rounded-t-lg"
         >
           <RichTextPlugin
-            contentEditable={<ContentEditable className="editor-input" />}
+            contentEditable={
+              <ContentEditable className="min-h-[150px] overflow-y-auto h-full w-full resize-none text-[15px] relative outline-none px-2.5 py-4" />
+            }
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
           />

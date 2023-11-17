@@ -5,8 +5,14 @@ import Editor from '../Editor/Editor';
 import { Input } from '../Input/Input';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabase';
+import RichTextViewer from '../RichTextViewer/RichTextViewer';
 
-type CardType = 'openCard' | 'smallCard' | 'deckCard' | 'publishedCard';
+type CardType =
+  | 'openCardRead'
+  | 'openCard'
+  | 'smallCard'
+  | 'deckCard'
+  | 'publishedCard';
 
 // Come up with a better name for this component and CardDesign, this card is the one that is used in the deck view and contains its data.
 //But the CardDesign is the one that is used to create newCards and show the stories (but they should propably also be card.tsx because
@@ -460,6 +466,83 @@ const Card = (props: CardProps) => {
                 setDeckChanges={props.setDeckChanges}
               />
             </div>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (props.variant === 'openCardRead') {
+    return (
+      <>
+        <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
+          <div
+            id="cardWrapper"
+            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
+            onMouseDown={props.handleMouseDown}
+          >
+            {imageUrl && (
+              <img
+                src={imageUrl}
+                alt=""
+                className="absolute -z-10 h-full w-full rounded-xl"
+                draggable="false"
+              />
+            )}
+            <CTAButton
+              variant="cardCategory"
+              title={categoryName}
+              onClick={() => {
+                console.log(props.card.text);
+                console.log(props.card.category_id);
+              }}
+              color={categoryColor}
+            />
+
+            <Input
+              id="CardTitle"
+              variant="cardTitle"
+              placeholder={props.card.name}
+              onChange={() => {}}
+              onBlur={e => changeCardName(e)}
+              type="text"
+              autoComplete="off"
+            />
+            {/* Inte bra med bottom-9, borde vara dynamiskt */}
+
+            <section
+              id="subCategory"
+              className="relative h-[200px] overflow-auto flex flex-col justify-end "
+            >
+              <div
+                id="SubCategoryWrapper"
+                className="flex flex-row flex-wrap gap-1 px-1"
+              >
+                {props.card.tags.map(tag => {
+                  return (
+                    <CTAButton
+                      key={tag.id}
+                      variant="cardSubCategory"
+                      title={tag.name}
+                      onClick={() => {}}
+                      color={tag.color_id}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+          </div>
+          <div className="w-[490px] flex flex-row">
+            <div className="w-[490px] h-[300px]">
+              <RichTextViewer editorState={props.card.text} />
+            </div>
+            <CTAButton
+              title="-"
+              variant="minimize/close"
+              onClick={() => {
+                toggleOpenCard();
+              }}
+            />
           </div>
         </div>
       </>
