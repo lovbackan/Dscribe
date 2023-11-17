@@ -38,22 +38,22 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     textColorClasses[textColor] || textColorClasses.default;
 
   const tailwindClasses = {
-    heading1: `text-3xl ${tailwindColorClass} font-inter`,
-    hero: `text-5xl ${tailwindColorClass} font-source font-bold`,
-    heading1Bold: `text-3xl ${tailwindColorClass} font-bold font-inter`,
-    heading2: `text-3xl ${tailwindColorClass} font-inter`,
-    heading3: `text-xl ${tailwindColorClass} font-inter`,
-    cardTitle: `text-xl ${tailwindColorClass} break-words font-inter`,
-    heading4: `text-base ${tailwindColorClass} font-inter`,
-    default: `text-sm ${tailwindColorClass} font-inter`,
-    logoBig: `text-[28px] font-courier ${tailwindColorClass} font-bold`,
-    logoMedium: `text-2xl font-courier ${tailwindColorClass}`,
-    logoSmall: `text-[20px] font-courier ${tailwindColorClass} font-bold`,
-    subCategory: `text-[10px] ${tailwindColorClass} font-inter`,
-    pPrimary: `text-[12px] font-inter ${tailwindColorClass}`,
-    pSecondary: `text-[20px] font-inter ${tailwindColorClass}`,
-    heroHeading2: `text-[36px] font-courier ${tailwindColorClass} font-bold`,
-    loginLogo: `text-[40px] font-courier ${tailwindColorClass} font-bold`,
+    heading1: `text-3xl ${tailwindColorClass} font-inter select-none`,
+    hero: `text-5xl ${tailwindColorClass} font-source font-bold select-none`,
+    heading1Bold: `text-3xl ${tailwindColorClass} font-bold font-inter select-none`,
+    heading2: `text-3xl ${tailwindColorClass} font-inter select-none`,
+    heading3: `text-xl ${tailwindColorClass} font-inter select-none`,
+    cardTitle: `text-xl ${tailwindColorClass} break-words font-inter select-none`,
+    heading4: `text-base ${tailwindColorClass} font-inter select-none`,
+    default: `text-sm ${tailwindColorClass} font-inter select-none`,
+    logoBig: `text-[28px] font-courier ${tailwindColorClass} font-bold select-none`,
+    logoMedium: `text-2xl font-courier ${tailwindColorClass} select-none`,
+    logoSmall: `text-[20px] font-courier ${tailwindColorClass} font-bold select-none`,
+    subCategory: `text-[10px] ${tailwindColorClass} font-inter select-none`,
+    pPrimary: `text-[12px] font-inter ${tailwindColorClass} select-none`,
+    pSecondary: `text-[20px] font-inter ${tailwindColorClass} select-none`,
+    heroHeading2: `text-[36px] font-courier ${tailwindColorClass} font-bold select-none`,
+    loginLogo: `text-[40px] font-courier ${tailwindColorClass} font-bold select-none`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
