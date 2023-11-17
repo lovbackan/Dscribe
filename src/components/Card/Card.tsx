@@ -332,7 +332,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-gradient-to-b from-[#5179D9] to-[#0F172A] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
             //here we should also make it so that the latest card u pressed has the highest z-index
             toggleOpenCard();
@@ -381,7 +381,7 @@ const Card = (props: CardProps) => {
         <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
           <div
             id="cardWrapper"
-            className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
+            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
             onMouseDown={props.handleMouseDown}
           >
             {imageUrl && (
@@ -470,7 +470,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-gradient-to-b from-[#5179D9] to-[#0F172A] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
@@ -583,6 +583,14 @@ const Card = (props: CardProps) => {
               id="SubCategoryWrapper"
               className=" flex flex-row flex-wrap gap-1 px-1"
             >
+              <CTAButton
+                variant="addTags"
+                title=""
+                onClick={event => {
+                  event.stopPropagation();
+                  setAddTagsWindow(!addTagsWindow);
+                }}
+              />
               {props.card.tags?.map(tag => {
                 return (
                   <CTAButton
@@ -599,15 +607,6 @@ const Card = (props: CardProps) => {
                   />
                 );
               })}
-              {/* Should be special "+" button. Placeholder CTAButton for now.  */}
-              <CTAButton
-                variant="cardSubCategory"
-                title="New Category"
-                onClick={event => {
-                  event.stopPropagation();
-                  setAddTagsWindow(!addTagsWindow);
-                }}
-              />
             </div>
           </section>
           {addTagsWindow ? (
