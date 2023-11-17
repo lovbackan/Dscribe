@@ -4,6 +4,7 @@ import { ACCEPTED_ROUTES } from '../../routes/routes';
 import { Link } from 'react-router-dom';
 import { Text } from '../Text/Text';
 import Logo from '../Logo/Logo';
+import { useNavigate } from 'react-router-dom';
 
 type ButtonType = 'home' | 'community' | 'settings' | 'logout';
 
@@ -19,32 +20,37 @@ export const NavbarButton: React.FC<NavbarButtonProps> = ({
   onClick,
   // userName,
 }) => {
+  const navigate = useNavigate();
+
   if (variant === 'home') {
     return (
-      <Link to={ACCEPTED_ROUTES.HOME}>
-        <div className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[207px] rounded-r-lg">
-          <Logo variant="small" />
-          <Text variant="pSecondary" content="Home" textColor="white" />
-        </div>
-      </Link>
+      <div
+        className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[207px] rounded-r-lg cursor-pointer"
+        onClick={() => navigate(ACCEPTED_ROUTES.HOME)}
+      >
+        <Logo variant="small" />
+        <Text variant="pSecondary" content="Home" textColor="white" />
+      </div>
     );
   } else if (variant === 'community') {
     return (
-      <Link to={ACCEPTED_ROUTES.COMMUNITY}>
-        <div className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg">
-          <div className="navBar-community"></div>
-          <Text variant="pSecondary" content="Community" textColor="white" />
-        </div>
-      </Link>
+      <div
+        className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg cursor-pointer"
+        onClick={() => navigate(ACCEPTED_ROUTES.COMMUNITY)}
+      >
+        <div className="navBar-community"></div>
+        <Text variant="pSecondary" content="Community" textColor="white" />
+      </div>
     );
   } else if (variant === 'settings') {
     return (
-      <Link to={ACCEPTED_ROUTES.SETTINGS}>
-        <div className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg">
-          <div className="navBar-settings"></div>
-          <Text variant="pSecondary" content="Settings" textColor="white" />
-        </div>
-      </Link>
+      <div
+        className="flex flex-col justify-center items-center hover:bg-[#0F172A] h-[128px] rounded-r-lg cursor-pointer"
+        onClick={() => navigate(ACCEPTED_ROUTES.SETTINGS)}
+      >
+        <div className="navBar-settings"></div>
+        <Text variant="pSecondary" content="Settings" textColor="white" />
+      </div>
     );
   } else if (variant === 'logout') {
     return (
