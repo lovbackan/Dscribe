@@ -895,6 +895,20 @@ i.logo {
   border-radius: 5px;
 }
 
+.addTags {
+  background-image: url(./images/icons/addTags.svg);
+  position: absolute;
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  right: 10px;
+  bottom: 25px;
+  width: 20px;
+  height: 20px;
+  background-color: #0b0b0b80;
+  border-radius: 20px;
+}
+
 .editSymbol {
   background-image: url(./images/icons/edit.svg);
   background-size: fill;

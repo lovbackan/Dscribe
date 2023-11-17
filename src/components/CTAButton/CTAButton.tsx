@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Text } from '../Text/Text';
 import { useState } from 'react';
 
 type ButtonType =
@@ -18,7 +17,8 @@ type ButtonType =
   | 'viewDeck'
   | 'addCard'
   | 'deleteCard'
-  | 'changePicture';
+  | 'changePicture'
+  | 'addTags';
 
 interface CTAButtonProps {
   title: string | number;
@@ -66,6 +66,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'deleteCard hover:border-2 hover:border-white cursor-pointer'
       : variant === 'changePicture'
       ? 'uploadPicture hover:border-2 hover:border-white cursor-pointer'
+      : variant === 'addTags'
+      ? 'addTags hover:border-2 hover:border-white cursor-pointer'
       : 'bg-purple-400';
 
   const textClasses =
