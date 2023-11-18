@@ -68,9 +68,17 @@ const StoryCard = (props: StoryCardProps) => {
     setImageUrl(result.data.publicUrl);
   }, [props.story.image_path]);
 
+  const publishStory = async () => {
+    const id = props.story.id;
+    const { error } = await supabase
+      .from('stories')
+      .update({ published: true })
+      .eq('id', id);
+    if (error) console.log(error);
+  };
+
   const changeName = async (newName: string) => {
     const id = props.story.id;
-    console.log(id, newName);
     const { data, error } = await supabase
       .from('stories')
       .update({ name: newName })
@@ -115,7 +123,7 @@ const StoryCard = (props: StoryCardProps) => {
                   variant="publishStory"
                   title="Make public"
                   onClick={() => {
-                    console.log(`publish story: ${props.story.name} `);
+                    publishStory();
                   }}
                 />
               )}
