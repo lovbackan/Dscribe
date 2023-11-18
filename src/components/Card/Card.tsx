@@ -384,7 +384,7 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard') {
     return (
       <>
-        <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
+        <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-xl">
           <div
             id="cardWrapper"
             className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
@@ -475,7 +475,7 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCardRead') {
     return (
       <>
-        <div className="flex relative  gap-0 w-[690px] h-[300px] bg-white drop-shadow-lg rounded-xl">
+        <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-xl">
           <div
             id="cardWrapper"
             className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"

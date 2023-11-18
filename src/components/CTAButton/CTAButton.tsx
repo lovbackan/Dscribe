@@ -58,7 +58,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : // : variant === 'edit'
       // ? 'w-6 h-6 bg-white  flex justify-center items-center hover:border-black hover:border rounded '
       variant === 'minimize/close'
-      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border bg-white cursor-pointer'
+      ? 'w-[20px] h-[20px] rounded-[5px] flex justify-center items-center hover:border-black hover:border cursor-pointer'
       : variant === 'cardSubCategory'
       ? 'w-auto h-[20px] rounded-[12px] bg-black flex justify-center items-center hover:border-white hover:border px-2 cursor-pointer'
       : variant === 'viewDeck'
