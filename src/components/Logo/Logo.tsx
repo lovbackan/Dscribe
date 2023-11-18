@@ -1,6 +1,6 @@
 import { Text } from '../Text/Text';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 type LogoType = 'big' | 'medium' | 'small' | 'login' | 'editor';
 
@@ -9,6 +9,7 @@ interface LogoProps {
 }
 
 const Logo: React.FC<LogoProps> = ({ variant }) => {
+  const navigate = useNavigate();
   const logoClasses = {
     big: 'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center ',
     login:
@@ -49,11 +50,13 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     );
   } else if (variant === 'editor') {
     return (
-      <Link to={ACCEPTED_ROUTES.HOME}>
-        <div id="logo" className={`${className}`}>
-          <Text variant="logoSmall" textColor="white" content="Codeck" />
-        </div>
-      </Link>
+      <div
+        id="logo"
+        className={`${className}`}
+        onClick={() => navigate(ACCEPTED_ROUTES.HOME)}
+      >
+        <Text variant="logoSmall" textColor="white" content="Codeck" />
+      </div>
     );
   }
 };
