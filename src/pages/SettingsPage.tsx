@@ -15,8 +15,9 @@ const SettingsPage = () => {
   const [showRemoveAccountPopup, setShowRemoveAccountPopup] = useState(false);
   const [username, setUsername] = useState('');
   const [newUsername, setNewUsername] = useState('');
-  const [password, setPassword] = useState('');
+
   const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const fetchUser = async () => {
     let { data, error } = await supabase.auth.getUser();
@@ -47,18 +48,26 @@ const SettingsPage = () => {
   };
 
   const changePassword = async () => {
-    //Should first check if the input password is correct then do the following checks
-
-    if (newPassword === '') {
+    if (newPassword !== confirmNewPassword) {
+      console.log('Sorry you did not write the same password twice');
+      return;
+    } else if (newPassword === '') {
       console.log('Password cannot be empty');
       return;
     } else if (newPassword.length < 8) {
       console.log('Password must be at least 8 characters long');
       return;
-    } else if (newPassword === password) {
-      console.log('New password cannot be the same as the old password');
+    } else if (newPassword.length > 72) {
+      console.log('Password must be less than 72 characters long');
+      return;
+    } else if (newPassword.includes(' ')) {
+      console.log('Password cannot contain spaces');
+      return;
+    } else if (!/\d/.test(newPassword)) {
+      console.log('Password must contain at least one number');
       return;
     }
+
     await supabase.auth.updateUser({ password: newPassword });
     console.log('Password changed');
     setShowChangePasswordPopup(false);
@@ -179,7 +188,7 @@ const SettingsPage = () => {
             setNewPassword(e.target.value);
           }}
           onChange2={e => {
-            setPassword(e.target.value);
+            setConfirmNewPassword(e.target.value);
           }}
         />
       )}
@@ -200,7 +209,7 @@ const SettingsPage = () => {
             setNewUsername(e.target.value);
           }}
           onChange2={e => {
-            setPassword(e.target.value);
+            console.log(e.target.value);
           }}
         />
       )}

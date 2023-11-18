@@ -158,8 +158,8 @@ const PopUp: React.FC<PopUpProps> = ({
         />
         {/* if u change the name of a story and try to delete it the old name will show up */}
         <Input
-          type="text"
-          id="username"
+          type="password"
+          id="newPassword"
           autoComplete="off"
           placeholder="New password"
           variant="secondary"
@@ -168,9 +168,9 @@ const PopUp: React.FC<PopUpProps> = ({
         />
         <Input
           type="password"
-          id="password"
+          id="confirmNewPassword"
           variant="secondary"
-          placeholder="Old password"
+          placeholder="Confirm new password"
           onChange={onChange2 ? onChange2 : () => {}}
         />
 
