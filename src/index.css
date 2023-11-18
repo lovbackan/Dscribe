@@ -17,8 +17,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  height: auto;
-  width: 100%;
+  /* height: auto; */
+  /* width: 100%; */
   /* overflow: hidden; */
 }
 
@@ -34,8 +34,8 @@ body {
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  width: 100%;
-  height: auto;
+  /* width: 100%; */
+  /* height: auto; */
 }
 
 .other h2 {

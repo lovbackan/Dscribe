@@ -14,6 +14,8 @@ interface PopUpProps {
   action: Function;
   changeCardId?: any;
   cancel: Function;
+  onChange1?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange2?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PopUp: React.FC<PopUpProps> = ({
@@ -21,6 +23,8 @@ const PopUp: React.FC<PopUpProps> = ({
   action,
   cancel,
   changeCardId,
+  onChange1,
+  onChange2,
 }) => {
   if (variant === 'logOut') {
     return (
@@ -118,18 +122,14 @@ const PopUp: React.FC<PopUpProps> = ({
           placeholder="New username"
           variant="secondary"
           autoFocus={true}
-          onChange={e => {
-            console.log(e.target.value);
-          }}
+          onChange={onChange1 ? onChange1 : () => {}}
         />
         <Input
           type="password"
           id="password"
           variant="secondary"
           placeholder="Password"
-          onChange={e => {
-            console.log(e.target.value);
-          }}
+          onChange={onChange2 ? onChange2 : () => {}}
         />
 
         <div className="flex flex-row justify-between">
@@ -164,18 +164,14 @@ const PopUp: React.FC<PopUpProps> = ({
           placeholder="New password"
           variant="secondary"
           autoFocus={true}
-          onChange={e => {
-            console.log(e.target.value);
-          }}
+          onChange={onChange1 ? onChange1 : () => {}}
         />
         <Input
           type="password"
           id="password"
           variant="secondary"
           placeholder="Old password"
-          onChange={e => {
-            console.log(e.target.value);
-          }}
+          onChange={onChange2 ? onChange2 : () => {}}
         />
 
         <div className="flex flex-row justify-between">

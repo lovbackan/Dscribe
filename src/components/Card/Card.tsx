@@ -664,7 +664,7 @@ const Card = (props: CardProps) => {
           <section id="subCategory" className="mt-40 ">
             <div
               id="SubCategoryWrapper"
-              className=" flex flex-row flex-wrap gap-1 px-1"
+              className=" flex flex-row flex-wrap gap-1 px-1 "
             >
               <CTAButton
                 variant="addTags"

@@ -18,11 +18,11 @@ const HomePage = () => {
   //const [filteredStories, setFilteredStories] = useState(stories);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
 
-  if (showSignOutPopup) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  // if (showSignOutPopup) {
+  //   document.body.style.overflow = 'hidden';
+  // } else {
+  //   document.body.style.overflow = 'auto';
+  // }
 
   const fetchStories = async () => {
     const { data, error } = await supabase
