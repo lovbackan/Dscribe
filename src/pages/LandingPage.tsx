@@ -4,17 +4,21 @@ import { Text } from '../components/Text/Text.tsx';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo/Logo.tsx';
 import mockUpImage from '../images/mock-up.jpg';
+import adventure from '../images/heroPagePictures/adventure.png';
+import brothers from '../images/heroPagePictures/brothers.png';
+import futureCity from '../images/heroPagePictures/futureCity.png';
+import theWitch from '../images/heroPagePictures/theWitch.png';
+import why from '../images/heroPagePictures/why.png';
 import { CardDesign } from '../components/Card/CardDesign.tsx';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-full w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default ">
+    <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default overflow-x-hidden ">
       <section
         id="LandingPageNavbar"
-        className="h-[101px] w-full bg-inherit flex flex-row justify-center items-center px-[20px]"
+        className="absolute top-0 right-0 pt-3 pr-3"
       >
-        <div className="flex-grow "></div>
         <CTAButton
           title="Log in"
           variant="landing"
@@ -26,7 +30,7 @@ const LandingPage = () => {
 
       <section
         id="hero"
-        className="flex flex-row justify-center items-center   "
+        className="flex flex-row pt-96 justify-center items-center   "
       >
         <Logo variant="big" />
         {/* <div
@@ -100,31 +104,31 @@ const LandingPage = () => {
           <CardDesign
             title="Adventure is coming"
             variant="bigCard"
-            imageUrl="src/images/heroPagePictures/adventure.png"
+            imageUrl={adventure}
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Future City"
             variant="bigCard"
-            imageUrl="src/images/heroPagePictures/futureCity.png"
+            imageUrl={futureCity}
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="The Witch"
             variant="bigCard"
-            imageUrl="src/images/heroPagePictures/theWitch.png"
+            imageUrl={theWitch}
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Brothers (manuscript)"
             variant="bigCard"
-            imageUrl="src/images/heroPagePictures/brothers.png"
+            imageUrl={brothers}
             onClick={() => console.log('Mockup published work clicked')}
           />
           <CardDesign
             title="Why"
             variant="bigCard"
-            imageUrl="src/images/heroPagePictures/why.png"
+            imageUrl={why}
             onClick={() => console.log('Mockup published work clicked')}
           />
         </div>
