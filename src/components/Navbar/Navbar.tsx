@@ -4,6 +4,7 @@ import { NavbarButton } from './NavbarButton';
 
 interface NavbarProps {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onClick }) => {
