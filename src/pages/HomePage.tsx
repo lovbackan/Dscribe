@@ -81,8 +81,8 @@ const HomePage = () => {
     const uploadError: any = result.error;
     if (uploadError) console.log(uploadError);
     if (uploadError && uploadError.statusCode === '409') {
-      alert('File already exists');
-      return;
+      //alert('File already exists');
+      //return;
     }
 
     const { error } = await supabase

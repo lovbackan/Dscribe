@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { Text } from '../Text/Text';
 
 interface StoryCardProps {
-  story: { id: number; name: string; image_path?: string };
+  story: { id: number; name: string; image_path?: string; user_id: string };
   setChangeCardId?: Function;
   setSelectedStory: Function;
   deleteCard?: Function;
@@ -60,6 +60,19 @@ const StoryCard = (props: StoryCardProps) => {
   //can you make me a solution to see if card is hovered over and then show the delete button
   const [isHovered, setIsHovered] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [author, setAuthor] = useState<string>('');
+
+  useEffect(() => {
+    if (!props.author) return;
+    supabase
+      .from('users')
+      .select('username')
+      .eq('id', props.story.user_id)
+      .single()
+      .then(result => {
+        setAuthor(result.data?.username);
+      });
+  }, []);
 
   useEffect(() => {
     if (!props.story.image_path) return;
@@ -219,7 +232,7 @@ const StoryCard = (props: StoryCardProps) => {
       {props.author && isHovered && (
         <div className="absolute bottom-0 flex justify-center items-center w-full rounded-b-2xl bg-black bg-opacity-40 h-8 ">
           <Text
-            content={`Author: ${props.story.name}`}
+            content={`Author: ${author}`}
             textColor="white"
             variant="pPrimary"
           />
