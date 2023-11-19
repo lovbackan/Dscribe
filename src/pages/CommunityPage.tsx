@@ -113,6 +113,7 @@ const HomePage = () => {
           stories={filteredStories}
           setSelectedStory={setSelectedStory}
           setStories={setStories}
+          author={true}
         />
       </div>
 
