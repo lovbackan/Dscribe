@@ -207,7 +207,7 @@ const StoryCard = (props: StoryCardProps) => {
       {props.deleteCard === undefined &&
         props.changePicture === undefined &&
         props.setChangeCardId === undefined && (
-          <div className=" h-auto h-max-[68px] w-[150px] ml-[23px] mt-[42px] bg-black bg-opacity-60 rounded-lg p-3">
+          <div className=" h-auto  w-[150px] ml-[23px] mt-[42px] bg-black bg-opacity-60 rounded-lg p-3">
             <Text
               content={props.story.name}
               textColor="white"
