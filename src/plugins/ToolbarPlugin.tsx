@@ -410,6 +410,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
   function CardLinkToolbarPlugin(): JSX.Element {
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
+        //remove this shortcut since we need to use the toolbar to select card
         if ((event.metaKey || event.ctrlKey) && event.key === 'h') {
           event.preventDefault(); // Prevent the default behavior of the browser
           activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, undefined);

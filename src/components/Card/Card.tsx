@@ -340,7 +340,6 @@ const Card = (props: CardProps) => {
         <div
           className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
-            //here we should also make it so that the latest card u pressed has the highest z-index
             toggleOpenCard();
           }}
         >
@@ -398,7 +397,7 @@ const Card = (props: CardProps) => {
                 draggable="false"
               />
             )}
-            <div className="w-min">
+            <div className="w-min ">
               <CTAButton
                 variant="cardCategory"
                 title={categoryName}
@@ -444,6 +443,7 @@ const Card = (props: CardProps) => {
             </section>
           </div>
           <div className="w-[490px] flex flex-row">
+            {/* remove the bg color and drag, and place the close button in the toolbar if possible */}
             <div
               className="absolute w-[490px] bg-slate-300 h-5 flex justify-end z-10"
               onMouseDown={props.handleMouseDown}

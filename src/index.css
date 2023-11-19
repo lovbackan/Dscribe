@@ -128,11 +128,15 @@ h1 {
 }
 
 .editor-card-link {
-  color: white;
+  color: black;
 
-  background-color: black;
+  /* background-color: #fff7dd; */
+  background-color: #c7d8ff;
   border-radius: 5px;
   padding: 5px 5px 5px 5px;
+}
+.editor-card-link:hover {
+  border: 1px solid black;
 }
 
 .editor-text-italic {
