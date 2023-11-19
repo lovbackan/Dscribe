@@ -18,11 +18,12 @@ const HomePage = () => {
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
 
-  if (showSignOutPopup) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  // if (showSignOutPopup) {
+  //   document.body.style.overflow = 'hidden';
+  // } else {
+  //   document.body.style.overflow = 'auto';
+  // }
+
   useEffect(() => {
     setFilteredStories(stories);
   }, [stories]);

@@ -2,6 +2,7 @@ import { Input } from '../Input/Input';
 import { supabase } from '../../supabase';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { useState, useEffect } from 'react';
+import { Text } from '../Text/Text';
 
 interface StoryCardProps {
   story: { id: number; name: string; image_path?: string };
@@ -9,6 +10,7 @@ interface StoryCardProps {
   setSelectedStory: Function;
   deleteCard?: Function;
   changePicture?: Function;
+  author?: boolean;
 }
 
 {
@@ -182,22 +184,47 @@ const StoryCard = (props: StoryCardProps) => {
             </div>
           )}
 
-        <div className="">
-          <Input
-            id={props.story.id.toString()}
-            variant="cardTitle"
-            placeholder={props.story.name}
-            onChange={() => {}}
-            type="text"
-            onBlur={e => {
-              const newName = e.target.value;
+        {props.deleteCard !== undefined &&
+          props.changePicture !== undefined &&
+          props.setChangeCardId !== undefined && (
+            <div className="">
+              <Input
+                id={props.story.id.toString()}
+                variant="cardTitle"
+                placeholder={props.story.name}
+                onChange={() => {}}
+                type="text"
+                onBlur={e => {
+                  const newName = e.target.value;
 
-              changeName(newName);
-            }}
+                  changeName(newName);
+                }}
+              />
+            </div>
+          )}
+      </div>
+
+      {props.deleteCard === undefined &&
+        props.changePicture === undefined &&
+        props.setChangeCardId === undefined && (
+          <div className=" h-auto  w-[150px] ml-[23px] mt-[42px] bg-black bg-opacity-60 rounded-lg p-3">
+            <Text
+              content={props.story.name}
+              textColor="white"
+              variant="cardTitle"
+            />
+          </div>
+        )}
+
+      {props.author && isHovered && (
+        <div className="absolute bottom-0 flex justify-center items-center w-full rounded-b-2xl bg-black bg-opacity-40 h-8 ">
+          <Text
+            content={`Author: ${props.story.name}`}
+            textColor="white"
+            variant="pPrimary"
           />
         </div>
-      </div>
-      {/* <h2 className="text-black">Story: {props.story.id}</h2> */}
+      )}
     </div>
   );
 };

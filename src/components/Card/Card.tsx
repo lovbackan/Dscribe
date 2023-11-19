@@ -340,7 +340,6 @@ const Card = (props: CardProps) => {
         <div
           className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
           onClick={() => {
-            //here we should also make it so that the latest card u pressed has the highest z-index
             toggleOpenCard();
           }}
         >
@@ -398,34 +397,34 @@ const Card = (props: CardProps) => {
                 draggable="false"
               />
             )}
-            <CTAButton
-              variant="cardCategory"
-              title={categoryName}
-              onClick={() => {
-                console.log(props.card.text);
-                console.log(props.card.category_id);
-              }}
-              color={categoryColor}
-            />
+            <div className="w-min ">
+              <CTAButton
+                variant="cardCategory"
+                title={categoryName}
+                onClick={() => {
+                  console.log(props.card.text);
+                  console.log(props.card.category_id);
+                }}
+                color={categoryColor}
+              />
+            </div>
 
-            <Input
-              id="CardTitle"
-              variant="cardTitle"
-              placeholder={props.card.name}
-              onChange={() => {}}
-              onBlur={e => changeCardName(e)}
-              type="text"
-              autoComplete="off"
-            />
-            {/* Inte bra med bottom-9, borde vara dynamiskt */}
+            <div className="mt-8">
+              <Input
+                id="CardTitle"
+                variant="cardTitle"
+                placeholder={props.card.name}
+                onChange={() => {}}
+                onBlur={e => changeCardName(e)}
+                type="text"
+                autoComplete="off"
+              />
+            </div>
 
-            <section
-              id="subCategory"
-              className="relative h-[200px] overflow-auto flex flex-col justify-end "
-            >
+            <section id="subCategory" className="mt-36 ">
               <div
                 id="SubCategoryWrapper"
-                className="flex flex-row flex-wrap gap-1 px-1"
+                className="flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent"
               >
                 {props.card.tags.map(tag => {
                   return (
@@ -444,6 +443,7 @@ const Card = (props: CardProps) => {
             </section>
           </div>
           <div className="w-[490px] flex flex-row">
+            {/* remove the bg color and drag, and place the close button in the toolbar if possible */}
             <div
               className="absolute w-[490px] bg-slate-300 h-5 flex justify-end z-10"
               onMouseDown={props.handleMouseDown}
@@ -661,10 +661,10 @@ const Card = (props: CardProps) => {
               onBlur={e => changeCardName(e)}
             />
           </div>
-          <section id="subCategory" className="mt-40 ">
+          <section id="subCategory" className="mt-36 ">
             <div
               id="SubCategoryWrapper"
-              className=" flex flex-row flex-wrap gap-1 px-1"
+              className=" flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent  "
             >
               <CTAButton
                 variant="addTags"

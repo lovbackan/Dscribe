@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
 import PopUp from '../components/PopUp/PopUp';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,69 @@ const SettingsPage = () => {
   const [showChangeUsernamePopup, setShowChangeUsernamePopup] = useState(false);
   const [showChangePasswordPopup, setShowChangePasswordPopup] = useState(false);
   const [showRemoveAccountPopup, setShowRemoveAccountPopup] = useState(false);
+  const [username, setUsername] = useState('');
+  const [newUsername, setNewUsername] = useState('');
+
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+  const fetchUser = async () => {
+    let { data, error } = await supabase.auth.getUser();
+    const userId = data.user?.id;
+    console.log(data);
+    const result = await supabase
+      .from('users')
+      .select('username')
+      .eq('id', userId)
+      .single();
+
+    if (error) console.log(error);
+    else setUsername(result.data?.username);
+    console.log(result.data?.username);
+  };
+
+  const changeUsername = async () => {
+    // if (newUsername === '') {
+    //   console.log('Username cannot be empty');
+    //   return;
+    // } else if (newUsername === username) {
+    //   console.log('New username cannot be the same as the old username');
+    //   return;
+    // }
+    // await supabase.auth.updateUser({ username: newUsername });
+    // console.log('Username changed');
+    // setShowChangeUsernamePopup(false);
+  };
+
+  const changePassword = async () => {
+    if (newPassword !== confirmNewPassword) {
+      console.log('Sorry you did not write the same password twice');
+      return;
+    } else if (newPassword === '') {
+      console.log('Password cannot be empty');
+      return;
+    } else if (newPassword.length < 8) {
+      console.log('Password must be at least 8 characters long');
+      return;
+    } else if (newPassword.length > 72) {
+      console.log('Password must be less than 72 characters long');
+      return;
+    } else if (newPassword.includes(' ')) {
+      console.log('Password cannot contain spaces');
+      return;
+    } else if (!/\d/.test(newPassword)) {
+      console.log('Password must contain at least one number');
+      return;
+    }
+
+    await supabase.auth.updateUser({ password: newPassword });
+    console.log('Password changed');
+    setShowChangePasswordPopup(false);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const navigate = useNavigate();
   const handleSignOut = async () => {
@@ -26,11 +89,11 @@ const SettingsPage = () => {
     }
   };
 
-  if (showSignOutPopup) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  // if (showSignOutPopup) {
+  //   document.body.style.overflow = 'hidden';
+  // } else {
+  //   document.body.style.overflow = 'auto';
+  // }
 
   return (
     <div className="h-screen w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
@@ -116,10 +179,16 @@ const SettingsPage = () => {
         <PopUp
           variant="changePassword"
           action={() => {
-            console.log('change Password');
+            changePassword();
           }}
           cancel={() => {
             setShowChangePasswordPopup(false);
+          }}
+          onChange1={e => {
+            setNewPassword(e.target.value);
+          }}
+          onChange2={e => {
+            setConfirmNewPassword(e.target.value);
           }}
         />
       )}
@@ -127,10 +196,20 @@ const SettingsPage = () => {
         <PopUp
           variant="changeUsername"
           action={() => {
-            console.log('change username');
+            // add check if password is correct
+            if (newUsername !== '' && newUsername !== username) {
+              changeUsername();
+              setShowChangeUsernamePopup(false);
+            }
           }}
           cancel={() => {
             setShowChangeUsernamePopup(false);
+          }}
+          onChange1={e => {
+            setNewUsername(e.target.value);
+          }}
+          onChange2={e => {
+            console.log(e.target.value);
           }}
         />
       )}

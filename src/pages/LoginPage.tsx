@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('asd@asd'); //Values for testing account.
-  const [password, setPassword] = useState('asdasd123'); ///////
+  const [password, setPassword] = useState('testing1234'); ///////
   const [error, setError] = useState<Error | null>(null);
 
   const signIn = async () => {

@@ -18,11 +18,16 @@ const HomePage = () => {
   //const [filteredStories, setFilteredStories] = useState(stories);
   const [showSignOutPopup, setShowSignOutPopup] = useState(false);
 
-  if (showSignOutPopup) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
+  const [filteredStories, setFilteredStories] = useState(stories);
+  useEffect(() => {
+    setFilteredStories(stories);
+  }, [stories]);
+
+  // if (showSignOutPopup) {
+  //   document.body.style.overflow = 'hidden';
+  // } else {
+  //   document.body.style.overflow = 'auto';
+  // }
 
   const fetchStories = async () => {
     const { data, error } = await supabase
@@ -86,16 +91,29 @@ const HomePage = () => {
           variant="secondary"
           autoFocus={true}
           onChange={e => {
-            console.log(e.target.value);
+            const value = e.target.value.toLowerCase();
+            if (value === '') {
+              setFilteredStories(stories);
+            } else {
+              setFilteredStories(
+                stories.filter(
+                  story =>
+                    story &&
+                    story.name &&
+                    story.name.toLowerCase().includes(value),
+                ),
+              );
+            }
           }}
         />
       </div>
       <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
         <StoryList
           supabase={supabase}
-          stories={stories}
+          stories={filteredStories}
           setSelectedStory={setSelectedStory}
           setStories={setStories}
+          author={true}
         />
       </div>
 

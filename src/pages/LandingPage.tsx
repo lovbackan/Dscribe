@@ -14,7 +14,7 @@ import { CardDesign } from '../components/Card/CardDesign.tsx';
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default overflow-x-hidden ">
+    <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default overflow-x-hidden">
       <section
         id="LandingPageNavbar"
         className="absolute top-0 right-0 pt-3 pr-3"
