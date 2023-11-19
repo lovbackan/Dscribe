@@ -81,7 +81,6 @@ const ReadingPage = () => {
     console.log(data);
     if (error) console.log(error);
     else setDeck(...[data]);
-    console.log(data);
   };
 
   const fetchCategories = async () => {
