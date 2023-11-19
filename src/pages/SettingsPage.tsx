@@ -49,27 +49,27 @@ const SettingsPage = () => {
 
   const changePassword = async () => {
     if (newPassword !== confirmNewPassword) {
-      console.log('Sorry you did not write the same password twice');
+      alert('Sorry you did not write the same password twice');
       return;
     } else if (newPassword === '') {
-      console.log('Password cannot be empty');
+      alert('Password cannot be empty');
       return;
     } else if (newPassword.length < 8) {
-      console.log('Password must be at least 8 characters long');
+      alert('Password must be at least 8 characters long');
       return;
     } else if (newPassword.length > 72) {
-      console.log('Password must be less than 72 characters long');
+      alert('Password must be less than 72 characters long');
       return;
     } else if (newPassword.includes(' ')) {
-      console.log('Password cannot contain spaces');
+      alert('Password cannot contain spaces');
       return;
     } else if (!/\d/.test(newPassword)) {
-      console.log('Password must contain at least one number');
+      alert('Password must contain at least one number');
       return;
     }
 
     await supabase.auth.updateUser({ password: newPassword });
-    console.log('Password changed');
+    alert('Password changed');
     setShowChangePasswordPopup(false);
   };
 

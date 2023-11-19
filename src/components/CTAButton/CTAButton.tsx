@@ -148,13 +148,15 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
             } relative top-[-23px] left-[-10px] `}
             onClick={e => e.stopPropagation()}
           >
-            <div
-              id="removeCateogry"
-              className="close-icon absolute rounded-full h-5 w-5 hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black "
-              onClick={remove}
-            >
-              {/* <Text content="x" variant="subCategory" textColor="white" /> */}
-            </div>
+            {remove && (
+              <div
+                id="removeCateogry"
+                className="close-icon absolute rounded-full h-5 w-5 hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black "
+                onClick={remove}
+              >
+                {/* <Text content="x" variant="subCategory" textColor="white" /> */}
+              </div>
+            )}
           </div>
         </div>
       </div>
