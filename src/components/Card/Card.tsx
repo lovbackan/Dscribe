@@ -391,7 +391,7 @@ const Card = (props: CardProps) => {
         <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-xl">
           <div
             id="cardWrapper"
-            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
+            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl  relative -z-20"
             onMouseDown={props.handleMouseDown}
           >
             {imageUrl && (
@@ -414,7 +414,7 @@ const Card = (props: CardProps) => {
               />
             </div>
 
-            <div className="mt-8">
+            <div className="mt-6">
               <Input
                 id="CardTitle"
                 variant="cardTitle"
@@ -428,10 +428,10 @@ const Card = (props: CardProps) => {
               />
             </div>
 
-            <section id="subCategory" className="mt-36 ">
+            <section id="subCategory" className="mt-[138px] ">
               <div
                 id="SubCategoryWrapper"
-                className="flex flex-row flex-wrap gap-1 px-1 h-18 overflow-y-auto pt-1 bg-transparent"
+                className="flex flex-row flex-wrap gap-1 px-1 h-[72px] overflow-y-auto pt-1 bg-transparent"
               >
                 {props.card.tags.map(tag => {
                   return (
@@ -699,7 +699,7 @@ const Card = (props: CardProps) => {
               onBlur={e => changeCardName(e)}
             />
           </div>
-          <section id="subCategory" className="mt-36 ">
+          <section id="subCategory" className="mt-32 ">
             <div
               id="SubCategoryWrapper"
               className=" flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent  "
