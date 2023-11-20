@@ -55,6 +55,20 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
 
   const [filterTags, setFilterTags] = useState<any[]>([]);
   const [filterCategories, setFilterCategories] = useState<any[]>([]);
+  const [columns, setColumns] = useState<any>(4);
+
+  //Listen to window event instead.
+
+  const handleResize = () => {
+    //Deckview 75% 160px padding 200px card width + 5px gap
+    setColumns(Math.floor((window.innerWidth * 0.75 - 160) / 210));
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize, true);
+
+    return window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let newFilteredCards = allCards;
@@ -306,7 +320,9 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           <div className="w-full h-0.5 bg-black self-end mb-[6px]"></div>
         </div>
         {/* Fix grid-cols to be dynamically size */}
-        <div className="grid grid-cols-4 gap-4 my-2 items-center mb-[30px]">
+        <div
+          className={`grid grid-cols-${columns} gap-4 my-2 items-center mb-[30px]`}
+        >
           <div
             className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white"
             onClick={() => props.addCard()}
