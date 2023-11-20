@@ -4,7 +4,6 @@ import { NavbarButton } from './NavbarButton';
 
 interface NavbarProps {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
-  
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onClick }) => {
@@ -28,7 +27,7 @@ const Navbar: React.FC<NavbarProps> = ({ onClick }) => {
   // }, []);
 
   return (
-    <div className=" fixed left-0 w-32 h-full flex flex-col justify-between py-[111px]">
+    <div className=" fixed left-0 w-32 h-full flex flex-col justify-between py-[30px]">
       <NavbarButton variant="home" />
       <NavbarButton variant="community" />
       <NavbarButton variant="settings" />
