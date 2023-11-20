@@ -16,6 +16,7 @@ interface PopUpProps {
   cancel: Function;
   onChange1?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChange2?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange3?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PopUp: React.FC<PopUpProps> = ({
@@ -25,6 +26,7 @@ const PopUp: React.FC<PopUpProps> = ({
   changeCardId,
   onChange1,
   onChange2,
+  onChange3,
 }) => {
   if (variant === 'logOut') {
     return (
@@ -124,13 +126,15 @@ const PopUp: React.FC<PopUpProps> = ({
           autoFocus={true}
           onChange={onChange1 ? onChange1 : () => {}}
         />
-        <Input
-          type="password"
-          id="password"
-          variant="secondary"
-          placeholder="Password"
-          onChange={onChange2 ? onChange2 : () => {}}
-        />
+        {onChange2 && (
+          <Input
+            type="password"
+            id="password"
+            variant="secondary"
+            placeholder="Password"
+            onChange={onChange2}
+          />
+        )}
 
         <div className="flex flex-row justify-between">
           <CTAButton
@@ -173,6 +177,16 @@ const PopUp: React.FC<PopUpProps> = ({
           placeholder="Confirm new password"
           onChange={onChange2 ? onChange2 : () => {}}
         />
+
+        {onChange3 && (
+          <Input
+            type="password"
+            id="password"
+            variant="secondary"
+            placeholder="Old Password"
+            onChange={onChange3}
+          />
+        )}
 
         <div className="flex flex-row justify-between">
           <CTAButton
