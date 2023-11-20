@@ -427,7 +427,7 @@ const Card = (props: CardProps) => {
             <section id="subCategory" className="mt-36 ">
               <div
                 id="SubCategoryWrapper"
-                className="flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent"
+                className="flex flex-row flex-wrap gap-1 px-1 h-18 overflow-y-auto pt-1 bg-transparent"
               >
                 {props.card.tags.map(tag => {
                   return (
@@ -492,28 +492,59 @@ const Card = (props: CardProps) => {
                 draggable="false"
               />
             )}
-            <CTAButton
-              variant="cardCategory"
-              title={categoryName}
-              onClick={() => {
-                console.log(props.card.text);
-                console.log(props.card.category_id);
-              }}
-              color={categoryColor}
-            />
+            <div className="w-min">
+              <CTAButton
+                variant="cardCategory"
+                title={categoryName}
+                onClick={() => {
+                  console.log(props.card.text);
+                  console.log(props.card.category_id);
+                }}
+                color={categoryColor}
+              />
+            </div>
+            <div className=" h-auto  w-[150px] ml-[23px] mt-4 bg-black bg-opacity-60 rounded-lg p-2">
+              <Text
+                content={props.card.name}
+                textColor="white"
+                variant="cardTitle"
+              />
+            </div>
 
-            <Input
-              id="CardTitle"
-              variant="cardTitle"
-              placeholder={props.card.name}
-              onChange={() => {}}
-              onBlur={e => changeCardName(e)}
-              type="text"
-              autoComplete="off"
-            />
-            {/* Inte bra med bottom-9, borde vara dynamiskt */}
+            {/* <div className="mt-8">
+              <Input
+                id="CardTitle"
+                variant="cardTitle"
+                placeholder={props.card.name}
+                onChange={() => {}}
+                onBlur={e => changeCardName(e)}
+                type="text"
+                autoComplete="off"
+              />
+            </div> */}
 
-            <section
+            <section id="subCategory" className="mt-28 ">
+              <div
+                id="SubCategoryWrapper"
+                className="flex flex-row flex-wrap gap-1 px-1 h-18 overflow-y-auto pt-1 bg-transparent"
+              >
+                {props.card.tags.map(tag => {
+                  return (
+                    <CTAButton
+                      key={tag.id}
+                      variant="cardSubCategory"
+                      title={tag.name}
+                      onClick={() => {
+                        console.log('Slackerman');
+                      }}
+                      color={tag.color_id}
+                    />
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* <section
               id="subCategory"
               className="relative h-[200px] overflow-auto flex flex-col justify-end "
             >
@@ -533,7 +564,7 @@ const Card = (props: CardProps) => {
                   );
                 })}
               </div>
-            </section>
+            </section> */}
           </div>
           <div className="w-[490px] flex flex-row">
             <div className="w-[490px] h-[300px]">
@@ -556,7 +587,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black "
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
