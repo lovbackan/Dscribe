@@ -126,7 +126,7 @@ function SaveOnChange(props: {
 }
 
 function Placeholder() {
-  return <div className="editor-placeholder">Enter some rich text...</div>;
+  return <div className="editor-placeholder">Write your content...</div>;
 }
 
 const editorConfig = {

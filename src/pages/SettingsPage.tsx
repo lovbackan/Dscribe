@@ -52,6 +52,10 @@ const SettingsPage = () => {
       .eq('id', user.id);
     setOldPassword('');
     setShowChangeUsernamePopup(false);
+    if (result.error) {
+      alert('Username already exists');
+      return;
+    }
   };
 
   const changePassword = async () => {

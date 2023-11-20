@@ -376,11 +376,13 @@ const Card = (props: CardProps) => {
               />
             )}
           </div>
-          <Text
-            content={props.card.name}
-            textColor="white"
-            variant="cardTitle"
-          />
+          <div className=" h-auto  w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg p-2">
+            <Text
+              content={props.card.name}
+              textColor="white"
+              variant="cardTitle"
+            />
+          </div>
         </div>
       </>
     );
