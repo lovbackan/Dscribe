@@ -835,6 +835,14 @@ i.logo {
   display: inline-block;
 }
 
+.new-close-icon-big {
+  background-image: url(./images/icons/new-big-close-icon.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
 .deck-icon {
   background-image: url(./images/icons/deck-icon.svg);
   background-size: fill;

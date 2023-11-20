@@ -207,15 +207,24 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       className="  bg-gradient-to-b from-[#C7D8FF] to-[#FAFAFA] overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
       <div className="flex flex-row justify-end ">
-        <div className="fixed pr-6 pt-3">
+        <div className="fixed mr-[25px] mt-[25px]">
           <CTAButton
+            title=""
+            variant="closeBig"
+            onClick={() => {
+              console.log('close deck view');
+              props.toggleDeckView();
+            }}
+          />
+
+          {/* <CTAButton
             title="X"
             variant="minimize/close"
             onClick={() => {
               console.log('close deck view');
               props.toggleDeckView();
             }}
-          />
+          /> */}
         </div>
       </div>
       <div className="px-20">
