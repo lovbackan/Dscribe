@@ -184,13 +184,13 @@ const Card = (props: CardProps) => {
       const cardIndex = getCardIndex();
 
       const newDeck = props.deck;
-      newDeck[cardIndex].name = newName;
       if (
         props.deck[cardIndex].name === newName ||
         !props.deckChanges ||
         !props.setDeckChanges
       )
         return;
+      newDeck[cardIndex].name = newName;
 
       const newDeckChanges = props.deckChanges;
       const cardChangesIndex = getCardChangesIndex();
@@ -202,6 +202,7 @@ const Card = (props: CardProps) => {
       } else {
         newDeckChanges[cardChangesIndex].name = newName;
       }
+
       props.setDeck([...newDeck]);
       props.setDeckChanges([...newDeckChanges]);
     }
@@ -415,7 +416,9 @@ const Card = (props: CardProps) => {
                 variant="cardTitle"
                 placeholder={props.card.name}
                 onChange={() => {}}
-                onBlur={e => changeCardName(e)}
+                onBlur={e => {
+                  changeCardName(e);
+                }}
                 type="text"
                 autoComplete="off"
               />
