@@ -47,6 +47,8 @@ const StoryList = (props: StoryListProps) => {
           <StoryCard
             key={story.id}
             story={story}
+            stories={props.stories}
+            setStories={props.setStories}
             setSelectedStory={props.setSelectedStory}
             setChangeCardId={props.setChangeCardId}
             deleteCard={props.deleteCard}

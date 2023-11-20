@@ -5,7 +5,15 @@ import { useState, useEffect } from 'react';
 import { Text } from '../Text/Text';
 
 interface StoryCardProps {
-  story: { id: number; name: string; image_path?: string; user_id: string };
+  story: {
+    id: number;
+    name: string;
+    image_path?: string;
+    user_id: string;
+    published: boolean;
+  };
+  stories: StoryCardProps['story'][];
+  setStories: Function;
   setChangeCardId?: Function;
   setSelectedStory: Function;
   deleteCard?: Function;
@@ -85,11 +93,22 @@ const StoryCard = (props: StoryCardProps) => {
 
   const publishStory = async () => {
     const id = props.story.id;
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('stories')
-      .update({ published: true })
-      .eq('id', id);
+      .update({ published: !props.story.published })
+      .eq('id', id)
+      .select('published')
+      .single();
     if (error) console.log(error);
+    else {
+      const updatedStories = props.stories;
+      const storyIndex = updatedStories.findIndex(story => {
+        if (story.id === props.story.id) return true;
+        return false;
+      });
+      updatedStories[storyIndex].published = data.published;
+      props.setStories([...updatedStories]);
+    }
   };
 
   const changeName = async (newName: string) => {
@@ -136,7 +155,7 @@ const StoryCard = (props: StoryCardProps) => {
               {isHovered && (
                 <CTAButton
                   variant="publishStory"
-                  title="Make public"
+                  title={props.story.published ? 'Make private' : 'Make public'}
                   onClick={() => {
                     publishStory();
                   }}
