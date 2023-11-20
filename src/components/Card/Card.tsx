@@ -539,7 +539,7 @@ const Card = (props: CardProps) => {
               />
             </div>
 
-            <div className="w-[490px] pt-4 h-[300px]">
+            <div className="w-[490px] pt-4 h-[290px]">
               <Editor
                 card={props.card}
                 deck={props.deck}
