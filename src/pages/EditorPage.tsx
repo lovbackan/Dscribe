@@ -325,6 +325,8 @@ const EditorPage = () => {
                   <Card
                     key={card.id}
                     card={card}
+                    tags={tags}
+                    createTag={createTag}
                     variant="openCard"
                     supabase={supabase}
                     deck={deck}

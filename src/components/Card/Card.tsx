@@ -393,6 +393,8 @@ const Card = (props: CardProps) => {
             id="cardWrapper"
             className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl  relative -z-20"
             onMouseDown={props.handleMouseDown}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             {imageUrl && (
               <img
@@ -402,18 +404,70 @@ const Card = (props: CardProps) => {
                 draggable="false"
               />
             )}
-            <div className="w-min ">
+            <div className="flex flex-row justify-between">
               <CTAButton
                 variant="cardCategory"
                 title={categoryName}
-                onClick={() => {
-                  console.log(props.card.text);
-                  console.log(props.card.category_id);
+                onClick={e => {
+                  e.stopPropagation();
+                  setAddCategoryWindow(!addCategoryWindow);
                 }}
                 color={categoryColor}
               />
+              <div
+                className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2"
+                onClick={e => {
+                  e.stopPropagation();
+                }}
+              >
+                {isHovered && !addCategoryWindow && (
+                  <form
+                    onSubmit={e => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <input
+                      className=" hidden"
+                      id="file-upload"
+                      type="file"
+                      accept=" .png, .jpg, .gif"
+                      name="image"
+                      onChange={e => {
+                        e.preventDefault();
+
+                        if (e.target.files) {
+                          if (e.target.files[0].size > 2097152) {
+                            alert('File is too big!');
+                            return;
+                          }
+                          uploadImage(e.target.files[0]);
+                        }
+                      }}
+                    />
+                    <label htmlFor="file-upload" className="custom-file-upload">
+                      <CTAButton
+                        variant="changePicture"
+                        title=""
+                        onClick={() => {}}
+                      />
+                    </label>
+                  </form>
+                )}
+              </div>
             </div>
 
+            {addCategoryWindow && (
+              <div className=" absolute top-4 w-full">
+                <Dropdown
+                  add={setCategory}
+                  create={props.createCategory}
+                  card={props.card}
+                  mappable={props.categories}
+                  variant="categories"
+                  setThisOpen={setAddCategoryWindow}
+                />
+              </div>
+            )}
             <div className="mt-6">
               <Input
                 id="CardTitle"
@@ -433,6 +487,16 @@ const Card = (props: CardProps) => {
                 id="SubCategoryWrapper"
                 className="flex flex-row flex-wrap gap-1 px-1 h-[72px] overflow-y-auto pt-1 bg-transparent"
               >
+                {isHovered && (
+                  <CTAButton
+                    variant="addTags"
+                    title=""
+                    onClick={event => {
+                      event.stopPropagation();
+                      setAddTagsWindow(!addTagsWindow);
+                    }}
+                  />
+                )}
                 {props.card.tags.map(tag => {
                   return (
                     <CTAButton
@@ -442,12 +506,23 @@ const Card = (props: CardProps) => {
                       onClick={() => {
                         console.log('Slackerman');
                       }}
+                      remove={() => removeTag(tag.id)}
                       color={tag.color_id}
                     />
                   );
                 })}
               </div>
             </section>
+            {addTagsWindow && (
+              <Dropdown
+                mappable={props.tags}
+                card={props.card}
+                add={addTag}
+                create={props.createTag}
+                variant="tags"
+                setThisOpen={setAddTagsWindow}
+              />
+            )}
           </div>
           <div className="w-[490px] flex flex-row">
             {/* remove the bg color and drag, and place the close button in the toolbar if possible */}
@@ -734,7 +809,7 @@ const Card = (props: CardProps) => {
               })}
             </div>
           </section>
-          {addTagsWindow ? (
+          {addTagsWindow && (
             <Dropdown
               mappable={props.tags}
               card={props.card}
@@ -743,7 +818,7 @@ const Card = (props: CardProps) => {
               variant="tags"
               setThisOpen={setAddTagsWindow}
             />
-          ) : null}
+          )}
         </div>
       </>
     );
