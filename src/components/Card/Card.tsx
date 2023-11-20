@@ -670,7 +670,7 @@ const Card = (props: CardProps) => {
         <div
           className={`bg-gradient-to-b ${
             imageUrl ? 'bg-none' : 'from-[#0F172A] to-[#5179D9]'
-          }  drop-shadow-lg shadow-right-bottom h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border-2 hover:border-black `}
+          }  drop-shadow-lg shadow-right-bottom h-[300px] w-[200px] rounded-xl  hover:z-10  cursor-pointer hover:border-2 hover:border-black `}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
