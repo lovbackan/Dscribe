@@ -95,7 +95,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'addCard'
       ? 'text-black text-[32px] font-inter'
       : variant === 'minimize/close'
-      ? 'text-black text-[12px] font-inter'
+      ? 'text-black text-[20px] font-inter'
       : variant === 'cardSubCategory'
       ? 'text-white text-[10px] font-inter'
       : variant === 'publishStory'

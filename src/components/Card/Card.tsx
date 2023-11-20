@@ -452,8 +452,8 @@ const Card = (props: CardProps) => {
           <div className="w-[490px] flex flex-row">
             {/* remove the bg color and drag, and place the close button in the toolbar if possible */}
             <div
-              className="absolute w-[490px] bg-slate-300 h-5 flex justify-end z-10"
-              onMouseDown={props.handleMouseDown}
+              className="absolute w-[490px] pr-2 h-5 flex justify-end z-10"
+              // onMouseDown={props.handleMouseDown}
             >
               <CTAButton
                 title="-"
@@ -574,13 +574,15 @@ const Card = (props: CardProps) => {
             <div className="w-[490px] h-[300px]">
               <RichTextViewer editorState={props.card.text} />
             </div>
-            <CTAButton
-              title="-"
-              variant="minimize/close"
-              onClick={() => {
-                toggleOpenCard();
-              }}
-            />
+            <div className="pr-2 pt-2">
+              <CTAButton
+                title="-"
+                variant="minimize/close"
+                onClick={() => {
+                  toggleOpenCard();
+                }}
+              />
+            </div>
           </div>
         </div>
       </>
@@ -751,7 +753,7 @@ const Card = (props: CardProps) => {
         onClick={() => {
           console.log('published');
         }}
-        className={`h-72  w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border bg-white border-black`}
+        className={`h-72 w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border bg-white border-black`}
       >
         <Text content="{title}" textColor="black" variant="cardTitle" />
       </div>
