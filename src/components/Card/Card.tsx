@@ -376,7 +376,7 @@ const Card = (props: CardProps) => {
               />
             )}
           </div>
-          <div className=" h-auto  w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg p-2">
+          <div className=" h-auto min-h-[44px] w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg p-2">
             <Text
               content={props.card.name}
               textColor="white"
@@ -470,24 +470,29 @@ const Card = (props: CardProps) => {
                 />
               </div>
             )}
-            <div className="mt-6">
-              <Input
-                id="CardTitle"
-                variant="cardTitle"
-                placeholder={props.card.name}
-                onChange={() => {}}
-                onBlur={e => {
-                  changeCardName(e);
-                }}
-                type="text"
-                autoComplete="off"
-              />
-            </div>
 
-            <section id="subCategory" className="mt-[138px] ">
+            <Input
+              id="CardTitle"
+              variant="cardTitle"
+              placeholder={props.card.name}
+              onChange={() => {}}
+              onBlur={e => {
+                changeCardName(e);
+              }}
+              type="text"
+              autoComplete="off"
+            />
+
+            {/* <section id="subCategory" className="mt-32 ">
+            <div
+              id="SubCategoryWrapper"
+              className=" flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent  "
+            > */}
+
+            <section id="subCategory" className="mt-32 ">
               <div
                 id="SubCategoryWrapper"
-                className="flex flex-row flex-wrap gap-1 px-1 h-[72px] overflow-y-auto pt-1 bg-transparent"
+                className="flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent"
               >
                 {isHovered && (
                   <CTAButton
