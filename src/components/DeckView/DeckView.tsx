@@ -305,9 +305,10 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
 
           <div className="w-full h-0.5 bg-black self-end mb-[6px]"></div>
         </div>
-        <div className="flex flex-wrap gap-10 my-2 justify-center items-center mb-[30px]">
+        {/* Fix grid-cols to be dynamically size */}
+        <div className="grid grid-cols-4 gap-4 my-2 items-center mb-[30px]">
           <div
-            className="w-[200px] h-[300px] rounded-[20px] drop-shadow-lg shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50  flex justify-center items-center border-2 border-white"
+            className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white"
             onClick={() => props.addCard()}
           >
             <Text variant="heading2" content="+" textColor="white" />
