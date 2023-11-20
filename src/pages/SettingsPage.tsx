@@ -35,16 +35,14 @@ const SettingsPage = () => {
   };
 
   const changeUsername = async () => {
-    // if (newUsername === '') {
-    //   console.log('Username cannot be empty');
-    //   return;
-    // } else if (newUsername === username) {
-    //   console.log('New username cannot be the same as the old username');
-    //   return;
-    // }
-    // await supabase.auth.updateUser({ username: newUsername });
-    // console.log('Username changed');
-    // setShowChangeUsernamePopup(false);
+    const user = (await supabase.auth.getUser()).data.user;
+    if (!user) return;
+    const result = await supabase
+      .from('users')
+      .update({ username: newUsername })
+      .eq('id', user.id);
+    console.log(result);
+    setShowChangeUsernamePopup(false);
   };
 
   const changePassword = async () => {
