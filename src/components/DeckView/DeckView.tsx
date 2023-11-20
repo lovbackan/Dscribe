@@ -207,7 +207,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       className="  bg-gradient-to-b from-[#C7D8FF] to-[#FAFAFA] overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
       <div className="flex flex-row justify-end ">
-        <div className="fixed mr-[25px] mt-[25px]">
+        <div className="fixed mr-[15px] mt-[15px]">
           <CTAButton
             title=""
             variant="closeBig"
@@ -228,13 +228,15 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         </div>
       </div>
       <div className="px-20">
-        <div id="title" className="mt-10 ">
-          <h1>DeckView</h1>
+        <div id="title" className="mt-6 ">
+          <Text variant="heading2" content="Deck View" textColor="black" />
         </div>
         {/* map over deck and display cards */}
 
-        <div className="flex flex-row">
-          <Text variant="heading2" content="Filter" textColor="black" />
+        <div className="flex flex-row mt-[34px]">
+          <div className="pr-2">
+            <Text variant="heading3" content="Filter" textColor="black" />
+          </div>
           <Input
             type="text"
             id="search"
@@ -247,7 +249,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             }}
           />
         </div>
-        <div className="flex flex-row w-[100%] h-auto">
+        <div className="flex flex-row w-[100%] h-auto mt-[12px] gap-2 items-center">
+          <Text variant="heading3" content="Categories" textColor="black" />
           {props.categories.map(category => {
             return (
               <CTAButton
@@ -272,7 +275,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           })}
         </div>
 
-        <div className="flex flex-row w-[100%] h-auto flex-wrap ">
+        <div className="flex flex-row w-[100%] h-auto flex-wrap mt-[12px] gap-1  items-center ">
+          <Text variant="heading3" content="Tags" textColor="black" />
           {props.tags.map(tag => {
             return (
               <CTAButton
@@ -296,7 +300,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
             );
           })}
         </div>
-        <div className="flex flex-row pb-10">
+        <div className="flex flex-row pb-10 mt-[12px]">
           <Text textColor="black" variant="heading2" content="Cards" />
 
           <div className="w-full h-0.5 bg-black self-end"></div>
