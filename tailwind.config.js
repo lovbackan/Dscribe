@@ -6,6 +6,9 @@ export default {
     //   courier: ['Courier', 'monospace'],
     //   source: ['Courier Prime', 'monospace'],
     // },
+    boxShadow: {
+      'right-bottom': '10px 10px 10px rgba(0, 0, 0, 0.5)',
+    },
     extend: {
       gridTemplateColumns: {
         // Simple 16 column grid

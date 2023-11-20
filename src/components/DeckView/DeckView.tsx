@@ -207,7 +207,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       className="  bg-gradient-to-b from-[#C7D8FF] to-[#FAFAFA] overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
       <div className="flex flex-row justify-end ">
-        <div className="fixed mr-[15px] mt-[15px]">
+        <div className="fixed mr-[5px] mt-[5px]">
           <CTAButton
             title=""
             variant="closeBig"
@@ -228,12 +228,12 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         </div>
       </div>
       <div className="px-20">
-        <div id="title" className="mt-6 ">
+        <div id="title" className="mt-4 ">
           <Text variant="heading2" content="Deck View" textColor="black" />
         </div>
         {/* map over deck and display cards */}
 
-        <div className="flex flex-row mt-[34px]">
+        <div className="flex flex-row mt-[12px]">
           <div className="pr-2">
             <Text variant="heading3" content="Filter" textColor="black" />
           </div>
@@ -303,16 +303,14 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         <div className="flex flex-row pb-10 mt-[12px]">
           <Text textColor="black" variant="heading2" content="Cards" />
 
-          <div className="w-full h-0.5 bg-black self-end"></div>
+          <div className="w-full h-0.5 bg-black self-end mb-[6px]"></div>
         </div>
         <div className="flex flex-wrap gap-10 my-2 justify-center items-center mb-[30px]">
           <div
-            className="w-[200px] h-[300px] rounded-[20px]  cursor-pointer hover:border-4  text-black flex justify-center items-center border-2 border-white"
+            className="w-[200px] h-[300px] rounded-[20px] drop-shadow-lg shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50  flex justify-center items-center border-2 border-white"
             onClick={() => props.addCard()}
           >
-            <h2 className="text-white text-[30px] flex justify-center items-center">
-              +
-            </h2>
+            <Text variant="heading2" content="+" textColor="white" />
           </div>
 
           {filteredCards.map(card => {
