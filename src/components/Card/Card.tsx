@@ -340,6 +340,8 @@ const Card = (props: CardProps) => {
       <>
         <div
           className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border hover:border-black"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
             toggleOpenCard();
           }}
@@ -363,14 +365,16 @@ const Card = (props: CardProps) => {
               color={categoryColor}
             />
 
-            <CTAButton
-              variant="minimize/close"
-              title="X"
-              onClick={event => {
-                event.stopPropagation(); // Stop the event from propagating to the parent div
-                if (props.card.inHand) toggleInHand();
-              }}
-            />
+            {isHovered && (
+              <CTAButton
+                variant="closeSmall"
+                title=""
+                onClick={event => {
+                  event.stopPropagation(); // Stop the event from propagating to the parent div
+                  if (props.card.inHand) toggleInHand();
+                }}
+              />
+            )}
           </div>
           <Text
             content={props.card.name}

@@ -19,7 +19,9 @@ type ButtonType =
   | 'deleteCard'
   | 'changePicture'
   | 'addTags'
-  | 'publishStory';
+  | 'publishStory'
+  | 'closeSmall'
+  | 'closeBig';
 
 interface CTAButtonProps {
   title: string | number;
@@ -71,6 +73,10 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'addTags hover:border-2 hover:border-white cursor-pointer'
       : variant === 'publishStory'
       ? 'w-[100px] h-[25px] rounded-[5px] flex justify-center items-center hover:border-white hover:border-2 cursor-pointer bg-black bg-opacity-50'
+      : variant === 'closeSmall'
+      ? 'new-close-icon absolute right-0 rounded-lg mt-[8px] mr-[8px] h-[25px] w-[25px] hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black cursor-pointer'
+      : variant === 'closeBig'
+      ? 'new-close-icon-big absolute right-0 rounded-lg mt-[8px] mr-[8px] h-[40px] w-[40px] hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black cursor-pointer'
       : 'bg-purple-400';
 
   const textClasses =
@@ -93,6 +99,10 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'cardSubCategory'
       ? 'text-white text-[10px] font-inter'
       : variant === 'publishStory'
+      ? 'text-white text-[12px] font-inter'
+      : variant === 'closeSmall'
+      ? 'text-white text-[12px] font-inter'
+      : variant === 'closeBig'
       ? 'text-white text-[12px] font-inter'
       : 'text-purple-400';
 
