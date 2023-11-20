@@ -15,6 +15,7 @@ const SettingsPage = () => {
   const [showRemoveAccountPopup, setShowRemoveAccountPopup] = useState(false);
   const [username, setUsername] = useState('');
   const [newUsername, setNewUsername] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
 
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
@@ -35,17 +36,33 @@ const SettingsPage = () => {
   };
 
   const changeUsername = async () => {
+    //This isn't 100% safe. Should create a custom change password function on Supabase that incorporates this.
+    const passResult = await supabase.rpc('verify_user_password', {
+      password: oldPassword,
+    });
+    if (passResult.error || !passResult.data) {
+      alert('Wrong password!');
+      return;
+    }
     const user = (await supabase.auth.getUser()).data.user;
     if (!user) return;
     const result = await supabase
       .from('users')
       .update({ username: newUsername })
       .eq('id', user.id);
-    console.log(result);
+    setOldPassword('');
     setShowChangeUsernamePopup(false);
   };
 
   const changePassword = async () => {
+    const passResult = await supabase.rpc('verify_user_password', {
+      password: oldPassword,
+    });
+    if (passResult.error || !passResult.data) {
+      alert('Wrong password!');
+      return;
+    }
+
     if (newPassword !== confirmNewPassword) {
       alert('Sorry you did not write the same password twice');
       return;
@@ -188,6 +205,9 @@ const SettingsPage = () => {
           onChange2={e => {
             setConfirmNewPassword(e.target.value);
           }}
+          onChange3={e => {
+            setOldPassword(e.target.value);
+          }}
         />
       )}
       {showChangeUsernamePopup && (
@@ -207,7 +227,7 @@ const SettingsPage = () => {
             setNewUsername(e.target.value);
           }}
           onChange2={e => {
-            console.log(e.target.value);
+            setOldPassword(e.target.value);
           }}
         />
       )}
