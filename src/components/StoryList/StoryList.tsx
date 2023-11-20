@@ -27,7 +27,7 @@ const StoryList = (props: StoryListProps) => {
     if (error) {
       console.log(error);
     } else {
-      props.setStories([...props.stories, data]);
+      props.setStories([data, ...props.stories]);
     }
   };
 

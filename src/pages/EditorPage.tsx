@@ -226,7 +226,7 @@ const EditorPage = () => {
       const newDeck = deck;
       const newCard = data;
       newCard.tags = [];
-      setDeck([...newDeck, newCard]);
+      setDeck([newCard, ...newDeck]);
     }
   };
 
