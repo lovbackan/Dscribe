@@ -1,6 +1,7 @@
 import { Text } from '../Text/Text';
 import { ACCEPTED_ROUTES } from '../../routes/routes';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 type LogoType = 'big' | 'medium' | 'small' | 'login' | 'editor';
 
@@ -10,10 +11,12 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ variant }) => {
   const navigate = useNavigate();
+  const [animation, setAnimation] = useState('');
+
   const logoClasses = {
     big: 'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center ',
     login:
-      'w-[200px] h-[300px] rounded-[20px] bg-inherit flex justify-center items-center border-white border-r-2 ',
+      'w-[200px] h-[300px] rounded-[20px] bg-inherit flex justify-center items-center border-white border-2 translate-x-[260px] transition-transform delay-1000 duration-1000',
     medium:
       'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
     small:
@@ -21,6 +24,12 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     editor:
       'h-[150px] w-[100px] rounded-3xl border-2 border-white flex flex-col justify-center items-center absolute cursor-pointer hover:border-4 left-6 top-6',
   };
+
+  useEffect(() => {
+    if (variant === 'login') {
+      setAnimation('translate-x-0');
+    }
+  }, []);
 
   const className = logoClasses[variant] || logoClasses.big;
 
@@ -32,7 +41,7 @@ const Logo: React.FC<LogoProps> = ({ variant }) => {
     );
   } else if (variant === 'login') {
     return (
-      <div id="logo" className={`${className}`}>
+      <div id="logo" className={`${className} ${animation}`}>
         <Text variant="loginLogo" textColor="white" content="Codeck" />
       </div>
     );

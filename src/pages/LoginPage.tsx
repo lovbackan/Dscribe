@@ -26,7 +26,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
+    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A] overflow-hidden">
       <FormCard
         formComponent={
           <Form

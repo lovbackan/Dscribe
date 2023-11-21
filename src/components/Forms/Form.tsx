@@ -25,8 +25,7 @@ const Form: React.FC<FormProps> = ({
   if (variant === 'login') {
     return (
       <>
-        <Text variant="heading3" content="Login" textColor="white" />
-        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4  ">
+        <div id="inputContainer" className="gap-2.5 flex flex-col mt-[92px]  ">
           <Input
             type="email"
             id="email"

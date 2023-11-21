@@ -53,7 +53,7 @@ export const Text: React.FC<TextProps> = ({ content, variant, textColor }) => {
     pPrimary: `text-[12px] font-inter ${tailwindColorClass} select-none`,
     pSecondary: `text-[20px] font-inter ${tailwindColorClass} select-none`,
     heroHeading2: `text-[36px] font-courier ${tailwindColorClass} font-bold select-none`,
-    loginLogo: `text-[40px] font-courier ${tailwindColorClass} font-bold select-none`,
+    loginLogo: `text-[40px] font-courier ${tailwindColorClass} font-bold select-none pt-1`,
   };
 
   const className = tailwindClasses[variant] || tailwindClasses.default;
