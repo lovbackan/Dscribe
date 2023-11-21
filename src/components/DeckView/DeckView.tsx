@@ -60,11 +60,12 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
   //Listen to window event instead.
 
   const handleResize = () => {
-    //Deckview 75% 160px padding 200px card width + 5px gap
-    setColumns(Math.floor((window.innerWidth * 0.75 - 160) / 210));
+    //Deckview 75% 160px padding, 10 margin, 200px card width + 24px gap
+    setColumns(Math.floor((window.innerWidth * 0.75 - 170) / 224));
   };
 
   useEffect(() => {
+    handleResize();
     window.addEventListener('resize', handleResize, true);
 
     return window.removeEventListener('resize', handleResize);
@@ -242,7 +243,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         </div>
       </div>
       <div className="px-20">
-        <div id="title" className="mt-4 ">
+        <div id="title" className="mt-6 ">
           <Text variant="heading2" content="Deck View" textColor="black" />
         </div>
         {/* map over deck and display cards */}
@@ -319,9 +320,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
 
           <div className="w-full h-0.5 bg-black self-end mb-[6px]"></div>
         </div>
-        {/* Fix grid-cols to be dynamically size */}
         <div
-          className={`grid gap-4 my-2 items-center mb-[30px] `}
+          className={`grid gap-6 mt-2 mx-1 items-center mb-16`}
           style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
         >
           <div
@@ -330,16 +330,6 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           >
             <Text variant="heading2" content="+" textColor="white" />
           </div>
-          {/* <div
-          className={`grid gap-4 my-2 items-center mb-[30px] justify-between`}
-          style={{ gridTemplateColumns: `repeat(${columns}, auto)` }}
-        >
-          <div
-            className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white "
-            onClick={() => props.addCard()}
-          >
-            <Text variant="heading2" content="+" textColor="white" />
-          </div> */}
 
           {filteredCards.map(card => {
             return (
