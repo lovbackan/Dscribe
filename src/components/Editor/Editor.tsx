@@ -214,7 +214,7 @@ const Editor = (props: EditorProps) => {
         >
           <RichTextPlugin
             contentEditable={
-              <ContentEditable className="min-h-[150px] overflow-y-auto h-full w-full resize-none text-[15px] relative outline-none px-8 py-4" />
+              <ContentEditable className="min-h-[150px] overflow-y-auto h-full w-full resize-none text-[15px] relative outline-none px-2.5 py-4" />
             }
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}

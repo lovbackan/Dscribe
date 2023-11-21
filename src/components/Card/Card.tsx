@@ -361,7 +361,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] drop-shadow-lg shadow-right-bottom h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border-2 hover:border-black"
+          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] z-0 drop-shadow-lg shadow-right-bottom h-72 w-52 rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border-2 hover:border-black"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
@@ -398,14 +398,32 @@ const Card = (props: CardProps) => {
               />
             )}
           </div>
-          <div className=" h-auto min-h-[44px] w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg p-2">
+
+          {/* <div className="  w-[150px] h-[44px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70 font-inter">
             <Text
               content={props.card.name}
               textColor="white"
               variant="cardTitle"
             />
+          </div> */}
+
+          <div className=" h-auto min-h-[40px] w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg flex justify-center items-center">
+            <Text
+              content={props.card.name}
+              textColor="white"
+              variant="heading4"
+            />
           </div>
         </div>
+
+        {/* <div className=" h-auto min-h-[44px] w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg p-2">
+            <Text
+              content={props.card.name}
+              textColor="white"
+              variant="heading3"
+            />
+          </div>
+        </div> */}
       </>
     );
   }
@@ -674,11 +692,8 @@ const Card = (props: CardProps) => {
               </div>
             </section> */}
           </div>
-          <div className="w-[490px] flex flex-row">
-            <div className="w-[490px] h-[300px]">
-              <RichTextViewer editorState={props.card.text} />
-            </div>
-            <div className="pr-2 pt-2">
+          <div className="w-[490px] h-[300px] pt-6">
+            <div className="pr-1 pt-1 absolute z-10 top-0 right-0">
               <CTAButton
                 title="-"
                 variant="minimize/close"
@@ -686,6 +701,9 @@ const Card = (props: CardProps) => {
                   toggleOpenCard();
                 }}
               />
+            </div>
+            <div className="w-[490px] h-[300px] ">
+              <RichTextViewer editorState={props.card.text} />
             </div>
           </div>
         </div>

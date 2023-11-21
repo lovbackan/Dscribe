@@ -13,7 +13,10 @@ const Hand = (props: HandProps) => {
     <div className=" z-10 absolute bottom-[-230px] grid w-[90%] justify-center grid-cols-[repeat(auto-fit,_minmax(0,_max-content))]  max-w-[80%]">
       {props.deck.map(card => {
         return card.inHand ? (
-          <div className=" relative hover:bottom-[30px]" key={card.id}>
+          <div
+            className=" relative hover:bottom-[30px] hover:z-20"
+            key={card.id}
+          >
             {/* <div className=" absolute bottom-[-230px] hover:bottom-[-220px]"> */}
             <Card
               key={card.id}

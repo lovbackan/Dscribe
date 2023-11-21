@@ -31,7 +31,7 @@ export const Input: React.FC<InputProps> = ({
       : variant === 'secondary'
       ? 'w-[200px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter hover:border-black hover:border'
       : variant === 'cardTitle'
-      ? 'w-[150px] h-[44px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70 font-inter'
+      ? 'w-[150px] h-[40px] resize-none rounded-lg text-white px-2 py-1 text-center bg-black placeholder-white hover:border-white hover:border hover:border-2 bg-opacity-70 font-inter'
       : 'w-[540px] h-[30px] resize-none rounded-lg text-black px-2 py-1 font-inter';
 
   if (variant === 'cardTitle') {
