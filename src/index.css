@@ -133,7 +133,8 @@ h1 {
   /* background-color: #fff7dd; */
   background-color: #c7d8ff;
   border-radius: 5px;
-  padding: 5px 5px 5px 5px;
+  padding: 2px 2px 3px 3px;
+  border: 1px solid transparent;
 }
 .editor-card-link:hover {
   border: 1px solid black;
@@ -403,6 +404,8 @@ pre::-webkit-scrollbar-thumb {
   border-top-right-radius: 10px;
   vertical-align: middle; */
 }
+
+/* All buttons */
 
 .toolbar button.toolbar-item {
   border: 0;
