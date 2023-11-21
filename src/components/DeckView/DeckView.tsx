@@ -321,7 +321,8 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
         </div>
         {/* Fix grid-cols to be dynamically size */}
         <div
-          className={`grid grid-cols-${columns} gap-4 my-2 items-center mb-[30px]`}
+          className={`grid gap-4 my-2 items-center mb-[30px] `}
+          style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
         >
           <div
             className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white"
@@ -329,6 +330,16 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
           >
             <Text variant="heading2" content="+" textColor="white" />
           </div>
+          {/* <div
+          className={`grid gap-4 my-2 items-center mb-[30px] justify-between`}
+          style={{ gridTemplateColumns: `repeat(${columns}, auto)` }}
+        >
+          <div
+            className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white "
+            onClick={() => props.addCard()}
+          >
+            <Text variant="heading2" content="+" textColor="white" />
+          </div> */}
 
           {filteredCards.map(card => {
             return (
