@@ -208,13 +208,13 @@ const Editor = (props: EditorProps) => {
         <ToolbarPlugin deckViewOpen={props.deckViewOpen} />
         <div
           id="editorInner"
-          className={`w-full ${
+          className={`w-full  ${
             props.deckViewOpen ? 'bg-[#0B0B0B]' : 'bg-white'
           } relative h-full `}
         >
           <RichTextPlugin
             contentEditable={
-              <ContentEditable className="min-h-[150px] overflow-y-auto h-full w-full resize-none text-[15px] relative outline-none px-2.5 py-4" />
+              <ContentEditable className="min-h-[150px] overflow-y-auto h-full w-full resize-none text-[15px] relative outline-none px-8 py-4" />
             }
             placeholder={<Placeholder />}
             ErrorBoundary={LexicalErrorBoundary}
