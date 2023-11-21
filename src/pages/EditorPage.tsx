@@ -80,6 +80,11 @@ const EditorPage = () => {
   saveTimerRef.current = saveTimer;
   const deckChangesRef = useRef(deckChanges);
   deckChangesRef.current = deckChanges;
+  const [saveAnimation, setSaveAnimation] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (saveAnimation === true) setTimeout(() => setSaveAnimation(false), 500);
+  }, [saveAnimation]);
 
   useEffect(() => {
     const timeout = setTimeout(saveCountdown, 500);
@@ -89,6 +94,7 @@ const EditorPage = () => {
   const saveCountdown = async () => {
     if (saveTimerRef.current >= 0) {
       const newTime = saveTimerRef.current - 100;
+      let changes = false;
       setSaveTimer(newTime);
       if (newTime <= 0) {
         //Saving happens here. Needs error handling.
@@ -128,17 +134,24 @@ const EditorPage = () => {
             deckErrors.push(error);
           }
         });
-        if (deckErrors.length === 0) setDeckChanges([]);
+        if (deckErrors.length === 0 && deckChanges.length > 0) {
+          setDeckChanges([]);
+          changes = true;
+        }
+
         if (storyChangesRef.current.text) {
-          supabase
+          await supabase
             .from('stories')
             .update({ text: storyChangesRef.current.text })
             .eq('id', selectedStory.id)
             .then(result => {
-              if (!result.error) setStoryChanges({});
-              console.log(result);
+              if (!result.error) {
+                setStoryChanges({});
+                changes = true;
+              }
             });
         }
+        if (changes) setSaveAnimation(true);
       }
     }
     setTimeout(saveCountdown, 100);
@@ -420,6 +433,12 @@ const EditorPage = () => {
               />
             </div>
           </div>
+          <div
+            className={` saveSymbol ${saveAnimation ? 'saveAnimation' : ''}`}
+            onClick={() => {
+              setSaveAnimation(true);
+            }}
+          ></div>
         </div>
       </deckContext.Provider>
     </setDeckContext.Provider>

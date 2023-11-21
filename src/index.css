@@ -939,6 +939,25 @@ i.logo {
   opacity: 0;
   transition: opacity 0.3s ease;
   position: absolute;
+  right: 0;
+}
+
+.saveSymbol {
+  background-image: url(./images/icons/save.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 50px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.saveAnimation {
+  opacity: 0.7;
 }
 
 .inputWrapper:hover .editSymbol {
