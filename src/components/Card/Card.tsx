@@ -60,7 +60,7 @@ const Dropdown = (props: DropdownProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   return (
     <div
-      className="bg-black w-full h-10 z-50"
+      className="bg-[#0F172A] w-full z-50"
       //Prevents deselection of input field.
       //gör om istället att inputen sortar alla tags/kategorier utifrån inputen, om det inte finns något alternativ så kommer en div upp som heter create category/tag
     >
@@ -529,7 +529,7 @@ const Card = (props: CardProps) => {
               className=" flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent  "
             > */}
 
-            <section id="subCategory" className="mt-32 ">
+            <section id="subCategory" className="mt-36 ">
               <div
                 id="SubCategoryWrapper"
                 className="flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent"
@@ -825,7 +825,7 @@ const Card = (props: CardProps) => {
               onBlur={e => changeCardName(e)}
             />
           </div>
-          <section id="subCategory" className="mt-32 ">
+          <section id="subCategory" className="mt-36 ">
             <div
               id="SubCategoryWrapper"
               className=" flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent  "
