@@ -429,15 +429,13 @@ const EditorPage = () => {
                   setTags,
                   createTag,
                   createCategory,
+                  setSaveAnimation,
                 }}
               />
             </div>
           </div>
           <div
             className={` saveSymbol ${saveAnimation ? 'saveAnimation' : ''}`}
-            onClick={() => {
-              setSaveAnimation(true);
-            }}
           ></div>
         </div>
       </deckContext.Provider>
