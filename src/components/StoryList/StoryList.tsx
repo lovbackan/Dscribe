@@ -1,5 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import StoryCard from '../StoryCard/StoryCard';
+import { Text } from '../Text/Text';
 
 interface StoryListProps {
   stories: Array<any>;
@@ -36,12 +37,15 @@ const StoryList = (props: StoryListProps) => {
     <>
       {props.addStory && (
         <div
-          className="w-[200px] h-[300px] rounded-[20px]  cursor-pointer hover:border-4  text-black flex justify-center items-center border-2 border-white"
+          className="w-[200px] h-[300px] rounded-[10px] bg-[#223154]  cursor-pointer hover:border-4  text-black flex justify-center items-center border-2 border-white"
           onClick={() => addStory()}
         >
-          <h2 className="text-white text-[30px] flex justify-center items-center">
+          <div>
+            <Text variant="heading2" textColor="white" content="+" />
+            {/* <h2 className="text-white text-[30px] flex justify-center items-center">
             +
-          </h2>
+          </h2> */}
+          </div>
         </div>
       )}
       {props.stories.map(story => {
