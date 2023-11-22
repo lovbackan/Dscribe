@@ -31,11 +31,11 @@ import {
 } from '@lexical/selection';
 import {
   $isListNode,
-  INSERT_CHECK_LIST_COMMAND,
-  INSERT_ORDERED_LIST_COMMAND,
-  INSERT_UNORDERED_LIST_COMMAND,
+  // INSERT_CHECK_LIST_COMMAND,
+  // INSERT_ORDERED_LIST_COMMAND,
+  // INSERT_UNORDERED_LIST_COMMAND,
+  // REMOVE_LIST_COMMAND,
   ListNode,
-  REMOVE_LIST_COMMAND,
 } from '@lexical/list';
 import {
   $findMatchingParent,
@@ -123,29 +123,29 @@ function BlockFormatDropDown({
     }
   };
 
-  const formatBulletList = () => {
-    if (blockType !== 'bullet') {
-      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
-    } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
-    }
-  };
+  // const formatBulletList = () => {
+  //   if (blockType !== 'bullet') {
+  //     editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+  //   } else {
+  //     editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
+  //   }
+  // };
 
-  const formatCheckList = () => {
-    if (blockType !== 'check') {
-      editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
-    } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
-    }
-  };
+  // const formatCheckList = () => {
+  //   if (blockType !== 'check') {
+  //     editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
+  //   } else {
+  //     editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
+  //   }
+  // };
 
-  const formatNumberedList = () => {
-    if (blockType !== 'number') {
-      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
-    } else {
-      editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
-    }
-  };
+  // const formatNumberedList = () => {
+  //   if (blockType !== 'number') {
+  //     editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+  //   } else {
+  //     editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined);
+  //   }
+  // };
 
   const formatQuote = () => {
     if (blockType !== 'quote') {
@@ -189,34 +189,34 @@ function BlockFormatDropDown({
         <i className="icon h2" />
         <span className="text">Heading 2</span>
       </DropDownItem>
-      <DropDownItem
+      {/* <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'h3')}
         onClick={() => formatHeading('h3')}
       >
         <i className="icon h3" />
         <span className="text">Heading 3</span>
-      </DropDownItem>
-      <DropDownItem
+      </DropDownItem> */}
+      {/* <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'bullet')}
         onClick={formatBulletList}
       >
         <i className="icon bullet-list" />
         <span className="text">Bullet List</span>
-      </DropDownItem>
-      <DropDownItem
+      </DropDownItem> */}
+      {/* <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'number')}
         onClick={formatNumberedList}
       >
         <i className="icon numbered-list" />
         <span className="text">Numbered List</span>
-      </DropDownItem>
-      <DropDownItem
+      </DropDownItem> */}
+      {/* <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'check')}
         onClick={formatCheckList}
       >
         <i className="icon check-list" />
         <span className="text">Check List</span>
-      </DropDownItem>
+      </DropDownItem> */}
       <DropDownItem
         className={'item ' + dropDownActiveClass(blockType === 'quote')}
         onClick={formatQuote}
