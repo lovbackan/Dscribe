@@ -433,7 +433,11 @@ const Card = (props: CardProps) => {
         <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-[10px]">
           <div
             id="cardWrapper"
-            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-[10px]  relative -z-20"
+            className={` ${
+              imageUrl
+                ? 'bg-none'
+                : 'bg-gradient-to-b from-[#0F172A] to-[#5179D9]'
+            } h-[300px] w-[200px] rounded-[10px]  relative -z-20 drop-shadow-md`}
             onMouseDown={props.handleMouseDown}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -442,7 +446,7 @@ const Card = (props: CardProps) => {
               <img
                 src={imageUrl}
                 alt=""
-                className="absolute -z-10 h-full w-full rounded-xl"
+                className="absolute -z-10 h-full w-full rounded-[10px]"
                 draggable="false"
               />
             )}
@@ -571,7 +575,7 @@ const Card = (props: CardProps) => {
               />
             )}
           </div>
-          <div className="w-[490px] flex flex-row">
+          <div className="ml-[5px] w-[490px] flex flex-row">
             {/* remove the bg color and drag, and place the close button in the toolbar if possible */}
             <div
               className="absolute w-[490px] pr-2 h-5 flex justify-end z-10"
