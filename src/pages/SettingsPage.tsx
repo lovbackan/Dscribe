@@ -123,7 +123,7 @@ const SettingsPage = () => {
           showChangePasswordPopup ||
           showChangeUsernamePopup ||
           showRemoveAccountPopup
-            ? 'opacity-40  '
+            ? 'opacity-40 bg-black h-screen '
             : 'opacity-100'
         }`}
       >

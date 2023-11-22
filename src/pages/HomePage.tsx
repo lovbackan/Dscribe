@@ -125,7 +125,9 @@ const HomePage = () => {
     >
       <div
         className={`${
-          showSignOutPopup || showDeletePopup ? 'opacity-40  ' : 'opacity-100'
+          showSignOutPopup || showDeletePopup
+            ? 'opacity-40 bg-black  '
+            : 'opacity-100'
         }`}
       >
         <Navbar
@@ -165,6 +167,7 @@ const HomePage = () => {
         </div>
         <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
           <StoryList
+            addStory={true}
             supabase={supabase}
             stories={filteredStories}
             setSelectedStory={setSelectedStory}

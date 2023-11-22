@@ -10,6 +10,7 @@ interface StoryListProps {
   deleteCard?: Function;
   changePicture?: Function;
   author?: boolean;
+  addStory?: boolean;
 }
 
 const StoryList = (props: StoryListProps) => {
@@ -33,14 +34,16 @@ const StoryList = (props: StoryListProps) => {
 
   return (
     <>
-      <div
-        className="w-[200px] h-[300px] rounded-[20px]  cursor-pointer hover:border-4  text-black flex justify-center items-center border-2 border-white"
-        onClick={() => addStory()}
-      >
-        <h2 className="text-white text-[30px] flex justify-center items-center">
-          +
-        </h2>
-      </div>
+      {props.addStory && (
+        <div
+          className="w-[200px] h-[300px] rounded-[20px]  cursor-pointer hover:border-4  text-black flex justify-center items-center border-2 border-white"
+          onClick={() => addStory()}
+        >
+          <h2 className="text-white text-[30px] flex justify-center items-center">
+            +
+          </h2>
+        </div>
+      )}
       {props.stories.map(story => {
         // console.log(story);
         return (

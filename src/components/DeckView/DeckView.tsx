@@ -221,7 +221,7 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       id="deckView"
       className="  bg-gradient-to-b from-[#C7D8FF] to-[#FAFAFA] overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
-      <div className={`${showDeletePopup ? 'opacity-40  ' : 'opacity-100'}`}>
+      <div className={`${showDeletePopup ? 'opacity-40 ' : 'opacity-100'}`}>
         <div className="flex flex-row justify-end ">
           <div className="fixed mr-[5px] mt-[5px]">
             <CTAButton

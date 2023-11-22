@@ -68,7 +68,13 @@ const HomePage = () => {
     <div
       className={`w-full min-h-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]`}
     >
-      <div className={`${showSignOutPopup ? 'opacity-40  ' : 'opacity-100'}`}>
+      <div
+        className={`${
+          showSignOutPopup
+            ? 'bg-black opacity-40 min-h-screen  '
+            : 'opacity-100'
+        }`}
+      >
         <Navbar
           onClick={() => {
             setShowSignOutPopup(true);
