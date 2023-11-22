@@ -14,140 +14,148 @@ import { CardDesign } from '../components/Card/CardDesign.tsx';
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] flex flex-col gap-[100px] justify-center items-center cursor-default overflow-x-hidden">
-      <section
-        id="LandingPageNavbar"
-        className="absolute top-0 right-0 pt-3 pr-3"
-      >
-        <CTAButton
-          title="Log in"
-          variant="landing"
-          onClick={() => {
-            navigate(ACCEPTED_ROUTES.LOGIN);
-          }}
-        />
-      </section>
-
-      <section
-        id="hero"
-        className="flex flex-row pt-96 justify-center items-center   "
-      >
-        <Logo variant="big" />
-        {/* <div
+    <>
+      <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-screen fixed w-full top-0 -z-10"></div>
+      <div className="] flex flex-col gap-[100px] justify-center items-center cursor-default overflow-x-hidden">
+        <section
+          id="LandingPageNavbar"
+          className="absolute top-0 right-0 pt-3 pr-3"
+        >
+          <CTAButton
+            title="Log in"
+            variant="landing"
+            onClick={() => {
+              navigate(ACCEPTED_ROUTES.LOGIN);
+            }}
+          />
+        </section>
+        <div className=" h-screen min-h-[750px] flex flex-col justify-end max-h-none">
+          <section
+            id="hero"
+            className="flex flex-row  justify-center items-center   "
+          >
+            <Logo variant="big" />
+            {/* <div
           id="logo"
           className="h-[200px] w-[133px] rounded-3xl border-2 border-black flex flex-col justify-center items-center"
         >
           <Text variant="logo" textColor="white" content="Codeck" />
         </div> */}
-        <div className="w-[600px] h-[200px] text-left ml-[73px] ">
-          <Text
-            variant="hero"
-            textColor="white"
-            content=" Unfold creativity and structure with card-based writing!"
-          />
-        </div>
-      </section>
+            <div className="w-[600px] h-[200px] text-left ml-[73px] ">
+              <Text
+                variant="hero"
+                textColor="white"
+                content=" Unfold creativity and structure with card-based writing!"
+              />
+            </div>
+          </section>
 
-      <section className="flex flex-row h-[500px] gap-[25px] max-w-[1160px]">
-        <div className="flex flex-col h-auto max-w-[497px] text-left gap-[36px] my-[35px] ">
-          <Text
-            variant="heroHeading2"
-            textColor="white"
-            content="Why Codeck?"
-          />
-          <Text
-            variant="pSecondary"
-            textColor="white"
-            content="Unlock a new dimension in writing. Seamlessly blend your main text with card-based notes, ensuring clarity without the clutter. Tailor your narrative effortlessly, whether you're drafting documents, crafting stories, or enhancing your communication. Codeck empowers you to express more, with precision and ease!"
-          />
-          <CTAButton
-            title="Get started today!"
-            variant="landing2"
-            onClick={() => {
-              navigate(ACCEPTED_ROUTES.LOGIN);
-            }}
-          />
-        </div>
+          <section className="flex flex-row h-[500px] gap-[25px] max-w-[1160px]">
+            <div className="flex flex-col h-auto max-w-[497px] text-left gap-[36px] my-[35px] ">
+              <Text
+                variant="heroHeading2"
+                textColor="white"
+                content="Why Codeck?"
+              />
+              <Text
+                variant="pSecondary"
+                textColor="white"
+                content="Unlock a new dimension in writing. Seamlessly blend your main text with card-based notes, ensuring clarity without the clutter. Tailor your narrative effortlessly, whether you're drafting documents, crafting stories, or enhancing your communication. Codeck empowers you to express more, with precision and ease!"
+              />
+              <CTAButton
+                title="Get started today!"
+                variant="landing2"
+                onClick={() => {
+                  navigate(ACCEPTED_ROUTES.LOGIN);
+                }}
+              />
+            </div>
 
-        <div className="w-[600px] h-[428px] drop-shadow-lg ">
-          <img
-            src={mockUpImage}
-            alt="mock-up"
-            className="w-[100%] h-[100%] object-cover"
-          />
-        </div>
-      </section>
-
-      <section className="max-w-[1160px] flex flex-row ">
-        <div className="max-w-[1160px] text-left">
-          <Text
-            variant="heroHeading2"
-            textColor="white"
-            content="What is Codeck?"
-          />
-          <Text
-            variant="pSecondary"
-            textColor="white"
-            content="Codeck is a web-based word processing service that redefines the art of writing by providing a dynamic platform where words and concise notes intertwine seamlessly. Unlike traditional word processors, Codeck empowers you to craft compelling narratives while using side-by-side cards for supplementary details. Whether you're a writer, student, or professional communicator, Codeck is your key to efficient and expressive writing, simplifying the process of conveying information and ideas."
-          />
-        </div>
-      </section>
-
-      <section id="StoryList" className="max-w-[1160px] h-[396px]">
-        <div className="flex flex-row pb-10 w-[1160px] h-[56px]">
-          <Text textColor="white" variant="heading2" content="Trending" />
-
-          <div className="w-full h-0.5  bg-white mt-[27px]"></div>
+            <div className="w-[600px] h-[428px] drop-shadow-lg ">
+              <img
+                src={mockUpImage}
+                alt="mock-up"
+                className="w-[100%] h-[100%] object-cover"
+              />
+            </div>
+          </section>
         </div>
 
-        <div className="flex flex-row justify-between w-full mt-[40px]">
-          <CardDesign
-            title="Adventure is coming"
-            variant="bigCard"
-            imageUrl={adventure}
-            onClick={() => console.log('Mockup published work clicked')}
-          />
-          <CardDesign
-            title="Future City"
-            variant="bigCard"
-            imageUrl={futureCity}
-            onClick={() => console.log('Mockup published work clicked')}
-          />
-          <CardDesign
-            title="The Witch"
-            variant="bigCard"
-            imageUrl={theWitch}
-            onClick={() => console.log('Mockup published work clicked')}
-          />
-          <CardDesign
-            title="Brothers (manuscript)"
-            variant="bigCard"
-            imageUrl={brothers}
-            onClick={() => console.log('Mockup published work clicked')}
-          />
-          <CardDesign
-            title="Why"
-            variant="bigCard"
-            imageUrl={why}
-            onClick={() => console.log('Mockup published work clicked')}
-          />
-        </div>
-      </section>
-      <section className="h-[250px]">
-        <div className="w-screen h-0.5  bg-white "></div>
-        <div className="flex flex-row justify-between my-[57px] px-[140px]">
-          <div>
-            <Text content="Contact us" variant="heading2" textColor="white" />
+        <section className="max-w-[1160px] flex flex-row ">
+          <div className="max-w-[1160px] text-left">
             <Text
-              content="info@codeck.com"
-              variant="pPrimary"
+              variant="heroHeading2"
+              textColor="white"
+              content="What is Codeck?"
+            />
+            <Text
+              variant="pSecondary"
+              textColor="white"
+              content="Codeck is a web-based word processing service that redefines the art of writing by providing a dynamic platform where words and concise notes intertwine seamlessly. Unlike traditional word processors, Codeck empowers you to craft compelling narratives while using side-by-side cards for supplementary details. Whether you're a writer, student, or professional communicator, Codeck is your key to efficient and expressive writing, simplifying the process of conveying information and ideas."
+            />
+          </div>
+        </section>
+
+        <section id="StoryList" className="max-w-[1160px] h-[396px]">
+          <div className="flex flex-row pb-10 w-[1160px] h-[56px]">
+            <Text textColor="white" variant="heading2" content="Trending" />
+
+            <div className="w-full h-0.5  bg-white mt-[27px]"></div>
+          </div>
+
+          <div className="flex flex-row justify-between w-full mt-[40px]">
+            <CardDesign
+              title="Adventure is coming"
+              variant="bigCard"
+              imageUrl={adventure}
+              onClick={() => console.log('Mockup published work clicked')}
+            />
+            <CardDesign
+              title="Future City"
+              variant="bigCard"
+              imageUrl={futureCity}
+              onClick={() => console.log('Mockup published work clicked')}
+            />
+            <CardDesign
+              title="The Witch"
+              variant="bigCard"
+              imageUrl={theWitch}
+              onClick={() => console.log('Mockup published work clicked')}
+            />
+            <CardDesign
+              title="Brothers (manuscript)"
+              variant="bigCard"
+              imageUrl={brothers}
+              onClick={() => console.log('Mockup published work clicked')}
+            />
+            <CardDesign
+              title="Why"
+              variant="bigCard"
+              imageUrl={why}
+              onClick={() => console.log('Mockup published work clicked')}
+            />
+          </div>
+        </section>
+        <section className="h-[250px]">
+          <div className="w-screen h-0.5  bg-white "></div>
+          <div className="flex flex-row justify-between my-[57px] px-[140px]">
+            <div>
+              <Text content="Contact us" variant="heading2" textColor="white" />
+              <Text
+                content="info@codeck.com"
+                variant="pPrimary"
+                textColor="white"
+              />
+            </div>
+            <Text
+              content="Copyright 2023"
+              variant="heading2"
               textColor="white"
             />
           </div>
-          <Text content="Copyright 2023" variant="heading2" textColor="white" />
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 };
 
