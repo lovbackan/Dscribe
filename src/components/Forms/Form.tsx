@@ -25,7 +25,10 @@ const Form: React.FC<FormProps> = ({
   if (variant === 'login') {
     return (
       <>
-        <div id="inputContainer" className="gap-2.5 flex flex-col mt-[92px]  ">
+        <div className="mt-[60px]">
+          <Text variant="heading3" content="Login" textColor="white" />
+        </div>
+        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4  ">
           <Input
             type="email"
             id="email"
@@ -76,7 +79,9 @@ const Form: React.FC<FormProps> = ({
   } else if (variant === 'signup') {
     return (
       <>
-        <Text variant="heading3" content="Sign Up" textColor="white" />
+        <div className="mt-[20px]">
+          <Text variant="heading3" content="Sign Up" textColor="white" />
+        </div>
         <div id="inputContainer" className="gap-2.5 flex flex-col mt-4 ">
           <Input
             type="email"
@@ -133,34 +138,36 @@ const Form: React.FC<FormProps> = ({
   } else if (variant === 'forgotPassword') {
     return (
       <>
-        <Text variant="heading3" content="Reset password" textColor="white" />
-        <Input
-          type="email"
-          id="email"
-          variant="primary"
-          placeholder="Email"
-          onChange={onChange1}
-          autoComplete="on"
-        />
+        <div className="mt-[96px]">
+          <Text variant="heading3" content="Reset Password" textColor="white" />
+        </div>
+        <div id="inputContainer" className="gap-2.5 flex flex-col mt-4  ">
+          <Input
+            type="email"
+            id="email"
+            variant="primary"
+            placeholder="Email"
+            onChange={onChange1}
+            autoComplete="on"
+          />
+        </div>
+        <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
+          <div className="mb-[20px]">
+            <CTAButton title="Reset" variant="primary" onClick={onClick} />
+          </div>
 
-        <CTAButton title="Reset" variant="primary" onClick={onClick} />
-
-        <div id="optionsContainer" className="flex flex-col">
           <div
             onClick={() => navigate(ACCEPTED_ROUTES.LOGIN)}
             className="cursor-pointer"
           >
             <Text variant="pPrimary" content="Login" textColor="white" />
           </div>
+
           <div
             onClick={() => navigate(ACCEPTED_ROUTES.REGISTER)}
             className="cursor-pointer"
           >
-            <Text
-              variant="pPrimary"
-              content="Create account"
-              textColor="white"
-            />
+            <Text variant="pPrimary" content="Register" textColor="white" />
           </div>
         </div>
       </>
