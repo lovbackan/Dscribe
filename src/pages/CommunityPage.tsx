@@ -65,9 +65,8 @@ const HomePage = () => {
   }, [selectedStory]);
 
   return (
-    <div
-      className={`w-full min-h-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]`}
-    >
+    <div className={`w-full min-h-screen`}>
+      <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-screen fixed w-full top-0 -z-10"></div>
       <Navbar
         onClick={() => {
           setShowSignOutPopup(true);

@@ -2,6 +2,7 @@ import Logo from '../Logo/Logo';
 import { useState, useEffect } from 'react';
 interface FormCardProps {
   formComponent: React.ReactNode;
+  animate?: boolean;
 }
 
 const FormCard: React.FC<FormCardProps> = props => {
@@ -15,13 +16,17 @@ const FormCard: React.FC<FormCardProps> = props => {
   return (
     <div
       id="outerContainer"
-      className={`w-[690px] h-[300px] rounded-[20px] flex-row bg-inherit flex   transition-transform delay-300 duration-1000 ${outerAnimation}`}
+      className={`w-[690px] h-[300px] rounded-[20px] flex-row bg-inherit flex  ${
+        props.animate ? 'transition-transform' : 'transition-none'
+      } delay-300 duration-1000 ${outerAnimation}`}
     >
-      <Logo variant="login" />
+      <Logo variant={props.animate ? 'loginAnimate' : 'login'} />
 
       <div
         id="infoContainer"
-        className={`w-[490px] ${innerAnimation} h-full rounded-r-[20px] bg-inherit flex  items-center flex-col pl-10 -ml-5   border-y-2 border-e-2 border-white   transition-all delay-1000 duration-1000`}
+        className={`w-[510px] ${innerAnimation} h-full rounded-r-[20px] bg-inherit flex  items-center flex-col pl-10 -ml-5   border-y-2 border-e-2 border-white   ${
+          props.animate ? 'transition-all' : 'transition-none'
+        } delay-1000 duration-1000`}
       >
         {formComponent}
       </div>
