@@ -37,7 +37,7 @@ export const Input: React.FC<InputProps> = ({
   if (variant === 'cardTitle') {
     return (
       <div className="inline-block inputWrapper ">
-        <div className="editSymbol pr-[274px] pt-6 pointer-events-none"></div>
+        <div className="editSymbol pt-6 pr-[70px] pointer-events-none"></div>
         <input
           type={type}
           autoComplete={autoComplete}
