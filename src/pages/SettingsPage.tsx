@@ -44,6 +44,7 @@ const SettingsPage = () => {
       alert('Wrong password!');
       return;
     }
+
     const user = (await supabase.auth.getUser()).data.user;
     if (!user) return;
     const result = await supabase
@@ -116,72 +117,83 @@ const SettingsPage = () => {
 
   return (
     <div className="h-screen w-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
-      <Navbar
-        onClick={() => {
-          setShowSignOutPopup(true);
-          setShowChangePasswordPopup(false);
-          setShowChangeUsernamePopup(false);
-          setShowRemoveAccountPopup(false);
-        }}
-      />
       <div
-        id="search-bar"
-        className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] gap-6 pb-[90px]"
+        className={`${
+          showSignOutPopup ||
+          showChangePasswordPopup ||
+          showChangeUsernamePopup ||
+          showRemoveAccountPopup
+            ? 'opacity-40  '
+            : 'opacity-100'
+        }`}
       >
-        <Text variant="heading1" textColor="white" content="Settings" />
-        <Input
-          type="text"
-          id="search"
-          autoComplete="off"
-          placeholder="Search"
-          variant="secondary"
-          autoFocus={true}
-          onChange={e => {
-            console.log(e.target.value);
-          }}
-        />
-      </div>
-
-      <div className="pl-[212px] text-left pb-[80px] gap-[20px] flex flex-col">
-        <Text variant="heading3" textColor="white" content="Username" />
-        <CTAButton
-          title="Change username"
-          variant="secondary"
+        <Navbar
           onClick={() => {
-            setShowChangeUsernamePopup(true);
-            setShowSignOutPopup(false);
+            setShowSignOutPopup(true);
             setShowChangePasswordPopup(false);
-            setShowRemoveAccountPopup(false);
-          }}
-        />
-      </div>
-
-      <div className="pl-[212px] text-left pb-[80px] gap-[20px] flex flex-col">
-        <Text variant="heading3" textColor="white" content="Password" />
-        <CTAButton
-          title="Change password"
-          variant="secondary"
-          onClick={() => {
-            setShowChangePasswordPopup(true);
-            setShowSignOutPopup(false);
             setShowChangeUsernamePopup(false);
             setShowRemoveAccountPopup(false);
           }}
         />
-      </div>
+        <div
+          id="search-bar"
+          className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] gap-6 pb-[90px]"
+        >
+          <Text variant="heading1" textColor="white" content="Settings" />
+          <Input
+            type="text"
+            id="search"
+            autoComplete="off"
+            placeholder="Search"
+            variant="secondary"
+            autoFocus={true}
+            onChange={e => {
+              console.log(e.target.value);
+            }}
+          />
+        </div>
 
-      <div className="pl-[212px] text-left pb-[80px] gap-[20px] flex flex-col">
-        <Text variant="heading3" textColor="white" content="Account" />
-        <CTAButton
-          title="Remove account"
-          variant="secondary"
-          onClick={() => {
-            setShowRemoveAccountPopup(true);
-            setShowSignOutPopup(false);
-            setShowChangePasswordPopup(false);
-            setShowChangeUsernamePopup(false);
-          }}
-        />
+        <div className="pl-[212px] text-left pb-[80px] gap-[20px] flex flex-col">
+          <Text variant="heading3" textColor="white" content="Username" />
+          <CTAButton
+            title="Change username"
+            variant="secondary"
+            onClick={() => {
+              setShowChangeUsernamePopup(true);
+              setShowSignOutPopup(false);
+              setShowChangePasswordPopup(false);
+              setShowRemoveAccountPopup(false);
+            }}
+          />
+        </div>
+
+        <div className="pl-[212px] text-left pb-[80px] gap-[20px] flex flex-col">
+          <Text variant="heading3" textColor="white" content="Password" />
+          <CTAButton
+            title="Change password"
+            variant="secondary"
+            onClick={() => {
+              setShowChangePasswordPopup(true);
+              setShowSignOutPopup(false);
+              setShowChangeUsernamePopup(false);
+              setShowRemoveAccountPopup(false);
+            }}
+          />
+        </div>
+
+        <div className="pl-[212px] text-left pb-[80px] gap-[20px] flex flex-col">
+          <Text variant="heading3" textColor="white" content="Account" />
+          <CTAButton
+            title="Remove account"
+            variant="secondary"
+            onClick={() => {
+              setShowRemoveAccountPopup(true);
+              setShowSignOutPopup(false);
+              setShowChangePasswordPopup(false);
+              setShowChangeUsernamePopup(false);
+            }}
+          />
+        </div>
       </div>
       {showRemoveAccountPopup && (
         <PopUp
@@ -219,6 +231,11 @@ const SettingsPage = () => {
           variant="changeUsername"
           action={() => {
             // add check if password is correct
+            if (newUsername === '') {
+              alert('Username cannot be empty');
+              return;
+            }
+
             if (newUsername !== '' && newUsername !== username) {
               changeUsername();
               setShowChangeUsernamePopup(false);

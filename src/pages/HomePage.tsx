@@ -122,56 +122,61 @@ const HomePage = () => {
   return (
     <div className={`w-full min-h-screen`}>
       <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-screen fixed w-full top-0 -z-10"></div>
-      <Navbar
-        onClick={() => {
-          setShowSignOutPopup(true);
-        }}
-      />
-
       <div
-        id="search-bar"
-        className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] pb-[40px] gap-6"
+        className={`${
+          showSignOutPopup || showDeletePopup ? 'opacity-40  ' : 'opacity-100'
+        }`}
       >
-        <Text variant="heading1" textColor="white" content="Your Projects" />
-        <Input
-          type="text"
-          id="search"
-          autoComplete="off"
-          placeholder="Search"
-          variant="secondary"
-          autoFocus={true}
-          onChange={e => {
-            const value = e.target.value.toLowerCase();
-            if (value === '') {
-              setFilteredStories(stories);
-            } else {
-              setFilteredStories(
-                stories.filter(
-                  story =>
-                    story &&
-                    story.name &&
-                    story.name.toLowerCase().includes(value),
-                ),
-              );
-            }
+        <Navbar
+          onClick={() => {
+            setShowSignOutPopup(true);
           }}
         />
-      </div>
-      <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
-        <StoryList
-          supabase={supabase}
-          stories={filteredStories}
-          setSelectedStory={setSelectedStory}
-          setStories={setStories}
-          setChangeCardId={setChangeCardId}
-          deleteCard={() => {
-            setShowDeletePopup(true);
-            console.log(`Delete card id: ${changeCardId} `);
-          }}
-          changePicture={changePicture}
-        />
-      </div>
 
+        <div
+          id="search-bar"
+          className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] pb-[40px] gap-6"
+        >
+          <Text variant="heading1" textColor="white" content="Your Projects" />
+          <Input
+            type="text"
+            id="search"
+            autoComplete="off"
+            placeholder="Search"
+            variant="secondary"
+            autoFocus={true}
+            onChange={e => {
+              const value = e.target.value.toLowerCase();
+              if (value === '') {
+                setFilteredStories(stories);
+              } else {
+                setFilteredStories(
+                  stories.filter(
+                    story =>
+                      story &&
+                      story.name &&
+                      story.name.toLowerCase().includes(value),
+                  ),
+                );
+              }
+            }}
+          />
+        </div>
+        <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
+          <StoryList
+            supabase={supabase}
+            stories={filteredStories}
+            setSelectedStory={setSelectedStory}
+            setStories={setStories}
+            setChangeCardId={setChangeCardId}
+            deleteCard={() => {
+              setShowDeletePopup(true);
+              console.log(`Delete card id: ${changeCardId} `);
+            }}
+            changePicture={changePicture}
+          />
+        </div>
+      </div>
       {showDeletePopup && (
         <PopUp
           variant="deleteStory"
@@ -185,15 +190,16 @@ const HomePage = () => {
           }}
         />
       )}
-
       {showSignOutPopup && (
-        <PopUp
-          variant="logOut"
-          action={handleSignOut}
-          cancel={() => {
-            setShowSignOutPopup(false);
-          }}
-        />
+        <div className="opacity-100">
+          <PopUp
+            variant="logOut"
+            action={handleSignOut}
+            cancel={() => {
+              setShowSignOutPopup(false);
+            }}
+          />
+        </div>
       )}
     </div>
   );

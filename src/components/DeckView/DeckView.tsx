@@ -221,18 +221,19 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
       id="deckView"
       className="  bg-gradient-to-b from-[#C7D8FF] to-[#FAFAFA] overflow-y-auto rounded-3xl w-[75vw] h-[85vh]"
     >
-      <div className="flex flex-row justify-end ">
-        <div className="fixed mr-[5px] mt-[5px]">
-          <CTAButton
-            title=""
-            variant="closeBig"
-            onClick={() => {
-              console.log('close deck view');
-              props.toggleDeckView();
-            }}
-          />
+      <div className={`${showDeletePopup ? 'opacity-40  ' : 'opacity-100'}`}>
+        <div className="flex flex-row justify-end ">
+          <div className="fixed mr-[5px] mt-[5px]">
+            <CTAButton
+              title=""
+              variant="closeBig"
+              onClick={() => {
+                console.log('close deck view');
+                props.toggleDeckView();
+              }}
+            />
 
-          {/* <CTAButton
+            {/* <CTAButton
             title="X"
             variant="minimize/close"
             onClick={() => {
@@ -240,127 +241,128 @@ export const DeckView: React.FC<DeckViewProps> = (props: DeckViewProps) => {
               props.toggleDeckView();
             }}
           /> */}
-        </div>
-      </div>
-      <div className="px-20">
-        <div id="title" className="mt-6 ">
-          <Text variant="heading2" content="Deck View" textColor="black" />
-        </div>
-        {/* map over deck and display cards */}
-
-        <div className="flex flex-row mt-[12px]">
-          <div className="pr-2">
-            <Text variant="heading3" content="Filter" textColor="black" />
           </div>
-          <Input
-            type="text"
-            id="search"
-            variant="primary"
-            placeholder="Search"
-            autoComplete="off"
-            autoFocus={true}
-            onChange={e => {
-              setSearchTerm(e.target.value.toLowerCase());
-            }}
-          />
         </div>
-        <div className="flex flex-row w-[100%] h-auto mt-[12px] gap-2 items-center">
-          <Text variant="heading3" content="Categories" textColor="black" />
-          {props.categories.map(category => {
-            return (
-              <CTAButton
-                key={category.id}
-                title={category.name}
-                variant={
-                  filterCategories.includes(category.id)
-                    ? 'deckViewCategoryFiltered'
-                    : 'deckViewCategory'
-                }
-                color={category.color_id}
-                onClick={() => {
-                  toggleFilterCategory(category.id);
-                }}
-                remove={() => {
-                  setShowDeletePopup(true);
-                  setToBeDeleted(category);
-                  setDeleteType('category');
-                }}
-              />
-            );
-          })}
-        </div>
+        <div className="px-20">
+          <div id="title" className="mt-6 ">
+            <Text variant="heading2" content="Deck View" textColor="black" />
+          </div>
+          {/* map over deck and display cards */}
 
-        <div className="flex flex-row w-[100%] h-auto flex-wrap mt-[12px] gap-1  items-center ">
-          <Text variant="heading3" content="Tags" textColor="black" />
-          {props.tags.map(tag => {
-            return (
-              <CTAButton
-                key={tag.id}
-                title={tag.name}
-                variant={
-                  filterTags.includes(tag.id)
-                    ? 'deckViewCategoryFiltered'
-                    : 'deckViewCategory'
-                }
-                color={tag.color_id}
-                onClick={() => {
-                  toggleFilterTag(tag.id);
-                }}
-                remove={() => {
-                  setShowDeletePopup(true);
-                  setToBeDeleted(tag);
-                  setDeleteType('tag');
-                }}
-              />
-            );
-          })}
-        </div>
-        <div className="flex flex-row pb-10 mt-[12px]">
-          <Text textColor="black" variant="heading2" content="Cards" />
+          <div className="flex flex-row mt-[12px]">
+            <div className="pr-2">
+              <Text variant="heading3" content="Filter" textColor="black" />
+            </div>
+            <Input
+              type="text"
+              id="search"
+              variant="primary"
+              placeholder="Search"
+              autoComplete="off"
+              autoFocus={true}
+              onChange={e => {
+                setSearchTerm(e.target.value.toLowerCase());
+              }}
+            />
+          </div>
+          <div className="flex flex-row w-[100%] h-auto mt-[12px] gap-2 items-center">
+            <Text variant="heading3" content="Categories" textColor="black" />
+            {props.categories.map(category => {
+              return (
+                <CTAButton
+                  key={category.id}
+                  title={category.name}
+                  variant={
+                    filterCategories.includes(category.id)
+                      ? 'deckViewCategoryFiltered'
+                      : 'deckViewCategory'
+                  }
+                  color={category.color_id}
+                  onClick={() => {
+                    toggleFilterCategory(category.id);
+                  }}
+                  remove={() => {
+                    setShowDeletePopup(true);
+                    setToBeDeleted(category);
+                    setDeleteType('category');
+                  }}
+                />
+              );
+            })}
+          </div>
 
-          <div className="w-full h-0.5 bg-black self-end mb-[6px]"></div>
-        </div>
-        <div
-          className={`grid gap-6 mt-2 mx-1 items-center mb-16`}
-          style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
-        >
+          <div className="flex flex-row w-[100%] h-auto flex-wrap mt-[12px] gap-1  items-center ">
+            <Text variant="heading3" content="Tags" textColor="black" />
+            {props.tags.map(tag => {
+              return (
+                <CTAButton
+                  key={tag.id}
+                  title={tag.name}
+                  variant={
+                    filterTags.includes(tag.id)
+                      ? 'deckViewCategoryFiltered'
+                      : 'deckViewCategory'
+                  }
+                  color={tag.color_id}
+                  onClick={() => {
+                    toggleFilterTag(tag.id);
+                  }}
+                  remove={() => {
+                    setShowDeletePopup(true);
+                    setToBeDeleted(tag);
+                    setDeleteType('tag');
+                  }}
+                />
+              );
+            })}
+          </div>
+          <div className="flex flex-row pb-10 mt-[12px]">
+            <Text textColor="black" variant="heading2" content="Cards" />
+
+            <div className="w-full h-0.5 bg-black self-end mb-[6px]"></div>
+          </div>
           <div
-            className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white"
-            onClick={() => props.addCard()}
+            className={`grid gap-6 mt-2 mx-1 items-center mb-16`}
+            style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
           >
-            <Text variant="heading2" content="+" textColor="white" />
-          </div>
+            <div
+              className="w-[200px] h-[300px] rounded-[20px] shadow-right-bottom cursor-pointer hover:border-4  bg-black opacity-50 flex justify-center items-center border-2 border-white"
+              onClick={() => props.addCard()}
+            >
+              <Text variant="heading2" content="+" textColor="white" />
+            </div>
 
-          {filteredCards.map(card => {
-            return (
-              <Card
-                key={card.id}
-                card={card}
-                variant="deckCard"
-                supabase={props.supabase}
-                deck={props.deck}
-                setDeck={props.setDeck}
-                deckChanges={props.deckChanges}
-                setDeckChanges={props.setDeckChanges}
-                categories={props.categories}
-                setCategories={props.setCategories}
-                tags={props.tags}
-                setTags={props.setTags}
-                createTag={props.createTag}
-                createCategory={props.createCategory}
-                toggleDeletePopup={() => {
-                  setShowDeletePopup(true);
-                  setToBeDeleted(card);
-                  setDeleteType('card');
-                }}
-              />
-            );
-          })}
+            {filteredCards.map(card => {
+              return (
+                <Card
+                  key={card.id}
+                  card={card}
+                  variant="deckCard"
+                  supabase={props.supabase}
+                  deck={props.deck}
+                  setDeck={props.setDeck}
+                  deckChanges={props.deckChanges}
+                  setDeckChanges={props.setDeckChanges}
+                  categories={props.categories}
+                  setCategories={props.setCategories}
+                  tags={props.tags}
+                  setTags={props.setTags}
+                  createTag={props.createTag}
+                  createCategory={props.createCategory}
+                  toggleDeletePopup={() => {
+                    setShowDeletePopup(true);
+                    setToBeDeleted(card);
+                    setDeleteType('card');
+                  }}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
       {showDeletePopup && (
         <PopUp
-          variant="deleteStory"
+          variant="deleteCard"
           changeCardId={toBeDeleted.name}
           action={() => {
             if (deleteType === 'card') deleteCard(toBeDeleted.id);

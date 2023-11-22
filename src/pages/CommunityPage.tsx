@@ -67,55 +67,56 @@ const HomePage = () => {
   return (
     <div className={`w-full min-h-screen`}>
       <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-screen fixed w-full top-0 -z-10"></div>
-      <Navbar
-        onClick={() => {
-          setShowSignOutPopup(true);
-        }}
-      />
-
-      <div
-        id="search-bar"
-        className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] pb-[40px] gap-6"
-      >
-        <Text
-          variant="heading1"
-          textColor="white"
-          content="Published projects"
-        />
-        <Input
-          type="text"
-          id="search"
-          autoComplete="off"
-          placeholder="Search"
-          variant="secondary"
-          autoFocus={true}
-          onChange={e => {
-            const value = e.target.value.toLowerCase();
-            if (value === '') {
-              setFilteredStories(stories);
-            } else {
-              setFilteredStories(
-                stories.filter(
-                  story =>
-                    story &&
-                    story.name &&
-                    story.name.toLowerCase().includes(value),
-                ),
-              );
-            }
+      <div className={`${showSignOutPopup ? 'opacity-40  ' : 'opacity-100'}`}>
+        <Navbar
+          onClick={() => {
+            setShowSignOutPopup(true);
           }}
         />
-      </div>
-      <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
-        <StoryList
-          supabase={supabase}
-          stories={filteredStories}
-          setSelectedStory={setSelectedStory}
-          setStories={setStories}
-          author={true}
-        />
-      </div>
 
+        <div
+          id="search-bar"
+          className="flex flex-col w-[500px] text-left pl-[212px] pt-[40px] pb-[40px] gap-6"
+        >
+          <Text
+            variant="heading1"
+            textColor="white"
+            content="Published projects"
+          />
+          <Input
+            type="text"
+            id="search"
+            autoComplete="off"
+            placeholder="Search"
+            variant="secondary"
+            autoFocus={true}
+            onChange={e => {
+              const value = e.target.value.toLowerCase();
+              if (value === '') {
+                setFilteredStories(stories);
+              } else {
+                setFilteredStories(
+                  stories.filter(
+                    story =>
+                      story &&
+                      story.name &&
+                      story.name.toLowerCase().includes(value),
+                  ),
+                );
+              }
+            }}
+          />
+        </div>
+        <div className="flex flex-wrap w-full justify-left items-center gap-[40px] pl-[212px] pr-[100px] pb-12 ">
+          <StoryList
+            supabase={supabase}
+            stories={filteredStories}
+            setSelectedStory={setSelectedStory}
+            setStories={setStories}
+            author={true}
+          />
+        </div>
+      </div>
       {showSignOutPopup && (
         <PopUp
           variant="logOut"
