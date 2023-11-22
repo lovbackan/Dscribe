@@ -11,12 +11,12 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ variant }) => {
   const navigate = useNavigate();
-  const [animation, setAnimation] = useState('');
+  const [animation, setAnimation] = useState('translate-x-[260px]');
 
   const logoClasses = {
     big: 'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center ',
     login:
-      'w-[200px] h-[300px] rounded-[20px] bg-inherit flex justify-center items-center border-white border-2 translate-x-[260px] transition-transform delay-1000 duration-1000',
+      'w-[200px] h-[300px] rounded-[20px] bg-inherit flex justify-center items-center border-white border-2  transition-transform delay-1000 duration-1000',
     medium:
       'h-[200px] w-[133px] rounded-3xl border-2 border-white flex flex-col justify-center items-center',
     small:
