@@ -71,7 +71,7 @@ const LandingPage = () => {
               />
             </div>
 
-            <div className="w-[600px] h-[428px] drop-shadow-lg ">
+            <div className="w-[600px] h-[428px] shadow-mockup ">
               <img
                 src={mockUpImage}
                 alt="mock-up"

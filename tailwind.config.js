@@ -8,6 +8,7 @@ export default {
     // },
     boxShadow: {
       'right-bottom': '10px 10px 10px rgba(0, 0, 0, 0.5)',
+      mockup: '15px 15px 10px rgba(0, 0, 0, 0.3)',
     },
     extend: {
       gridTemplateColumns: {
