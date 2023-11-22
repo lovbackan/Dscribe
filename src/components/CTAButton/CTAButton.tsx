@@ -21,7 +21,8 @@ type ButtonType =
   | 'addTags'
   | 'publishStory'
   | 'closeSmall'
-  | 'closeBig';
+  | 'closeBig'
+  | 'popUpSmall';
 
 interface CTAButtonProps {
   title: string | number;
@@ -77,6 +78,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'new-close-icon absolute right-0 rounded-lg mt-[8px] mr-[8px] h-[25px] w-[25px] hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black cursor-pointer'
       : variant === 'closeBig'
       ? 'new-close-icon-big absolute right-0 rounded-lg mt-[8px] mr-[8px] h-[40px] w-[40px] hover:border-white  hover:border  flex justify-center items-center bg-opacity-50 bg-black cursor-pointer'
+      : variant === 'popUpSmall'
+      ? 'w-[41px] h-[27px] items-center flex justify-center bg-white rounded cursor-pointer hover:border-black hover:border'
       : 'bg-purple-400';
 
   const textClasses =
@@ -104,6 +107,8 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       ? 'text-white text-[12px] font-inter'
       : variant === 'closeBig'
       ? 'text-white text-[12px] font-inter'
+      : variant === 'popUpSmall'
+      ? 'text-black text-[12px] font-inter'
       : 'text-purple-400';
 
   const colors = [
