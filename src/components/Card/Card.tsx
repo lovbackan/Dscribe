@@ -361,7 +361,7 @@ const Card = (props: CardProps) => {
     return (
       <>
         <div
-          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] z-0 drop-shadow-lg shadow-right-bottom h-[300px] w-[200px] rounded-xl mr-[-20px] hover:z-10  cursor-pointer hover:border-2 hover:border-black"
+          className=" bg-gradient-to-b from-[#0F172A] to-[#5179D9] z-0 drop-shadow-lg shadow-right-bottom h-[300px] w-[200px] rounded-[10px] mr-[-20px] hover:z-10  cursor-pointer hover:border-2 hover:border-black"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
@@ -372,7 +372,7 @@ const Card = (props: CardProps) => {
             <img
               src={imageUrl}
               alt=""
-              className="absolute -z-10 w-full h-full rounded-xl"
+              className="absolute -z-10 w-full h-full rounded-[10px]"
               draggable="false"
             />
           )}
@@ -407,7 +407,7 @@ const Card = (props: CardProps) => {
             />
           </div> */}
 
-          <div className=" h-auto min-h-[40px] w-[150px] ml-[23px] mt-4 bg-black bg-opacity-60 rounded-lg flex justify-center items-center">
+          <div className=" h-auto min-h-[40px] w-[150px] ml-[23px] mt-4 bg-black bg-opacity-60 rounded-[10px] flex justify-center items-center">
             <Text
               content={props.card.name}
               textColor="white"
@@ -430,10 +430,10 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCard') {
     return (
       <>
-        <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-xl">
+        <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-[10px]">
           <div
             id="cardWrapper"
-            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl  relative -z-20"
+            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-[10px]  relative -z-20"
             onMouseDown={props.handleMouseDown}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -604,17 +604,17 @@ const Card = (props: CardProps) => {
   if (props.variant === 'openCardRead') {
     return (
       <>
-        <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-xl">
+        <div className="flex relative  gap-0 w-[690px] h-[300px] -z-10 bg-white shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] rounded-[10px]">
           <div
             id="cardWrapper"
-            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-xl border-2 border-black relative -z-20"
+            className="bg-gradient-to-b from-[#0F172A] to-[#5179D9] h-[300px] w-[200px] rounded-[10px] border-2 border-black relative -z-20"
             onMouseDown={props.handleMouseDown}
           >
             {imageUrl && (
               <img
                 src={imageUrl}
                 alt=""
-                className="absolute -z-10 h-full w-full rounded-xl"
+                className="absolute -z-10 h-full w-full rounded-[10px]"
                 draggable="false"
               />
             )}
@@ -629,7 +629,7 @@ const Card = (props: CardProps) => {
                 color={categoryColor}
               />
             </div>
-            <div className=" h-auto  w-[150px] ml-[23px] mt-4 bg-black bg-opacity-60 rounded-lg p-2">
+            <div className=" h-auto  w-[150px] ml-[23px] mt-4 bg-black bg-opacity-60 rounded-[10px] p-2">
               <Text
                 content={props.card.name}
                 textColor="white"
@@ -717,7 +717,7 @@ const Card = (props: CardProps) => {
         <div
           className={`bg-gradient-to-b ${
             imageUrl ? 'bg-none' : 'from-[#0F172A] to-[#5179D9]'
-          }  drop-shadow-lg shadow-right-bottom h-[300px] w-[200px] rounded-xl  hover:z-10  cursor-pointer hover:border-2 hover:border-black `}
+          }  drop-shadow-lg shadow-right-bottom h-[300px] w-[200px] rounded-[10px]  hover:z-10  cursor-pointer hover:border-2 hover:border-black `}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() => {
@@ -728,7 +728,7 @@ const Card = (props: CardProps) => {
             <img
               src={imageUrl}
               alt=""
-              className="absolute -z-10 w-full h-full rounded-xl"
+              className="absolute -z-10 w-full h-full rounded-[10px]"
               draggable="false"
             />
           )}
@@ -877,7 +877,7 @@ const Card = (props: CardProps) => {
         onClick={() => {
           console.log('published');
         }}
-        className={`h-72 w-52 rounded-lg border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border bg-white border-black`}
+        className={`h-72 w-52 rounded-[10px] border-2 justify-center items-center cursor-pointer hover:border-red-300 hover:border bg-white border-black`}
       >
         <Text content="{title}" textColor="black" variant="cardTitle" />
       </div>
