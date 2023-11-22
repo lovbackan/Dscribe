@@ -123,7 +123,7 @@ const SettingsPage = () => {
           showChangePasswordPopup ||
           showChangeUsernamePopup ||
           showRemoveAccountPopup
-            ? 'opacity-40 bg-black h-screen '
+            ? 'opacity-40 bg-black h-screen pointer-events-none '
             : 'opacity-100'
         }`}
       >
@@ -199,7 +199,8 @@ const SettingsPage = () => {
         <PopUp
           variant="deleteAccount"
           action={() => {
-            console.log('Delete account');
+            alert('This feature does not exist yet');
+            setShowRemoveAccountPopup(false);
           }}
           cancel={() => {
             setShowRemoveAccountPopup(false);

@@ -69,7 +69,9 @@ const HomePage = () => {
       <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-screen fixed w-full top-0 -z-10"></div>
       <div
         className={`${
-          showSignOutPopup ? 'opacity-40 bg-black min-h-screen ' : 'opacity-100'
+          showSignOutPopup
+            ? 'opacity-40 bg-black min-h-screen pointer-events-none '
+            : 'opacity-100'
         }`}
       >
         <Navbar
