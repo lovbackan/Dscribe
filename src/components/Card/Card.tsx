@@ -407,7 +407,7 @@ const Card = (props: CardProps) => {
             />
           </div> */}
 
-          <div className=" h-auto min-h-[40px] w-[150px] ml-[23px] mt-1 bg-black bg-opacity-60 rounded-lg flex justify-center items-center">
+          <div className=" h-auto min-h-[40px] w-[150px] ml-[23px] mt-4 bg-black bg-opacity-60 rounded-lg flex justify-center items-center">
             <Text
               content={props.card.name}
               textColor="white"
