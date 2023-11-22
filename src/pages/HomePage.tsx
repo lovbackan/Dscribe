@@ -123,7 +123,11 @@ const HomePage = () => {
     <div
       className={`w-full min-h-screen bg-gradient-to-b from-[#5179D9] to-[#0F172A] `}
     >
-      <div className={`${showSignOutPopup ? 'opacity-40  ' : 'opacity-100'}`}>
+      <div
+        className={`${
+          showSignOutPopup || showDeletePopup ? 'opacity-40  ' : 'opacity-100'
+        }`}
+      >
         <Navbar
           onClick={() => {
             setShowSignOutPopup(true);
@@ -173,21 +177,20 @@ const HomePage = () => {
             changePicture={changePicture}
           />
         </div>
-
-        {showDeletePopup && (
-          <PopUp
-            variant="deleteStory"
-            changeCardId={changeCardId.name}
-            action={() => {
-              deleteStory(changeCardId.id);
-              setShowDeletePopup(false);
-            }}
-            cancel={() => {
-              setShowDeletePopup(false);
-            }}
-          />
-        )}
       </div>
+      {showDeletePopup && (
+        <PopUp
+          variant="deleteStory"
+          changeCardId={changeCardId.name}
+          action={() => {
+            deleteStory(changeCardId.id);
+            setShowDeletePopup(false);
+          }}
+          cancel={() => {
+            setShowDeletePopup(false);
+          }}
+        />
+      )}
       {showSignOutPopup && (
         <div className="opacity-100">
           <PopUp
