@@ -5,7 +5,7 @@ interface FormCardProps {
 }
 
 const FormCard: React.FC<FormCardProps> = props => {
-  const [outerAnimation, setOuterAnimation] = useState('');
+  const [outerAnimation, setOuterAnimation] = useState('translate-y-[70vh]');
   const [innerAnimation, setInnerAnimation] = useState('opacity-0');
   useEffect(() => {
     setOuterAnimation('translate-y-0');
@@ -15,7 +15,7 @@ const FormCard: React.FC<FormCardProps> = props => {
   return (
     <div
       id="outerContainer"
-      className={`w-[690px] h-[300px] rounded-[20px] flex-row bg-inherit flex  translate-y-[70vh] transition-transform delay-300 duration-1000 ${outerAnimation}`}
+      className={`w-[690px] h-[300px] rounded-[20px] flex-row bg-inherit flex   transition-transform delay-300 duration-1000 ${outerAnimation}`}
     >
       <Logo variant="login" />
 
@@ -25,6 +25,7 @@ const FormCard: React.FC<FormCardProps> = props => {
       >
         {formComponent}
       </div>
+      <div className="translate-y-0 opacity-100 opacity-0"></div>
     </div>
   );
 };
