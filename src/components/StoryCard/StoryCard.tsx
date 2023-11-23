@@ -249,17 +249,26 @@ const StoryCard = (props: StoryCardProps) => {
       {props.deleteCard === undefined &&
         props.changePicture === undefined &&
         props.setChangeCardId === undefined && (
-          <div className=" h-auto  w-[150px] ml-[24px] mt-[42px] bg-black bg-opacity-60 rounded-lg p-3">
-            <Text
-              content={props.story.name}
-              textColor="white"
-              variant="cardTitle"
-            />
+          <div className=" flex justify-center items-center pt-[42px]">
+            {/* <div className="w-[150px] bg-black bg-opacity-60 rounded-lg p-3">
+              <Text
+                content={props.story.name}
+                textColor="white"
+                variant="cardTitle"
+              />
+            </div> */}
+            <div className=" h-auto min-h-[40px] w-[150px] bg-black bg-opacity-60 rounded-[10px] flex justify-center items-center px-1">
+              <Text
+                content={props.story.name}
+                textColor="white"
+                variant="heading4"
+              />
+            </div>
           </div>
         )}
 
       {((props.author && isHovered) || props.author === 'always') && (
-        <div className="absolute bottom-0 flex justify-center items-center w-full rounded-b-[8px] bg-black bg-opacity-40 h-8 ">
+        <div className="absolute bottom-0 flex items-center text-left w-full pl-2 rounded-b-[8px] bg-black bg-opacity-40 h-8 ">
           <Text
             content={`Author: ${author}`}
             textColor="white"

@@ -297,7 +297,7 @@ const EditorPage = () => {
           } `}
         >
           <div
-            className="absolute right-0 pointer-events-none mr-7"
+            className="w-[200px] h-[300px] right-0 absolute top-0 pointer-events-none mr-7 mt-7"
             onClick={e => {
               e.stopPropagation();
             }}

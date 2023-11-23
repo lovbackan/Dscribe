@@ -6,6 +6,7 @@ import RichTextViewer from '../components/RichTextViewer/RichTextViewer';
 import Logo from '../components/Logo/Logo';
 import { Text } from '../components/Text/Text';
 import Card from '../components/Card/Card';
+import StoryCard from '../components/StoryCard/StoryCard';
 
 import { deckContext, setDeckContext } from './EditorPage';
 
@@ -111,12 +112,20 @@ const ReadingPage = () => {
           <div
             className={`h-screen w-screen relative flex justify-center overflow-hidden bg-[#0F172A]`}
           >
-            <div className="absolute flex justify-center items-center w-screen">
+            {/* <div className="absolute flex justify-center items-center w-screen">
               <Text
                 variant="heading1Bold"
                 textColor="white"
                 content={story ? story.name : ''}
               />
+            </div> */}
+            <div
+              className="absolute right-0 pointer-events-none mr-7"
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
+              <StoryCard story={selectedStory} author="always" />
             </div>
             <Logo variant="editor" />
             <div
