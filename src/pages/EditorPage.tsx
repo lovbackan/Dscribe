@@ -9,6 +9,7 @@ import Card from '../components/Card/Card';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
 import { Text } from '../components/Text/Text';
+import StoryCard from '../components/StoryCard/StoryCard';
 
 type CardPositions = {
   [key: string]: { x: number; y: number };
@@ -284,6 +285,9 @@ const EditorPage = () => {
     }
   };
 
+  console.log(selectedStory);
+  console.log(story);
+
   return (
     <setDeckContext.Provider value={setDeck}>
       <deckContext.Provider value={deck}>
@@ -292,13 +296,41 @@ const EditorPage = () => {
             showDeck ? 'bg-[#0C101A] ' : 'bg-[#0F172A]'
           } `}
         >
-          <div className="absolute flex justify-center items-center w-screen">
-            <Text
-              variant="heading1Bold"
-              textColor="white"
-              content={story ? story.name : ''}
-            />
+          <div
+            className="absolute right-0 pointer-events-none mr-7"
+            onClick={e => {
+              e.stopPropagation();
+            }}
+          >
+            <StoryCard story={selectedStory} author="always" />
           </div>
+          {/* <section
+            className={`h-[300px] w-[200px] rounded-[10px] border-2 justify-center items-center absolute right-0 mr-7 mt-7`}
+          >
+            {selectedStory.image_path && (
+              <img
+                src={`https://shgbqnaodutxthloqmkx.supabase.co/storage/v1/object/public/images/${selectedStory.image_path} `}
+                alt=""
+                className="absolute w-full h-full rounded-[8px] object-fill"
+                draggable="false"
+              />
+            )}
+            <div className=" h-auto absolute w-[150px] ml-[24px] mt-[42px] bg-black bg-opacity-60 rounded-lg p-3">
+              <Text
+                content={story ? story.name : ''}
+                textColor="white"
+                variant="cardTitle"
+              />
+            </div>
+
+            <div className="absolute bottom-0 flex justify-center items-center w-full rounded-[8px] bg-black bg-opacity-40 h-8 ">
+              <Text
+                content={`Author: ${selectedStory.author}`}
+                textColor="white"
+                variant="pPrimary"
+              />
+            </div>
+          </section> */}
 
           <Logo variant="editor" />
 
