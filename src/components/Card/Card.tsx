@@ -653,7 +653,7 @@ const Card = (props: CardProps) => {
               />
             </div> */}
 
-            <section id="subCategory" className="mt-28 ">
+            <section id="subCategory" className="mt-40 ">
               <div
                 id="SubCategoryWrapper"
                 className="flex flex-row flex-wrap gap-1 px-1 h-18 overflow-y-auto pt-1 bg-transparent"
@@ -673,28 +673,6 @@ const Card = (props: CardProps) => {
                 })}
               </div>
             </section>
-
-            {/* <section
-              id="subCategory"
-              className="relative h-[200px] overflow-auto flex flex-col justify-end "
-            >
-              <div
-                id="SubCategoryWrapper"
-                className="flex flex-row flex-wrap gap-1 px-1"
-              >
-                {props.card.tags.map(tag => {
-                  return (
-                    <CTAButton
-                      key={tag.id}
-                      variant="cardSubCategory"
-                      title={tag.name}
-                      onClick={() => {}}
-                      color={tag.color_id}
-                    />
-                  );
-                })}
-              </div>
-            </section> */}
           </div>
           <div className="w-[490px] h-[300px] pt-6">
             <div className="pr-1 pt-1 absolute z-10 top-0 right-0">
