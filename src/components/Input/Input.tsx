@@ -40,7 +40,7 @@ export const Input: React.FC<InputProps> = ({
         <div className="editSymbol pt-6 pr-[70px] pointer-events-none"></div>
         <input
           type={type}
-          autoComplete={autoComplete}
+          autoComplete="off"
           id={id}
           defaultValue={placeholder}
           onKeyDown={e => {
