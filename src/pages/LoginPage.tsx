@@ -26,7 +26,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A] overflow-hidden">
+    <div className="w-screen h-screen flex-col flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A] overflow-hidden">
       <FormCard
         animate={true}
         formComponent={
@@ -39,7 +39,7 @@ const LoginPage = () => {
         }
       />
 
-      {error && <p>{error.message}</p>}
+      {error && <p className="text-red-500">{error.message}</p>}
     </div>
   );
 };
