@@ -126,38 +126,8 @@ const LandingPage = () => {
 
           <div className="flex flex-row justify-between w-full mt-[40px]">
             {featuredStories.map(story => {
-              return <StoryCard story={story} />;
+              return <StoryCard story={story} author={true} />;
             })}
-            {/* <CardDesign
-              title="Adventure is coming"
-              variant="bigCard"
-              imageUrl={adventure}
-              onClick={() => console.log('Mockup published work clicked')}
-            />
-            <CardDesign
-              title="Future City"
-              variant="bigCard"
-              imageUrl={futureCity}
-              onClick={() => console.log('Mockup published work clicked')}
-            />
-            <CardDesign
-              title="The Witch"
-              variant="bigCard"
-              imageUrl={theWitch}
-              onClick={() => console.log('Mockup published work clicked')}
-            />
-            <CardDesign
-              title="Brothers (manuscript)"
-              variant="bigCard"
-              imageUrl={brothers}
-              onClick={() => console.log('Mockup published work clicked')}
-            />
-            <CardDesign
-              title="Why"
-              variant="bigCard"
-              imageUrl={why}
-              onClick={() => console.log('Mockup published work clicked')}
-            /> */}
           </div>
         </section>
         <section className="h-[250px]">

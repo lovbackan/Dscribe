@@ -20,7 +20,7 @@ interface StoryCardProps {
   setSelectedStory?: Function;
   deleteCard?: Function;
   changePicture?: Function;
-  author?: boolean;
+  author?: boolean | 'always';
 }
 
 {
@@ -258,7 +258,7 @@ const StoryCard = (props: StoryCardProps) => {
           </div>
         )}
 
-      {props.author && isHovered && (
+      {((props.author && isHovered) || props.author === 'always') && (
         <div className="absolute bottom-0 flex justify-center items-center w-full rounded-b-2xl bg-black bg-opacity-40 h-8 ">
           <Text
             content={`Author: ${author}`}

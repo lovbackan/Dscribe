@@ -317,11 +317,11 @@ const EditorPage = () => {
                 deckViewOpen={showDeck}
               />
             ) : null}
-            <div
+            {/* <div
               className={`absolute h-[20%] w-[100%] mt-10 ${
                 showDeck ? 'bg-white opacity-50 ' : 'bg-white'
               }`}
-            ></div>
+            ></div> */}
           </div>
           {deck.map(card => {
             if (card.openCard)
