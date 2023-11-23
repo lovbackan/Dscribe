@@ -303,7 +303,11 @@ const EditorPage = () => {
               e.stopPropagation();
             }}
           >
-            <StoryCard story={selectedStory} author="always" />
+            <StoryCard
+              story={selectedStory}
+              author="always"
+              setSelectedStory={() => {}}
+            />
           </div>
           {/* <section
             className={`h-[300px] w-[200px] rounded-[10px] border-2 justify-center items-center absolute right-0 mr-7 mt-7`}
@@ -350,11 +354,11 @@ const EditorPage = () => {
                 deckViewOpen={showDeck}
               />
             ) : null}
-            {/* <div
+            <div
               className={`absolute h-[20%] w-[100%] mt-10 ${
                 showDeck ? 'bg-white opacity-50 ' : 'bg-white'
               }`}
-            ></div> */}
+            ></div>
           </div>
           {deck.map(card => {
             if (card.openCard)

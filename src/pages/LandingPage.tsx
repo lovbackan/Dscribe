@@ -19,10 +19,22 @@ type story = {
 const LandingPage = () => {
   const navigate = useNavigate();
   const [featuredStories, setFeaturedStories] = useState<story[]>([]);
+  const [selectedStory, setSelectedStory] = useState<any>(null);
 
   useEffect(() => {
     fetchStories();
   }, []);
+
+  useEffect(() => {
+    if (selectedStory) {
+      navigate(ACCEPTED_ROUTES.READER, {
+        replace: true,
+        state: {
+          selectedStory: selectedStory,
+        },
+      });
+    }
+  }, [selectedStory]);
 
   const fetchStories = async () => {
     const { data, error } = await supabase
@@ -126,7 +138,13 @@ const LandingPage = () => {
 
           <div className="flex flex-row justify-between w-full mt-[40px]">
             {featuredStories.map(story => {
-              return <StoryCard story={story} author={true} />;
+              return (
+                <StoryCard
+                  story={story}
+                  author={true}
+                  setSelectedStory={setSelectedStory}
+                />
+              );
             })}
           </div>
         </section>

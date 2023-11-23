@@ -10,7 +10,7 @@ interface HandProps {
 
 const Hand = (props: HandProps) => {
   return (
-    <div className=" z-10 absolute bottom-[-230px] grid w-[90%] justify-center grid-cols-[repeat(auto-fit,_minmax(0,_max-content))]  max-w-[80%]">
+    <div className=" z-50 absolute bottom-[-230px] grid w-[90%] justify-center grid-cols-[repeat(auto-fit,_minmax(0,_max-content))]  max-w-[80%]">
       {props.deck.map(card => {
         return card.inHand ? (
           <div

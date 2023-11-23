@@ -108,7 +108,6 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    console.log(selectedStory);
     if (selectedStory) {
       navigate(ACCEPTED_ROUTES.EDITOR, {
         replace: true,

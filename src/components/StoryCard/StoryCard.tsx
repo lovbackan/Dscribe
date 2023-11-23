@@ -17,7 +17,7 @@ interface StoryCardProps {
   stories?: StoryCardProps['story'][];
   setStories?: Function;
   setChangeCardId?: Function;
-  setSelectedStory?: Function;
+  setSelectedStory: Function;
   deleteCard?: Function;
   changePicture?: Function;
   author?: boolean | 'always';
@@ -119,6 +119,10 @@ const StoryCard = (props: StoryCardProps) => {
   };
 
   const changeName = async (newName: string) => {
+    if (!props.stories || !props.setStories) {
+      console.log('Missing stories props!');
+      return;
+    }
     const id = props.story.id;
     const { data, error } = await supabase
       .from('stories')
@@ -126,8 +130,15 @@ const StoryCard = (props: StoryCardProps) => {
       .eq('id', id);
     if (error) {
       console.log(error);
+    } else {
+      const index = props.stories.findIndex(story => {
+        if (story.id === id) return true;
+        return false;
+      });
+      const newStories = props.stories;
+      newStories[index].name = newName;
+      props.setStories([...newStories]);
     }
-    console.log(data);
 
     // write your logic here for updating name of story
   };
@@ -139,8 +150,7 @@ const StoryCard = (props: StoryCardProps) => {
         imageUrl ? '' : 'hover:border-2 hover:border-white'
       }`}
       onClick={() => {
-        if (props.setSelectedStory) props.setSelectedStory(props.story);
-        else navigate(ACCEPTED_ROUTES.LOGIN);
+        props.setSelectedStory(props.story);
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
