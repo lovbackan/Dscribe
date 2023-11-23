@@ -9,6 +9,7 @@ import Card from '../components/Card/Card';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
 import StoryCard from '../components/StoryCard/StoryCard';
+import { create } from 'domain';
 
 type CardPositions = {
   [key: string]: { x: number; y: number };
@@ -358,6 +359,7 @@ const EditorPage = () => {
                     setDeckChanges={setDeckChanges}
                     categories={categories}
                     setCategories={setCategories}
+                    createCategory={createCategory}
                     handleMouseDown={e => {
                       const rect = e.currentTarget.getBoundingClientRect();
                       setDragOffset({
