@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { supabase } from '../supabase';
 import { ACCEPTED_ROUTES } from '../routes/routes';

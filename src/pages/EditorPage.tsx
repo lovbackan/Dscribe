@@ -65,8 +65,11 @@ const EditorPage = () => {
   const location = useLocation();
   const selectedStory = location.state.selectedStory;
   const [story, setStory] = useState<{
-    id: string;
+    id: number;
     name: string;
+    image_path?: string | undefined;
+    user_id: string;
+    published: boolean;
     text: string;
   } | null>();
   const [storyChanges, setStoryChanges] = useState<{ text?: string }>({});
@@ -297,45 +300,20 @@ const EditorPage = () => {
             darkMode ? 'bg-[#0F172A]' : 'bg-[#5179D9]'
           }  ${showDeck ? 'bg-[#0C101A] ' : 'bg-[#0F172A]'} `}
         >
-          <div
-            className="w-[200px] h-[300px] right-0 absolute top-0 pointer-events-none mr-7 mt-7"
-            onClick={e => {
-              e.stopPropagation();
-            }}
-          >
-            <StoryCard
-              story={selectedStory}
-              author="always"
-              setSelectedStory={() => {}}
-            />
-          </div>
-          {/* <section
-            className={`h-[300px] w-[200px] rounded-[10px] border-2 justify-center items-center absolute right-0 mr-7 mt-7`}
-          >
-            {selectedStory.image_path && (
-              <img
-                src={`https://shgbqnaodutxthloqmkx.supabase.co/storage/v1/object/public/images/${selectedStory.image_path} `}
-                alt=""
-                className="absolute w-full h-full rounded-[8px] object-fill"
-                draggable="false"
-              />
-            )}
-            <div className=" h-auto absolute w-[150px] ml-[24px] mt-[42px] bg-black bg-opacity-60 rounded-lg p-3">
-              <Text
-                content={story ? story.name : ''}
-                textColor="white"
-                variant="cardTitle"
+          {story && (
+            <div
+              className="w-[200px] h-[300px] right-0 absolute top-0 pointer-events-none mr-7 mt-7"
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
+              <StoryCard
+                story={story}
+                author="always"
+                setSelectedStory={() => {}}
               />
             </div>
-
-            <div className="absolute bottom-0 flex justify-center items-center w-full rounded-[8px] bg-black bg-opacity-40 h-8 ">
-              <Text
-                content={`Author: ${selectedStory.author}`}
-                textColor="white"
-                variant="pPrimary"
-              />
-            </div>
-          </section> */}
+          )}
 
           <Logo variant="editor" />
 
