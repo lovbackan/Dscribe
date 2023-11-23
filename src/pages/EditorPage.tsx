@@ -9,7 +9,6 @@ import Card from '../components/Card/Card';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
 import StoryCard from '../components/StoryCard/StoryCard';
-import { create } from 'domain';
 
 type CardPositions = {
   [key: string]: { x: number; y: number };
@@ -396,15 +395,26 @@ const EditorPage = () => {
               darkMode
                 ? 'justify-start border-white bg-black '
                 : 'justify-end bg-white border-black'
-            }`}
+            } transition-all duration-500`}
             onClick={() => {
               setDarkMode(!darkMode);
             }}
           >
             <div
-              className={`rounded-full w-[34px] h-[34px] cursor-pointer ${
-                darkMode ? 'bg-white' : 'bg-black'
+              className={`darkModeSun absolute left-[2px] ml-2 transition-all duration-500 ${
+                darkMode ? 'ml-0 ' : 'ml-2 '
               }`}
+            ></div>
+            <div
+              className={`darkModeMoon absolute right-[2px] mr-2 transition-all duration-500 ${
+                darkMode ? 'mr-2 ' : 'mr-0 '
+              }`}
+            ></div>
+            <div
+              id="darkModeToggleCircle"
+              className={`rounded-full z-10 w-[34px] h-[34px] cursor-pointer ${
+                darkMode ? 'bg-white' : 'bg-black'
+              } transition-all duration-500`}
             ></div>
           </div>
 

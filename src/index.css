@@ -931,6 +931,36 @@ i.logo {
   border-radius: 20px;
 }
 
+.darkModeSun {
+  background-image: url(./images/icons/sun.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.darkModeSun:hover {
+  background-image: url(./images/icons/sun-hover.svg);
+}
+
+.darkModeMoon {
+  background-image: url(./images/icons/moon.svg);
+  background-size: fill;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+}
+
+.darkModeMoon:hover {
+  background-image: url(./images/icons/moon-hover.svg);
+}
+
 .editSymbol {
   background-image: url(./images/icons/edit.svg);
   background-size: fill;
