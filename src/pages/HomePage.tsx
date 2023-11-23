@@ -125,7 +125,7 @@ const HomePage = () => {
         id="blur"
         className={`${
           showSignOutPopup || showDeletePopup
-            ? 'opacity-40 bg-black pointer-events-none  '
+            ? 'opacity-40 bg-black pointer-events-none min-h-screen  '
             : 'opacity-100'
         }`}
       >

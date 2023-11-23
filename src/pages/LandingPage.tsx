@@ -55,7 +55,7 @@ const LandingPage = () => {
           className="absolute top-0 right-0 pt-3 pr-3"
         >
           <CTAButton
-            title="Log in"
+            title="Login"
             variant="landing"
             onClick={() => {
               navigate(ACCEPTED_ROUTES.LOGIN);

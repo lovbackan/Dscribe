@@ -222,7 +222,7 @@ const StoryCard = (props: StoryCardProps) => {
                 variant="cardTitle"
               />
             </div> */}
-            <div className=" h-auto min-h-[40px] w-[150px] bg-black bg-opacity-60 rounded-[10px] flex justify-center items-center px-1">
+            <div className=" h-auto min-h-[40px] break-words w-[150px] bg-black bg-opacity-60 rounded-[10px] flex justify-center items-center px-1">
               <Text
                 content={props.story.name}
                 textColor="white"
