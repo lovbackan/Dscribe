@@ -60,7 +60,7 @@ const Dropdown = (props: DropdownProps) => {
   const [searchTerm, setSearchTerm] = useState('');
   return (
     <div
-      className="bg-[#0F172A] w-full z-50"
+      className={`bg-[#0F172A] w-full z-50 `}
       //Prevents deselection of input field.
       //gör om istället att inputen sortar alla tags/kategorier utifrån inputen, om det inte finns något alternativ så kommer en div upp som heter create category/tag
     >
@@ -87,7 +87,11 @@ const Dropdown = (props: DropdownProps) => {
           }
         }}
       />
-      <div className="w-full h-auto bg-black flex flex-row flex-wrap gap-2 py-2">
+      <div
+        className={`w-full h-auto bg-black flex flex-row flex-wrap gap-2 ${
+          props.mappable && props.mappable.length > 0 ? 'py-2 px-2 ' : ''
+        } `}
+      >
         {props.mappable
           ?.sort((a, b) => a.name.localeCompare(b.name))
           .filter(object => object.name.includes(searchTerm))
@@ -99,24 +103,15 @@ const Dropdown = (props: DropdownProps) => {
               });
               if (tagExistsOnCard) return null;
             }
+
             return (
               <div
                 onMouseDown={e => {
                   e.preventDefault();
                 }}
-                className="w-auto h-auto"
-                // onClick={e => {
-                //   e.stopPropagation();
-                //   props.add(object.id);
-                // }}
+                className={`w-auto h-auto `}
                 key={object.id}
               >
-                {/* <Text
-                content={object.name}
-                variant="pPrimary"
-                textColor="white"
-              /> */}
-
                 <CTAButton
                   key={object.id}
                   variant="cardSubCategory"

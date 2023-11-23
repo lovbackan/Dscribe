@@ -101,7 +101,7 @@ const StoryCard = (props: StoryCardProps) => {
   return (
     <div
       id={props.story.name}
-      className={`  w-[200px] h-[300px] rounded-[10px] relative z-0 shadow-right-bottom bg-[#5179D9] cursor-pointer ${
+      className={`  w-[200px] h-[300px] rounded-[10px] relative z-0 shadow-right-bottom bg-gradient-to-b from-[#0F172A] to-[#5179D9] cursor-pointer ${
         imageUrl ? '' : 'hover:border-2 hover:border-white'
       }`}
       onClick={() => {
