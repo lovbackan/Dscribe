@@ -20,6 +20,7 @@ const ReadingPage = () => {
   const [cardPositions, setCardPositions] = useState<CardPositions>({});
   const [activeCard, setActiveCard] = useState<string | null>(null);
   const [deck, setDeck] = useState<any[]>([]);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
   const [story, setStory] = useState<{
     id: string;
     name: string;
@@ -109,7 +110,9 @@ const ReadingPage = () => {
       <setDeckContext.Provider value={setDeck}>
         <deckContext.Provider value={deck}>
           <div
-            className={`h-screen w-screen relative flex justify-center overflow-hidden bg-[#0F172A]`}
+            className={`h-screen w-screen relative flex justify-center overflow-hidden ${
+              darkMode ? 'bg-[#0F172A]' : 'bg-[#5179D9]'
+            }`}
           >
             {/* <div className="absolute flex justify-center items-center w-screen">
               <Text
@@ -119,12 +122,16 @@ const ReadingPage = () => {
               />
             </div> */}
             <div
-              className="absolute right-0 pointer-events-none mr-7"
+              className="w-[200px] h-[300px] right-0 absolute top-0 pointer-events-none mr-7 mt-7"
               onClick={e => {
                 e.stopPropagation();
               }}
             >
-              <StoryCard story={selectedStory} author="always" />
+              <StoryCard
+                story={selectedStory}
+                author="always"
+                setSelectedStory={() => {}}
+              />
             </div>
             <Logo variant="editor" />
             <div
@@ -173,6 +180,23 @@ const ReadingPage = () => {
                   </div>
                 );
             })}
+            <div
+              id="darkModeToggle"
+              className={`absolute bottom-0 right-0 w-[80px] h-[40px] mr-7 mb-7 border rounded-[20px] cursor-pointer flex items-center px-[2px] ${
+                darkMode
+                  ? 'justify-start border-white bg-black '
+                  : 'justify-end bg-white border-black'
+              }`}
+              onClick={() => {
+                setDarkMode(!darkMode);
+              }}
+            >
+              <div
+                className={`rounded-full w-[34px] h-[34px] cursor-pointer ${
+                  darkMode ? 'bg-white' : 'bg-black'
+                }`}
+              ></div>
+            </div>
           </div>
         </deckContext.Provider>
       </setDeckContext.Provider>

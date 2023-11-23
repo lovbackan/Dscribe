@@ -4,7 +4,6 @@ import { CTAButton } from '../CTAButton/CTAButton';
 import { useState, useEffect } from 'react';
 import { Text } from '../Text/Text';
 import { useNavigate } from 'react-router';
-import { ACCEPTED_ROUTES } from '../../routes/routes';
 
 interface StoryCardProps {
   story: {
@@ -71,7 +70,6 @@ const StoryCard = (props: StoryCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [author, setAuthor] = useState<string>('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!props.author) return;
