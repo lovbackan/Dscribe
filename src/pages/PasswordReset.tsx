@@ -35,7 +35,7 @@ const RegisterPage = () => {
             onChange1={e => setEmail(e.target.value)}
             onChange2={e => setPassword(e.target.value)}
             onChange3={e => setUser(e.target.value)}
-            onClick={signUp}
+            submit={signUp}
           />
         }
       />

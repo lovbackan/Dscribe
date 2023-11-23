@@ -8,7 +8,7 @@ type LoginCardType = 'login' | 'signup' | 'forgotPassword';
 
 interface FormProps {
   variant: LoginCardType;
-  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  submit: Function;
   onChange1: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange2?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange3?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -16,7 +16,7 @@ interface FormProps {
 
 const Form: React.FC<FormProps> = ({
   variant,
-  onClick,
+  submit,
   onChange1,
   onChange2,
   onChange3,
@@ -44,12 +44,15 @@ const Form: React.FC<FormProps> = ({
               variant="primary"
               placeholder="Password"
               onChange={onChange2}
+              onKeyDown={e => {
+                if (e.key === 'Enter') submit();
+              }}
             />
           )}
         </div>
         <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
           <div className="mb-[20px]">
-            <CTAButton title="Login" variant="primary" onClick={onClick} />
+            <CTAButton title="Login" variant="primary" onClick={submit} />
           </div>
 
           <div
@@ -107,13 +110,16 @@ const Form: React.FC<FormProps> = ({
               variant="primary"
               placeholder="Username"
               onChange={onChange3}
+              onKeyDown={e => {
+                if (e.key === 'Enter') submit();
+              }}
             />
           )}
         </div>
 
         <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
           <div className="mb-[20px]">
-            <CTAButton title="Register" variant="primary" onClick={onClick} />
+            <CTAButton title="Register" variant="primary" onClick={submit} />
           </div>
 
           <div
@@ -149,11 +155,14 @@ const Form: React.FC<FormProps> = ({
             placeholder="Email"
             onChange={onChange1}
             autoComplete="on"
+            onKeyDown={e => {
+              if (e.key === 'Enter') submit();
+            }}
           />
         </div>
         <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
           <div className="mb-[20px]">
-            <CTAButton title="Reset" variant="primary" onClick={onClick} />
+            <CTAButton title="Reset" variant="primary" onClick={submit} />
           </div>
 
           <div

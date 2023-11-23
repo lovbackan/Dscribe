@@ -34,7 +34,7 @@ const LoginPage = () => {
             variant="login"
             onChange1={e => setEmail(e.target.value)}
             onChange2={e => setPassword(e.target.value)}
-            onClick={signIn}
+            submit={signIn}
           />
         }
       />

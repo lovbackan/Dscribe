@@ -42,7 +42,11 @@ export const Input: React.FC<InputProps> = ({
           type={type}
           autoComplete={autoComplete}
           id={id}
-          placeholder={placeholder}
+          defaultValue={placeholder}
+          onKeyDown={e => {
+            const target: HTMLInputElement | any = e.target;
+            if (e.key === 'Enter') target.blur();
+          }}
           onChange={onChange}
           onBlur={onBlur}
           className={` ${containerClasses}`}
