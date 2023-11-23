@@ -81,6 +81,7 @@ const EditorPage = () => {
   const deckChangesRef = useRef(deckChanges);
   deckChangesRef.current = deckChanges;
   const [saveAnimation, setSaveAnimation] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(true);
 
   useEffect(() => {
     if (saveAnimation === true) setTimeout(() => setSaveAnimation(false), 500);
@@ -290,10 +291,11 @@ const EditorPage = () => {
   return (
     <setDeckContext.Provider value={setDeck}>
       <deckContext.Provider value={deck}>
+        {/* showdeck ändrar inte bakgrund nu*/}
         <div
-          className={`h-screen w-screen relative flex justify-center overflow-hidden  ${
-            showDeck ? 'bg-[#0C101A] ' : 'bg-[#0F172A]'
-          } `}
+          className={`h-screen w-screen relative flex justify-center overflow-hidden ${
+            darkMode ? 'bg-[#0F172A]' : 'bg-[#5179D9]'
+          }  ${showDeck ? 'bg-[#0C101A] ' : 'bg-[#0F172A]'} `}
         >
           <div
             className="w-[200px] h-[300px] right-0 absolute top-0 pointer-events-none mr-7 mt-7"
@@ -409,6 +411,23 @@ const EditorPage = () => {
             title="Add category"
           />
         </div> */}
+          <div
+            id="darkModeToggle"
+            className={`absolute bottom-0 right-0 w-[80px] h-[40px] mr-7 mb-7 border rounded-[20px] cursor-pointer flex items-center px-[2px] ${
+              darkMode
+                ? 'justify-start border-white bg-black '
+                : 'justify-end bg-white border-black'
+            }`}
+            onClick={() => {
+              setDarkMode(!darkMode);
+            }}
+          >
+            <div
+              className={`rounded-full w-[34px] h-[34px] cursor-pointer ${
+                darkMode ? 'bg-white' : 'bg-black'
+              }`}
+            ></div>
+          </div>
 
           <div className="absolute bottom-0 left-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
             {/* <CTAButton
@@ -465,6 +484,7 @@ const EditorPage = () => {
               />
             </div>
           </div>
+
           <div
             className={` saveSymbol ${saveAnimation ? 'saveAnimation' : ''}`}
           ></div>
