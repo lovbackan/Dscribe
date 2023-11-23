@@ -259,7 +259,7 @@ const StoryCard = (props: StoryCardProps) => {
         )}
 
       {((props.author && isHovered) || props.author === 'always') && (
-        <div className="absolute bottom-0 flex justify-center items-center w-full rounded-b-2xl bg-black bg-opacity-40 h-8 ">
+        <div className="absolute bottom-0 flex justify-center items-center w-full rounded-b-[8px] bg-black bg-opacity-40 h-8 ">
           <Text
             content={`Author: ${author}`}
             textColor="white"
