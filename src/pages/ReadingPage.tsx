@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import RichTextViewer from '../components/RichTextViewer/RichTextViewer';
 import Logo from '../components/Logo/Logo';
-import { Text } from '../components/Text/Text';
 import Card from '../components/Card/Card';
 import StoryCard from '../components/StoryCard/StoryCard';
 

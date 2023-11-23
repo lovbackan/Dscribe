@@ -8,7 +8,6 @@ import Hand from '../components/Hand/Hand';
 import Card from '../components/Card/Card';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
-import { Text } from '../components/Text/Text';
 import StoryCard from '../components/StoryCard/StoryCard';
 
 type CardPositions = {
