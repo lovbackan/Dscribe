@@ -4,18 +4,21 @@ import { Text } from '../components/Text/Text.tsx';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../components/Logo/Logo.tsx';
 import mockUpImage from '../images/mock-up.jpg';
-import adventure from '../images/heroPagePictures/adventure.png';
-import brothers from '../images/heroPagePictures/brothers.png';
-import futureCity from '../images/heroPagePictures/futureCity.png';
-import theWitch from '../images/heroPagePictures/theWitch.png';
-import why from '../images/heroPagePictures/why.png';
 import StoryCard from '../components/StoryCard/StoryCard.tsx';
 import { supabase } from '../supabase/index.ts';
 import { useState, useEffect } from 'react';
 
+type story = {
+  id: number;
+  name: string;
+  image_path?: string;
+  user_id: string;
+  published: boolean;
+};
+
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [featuredStories, setFeaturedStories] = useState<any[]>([]);
+  const [featuredStories, setFeaturedStories] = useState<story[]>([]);
 
   useEffect(() => {
     fetchStories();

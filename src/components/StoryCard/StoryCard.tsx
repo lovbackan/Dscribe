@@ -14,7 +14,7 @@ interface StoryCardProps {
     user_id: string;
     published: boolean;
   };
-  stories: StoryCardProps['story'][];
+  stories?: StoryCardProps['story'][];
   setStories?: Function;
   setChangeCardId?: Function;
   setSelectedStory?: Function;
@@ -95,8 +95,8 @@ const StoryCard = (props: StoryCardProps) => {
   }, [props.story.image_path]);
 
   const publishStory = async () => {
-    if (!props.setStories) {
-      console.log('Missing prop setStories()');
+    if (!props.setStories || !props.stories) {
+      console.log('Missing props!');
       return;
     }
     const id = props.story.id;
