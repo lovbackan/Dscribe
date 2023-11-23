@@ -43,7 +43,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
+    <div className="w-screen h-screen flex-col flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A]">
       <FormCard
         formComponent={
           <Form
@@ -55,7 +55,7 @@ const RegisterPage = () => {
           />
         }
       />
-      {error && <p>{error.message}</p>}
+      {error && <p className="text-red-500">Error: {error.message}</p>}
     </div>
   );
 };
