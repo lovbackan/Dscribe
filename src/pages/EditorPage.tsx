@@ -340,8 +340,8 @@ const EditorPage = () => {
           <Logo variant="editor" />
 
           <div
-            className={`absolute w-[60%] h-[90%] mt-12 rounded-tl-lg rounded-tr-lg ${
-              showDeck ? 'bg-[#0B0B0B] ' : 'bg-white'
+            className={`absolute w-[60%] h-[100%] pb-12 mt-12 rounded-tl-lg rounded-tr-lg bg-white ${
+              showDeck ? 'opacity-50  ' : 'opacity-100'
             }`}
           >
             {story ? (
@@ -354,11 +354,6 @@ const EditorPage = () => {
                 deckViewOpen={showDeck}
               />
             ) : null}
-            <div
-              className={`absolute h-[20%] w-[100%] mt-10 ${
-                showDeck ? 'bg-white opacity-50 ' : 'bg-white'
-              }`}
-            ></div>
           </div>
           {deck.map(card => {
             if (card.openCard)
