@@ -49,7 +49,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
       : variant === 'landing'
       ? 'w-[126px] h-[48px] border border-white rounded-[5px] flex justify-center items-center hover:border-2 cursor-pointer'
       : variant === 'landing2'
-      ? 'w-[307x] h-[48px] border border-white rounded-[5px] flex justify-center items-center hover:border-2 cursor-pointer'
+      ? 'w-[307px] h-[48px] border border-white rounded-[5px] flex justify-center items-center hover:border-2 cursor-pointer'
       : variant === 'cardCategory'
       ? 'bg-black h-4 min-w-[40px] w-auto border-transparent border rounded-tl-[8px] rounded-br-[8px] flex justify-center items-center hover:border-white hover:border cursor-pointer p-2'
       : variant === 'deckViewCategory'

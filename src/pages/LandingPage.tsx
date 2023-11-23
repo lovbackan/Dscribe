@@ -74,7 +74,7 @@ const LandingPage = () => {
         >
           <Text variant="logo" textColor="white" content="Codeck" />
         </div> */}
-            <div className="w-[600px] h-[200px] text-left ml-[73px] ">
+            <div className="w-[600px] h-[200px] text-left ml-[73px] pt-[30px] ">
               <Text
                 variant="hero"
                 textColor="white"
@@ -108,7 +108,7 @@ const LandingPage = () => {
               <img
                 src={mockUpImage}
                 alt="mock-up"
-                className="w-[100%] h-[100%] object-cover"
+                className="w-[100%] h-[100%] object-cover rounded-[15px]"
               />
             </div>
           </section>
@@ -148,9 +148,9 @@ const LandingPage = () => {
             })}
           </div>
         </section>
-        <section className="h-[250px]">
+        <section className="h-[125px]">
           <div className="w-screen h-0.5  bg-white "></div>
-          <div className="flex flex-row justify-between my-[57px] px-[140px]">
+          <div className="flex flex-row justify-between my-[40px] px-[140px]">
             <div>
               <Text content="Contact us" variant="heading2" textColor="white" />
               <Text
