@@ -3,7 +3,6 @@ import { supabase } from '../../supabase';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { useState, useEffect } from 'react';
 import { Text } from '../Text/Text';
-import { useNavigate } from 'react-router';
 
 interface StoryCardProps {
   story: {
@@ -20,49 +19,6 @@ interface StoryCardProps {
   deleteCard?: Function;
   changePicture?: Function;
   author?: boolean | 'always';
-}
-
-{
-  /* <Input
-              id="CardTitle"
-              variant="cardTitle"
-              placeholder={props.card.name}
-              onChange={() => {}}
-              onBlur={e => {
-                const newName = e.target.value;
-                const cardIndex = props.deck.findIndex(deckCard => {
-                  if (props.card.id === deckCard.id) return true;
-                  return false;
-                });
-                const newDeck = props.deck;
-                newDeck[cardIndex].name = newName;
-                if (
-                  props.deck[cardIndex] === newName ||
-                  !props.deckChanges ||
-                  !props.setDeckChanges
-                )
-                  return;
-
-                const newDeckChanges = props.deckChanges;
-                const cardChangesIndex = newDeckChanges?.findIndex(deckCard => {
-                  if (props.card.id === deckCard.id) return true;
-                  return false;
-                });
-                console.log('Preupdate');
-                if (cardChangesIndex === -1) {
-                  console.log('Updateis');
-                  newDeckChanges?.push({
-                    id: props.card.id,
-                    name: newName,
-                  });
-                } else {
-                  newDeckChanges[cardChangesIndex].name = newName;
-                }
-                props.setDeck([...newDeck]);
-                props.setDeckChanges([...newDeckChanges]);
-              }}
-              type="text"
-            /> */
 }
 
 const StoryCard = (props: StoryCardProps) => {
@@ -129,6 +85,7 @@ const StoryCard = (props: StoryCardProps) => {
     if (error) {
       console.log(error);
     } else {
+      console.log(data);
       const index = props.stories.findIndex(story => {
         if (story.id === id) return true;
         return false;
