@@ -27,7 +27,7 @@ type ButtonType =
 interface CTAButtonProps {
   title: string | number;
   variant: ButtonType;
-  onClick: Function;
+  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
   remove?: (event: React.MouseEvent<HTMLDivElement>) => void;
   color?: number | null;
 }
@@ -154,7 +154,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         onMouseLeave={() => setIsVisible(false)}
         onMouseDown={e => e.preventDefault()}
       >
-        <div onClick={() => onClick()} className={` ${containerClasses}`}>
+        <div onClick={e => onClick(e)} className={` ${containerClasses}`}>
           <span className={` ${textClasses}`}>{title}</span>
 
           <div
@@ -179,7 +179,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   } else {
     return (
       <div
-        onClick={() => onClick()}
+        onClick={e => onClick(e)}
         className={` ${containerClasses}`}
         onMouseDown={e => e.preventDefault()}
       >
