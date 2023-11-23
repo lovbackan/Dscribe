@@ -41,6 +41,10 @@ export const routes: Array<PathRouteProps> = [
     path: ACCEPTED_ROUTES.PASSWORDRESET,
     element: <PasswordReset />,
   },
+  {
+    path: ACCEPTED_ROUTES.READER,
+    element: <ReadingPage />,
+  },
 ];
 
 export const privateRoutes: Array<PathRouteProps> = [
@@ -53,9 +57,5 @@ export const privateRoutes: Array<PathRouteProps> = [
   {
     path: ACCEPTED_ROUTES.EDITOR,
     element: <EditorPage />,
-  },
-  {
-    path: ACCEPTED_ROUTES.READER,
-    element: <ReadingPage />,
   },
 ];
