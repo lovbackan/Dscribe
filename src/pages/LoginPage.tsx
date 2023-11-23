@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { supabase } from '../supabase';
 import { ACCEPTED_ROUTES } from '../routes/routes';
@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('asd@asd'); //Values for testing account.
-  const [password, setPassword] = useState('testing1234'); ///////
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState<Error | null>(null);
 
   const signIn = async () => {
@@ -24,6 +24,8 @@ const LoginPage = () => {
       navigate(ACCEPTED_ROUTES.HOME); //  avigate to the readingPage
     }
   };
+
+  //WRITE ERROR MESSAGES FOR INVALID EMAIL AND PASSWORD
 
   return (
     <div className="w-screen h-screen flex-col flex justify-center items-center bg-gradient-to-b from-[#5179D9] to-[#0F172A] overflow-hidden">

@@ -14,9 +14,6 @@ type CardType =
   | 'deckCard'
   | 'publishedCard';
 
-// Come up with a better name for this component and CardDesign, this card is the one that is used in the deck view and contains its data.
-//But the CardDesign is the one that is used to create newCards and show the stories (but they should propably also be card.tsx because
-//they will contain pictures/title/headCategory.
 interface CardProps {
   card: {
     name: string;
@@ -522,12 +519,6 @@ const Card = (props: CardProps) => {
               autoComplete="off"
             />
 
-            {/* <section id="subCategory" className="mt-32 ">
-            <div
-              id="SubCategoryWrapper"
-              className=" flex flex-row flex-wrap gap-1 px-1 h-16 overflow-y-auto pt-4 bg-transparent  "
-            > */}
-
             <section id="subCategory" className="mt-36 ">
               <div
                 id="SubCategoryWrapper"
@@ -635,18 +626,6 @@ const Card = (props: CardProps) => {
                 variant="cardTitle"
               />
             </div>
-
-            {/* <div className="mt-8">
-              <Input
-                id="CardTitle"
-                variant="cardTitle"
-                placeholder={props.card.name}
-                onChange={() => {}}
-                onBlur={e => changeCardName(e)}
-                type="text"
-                autoComplete="off"
-              />
-            </div> */}
 
             <section id="subCategory" className="mt-40 ">
               <div

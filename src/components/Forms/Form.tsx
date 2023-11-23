@@ -52,7 +52,11 @@ const Form: React.FC<FormProps> = ({
         </div>
         <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
           <div className="mb-[20px]">
-            <CTAButton title="Login" variant="primary" onClick={() => submit} />
+            <CTAButton
+              title="Login"
+              variant="primary"
+              onClick={() => submit()}
+            />
           </div>
 
           <div
@@ -122,7 +126,7 @@ const Form: React.FC<FormProps> = ({
             <CTAButton
               title="Register"
               variant="primary"
-              onClick={() => submit}
+              onClick={() => submit()}
             />
           </div>
 
@@ -166,7 +170,11 @@ const Form: React.FC<FormProps> = ({
         </div>
         <div className="py-5 flex flex-col justify-items-start items-start w-[200px]">
           <div className="mb-[20px]">
-            <CTAButton title="Reset" variant="primary" onClick={() => submit} />
+            <CTAButton
+              title="Reset"
+              variant="primary"
+              onClick={() => submit()}
+            />
           </div>
 
           <div
