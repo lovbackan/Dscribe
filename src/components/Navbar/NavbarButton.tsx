@@ -13,7 +13,6 @@ interface NavbarButtonProps {
   userName?: string;
 }
 
-//FC is a type that ships with React's TypeScript types. It represents the type of a functional component, which is the building block of most modern React apps. tsx. // Component without props. const Component : React .
 export const NavbarButton: React.FC<NavbarButtonProps> = ({
   variant,
   onClick,
