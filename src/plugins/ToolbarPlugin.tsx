@@ -288,11 +288,8 @@ function FontDropDown({
     </DropDown>
   );
 }
-interface ToolbarPluginProps {
-  deckViewOpen?: boolean;
-}
 
-export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
+export default function ToolbarPlugin(): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
   const [blockType, setBlockType] =
