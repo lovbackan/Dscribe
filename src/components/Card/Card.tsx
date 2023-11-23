@@ -51,10 +51,30 @@ interface DropdownProps {
   card: CardProps['card'];
   variant: 'tags' | 'categories';
   setThisOpen: Function;
+  deck: any[];
 }
 
 const Dropdown = (props: DropdownProps) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMappable, setFilteredMappable] = useState<any[]>([]);
+
+  useEffect(() => {
+    let newFilteredMappable = props.mappable
+      ?.sort((a, b) => a.name.localeCompare(b.name))
+      .filter(object => object.name.includes(searchTerm));
+
+    newFilteredMappable = newFilteredMappable?.filter(object => {
+      const tagExistsOnCard = props.card.tags.find(cardTag => {
+        if (cardTag.id === object.id) return true;
+        return false;
+      });
+      return !tagExistsOnCard;
+    });
+
+    if (newFilteredMappable) setFilteredMappable([...newFilteredMappable]);
+    else setFilteredMappable([]);
+  }, [searchTerm, props.deck, props.mappable]);
+
   return (
     <div
       className={`bg-[#0F172A] w-full z-50 `}
@@ -86,42 +106,31 @@ const Dropdown = (props: DropdownProps) => {
       />
       <div
         className={`w-full h-auto bg-black flex flex-row flex-wrap gap-2 ${
-          props.mappable && props.mappable.length > 0 ? 'py-2 px-2 ' : ''
+          filteredMappable && filteredMappable.length > 0 ? 'py-2 px-2 ' : ''
         } `}
       >
-        {props.mappable
-          ?.sort((a, b) => a.name.localeCompare(b.name))
-          .filter(object => object.name.includes(searchTerm))
-          .map(object => {
-            if (props.variant === 'tags') {
-              const tagExistsOnCard = props.card.tags.find(cardTag => {
-                if (cardTag.id === object.id) return true;
-                return false;
-              });
-              if (tagExistsOnCard) return null;
-            }
-
-            return (
-              <div
-                onMouseDown={e => {
-                  e.preventDefault();
-                }}
-                className={`w-auto h-auto `}
+        {filteredMappable.map(object => {
+          return (
+            <div
+              onMouseDown={e => {
+                e.preventDefault();
+              }}
+              className={`w-auto h-auto `}
+              key={object.id}
+            >
+              <CTAButton
                 key={object.id}
-              >
-                <CTAButton
-                  key={object.id}
-                  variant="cardSubCategory"
-                  title={object.name}
-                  onClick={e => {
-                    e.stopPropagation();
-                    props.add(object.id);
-                  }}
-                  color={object.color_id}
-                />
-              </div>
-            );
-          })}
+                variant="cardSubCategory"
+                title={object.name}
+                onClick={e => {
+                  e.stopPropagation();
+                  props.add(object.id);
+                }}
+                color={object.color_id}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -503,6 +512,7 @@ const Card = (props: CardProps) => {
                   mappable={props.categories}
                   variant="categories"
                   setThisOpen={setAddCategoryWindow}
+                  deck={props.deck}
                 />
               </div>
             )}
@@ -558,6 +568,7 @@ const Card = (props: CardProps) => {
                 create={props.createTag}
                 variant="tags"
                 setThisOpen={setAddTagsWindow}
+                deck={props.deck}
               />
             )}
           </div>
@@ -763,6 +774,7 @@ const Card = (props: CardProps) => {
                 mappable={props.categories}
                 variant="categories"
                 setThisOpen={setAddCategoryWindow}
+                deck={props.deck}
               />
             </div>
           )}
@@ -820,6 +832,7 @@ const Card = (props: CardProps) => {
               create={props.createTag}
               variant="tags"
               setThisOpen={setAddTagsWindow}
+              deck={props.deck}
             />
           )}
         </div>
