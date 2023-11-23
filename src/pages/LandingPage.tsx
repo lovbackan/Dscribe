@@ -9,10 +9,28 @@ import brothers from '../images/heroPagePictures/brothers.png';
 import futureCity from '../images/heroPagePictures/futureCity.png';
 import theWitch from '../images/heroPagePictures/theWitch.png';
 import why from '../images/heroPagePictures/why.png';
-import { CardDesign } from '../components/Card/CardDesign.tsx';
+import StoryCard from '../components/StoryCard/StoryCard.tsx';
+import { supabase } from '../supabase/index.ts';
+import { useState, useEffect } from 'react';
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [featuredStories, setFeaturedStories] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchStories();
+  }, []);
+
+  const fetchStories = async () => {
+    const { data, error } = await supabase
+      .from('stories')
+      .select('*')
+      .eq('published', true)
+      .limit(5);
+    if (error) console.log(error);
+    else setFeaturedStories([...data]);
+  };
+
   return (
     <>
       <div className="bg-gradient-to-b from-[#5179D9] to-[#0F172A] h-screen fixed w-full top-0 -z-10"></div>
@@ -50,7 +68,7 @@ const LandingPage = () => {
             </div>
           </section>
 
-          <section className="flex flex-row h-[500px] gap-[25px] max-w-[1160px]">
+          <section className="flex flex-row h-[500px] gap-[25px] max-w-[1160px] mt-10">
             <div className="flex flex-col h-auto max-w-[497px] text-left gap-[36px] my-[35px] ">
               <Text
                 variant="heroHeading2"
@@ -104,7 +122,10 @@ const LandingPage = () => {
           </div>
 
           <div className="flex flex-row justify-between w-full mt-[40px]">
-            <CardDesign
+            {featuredStories.map(story => {
+              return <StoryCard story={story} />;
+            })}
+            {/* <CardDesign
               title="Adventure is coming"
               variant="bigCard"
               imageUrl={adventure}
@@ -133,7 +154,7 @@ const LandingPage = () => {
               variant="bigCard"
               imageUrl={why}
               onClick={() => console.log('Mockup published work clicked')}
-            />
+            /> */}
           </div>
         </section>
         <section className="h-[250px]">

@@ -3,6 +3,8 @@ import { supabase } from '../../supabase';
 import { CTAButton } from '../CTAButton/CTAButton';
 import { useState, useEffect } from 'react';
 import { Text } from '../Text/Text';
+import { useNavigate } from 'react-router';
+import { ACCEPTED_ROUTES } from '../../routes/routes';
 
 interface StoryCardProps {
   story: {
@@ -13,9 +15,9 @@ interface StoryCardProps {
     published: boolean;
   };
   stories: StoryCardProps['story'][];
-  setStories: Function;
+  setStories?: Function;
   setChangeCardId?: Function;
-  setSelectedStory: Function;
+  setSelectedStory?: Function;
   deleteCard?: Function;
   changePicture?: Function;
   author?: boolean;
@@ -69,6 +71,7 @@ const StoryCard = (props: StoryCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [author, setAuthor] = useState<string>('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!props.author) return;
@@ -92,6 +95,10 @@ const StoryCard = (props: StoryCardProps) => {
   }, [props.story.image_path]);
 
   const publishStory = async () => {
+    if (!props.setStories) {
+      console.log('Missing prop setStories()');
+      return;
+    }
     const id = props.story.id;
     const { data, error } = await supabase
       .from('stories')
@@ -128,10 +135,13 @@ const StoryCard = (props: StoryCardProps) => {
   return (
     <div
       id={props.story.name}
-      className={`  w-[200px] h-[300px] rounded-[10px] bg-[#5179D9] cursor-pointer  drop-shadow-lg ${
+      className={`  w-[200px] h-[300px] rounded-[10px] relative z-0 shadow-right-bottom bg-[#5179D9] cursor-pointer ${
         imageUrl ? '' : 'hover:border-2 hover:border-white'
       }`}
-      onClick={() => props.setSelectedStory(props.story)}
+      onClick={() => {
+        if (props.setSelectedStory) props.setSelectedStory(props.story);
+        else navigate(ACCEPTED_ROUTES.LOGIN);
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
