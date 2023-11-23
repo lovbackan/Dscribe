@@ -433,7 +433,6 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
           ///DROPDOWN!
 
           //Placeholder hardcoded values. Should implement some sort of card selector.
-          console.log('Heeej :^D');
           activeEditor.dispatchCommand(INSERT_CARDLINK_COMMAND, 1053);
         }}
         type="button"
@@ -444,9 +443,7 @@ export default function ToolbarPlugin(props: ToolbarPluginProps): JSX.Element {
   return (
     <div
       id="toolbar"
-      className={`toolbar flex mb-[1px] bg-white ${
-        props.deckViewOpen ? 'opacity-50' : ' opacity-100'
-      } p-1 w-full rounded-tl-lg rounded-tr-lg align-middle select-none`}
+      className={`toolbar flex mb-[1px] p-1 w-full rounded-tl-lg rounded-tr-lg align-middle select-none`}
     >
       <button
         disabled={!canUndo || !isEditable}
