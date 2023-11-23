@@ -301,7 +301,11 @@ const EditorPage = () => {
               e.stopPropagation();
             }}
           >
-            <StoryCard story={selectedStory} author="always" />
+            <StoryCard
+              story={selectedStory}
+              author="always"
+              setSelectedStory={() => {}}
+            />
           </div>
           {/* <section
             className={`h-[300px] w-[200px] rounded-[10px] border-2 justify-center items-center absolute right-0 mr-7 mt-7`}
