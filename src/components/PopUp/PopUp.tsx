@@ -60,7 +60,7 @@ const PopUp: React.FC<PopUpProps> = ({
     );
   } else if (variant === 'deleteStory') {
     return (
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.6)] pt-6 px-8 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center ">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.6)] py-6 px-8 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center ">
         <div className="flex flex-col w-auto h-auto gap-[12px]  justify-center items-center  ">
           <Text
             variant="heading3"
@@ -68,13 +68,13 @@ const PopUp: React.FC<PopUpProps> = ({
             content={`Are you sure you want to delete story:`}
           />
           <Text
-            variant="heading2"
+            variant="heading3"
             textColor="white"
-            content={`  ${changeCardId}`}
+            content={`"${changeCardId}"`}
           />
           {/* if u change the name of a story and try to delete it the old name will show up */}
 
-          <div className="flex flex-row gap-[43px] mb-[54px]">
+          <div className="flex flex-row gap-[43px]">
             <CTAButton
               title="No"
               variant="popUpSmall"
@@ -95,29 +95,61 @@ const PopUp: React.FC<PopUpProps> = ({
     );
   } else if (variant === 'deleteCard') {
     return (
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.6)] p-7 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center">
-        <Text
-          variant="heading3"
-          textColor="white"
-          content={`Are you sure you want to delete Card:`}
-        />
-        {/* if u change the name of a story and try to delete it the old name will show up */}
-        <Text
-          variant="heading2"
-          textColor="white"
-          content={`  ${changeCardId}`}
-        />
-        <div className="flex flex-row justify-between pt-3">
-          <CTAButton title="No" variant="primary" onClick={() => cancel()} />
-          <CTAButton
-            title="Yes"
-            variant="primary"
-            onClick={() => {
-              action();
-            }}
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.6)] py-6 px-8 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center ">
+        <div className="flex flex-col w-auto h-auto gap-[12px]  justify-center items-center  ">
+          <Text
+            variant="heading3"
+            textColor="white"
+            content={`Are you sure you want to delete card:`}
           />
+          <Text
+            variant="heading3"
+            textColor="white"
+            content={`"${changeCardId}"`}
+          />
+          {/* if u change the name of a story and try to delete it the old name will show up */}
+
+          <div className="flex flex-row gap-[43px]">
+            <CTAButton
+              title="No"
+              variant="popUpSmall"
+              onClick={() => {
+                cancel();
+              }}
+            />
+            <CTAButton
+              title="Yes"
+              variant="popUpSmall"
+              onClick={() => {
+                action();
+              }}
+            />
+          </div>
         </div>
       </div>
+      // <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[rgba(0,0,0,0.6)] py-7 px-8 rounded-lg z-10 h-[200px] w-[300px] flex-col justify-center items-center">
+      //   <Text
+      //     variant="heading3"
+      //     textColor="white"
+      //     content={`Are you sure you want to delete Card:`}
+      //   />
+      //   {/* if u change the name of a story and try to delete it the old name will show up */}
+      //   <Text
+      //     variant="heading3"
+      //     textColor="white"
+      //     content={`  "${changeCardId}"`}
+      //   />
+      //   <div className="flex flex-row justify-between pt-3">
+      //     <CTAButton title="No" variant="primary" onClick={() => cancel()} />
+      //     <CTAButton
+      //       title="Yes"
+      //       variant="primary"
+      //       onClick={() => {
+      //         action();
+      //       }}
+      //     />
+      //   </div>
+      // </div>
     );
   } else if (variant === 'changeUsername') {
     return (
