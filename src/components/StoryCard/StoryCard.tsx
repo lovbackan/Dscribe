@@ -126,7 +126,7 @@ const StoryCard = (props: StoryCardProps) => {
         {props.deleteCard !== undefined &&
           props.changePicture !== undefined &&
           props.setChangeCardId !== undefined && (
-            <div className="h-[42px] flex flex-row justify-end gap-2 pr-2 pt-2">
+            <div className="h-[42px] flex flex-row justify-between gap-2 pr-2 pt-2 ml-2">
               {isHovered && (
                 <CTAButton
                   variant="publishStory"
@@ -136,58 +136,59 @@ const StoryCard = (props: StoryCardProps) => {
                   }}
                 />
               )}
-
-              {isHovered && (
-                <CTAButton
-                  variant="deleteCard"
-                  title=""
-                  // onClick={() => props.setChangeCardId(props.story)}
-                  onClick={() => {
-                    props.deleteCard !== undefined && props.deleteCard();
-                    props.setChangeCardId !== undefined &&
-                      props.setChangeCardId(props.story);
-                    console.log(`Delete card id: ${props.story.name}`);
-                  }}
-                />
-              )}
-              {isHovered && (
-                <form
-                  onSubmit={e => {
-                    e.preventDefault();
-                  }}
-                >
-                  <input
-                    className=" hidden"
-                    id="file-upload"
-                    type="file"
-                    accept=" .png, .jpg, .gif"
-                    name="image"
-                    onChange={e => {
-                      e.preventDefault();
-
-                      if (e.target.files) {
-                        if (e.target.files[0].size > 2097152) {
-                          alert('File is too big!');
-                          return;
-                        }
-                        props.changePicture !== undefined &&
-                          props.changePicture(
-                            props.story.id,
-                            e.target.files[0],
-                          );
-                        // props.changePicture(props.story.id, image);
-                      }
+              <div className="flex gap-2">
+                {isHovered && (
+                  <CTAButton
+                    variant="deleteCard"
+                    title=""
+                    // onClick={() => props.setChangeCardId(props.story)}
+                    onClick={() => {
+                      props.deleteCard !== undefined && props.deleteCard();
+                      props.setChangeCardId !== undefined &&
+                        props.setChangeCardId(props.story);
+                      console.log(`Delete card id: ${props.story.name}`);
                     }}
                   />
-                  <label htmlFor="file-upload">
-                    <CTAButton
-                      variant="changePicture"
-                      title=""
-                      onClick={() => {}}
+                )}
+                {isHovered && (
+                  <form
+                    onSubmit={e => {
+                      e.preventDefault();
+                    }}
+                  >
+                    <input
+                      className=" hidden"
+                      id="file-upload"
+                      type="file"
+                      accept=" .png, .jpg, .gif"
+                      name="image"
+                      onChange={e => {
+                        e.preventDefault();
+
+                        if (e.target.files) {
+                          if (e.target.files[0].size > 2097152) {
+                            alert('File is too big!');
+                            return;
+                          }
+                          props.changePicture !== undefined &&
+                            props.changePicture(
+                              props.story.id,
+                              e.target.files[0],
+                            );
+                          // props.changePicture(props.story.id, image);
+                        }
+                      }}
                     />
-                  </label>
-                </form>
-              )}
+                    <label htmlFor="file-upload">
+                      <CTAButton
+                        variant="changePicture"
+                        title=""
+                        onClick={() => {}}
+                      />
+                    </label>
+                  </form>
+                )}
+              </div>
             </div>
           )}
 
