@@ -1,6 +1,5 @@
 interface DarkModeProps {
   darkMode: boolean;
-
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -16,12 +15,12 @@ export const DarkMode: React.FC<DarkModeProps> = ({ darkMode, onClick }) => {
       onClick={onClick}
     >
       <div
-        className={`darkModeSun absolute left-[2px] ml-2 transition-all duration-500 ${
+        className={`darkModeSun absolute left-[2px] transition-all duration-500 ${
           darkMode ? 'ml-0 ' : 'ml-2 '
         }`}
       ></div>
       <div
-        className={`darkModeMoon absolute right-[2px] mr-2 transition-all duration-500 ${
+        className={`darkModeMoon absolute right-[2px] transition-all duration-500 ${
           darkMode ? 'mr-2 ' : 'mr-0 '
         }`}
       ></div>

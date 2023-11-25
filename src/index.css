@@ -2,7 +2,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* vet inte om vi vill sätta root och body med height och widt på detta sätt */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -17,9 +16,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  /* height: auto; */
-  /* width: 100%; */
-  /* overflow: hidden; */
 }
 
 body {
@@ -33,8 +29,6 @@ body {
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* width: 100%; */
-  /* height: auto; */
 }
 
 .other h2 {
