@@ -140,6 +140,7 @@ const LandingPage = () => {
             {featuredStories.map(story => {
               return (
                 <StoryCard
+                  key={story.id}
                   story={story}
                   author={true}
                   setSelectedStory={setSelectedStory}
@@ -150,15 +151,28 @@ const LandingPage = () => {
         </section>
         <section className="h-[125px]">
           <div className="w-screen h-0.5  bg-white "></div>
-          <div className="flex flex-row justify-between my-[40px] px-[140px]">
+
+          <div className="flex flex-row justify-between my-[40px] mx-[140px]">
             <div>
-              <Text content="Contact us" variant="heading2" textColor="white" />
-              <Text
-                content="info@codeck.com"
-                variant="pPrimary"
-                textColor="white"
-              />
+              <div className="w-[200px]">
+                <Text
+                  content="Contact us"
+                  variant="heading2"
+                  textColor="white"
+                />
+                <Text
+                  content="Connect with us on Discord for inquiries, updates, and feedback. "
+                  variant="pPrimary"
+                  textColor="white"
+                />
+              </div>
             </div>
+            <a
+              href="https://discord.gg/gATY4m5kun"
+              className="w-[40px] h-[40px] pt-0.5"
+            >
+              <div className="discord"></div>
+            </a>
             <Text
               content="Copyright 2023"
               variant="heading2"
