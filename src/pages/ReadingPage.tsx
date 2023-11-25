@@ -6,6 +6,7 @@ import RichTextViewer from '../components/RichTextViewer/RichTextViewer';
 import Logo from '../components/Logo/Logo';
 import Card from '../components/Card/Card';
 import StoryCard from '../components/StoryCard/StoryCard';
+import { DarkMode } from '../components/DarkMode/DarkMode';
 
 import { deckContext, setDeckContext } from './EditorPage';
 
@@ -180,23 +181,12 @@ const ReadingPage = () => {
                   </div>
                 );
             })}
-            <div
-              id="darkModeToggle"
-              className={`absolute bottom-0 right-0 w-[80px] h-[40px] mr-7 mb-7 border rounded-[20px] cursor-pointer flex items-center px-[2px] ${
-                darkMode
-                  ? 'justify-start border-white bg-black '
-                  : 'justify-end bg-white border-black'
-              }`}
+            <DarkMode
+              darkMode={darkMode}
               onClick={() => {
                 setDarkMode(!darkMode);
               }}
-            >
-              <div
-                className={`rounded-full w-[34px] h-[34px] cursor-pointer ${
-                  darkMode ? 'bg-white' : 'bg-black'
-                }`}
-              ></div>
-            </div>
+            />
           </div>
         </deckContext.Provider>
       </setDeckContext.Provider>

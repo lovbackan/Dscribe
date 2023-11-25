@@ -9,6 +9,7 @@ import Card from '../components/Card/Card';
 import { ACCEPTED_ROUTES } from '../routes/routes';
 import Logo from '../components/Logo/Logo';
 import StoryCard from '../components/StoryCard/StoryCard';
+import { DarkMode } from '../components/DarkMode/DarkMode';
 
 type CardPositions = {
   [key: string]: { x: number; y: number };
@@ -389,7 +390,14 @@ const EditorPage = () => {
             title="Add category"
           />
         </div> */}
-          <div
+
+          <DarkMode
+            darkMode={darkMode}
+            onClick={() => {
+              setDarkMode(!darkMode);
+            }}
+          />
+          {/* <div
             id="darkModeToggle"
             className={`absolute bottom-0 right-0 w-[80px] h-[40px] mr-7 mb-7 border rounded-[20px] cursor-pointer flex items-center px-[2px] ${
               darkMode
@@ -416,7 +424,7 @@ const EditorPage = () => {
                 darkMode ? 'bg-white' : 'bg-black'
               } transition-all duration-500`}
             ></div>
-          </div>
+          </div> */}
 
           <div className="absolute bottom-0 left-0 z-10 flex flex-col justify-between gap-5 pb-6 pl-6">
             {/* <CTAButton
