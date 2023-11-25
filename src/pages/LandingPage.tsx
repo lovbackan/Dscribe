@@ -104,7 +104,7 @@ const LandingPage = () => {
               />
             </div>
 
-            <div className="w-[600px] h-[428px] shadow-mockup ">
+            <div className="w-[600px] h-[428px] shadow-mockup rounded-[15px] ">
               <img
                 src={mockUpImage}
                 alt="mock-up"
@@ -152,7 +152,7 @@ const LandingPage = () => {
         <section className="h-[125px]">
           <div className="w-screen h-0.5  bg-white "></div>
 
-          <div className="flex flex-row justify-between my-[40px] mx-[140px]">
+          <div className="flex flex-row justify-between mt-[40px] mx-[140px]">
             <div>
               <div className="w-[200px]">
                 <Text
